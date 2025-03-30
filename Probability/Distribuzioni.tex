@@ -1,0 +1,334 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[italian]{babel} %Mette in italiano tutte le parole fisse di LaTeX (v. "TITOLO")
+\usepackage[utf8]{inputenc} %Gestisce i caratteri accentati
+\usepackage{comment} %Per  usare \begin{comment}
+\usepackage{amsmath} %cose matematiche
+\usepackage{amssymb} %cose matematiche
+\usepackage{mathrsfs} %per \mathscr
+\usepackage{caption} %mettere le descrizioni
+\usepackage{graphicx} %Importare foto
+\usepackage{booktabs}
+\usepackage{geometry} %Per impostare i  margini del foglio
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+%\pagestyle{empty} %per togliere il numero della pagina
+\usepackage{xcolor} 
+\usepackage{empheq} 
+\usepackage{amsthm} 
+%\usepackage{enumitem} %Insieme  ai vari \renewcommand per fare elenchi coi numeri belli
+\usepackage[shortlabels]{enumitem}
+\usepackage{physics} %Per avere \nabla in grassetto
+\usepackage[most]{tcolorbox} %Box colorati teoremi
+\usepackage{mdframed}
+\usepackage{framed}
+\usepackage{color,soul} %per evidenziare con il comando highlight \hl
+\usepackage{hyperref} %per URL (con \url{}) e hyperlink
+
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+\newcommand{\bvec}{\textbf} %per scrivere i vettori in  grassetto usare \bvec
+\newcommand{\myth}{\normalfont \scshape \textcolor{red}} %mio modo custom di mettere teoremi/lemmi/proposizioni
+\newcommand{\ssubset}{\subseteq}
+
+\newcommand{\re}{\mathbb{R}} %numeri reali
+\newcommand{\pr}{\text{I\kern-0.15em P}} %probabilità
+\newcommand{\ex}{\mathbb{E}} %operatore valore atteso/media
+\newcommand{\om}{\Omega} %spazio campionario
+\newcommand{\F}{\mathcal{F}} %%sigma algebra, famiglia degli eventi
+\newcommand{\myeq}[1]{\stackrel{\mathclap{\normalfont\mbox{\tiny{#1}}}}{=}} %scrivere soppra all'uguale con \myeq{<cosa voglio scrivere>}
+
+\newtheorem*{defin}{Definizione}
+\newtheorem*{cor}{Corollario}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{theorem}{Teorema}
+\newtheorem*{prop}{Proposizione}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Osservazione}
+
+\theoremstyle{definition}
+\newenvironment{myproof}[1][\proofname]{%
+  \begin{proof}[#1]$ $\\ \nobreak\ignorespaces
+}{%
+  \end{proof}
+}
+
+\makeatletter                          %pper avere titolo del teorema 
+\def\th@plain{%
+  \thm@notefont{}% same as heading font
+  \itshape % body font
+}
+\def\th@definition{%
+  \thm@notefont{}% same as heading font
+  \normalfont % body font
+}
+\makeatother
+
+\newmdenv[
+  topline=false,
+  bottomline=false,
+  rightline=false,
+]{siderule}
+
+\tcolorboxenvironment{theorem}{
+enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+\tcolorboxenvironment{prop}{
+enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+\tcolorboxenvironment{lem}{
+enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+\newenvironment{dimo}{\begin{quote}\textbf{Dimostrazione.}}{\end{quote}} %dimostrazione con indentatura
+
+
+
+%\tcolorboxenvironment{eq}{
+%enhanced jigsaw,colframe=orange,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{defin}{
+%enhanced jigsaw,colframe=cyan,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{prop}{
+%enhanced jigsaw,colframe=yellow,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+\begin{document}
+
+
+\part*{Distribuzioni discrete}
+
+\section{Uniforme}
+\section{Bernoulli}
+È la funzione di ripartizione di una var. aleatoria discreta che assume il valore 1 con probabilità $p$ e il valore 0 con probabilità $q=1-p$. È il modello per un esperimento singolo che che fa una domanda con risposta sì/no. Quindi può essere valutato in maniera booleana (1=vero con prob. $p$, 0=falso con prob $1-p$). \\
+Funzione di ripartizione:
+$$F(x)=
+\begin{cases}
+    0 &x<0 \rightarrow x\text{ non assume mai valori $<0$ in quanto assume solo 0,1}\\
+    1-p &0\le x<1  \rightarrow \text{siamo nel complementare ($x<1$) di quando la prob. è $p$}\\
+    1 &x\ge1
+\end{cases}$$
+
+\subsection*{Funzione indicatrice} È un esempio di variabile di Bernoulli. Sia $A\in\mathcal{F}$ un evento. La funzione indicatrice di A è:
+\[I_A: \Omega \to \mathbb{R} \quad \mid \quad I_A(\omega\in\Omega)= 
+\begin{cases}
+    1 &\text{ se } \omega \in A \\
+    0 &\text{ se } \omega \in A^C \\
+\end{cases}\]
+La media è: $\ex I_A=\pr(A)$
+
+\section{Binomiale (Bernoulli finito)}
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+ \hline
+ parametri & PMF & $\ex[X]$ & Var(X) \\ 
+ \hline 
+ \shortstack{$n\in \mathbb{N}$ (numero di esperimenti) \\ $0<p<1$ (prob. del singolo successo)} & $\pr(X=k)=\binom{n}{k}p^k(1-p)^{n-k}$ & $np$ & $np(1-p)$\\ 
+ \hline
+\end{tabular}
+\end{center}
+Quando si fanno $n$ esperimenti di Bernoulli identici (\textbf{con reimmissione} nel caso di un urna) e indipendenti e si vuole sapere qual è la probabilità di avere $k$ successi.
+
+\subsection*{Trinomiale (multinomiale)}
+Come la binomiale, solo che non ho un solo tipo di successo e fallimento, ma due tipi di successo (per esempio voglio estrarre estrarre tot biance e tot rosse in un urna con tre o più colori) e un fallimento (ovvero le palline restanti).
+$$\pr(X=k,Y=h)=\binom{n}{k \quad h}p^kq^h(1-p-q)^{n-k-h}$$
+
+\subsection*{Proprietà}
+\begin{itemize}
+    \item Somma di n binomiali \textbf{indipendenti} è una binomiale di paramentri:
+    $$X_i\sim Bin(n_i,p) \implies \sum_{i=1}^kX_i \sim Bin(\sum_{i=1}^kn_i,p)$$
+\end{itemize}
+
+
+\section{Poisson}
+Serve per misurare la probabilità che un evento che accade mediamente nell'unità di tempo $\lambda$ volte, accada invece $n$ volte.
+$$\pr(X=k)=\frac{\lambda^k}{k!}e^{-\lambda}$$
+dove:
+\begin{itemize}
+    \item $k$ numero di eventi nell'unità di  tempo con cui è espressa $\lambda$
+    \item $\lambda$ numero medio di eventi che accadono nell'unità di tempo.
+\end{itemize}
+
+\subsection*{Costruzione}
+
+Prendo distribuzione binomiale $P\left(E_{k}\right)=\binom{n}{k}p^{k}\left(1-p\right)^{n-k}$,
+tengo $k\in\left\{ 0,1,2\dots\right\} $ fisso ma faccio dipendere
+$p=p_{n}$ da $n$ col vincolo $n\cdot p_{n}\rightarrow\lambda>0$
+fissato.
+
+\begin{align*}
+\lim_{n\to+\infty}\binom{n}{k}p^{k}\left(1-p\right)^{n-k} & 
+=\frac{n!}{k!\left(n-k\right)!}\frac{1}{n^{k}}\left(np_{n}\right)^{k}\frac{\left(1-p_{n}\right)^{n}}{\left(1-p_{n}\right)^{k}}
+=\frac{1}{k!}\overset{\longrightarrow\lambda^{k}}{\overbrace{\left(np_{n}\right)^{k}}}\overset{(a)}{\overbrace{\frac{n!}{\left(n-k\right)!n^{k}}}}\frac{\overset{\left(\boldsymbol{b}\right)}{\overbrace{\left(1-p_{n}\right)^{n}}}}{\underset{\longrightarrow1}{\underbrace{\left(1-p_{n}\right)^{k}}}}
+=\frac{\lambda^{k}}{k!}e^{-\lambda}
+\end{align*}
+
+$(a)=\prod_{i=0}^{k-1}(n-i) \cdot \frac{1}{n^k}=\prod_{i=0}^{k-1}[(n-i) \cdot \frac{1}{n}]=\prod_{i=0}^{k-1}\left(1-\frac{i}{n}\right)\rightarrow1$
+
+$(b)=\left(1-p_{n}\right)^{n}=\exp\left(n\ln\left(1-p_{n}\right)\right)=\overset{\text{$p_{n}\rightarrow0$, sviluppo di Taylor valido $ln(1-x)=-x+o(x^2)$}}{\exp\left(n\left(-p_{n}+O\left(p_{n}^{2}\right)\right)\right)}\overset{n\rightarrow\infty}{\longrightarrow}e^{-\lambda}$
+
+\subsection*{Misura di probabilità indotta su $\mathbb{N}_0$ dalla distrib. di Poisson}
+\paragraph*{Spazio e probabilità indotta}
+Poniamo: 
+\begin{itemize}
+    \item $\Omega=\mathbb{N}_0$
+    \item $\mathcal{A}=\mathcal{P}(\mathbb{N}_0)$
+    \item $\pr(\{k\})=\frac{e^{-\lambda}}{k!}\lambda^k$    
+    \item $\pr(E)=\sum_{k\in E}\pr(\{k\}$
+\end{itemize}
+
+\paragraph*{Proposizione} Questa probabilità definisce una misura di probabilità.
+
+\begin{dimo} Bisogna verificare i due assiomi. Per $\pr(\Omega)=1$ fare sommatoria sui naturali della distribuz. e ricordare serie notevole che dà $e^\lambda$. Secondo abbastanza intuitivo.
+    
+\end{dimo}
+
+
+\subsection*{Proprietà}
+\begin{itemize}
+    \item Somma di $n$ Poissoniane \textbf{indipendenti} è una poissoniana di paramentri:
+    $$X_i \sim Pois(\lambda_i) \implies \sum_{i=1}^kX_i \sim Pois(\sum_{i=1}^k\lambda_i)$$
+\end{itemize}
+
+
+
+\section{Geometrica}
+È la probabilità del numero di esperimenti di Bernoulli che devo fare prima di avere il primo successo.
+$$\pr(X=k)=p(1-p)^{k-1}$$
+dove:
+\begin{itemize}
+    \item $k=$ $k$-esimo tentativo a cui ho il primo successo
+    \item $p=$ probabilità di successo del singolo esperimento di Bernoulli 
+\end{itemize}
+
+\subsection*{Costruzione}
+Dobbiamo trovare la prob. di  $E_k$= "il \textbf{primo} successo si verifica alla prova $k$-esima". Abbiamo che:
+$$E_k=A_1^C\cap A_2^C\cap \dots \cap A_{k-1}^C\cap A_k$$
+e che tutti questi eventi sono indipendenti, allora la prob. è il prodotto delle prob. e segue la tesi.
+
+\begin{dimo}
+    (Che è una probabilità) Verificare che la sommatoria su tutto $\mathbb{N}$ delle prob fa 1. Quindi fare sommatoria, tirare fuori $p$ e ricordare la convergenza della serie geometrica (converge perchè $(1-p)<1$) 
+\end{dimo}
+
+\section{Binomiale negativa}
+Come la geometrica solo che non vogliamo vedere i fallimenti prima del primo successo, ma prima dell'$n$-esimo. La probabilità che si verifichino esattamente k fallimenti prima di ottenere un totale di n successi è data dalla probabilità di ottenere un successo nella prova numero k+n e di ottenere esattamente k fallimenti e n-1 successi nelle prove precedenti.
+$$\pr(X=k)=\binom{k-1}{n-1}p^n(1-p)^k$$
+dove: l'$n$-esimo successo si verifica alla prova $k$-esima
+
+\subsection*{Costruzione}
+Dobbiamo trovare la prob. di $E_{n,k}=$ "l'\textbf{$n$-esimo} successo si verifica alla prova $k$-esima". Se $k<n$ l'evento è chiaramente vuoto, allora facciamo per $k\ge n$. Vediamo che 
+$$E_{n,k}=\bigcup_{\alpha_1, \dots,\alpha_{k-1}\in \{0,1\}\mid\sum\alpha_i=n-1}(A_1^{\alpha_1}\cup \dots \cup A_{k-1}^{\alpha_{k-1}}\cap A_k)$$
+dove gli $\alpha_i$ indicano se 1 un successo (ovvero $A_i$), se 0 un insuccesso (ovvero $A_i^C$). Procedere come segue:
+\begin{enumerate}
+    \item Come al solito sono tutti eventi disgiunti., quindi per trovare la prob. fare sommatoria delle prob.
+    \item Come argomento della sommatoria ho la prob. dell'intersezione di eventi indipendenti, quindi è il prodotto delle prob. Porre $s_{k-1}=\sum_{i=1}^{k-1}\alpha_i=n-1$ e mettere le prob. in funzione di $p$ e $(1-p)$
+    \item Arrivo ad avere la sommatoria (rispetto sempre agli $\alpha_i$ dell'unione di partenza) di $p^n(1-p)^{k-n}$, che quindi posso tirare fuori quindi devo calcolare: 
+    $$ p^n(1-p)^{k-n} \cdot \underbrace{\#\{(\alpha_1 \dots \alpha_{k-1})\in\{0,1\}^{k-1}\mid\sum_{i=1}^{k-1}\alpha_i=n-1\}}_{=\binom{k-1}{n-1}}$$
+\end{enumerate}
+
+
+
+\section{Ipergeometrica}
+Probability of $k$ successes (random draws for which the object drawn has a specified feature) in 
+$n$ draws, \textbf{without replacement}, from a finite population of size 
+$N$ that contains exactly $K$ objects with that feature, wherein each draw is either a success or a failure. 
+$$\pr(X=r)=\frac{\binom{R}{r}\binom{N-R}{n-r}}{\binom{N}{n}}$$
+dove:
+\begin{itemize}
+    \item $r=$ numero esatto di palline rosse (vincenti) che vogliamo estrarre
+    \item $R=$ numero totale di palline rosse cincenti presenti nell'urna
+    \item $n=$ numero di estrazioni senza reimmissione, ovvero quante palline in blocco estraggo 
+    \item $N=$ numero totale di palline contenute
+\end{itemize}
+Posso pensarla anche come voler estrarre esattamente $r$ palline rosse vincenti ed esattamente $b=n-r$ palline biance perdenti
+
+\subsection*{Multi-ipergeometrica}
+Uguale alla ipergeometrica, ma voglio un numero esatto non più di 1 successo e un fallimento, ma di più successi e un fallimento. Qui il caso per due successi:
+$$\pr(X=r,Y=b)=\frac{\binom{R}{r}\binom{B}{b}\binom{N-R-B}{n-r-b}}{\binom{N}{n}}$$
+dove:
+\begin{itemize}
+    \item $r,b=$ numero esatto di palline rosse e bianche che voglio estrarre dalle $R,B$
+    \item $n-r-b=$ numero esatto di altre palline (fallimenti / verdi) che devo estrarre tra le $N-R-B$
+\end{itemize}
+
+
+\section{Ipergeometrica negativa}
+Come la binomiale negativa, ma \textbf{senza reimmissione}.
+$$\pr(X=k)=\frac{\binom{k+r-1}{k}\binom{N-r-k}{K-k}}{\binom{N}{K}}$$
+dove:
+\begin{itemize}
+    \item $N$ è il numero totale di popolazione
+    \item $K$ numero totale di fallimenti
+    \item $r$ numero di successi
+    \item $k$ numero di fallimenti
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\part*{Distribuzioni continue}
+\section{Uniforme}
+\section{Beta}
+$$f(x)=\frac{1}{B(\alpha,\beta)}x^{\alpha-1}(1-x)^{\beta-1} \quad \quad \forall x\in(0,1)$$
+dove $$B(\alpha,\beta) \coloneqq \int_0^1 t^{\alpha-1}(1-t)^{\beta-1}dt=\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}$$
+dove $\Gamma(\alpha)=\int_0^\infty t^{\alpha-1}e^{-t}dt$ è la \textbf{funzione gamma}. Importantissima, generalizza ai reali il concetto di fattoriale in quanto $\Gamma(n)=(n-1)!$.
+
+\section{Esponenziale}
+
+\section{Gamma}
+
+$$f(x)=\frac{\lambda^t}{\Gamma(\tau)}x^{\tau -1}e^{-\lambda x} \quad \quad \forall x\in(0,+\infty)$$
+
+dove
+\begin{itemize}
+    \item $\lambda>0$ è il parametro di scala
+    \item $\tau>0$ è il parametro di forma
+\end{itemize}
+Per $\lambda=\frac{1}{2}$ e $\tau=\frac{n}{2}$ la densità prende il nome di densità \textbf{chi-quadrato con $n$ gradi di libertà}, fondamentale in statistica.
+
+\section{Pareto}
+Importante in finanza, rappresenta distribuzione dei redditi.
+
+\section{Gaussiana}
+\subsection*{Proprietà}
+\begin{itemize}
+    \item \textbf{Trasformazioni affini} di gaussiane sono gaussiane con media e varianza:
+    $$A\sim \mathcal{N}(\mu_A,\sigma_A^2) \implies  m+\alpha A \sim  \mathcal{N}(\mu_A+m,\alpha^2\sigma_A^2) $$
+    \item \textbf{Combinazioni lineari} di gaussiane \textbf{indipendenti} sono gaussiane con media e varianza:
+    $$
+    \begin{cases}
+        A\sim \mathcal{N}(\mu_A,\sigma_A^2) \\
+        B\sim \mathcal{N}(\mu_B,\sigma_B^2)
+    \end{cases}
+    \implies \alpha A +\beta B \sim \mathcal{N}(\alpha\mu_A+\beta\mu_B,\alpha^2\sigma_A^2+\beta^2\sigma_B^2)$$
+\end{itemize}
+\section{Gaussiana multivariata}
+\subsection*{Proprietà}
+\begin{itemize}
+    \item \textbf{Trasformazioni affini} di gaussiane multivariate sono gaussiane multivariate con media e varianza:
+    $$ \pmb{X}\sim \mathcal{N}(\pmb{\mu},V) \implies  A\pmb{X}+\pmb{a} \sim  \mathcal{N}(A\pmb{\mu}+\pmb{a}, AVA^T) $$
+    dove $A$ è la matrice della trasformazione lineare e $V$ è la matrice di covarianza. \\
+    NB: non ho bisogno della condizione di indipendenza sulle componenti di $\pmb{X}$ poiché ho già la condizione che siano componenti di un vettore con distribuzione gaussaiana multivariata (vedere def e teorema di p.133 del libro)
+\end{itemize}
+
+\section{Cauchy}
+Simile di forma alla Gaussiana, ma ha code molto più alte.
+
+
+
+
+\end{document}

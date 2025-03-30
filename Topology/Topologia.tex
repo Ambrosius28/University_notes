@@ -1,0 +1,524 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[italian]{babel} %Mette in italiano tutte le parole fisse di LaTeX (v. "TITOLO")
+\usepackage[utf8]{inputenc} %Gestisce i caratteri accentati
+\usepackage{comment} %Per  usare \begin{comment}
+\usepackage{amsmath} %cose matematiche
+\usepackage{amssymb} %cose matematiche
+\usepackage{caption} %mettere le descrizioni
+\usepackage{graphicx} %Importare foto
+\usepackage{booktabs}
+\usepackage{geometry} %Per impostare i  margini del foglio
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+%\pagestyle{empty} %per togliere il numero della pagina
+\usepackage{xcolor} 
+\usepackage{empheq} 
+\usepackage{amsthm} 
+\usepackage{enumitem} %Insieme  ai vari \renewcommand per fare elenchi coi numeri belli
+\usepackage{physics} %Per avere \nabla in grassetto
+\usepackage[most]{tcolorbox} %Box colorati teoremi
+\usepackage{mdframed}
+\usepackage{framed}
+\usepackage{color,soul} %per evidenziare con il comando highlight \hl
+
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+\newcommand{\bvec}{\textbf} %per scrivere i vettori in  grassetto usare \bvec
+\newcommand{\myth}{\normalfont \scshape \textcolor{red}}
+
+
+\newtheorem*{defin}{Definizione}
+\newtheorem*{cor}{Corollario}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{theorem}{Teorema}
+\newtheorem*{prop}{Proposizione}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Osservazione}
+
+\theoremstyle{definition}
+\newenvironment{myproof}[1][\proofname]{%
+  \begin{proof}[#1]$ $\\ \nobreak\ignorespaces
+}{%
+  \end{proof}
+}
+
+\makeatletter                          %pper avere titolo del teorema 
+\def\th@plain{%
+  \thm@notefont{}% same as heading font
+  \itshape % body font
+}
+\def\th@definition{%
+  \thm@notefont{}% same as heading font
+  \normalfont % body font
+}
+\makeatother
+
+\newmdenv[
+  topline=false,
+  bottomline=false,
+  rightline=false,
+]{siderule}
+
+\tcolorboxenvironment{theorem}{
+enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+\tcolorboxenvironment{prop}{
+enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+\tcolorboxenvironment{lem}{
+enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{eq}{
+%enhanced jigsaw,colframe=orange,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{defin}{
+%enhanced jigsaw,colframe=cyan,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{prop}{
+%enhanced jigsaw,colframe=yellow,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+
+\title{Topologia}
+\author{Marco Ambrogio Bergamo}
+\date{Anno 2023-2024}
+
+\begin{document}
+\maketitle
+
+
+\part*{Teoria}
+
+\section*{Definizioni di base}
+\begin{description}
+    
+    \item[Topologia] Una topologia $\mathcal{T}$ su un insieme $X$ è una famiglia di sottoinsiemi di $X$ ($\coloneqq$ \textbf{aperti}) tali che:
+    \begin{itemize}
+        \item[(A1)] $\emptyset$ e $X$ $\in \mathcal{T}$
+        \item[(A2)] $A, B \in \mathcal{T} \Rightarrow A \cup B \in \mathcal{T} $ (anche infiniti)
+        \item[(A3)] $A, B \in \mathcal{T} \Rightarrow A \cap B \in \mathcal{T} $ (finita) $\implies$ \textbf{intersezione infinita} di aperti non è detto sia un aperto
+    \end{itemize}
+
+    \item[Aperto] Due definizioni equivalenti. $A \subset (X, \mathcal{T})$: (DIM)
+    \begin{enumerate}
+        \item è aperto se $A \in \mathcal{T}$.
+        \item è aperto se è intorno di ogni suo punto (ogni punto è interno).
+    \end{enumerate} 
+
+    \item[Chiuso] Due definizioni equivalenti. $C \subset (X, \mathcal{T})$: (DIM)
+    \begin{enumerate}
+        \item è chiuso se $X - C \in \mathcal{T}$ (aperto).
+        \item è chiuso se $C$ contiene tutti i suoi punti limite.
+    \end{enumerate} 
+    
+       
+
+    \item[Passaggio al complementare] Esso scambia:
+     \begin{itemize}
+         \item unione $\longleftrightarrow$ intersezione: $(A \cup B)^C = A^C \cap B^C$ (e viceversa, \textbf{leggi di De Morgan})
+         \item parte interna $\longleftrightarrow$ chiusura: $(A^\circ)^C = \overline{(A^C)}$ (e viceversa)
+     \end{itemize}
+
+     \item[Topologia dei chiusi] Come conseguenza delle leggi di De Morgan, in una topologia di aperti sia valgono le seguenti proprietà, sia può essere descritta proprio dai chiusi:
+    \begin{itemize}
+        \item[(C1)] $\emptyset$ e $X$ $\in \mathcal{T}_C$
+        \item[(C2)] $A, B \in \mathcal{T}_C \Rightarrow A \cap B \in \mathcal{T}_C $ (anche infiniti)
+        \item[(C3)] $A, B \in \mathcal{T}_C \Rightarrow A \cup B \in \mathcal{T}_C $ (finita) $\implies$\textbf{unione infinita} di chiusi non è detto sia un chiuso
+    \end{itemize}
+    Per esempio, un'unione infinita di chiusi (punti) che non è chiusa in $\mathbb{R}$ è: $\bigcup_{x \ge 0}\{\frac{1}{x}\}$ con $x \in \mathbb{R}$. Infatti 0 è un punto limite per l'insieme (appartiene alla chiusura) ma non appartiene all'insieme (notare che ciò varrebbe anche se $x \in \mathbb{N}$, ovvero se fosse unione numerabile)
+    \item[Famiglia di sottoinsiemi localmente finita] $\mathcal{F}=\{A \mid A \subset X\}$ è localmente finita se ogni intorno di ogni $x\in X \setminus\mathcal{F}$ interseca al più un numero finito di elementi di $\mathcal{F}$
+    \item[\myth{Prop.}] Locale finitezza assicura che l'unione infinita di chiusi è chiusa o intersezione infinita di aperti è aperta 
+    \item[Punto limite / di accumulazione] $x \in  X$:
+    \begin{enumerate}
+        \item è un punto limite di (punto di accumulazione per) $S \subset X$ se ogni intorno aperto di $x$ interseca $S$ in almeno un punto diverso da $x$.
+        \item  è un punto limite di $S$ se $x \in \overline{S}$ e non è punto isolato.
+    \end{enumerate}
+
+    \item[Intorno] $U \subset X$ intorno di $x \in X$ se: $\exists V \ \mbox{aperto} \mid x \in V \subset U \subset X$ ("$U$ contiene un aperto di $X$ che contiene $x$", ovvero $x$ è punto interno di $B$)
+
+    \item[Base] $\mathcal{B} \subset \mathcal{T}$ è base di $\mathcal{T}$ se ogni elemento di $\mathcal{T}$ (aperto) può essere scritto come unione di elementi di $\mathcal{B}$.
+    
+    \item[Topologia più fine] $\mathcal{T}$ e $\mathcal{R}$ due topologie su $X$. $\mathcal{T}$ è più fine di $\mathcal{R}$ se $\mathcal{R} \subset \mathcal{T} $ ($\mathcal{T}$ ha più aperti di $\mathcal{R}$) 
+
+    \item[Chiusura] Dato $B \subset X$ (sp. topologico), $\overline{B} \coloneqq \cap \{ C \mid B \subset C \subset X, \mbox{ $C$ chiuso} \}$ (intersezione di tutti i chiusi che contengono B). Ovvero  $\overline{B}$ è il più piccolo chiuso di $X$ contenente $B$. I suoi punti si dicono \textbf{aderenti} a $B$
+
+    \item[Parte interna] Dato $B \subset X$ (sp. topologico), $B^\circ \coloneqq \cup \{ A \mid A \subset B \subset X, \mbox{ $A$ aperto} \}$ (unione di tutti gli aperti contenuti in B). Ovvero  $B^\circ$ è il più grande aperto \textbf{di \textit{X}} contenuto in $B$
+
+   \item[Semi-aperto] $S \subset X$ è un sottoinsieme semi-aperto se esiste un aperto $A \subset X$ tale che $A \subset S \subset \overline{A}$
+
+    \item[Semi-chiuso] $S \subset X$ è un sottoinsieme semi-aperto se esiste un chiuso $C \subset X$ tale che $C^\circ \subset S \subset C$
+    
+    \item[Sottospazio denso] $A \subset X$ (sp. topologico), $A$ denso se $\overline{A}=X$, ovvero se $A$ interseca ogni aperto non vuoto di $X$. In generale, se $A \subset B \subset X$ (sp. topologico): $A$ è denso in $B$ se $B \subset \overline{A}$
+
+    \item[Densità] di $X$ (sp. top.) è la cardinalità più piccola possibile di un sottospazio denso in $X$
+
+    \item[Frontiera] $\partial B \coloneqq \overline{B}-B^\circ = \overline{B}\cap \overline{X-B}$
+
+    \item[Base locale / sistema fondamentale di intorni] È una famiglia $\mathcal{J} \subset \mathcal{I}(x)$ tale che: per ogni intorno di $x$ esiste un elemento della famiglia che è contenuto in tale intorno.
+
+    \item[Topologia di sottospazio/indotta] $X$ sp. topologico. Gli aperti in $Y \subset X$ sono gli aperti di $X$ intersecati con Y. (Ovvero $U \subset Y \subset X$ aperto in $Y$ se esiste un $V$ aperto di $X$ tale che $U = Y \cap V$). \\
+    La stessa  cosa vale coi chiusi. Attenione: per capire bene la def. pensare a sottoinsiemi sconnessi e pensare a cosa vuol dire intersecare un aperto di $X$ (che ricopre una sola componente connessa) con  \textbf{tutto} $Y \Rightarrow$ mi dà la sola componente connessa, che quindi è sia aperta che chiusa in $Y \subset X$ (poiché posso intersecarla sia con un aperto che con un chiuso di  $X$).
+
+    \item[\myth{Prop. (Proprietà universale della top. di sottospazio)}] Siano $X, Y$ s.t., $Z\subset Y$ con topologia di sottospazio, $f: X \to Z$ app. e $i \circ f:X \to Y$ composizione con l'inclusione di $Z$ in $Y$.\\
+    Allora: $if$ continua $\iff f$ continua
+
+    \item[Topologia prodotto] Su $P \times Q$ è la topologia meno fine tra quelle che rendono continue entrambe le proiezioni. 
+    
+    \item[\myth{Teorema}] La base della topologia prodotto su $P\times Q$ è formata dagli insiemi $A \times B \mid A \in \mathcal{T}_P, B \in \mathcal{T}_Q$, detta \textbf{base canonica}.
+
+     \item[\myth{Teorema}] Le proiezioni sui fattori $p: P\times Q \to P$ e $q: P\times Q \to Q$ sono \underline{applicazioni aperte}. \\
+     Per ogni $(x,y) \in P \times Q$ le restrizioni $p: P\times \{y\} \to P$,  $q: \{x\} \times Q \to Q$ sono omeomorfismi.
+
+    \item[\myth{Teo. (Prop. universale della top. prodotto)}] $f: X \to P \times Q$ è continua $\iff$ le sue componenti 
+     $\begin{cases}
+        f_1=p \circ f \\
+         f_2=q \circ f 
+    \end{cases}$
+     sono continue.
+
+    \item[Topologia quoziente] $X$ sp. topologico, $Y$ insieme, $f: X \rightarrow Y$ applicazione suriettiva. La topologia quoziente rispetto ad $f$ su $Y$ è $\mathcal{T}= \{A \subset Y\mid f^{-1}(A)$ è aperto in $X \}$ (è una topologia perchè $f^{-1}$ commuta con unione e intersezione). \\
+    È l'unica topologia su $Y$ che rende $f$ una identificazione ed è la topologia più fine tra quelle che rendono continua $f$.
+    
+
+\end{description}
+
+\section*{Applicazioni (funzioni)}
+\begin{equation*}
+    f:(X, \mathcal{T}_X) \to (Y, \mathcal{T}_Y) \quad A \subset X, B \subset Y
+\end{equation*}
+\begin{description}
+\item[Sottoinsieme $f$-saturo] $A \subset X$ se contiene le fibre dell'immagine di ogni suo punto.
+\item[Sottoinsieme $f$-coperto] (mia invenzione) $B \subset Y$ se $B \subset f(X)$
+\item[Funzione e "inversa"] $f\circ f^{-1}$ e $f^{-1}\circ f$:
+    \begin{enumerate}
+        \item $B \supseteq f(f^{-1}(B))$ \qquad uguale se $f$ suriettiva o se $B$ è $f$-coperto (ovvero non è uguale solo se $B$ contiene elementi che non hanno preimmagine)
+        \item $A \subseteq f^{-1}(f(A)) $ \qquad uguale se $f$ iniettiva o se $A$ è $f$-saturo (ovvero non è uguale solo se $A$ non contiene tutti gli elementi delle fibre)
+    \end{enumerate}
+    \item[Continuità "totale"] $A$ aperto in $Y \implies f^{-1}(A)$ aperto in X.
+    \\ 
+    (Dato che $f^{-1}$ commuta col passaggio al complementare e con l'unione, la def. può essere valutata sui chiusi o  solo sugli aperti della base di $Y$.)
+    \item[\myth{Lemma}] $f$ continua $\iff f(\overline{A}) \subset \overline{f(A)} \quad \forall A \subset X$ 
+    \item[\myth{Teorema}] composizione di app. continue è continua.
+    \item[Continuità locale] $f$ è continua in $x \in X$ se per ogni intorno $U$ \underline{di $f(x)$} esiste un intorno $V$ di $x$ tale che: $f(V) \subset U$. \\
+    NB se dicevo ...per ogni intorno di $l$ dove $l=\lim_{y\to x}f(y)$ allora era la def. di limite, dicendo invece intorno della $f(x)$ stessa implica che $\lim_{y\to x}f(y)=f(x)$ che è la canonica  def. di continuità.
+    \item[\myth{Teorema}] $f$ continua $\iff$ continua in ogni punto di $X$
+    \item[Omeomorfismo] Se:
+    \begin{enumerate}[noitemsep,nolistsep]
+        \item Biunivoca
+        \item $A$ aperto in $Y \implies f^{-1}(A)$ aperto in X (continua)
+        \item $A$ aperto in $X \implies f(A)$ aperto in Y (inversa continua)
+    \end{enumerate}
+    (Ovvero c'è una corrispondenza biunivoca sia tra gli elementi di $X$ e $Y$ che tra i loro aperti. Gli aperti sono tutti e soli quelli che vanno e  provengono da un aperto). 
+    \item[Applicazione aperta] se $A \subset X$ aperto $\Rightarrow f(A)$ aperto in $Y$
+    \item[Applicazione chiusa] se $C \subset X$ chiuso $\Rightarrow f(C)$ chiuso in $Y$ 
+    \item[\myth{Lemma}] per una funzione $f:X\to Y$ sono equivalenti:
+    \begin{enumerate}[noitemsep,nolistsep]
+        \item $f$ è un omeomorfismo
+        \item $f$ è continua, chiusa, biettiva
+        \item $f$ è continua, aperta, biettiva
+    \end{enumerate}
+    \item[Applicazione limitata] Se l'immagine è un insieme limitato.
+    \item[Immersione] $f$ continua e iniettiva in cui $A$ aperto in $X \iff A = f^{-1}(B)$, con $B$ aperto di $Y$.
+    \\Oppure: $f: X \to f(X) \subset Y$ è un omeomorfismo.
+    \begin{description}
+        \item[aperta] Un'immersione che è anche un'applicazione aperta.
+        \item[chiusa] Un'immersione che è anche un'applicazione chiusa.
+    \end{description}
+    
+    \item[\myth{Lemma}] $f$ continua, iniettiva, chiusa $\implies$ immersione chiusa 
+    \item[\myth{Lemma}] $f$ continua, iniettiva, aperta $\implies$ immersione aperta 
+    
+    \item[Identificazione]  $f$ continua e suriettiva in cui $A$ aperto (chiuso) in $Y \iff f^{-1}(A)$ aperto (chiuso) in $X$.
+    \\Oppure: $B$ aperto in $Y \iff B = f(A)$, con $A$ aperto \textbf{saturo} di $X$.
+     \begin{description}
+        \item[aperta] Un'identificazione che è anche un'applicazione aperta.
+        \item[chiusa] Un'identificazione che è anche un'applicazione chiusa.
+    \end{description}
+    \item[\myth{Lemma}] $f$ continua, suriettiva, chiusa $\implies$ identificazione chiusa 
+    \item[\myth{Lemma}] $f$ continua, suriettiva, aperta $\implies$ identificazione aperta 
+    \item[\myth{Lemma (Prop. universale delle ident.)}] $f: X \to Y$ identificazione, $g: X \to Z$ continua. Allora: \\
+    esiste $h: Y \to Z$ continua $\mid$ $g=hf \iff g$ costante sulle fibre \underline{di $f$}
+\end{description}
+
+\section*{Spazi metrici}
+\begin{description}
+    \item[Distanza] Una distanza su un insieme $X$ è un'applicazione $d: X \times X \rightarrow \mathbb{R}$ tale che per ogni $x,y,z \in X$:
+    \begin{enumerate}
+        \item $d(x,y) \ge 0$,  $d(x,y) = 0 \iff x=y$
+        \item $d(x,y) = d(y,x)$
+        \item $d(x,y) \le d(x,z)+d(z,y)$
+    \end{enumerate}
+    NB: la distanza è un'applicazione che va in $\mathbb{R}$, ciò è importantissimo perché mette in relazione un qualunque spazio (anche con le distanze più assurdi) con $\mathbb{R}$, che ha tutte le proprietà del mondo.
+    \item[Spazio metrico] È una coppia $(X,d)$ con $X$ un insieme e $d$ una distanza su di esso. 
+    \item[Palla aperta] Sia $(X,d)$ uno sp. metrico, è il sottoinsieme $B(x,r) = \{ y \in X \mid d(x,y) <  r \in \mathbb{R}\}$
+    \item[Topologia indotta da una distanza] $(X,d)$ uno sp. metrico, nella topologia su $X$ indotta da $d$ un sottoinsieme $A \subset X$ è \textbf{aperto} $\iff \forall x\in A$ esiste $r > 0$ tale che: $B(x,r) \subset A$ (ovvero ogni punto è interno)
+    \item[Distanze equivalenti] Se inducono la stessa metrica (non vale il viceversa). \\
+    Oppure: $d,d'$ equivalenti se $\forall x,y \in X \quad \exists A,B \in \mathbb{R} \mid$
+    $\begin{cases}
+       d(x,y) \le Ad'(x,y)  \\
+       d'(x,y) \le Bd'(x,y)
+    \end{cases}$
+    \item[Spazio topologico metrizzabile] Se la topologia è indotta da una distanza opportuna.
+    \item[Sottoinsieme limitato] $(X,d)$ uno sp. metrico. $A \subset X$ limitato se esiste numero reale $M$ tale che: $d(a,b) \le M$ per ogni $a,b \in A$
+    \item[Spazio metrico completo] Se in esso ogni successione di Cauchy è  convergente (ovvero se contiene i punti di accumulazione di ogni successione di Cauchy - vedere note sulle succ.d.C.)
+    \item[\myth{Oss.}] Vedi dopo. Spazio metrico  
+    $\begin{cases}
+        \implies \mbox{Normale  (da T4 in giù)} \\
+        \implies \mbox{1-numerabile}\\
+        \mbox{separabile} \iff \mbox{2-numerabile} \\
+        \mbox{+ compatto} \implies \mbox{2-numerabile}\\
+         \mbox{compatto} \iff \mbox{c.p.s.} \iff \mbox{completo + tot. limitato}  \\
+    \end{cases}$
+\end{description}
+
+\section*{Connessione}
+\begin{description}
+    \item[Spazio connesso] $X$ è connesso se gli  unici sottoinsiemi contemporaneamente aperti e chiusi sono $\emptyset$ e $X$. 
+    \item[\myth{Lemma}] $X$ è sconnesso $\iff$ è unione disgiunta di aperti/chiusi propri (sottoinsiemi strettamente contenuti in $X$) 
+    \item[\myth{Teorema}] $f: X \to Y$ continua, allora se $X$ connesso $\implies f(X)$ connesso
+    \item[Connessione per archi] X è connesso per archi se per ogni $x,y \in X$ esiste un'applicazione continua $\alpha : [0,1] \rightarrow X$ tale che $\alpha (0) = x$ e $\alpha (1) = y$.
+    \item[\myth{Lemma}] Spazio connesso per archi $\implies$ connesso
+
+    \item[\myth{Lemma}] Sia $f: X \to (Y$, connesso) continua e suriettiva allora se:
+    $\begin{cases}
+        \mbox{Ogni fibra è connessa} \\
+        f\mbox{ aperta o chiusa}
+    \end{cases}$
+    $\implies X$ connesso 
+
+    \item[\myth{Teorema}] Prodotto di spazi connessi è connesso
+    
+    \item[Componente connessa] È un elemento massimale della famiglia dei sottospazi connessi, ordinata per inclusione. Ovvero $C \subset X$ è una c.c. se $C$ connesso e se $C \subset A$ con $A$ connesso $\implies C=A$.
+    \item[\myth{Lemma}] Se aggiungo punti limite a un sottospazio connesso esso rimane connesso. Ovvero: $Y \subset X$ connesso, se $Y \subset W \subset \overline{Y} \implies W$ connesso.  \\
+    In particolare la chiusura di un connesso (cioè aggiungendo tutti i p.ti limite) è connessa.
+\end{description}
+
+
+\section*{Compattezza}
+\begin{description}
+    \item[Ricoprimento] Un ricoprimento di un insieme $X$ è una famiglia $\mathcal{A}$ di sottoinsiemi di $X$ tali che $X = \cup \{A \mid A\in \mathcal{A}\}$.
+    \begin{description}
+        \item[aperto] se ogni $A  \in \mathcal{A}$ è aperto
+        \item[chiuso] se ogni $A  \in \mathcal{A}$ è chiuso
+        \item[localmente finito] Se ogni punto di $X$ ha almeno un intorno aperto con intersezione non vuota solo con un numero finito di elementi del ricoprimento.
+        \item[fondamentale] quando un sottoinsieme $U \subset X$ è aperto $\iff U \cap A$ è aperto in $A$ per ogni $A \in \mathcal{A}$ 
+    \end{description}
+    \item[Sottoricoprimento] Se $\mathcal{A}$ e $\mathcal{B}$ sono ricoprimenti e $\mathcal{A} \subset \mathcal{B}$
+    \item[Spazio compatto] $X$ è compatto se ogni suo ricoprimento aperto possiete un sottoricoprimento finito.
+    \item[\myth{Oss.}] insieme finito $\implies$ compatto
+    \item[\myth{Oss.}] insieme finito $\iff$ discreto + compatto
+    \item[\myth{Teorema}] $f: X \to Y$ continua, allora se $X$ compatto $\implies f(X)$ compatto
+    
+    \item[Spazio localmente compatto] se ogni suo punto possiede un intorno compatto.
+    \item[Sottospazio compatto] se è compatto per la topologia di sottospazio (indotta).
+    \item[\myth{Teorema}] [0,1] è compatto in $\mathbb{R}$
+    \item[\myth{Prop.}] Sottospazio chiuso di un compatto $\implies$ compatto
+    \item[\myth{Prop.}] Unione finita di sottospazi compatti è compatta
+    \item[\myth{Coroll. (Heine-Borel)}] Sottospazio di $\mathbb{R}$ è compatto $\iff$ chiuso + limitato
+    \item[\myth{Coroll.}] $X$ compatto $\implies f: X \to Y$ ammette massimo e minimo.
+    \item[\myth{Teorema}] $f: X \to (Y$, compatto) applicazione. Se ogni fibra è compatta $\implies X$ compatto.
+\end{description}
+
+\section*{Proprietà di numerabilità}
+\begin{description}
+    \item[Spazio topologico separabile] Se contiene un sottoinsieme denso e numerabile.
+    \item[\myth{Lemma}] $X$ a base numerabile $\implies$ separabile
+    \item[\myth{Lemma}] $X$ metrico, allora è separabile $\iff$ a base numerabile
+    \item[Secondo assioma di numerabilità (secondo-numerabile)] Lo soddisfa uno spazio topologico a \textbf{base numerabile}, ovvero se esiste una base della topologica con cardinalità numerabile.
+    \item[\myth{Oss.}] Ogni sottospazio di un 2-numerabile è 2-numerabile.\\
+    Prodotto di due 2-numeranili è 2-numerabile.
+    \item[\myth{Lemma}] Spazio 2-numerabile $\implies$ separabile
+    \item[\myth{Lemma}] Spazio 
+    $\begin{cases}
+        \mbox{metrico} \\
+        \mbox{separabile}
+    \end{cases}$
+    $\implies$ 2-numerabile ($\implies$ 1-numerabile)
+    \item[\myth{Prop.}] In un 2-numerabile ogni ricoprimento ammette sottoricoprimento  numerabile \\ 
+    (ovvero 2-numerabile $\implies$ Lindelöf)
+    \item[Primo assioma di numerabilità (primo-numerabile)] Uno sp. topologico lo soddisfa se ogni punto possiede un sistema fondamentale di intorni numerabile.
+    \item[\myth{Oss.}] 2-numerabile $\implies$ 1-numerabile
+    \item[\myth{Lemma.}] Spazio metrico $\implies$ 1-numerabile
+\end{description}
+
+
+\section*{Proprietà di separazione}
+\begin{description}
+    \item[Proprietà di separazione] Determinano fino a che punto due punti distinti o due chiusi sono separati da aperti. Uno spazio topologico si dice:
+    \begin{description}
+        \item[T0] (di Kolmogoroff) se per ogni coppia di punti distinti \textbf{almeno} uno dei due ha in un intorno che non contiene l'altro. ($\iff$ due punti non sono mai l'uno punto limite dell'altro)
+        \item[T1] (di Fréchet) se per ogni coppia di punti distinti \textbf{ognuno} dei due ha in un intorno che non contiene l'altro ($\iff$ i punti sono sottoinsiemi chiusi). (DIM)
+        \item[T2] (di Hausdorff / separato) se ogni coppia di punti distinti ammette intorni disgiunti ($\iff$ punti sono intersezione di loro intorni chiusi)
+        \item[T3] se ogni coppia (insieme chiuso - punto) ammette una coppia (soprainsieme aperto - intorno) disgiunta ($\iff$ ogni aperto contiene intorni chiusi di ogni suo punto $\iff$ ogni chiuso è intersezione di suoi intorni chiusi )
+        \item[T4] se ogni coppia di chiusi disgiunti ammette una coppia di soprainsiemi aperti disgiunti.
+        \item[T5] se ogni coppia di sottoinsiemi separati (ognuno è disgiunto dalla chiusura dell'altro) ammette coppia di soprainsiemi aperti disgiunti.
+    \end{description}
+    \item[\myth{Oss.}] Le uniche implicazioni tra le prop di separazione sono: \\
+    T2 $\implies$ T1 $\implies$ T0 \\
+    T5 $\implies$ T4 \\
+    T3 + T0 $\implies$ T2 \\
+    T4 + T1 $\implies$ T3
+
+    \item[\myth{Prop.}] Spazio metrico $\implies$ Hausdorff \\
+        \textit{Dim.} $d$ distanza e $x \ne y \implies d(x,y) > 0$. Se $0<r<\frac{d(x,y)}{2}$ allora le palle $B(x,r),B(y,r)$ sono disgiunte: infatti se ci fosse $z$ nell'intersezione delle palle $d(x,y)  \le d(x,z)+d(z,y) < 2r < d(x,y)$
+     
+    \item[\myth{Lemma}] Hausdorff $\implies$ sottoinsiemi finiti sono chiusi.
+    \item[\myth{Lemma}] Sottospazi e \textbf{prodotti} di spazi di Hausdorff sono di Hausdorff.
+    \item[\myth{Teorema}] Hausdorff $\iff$ la diagonale è chiusa nel prodotto
+    \item[Spazio normale] Se ha tutte le proprietà fino a T4 ($\iff$ T2 e T4 $\iff$ T1 e T4)
+    \item[\myth{Prop.}] \underline{Spazio metrizzabile $\implies$ normale ($\implies$ regolare $\implies$ Hausdorff $\implies$ T1 $\implies$ T0)}
+    \item[Spazio regolare] Se ha tutte le proprietà fino a T3 ($\iff$ T1 e T3) 
+    \item[\myth{Prop.}] Spazio normale $\implies$ regolare
+    
+\end{description}
+
+\section*{Successioni}
+\begin{description}
+    \item[Successione] (in uno spazio topologico) è un'applicazione $a: \mathbb{N} \to X$ (sp. topologico). Vediamo il dominio come un insieme di indici: $a(i) \coloneqq a_i$.
+    \item[Converge] $\{ a_n \}$ converge a $p \in X$ se $\forall  U \subset X$ intorno di $p$ esiste $ N \in \mathbb{N} \mid a_n \in U$ per ogni $n \ge N$ (ovvero se la successione si avvicina sempre di più a un punto definitivamente)
+    \item[Punto di accomulazione] $p \in X$ è di accomulazione della successione se $\forall  U \subset X$ intorno di $p$ e $ \forall N \in \mathbb{N}$ esiste $n \ge N \mid a_n \in U$ (ovvero se riesco a trovare punti immagine della successione arbitrariamente vicini al punto)
+    
+    \item[\myth{Oss.}] Se una succ. converge a $p \implies p$ punto di accumulazione \\
+    (viceversa non vale sempre, vedi successioni che ammettono sottosucc. convergente, che quindi converge a $q \implies q$ p.to di acc. ma la succ. non converge a $q$)
+
+    \item[\myth{Prop.}] In un Hausdorff ogni successione converge al più ad un punto
+    
+    \item[Successione convergente] $\{ a_n \}$ convergente se converge a qualche putno $p \: \underline{\in X}$. Se $X$ è di Hausdorff diremo che $p$ è il \textbf{limite} di $\{ a_n \}$.
+    
+    \item[Sottosuccessione] di una successione  $a: \mathbb{N} \to X$ è la composizione di $a$ con un'applicazione $k: \mathbb{N} \to \mathbb{N}$ strettamente crescente.
+
+    \item[\myth{Lemma}] se una successione possiede una sottosuccessione convergente a $p \implies p$ è p.to di accumulazione. \\(\hl{Viceversa SOLO in 1-numerabili, vedi prossima prop.}) 
+
+    \item[\myth{Oss.}] Negli spazi che soddisfano gli assiomi di numerabilità, molte proprietà (come chiusura e compattezza) possono essere descritte in termini di successioni e sottosuccessioni
+    \item[\myth{Prop.}] $X$ 1-numerabile, $A\subset X$. Per $x \in X$ sono equivalenti:
+    
+    \begin{enumerate}[noitemsep,nolistsep]
+        \item Esiste succ. a valori in A che conv. a $x$
+        \item $x$ è di acc. per qualche succ. a  valori in A
+        \item $ x \in \overline{A}$
+    \end{enumerate}
+    
+    \item[\myth{Lemma}] $X$ compatto $\implies$ ogni successione possiede p.ti di  accumulazione (non implica compatto per successioni)
+    \item[Compatto per successioni] $X$ (s. t.) lo è se ogni successione in $X$ possiede una sottosuccessione convergente.
+    \item[\myth{Lemma.}] 1-numerabile: compatto per successioni $\iff$ ogni succ. ha p.ti di accumulazione. \\
+    In particolare: 
+    $\begin{cases}
+        \mbox{Compatto} \\
+        \mbox{1-numerabile}
+    \end{cases}$
+    $\implies$ compatto per successioni
+    \item[\myth{Prop.}] In un 2-numerabile: compatto $\iff$ (ogni succ. ha p.ti di acc.) $\iff$ compatto per successioni
+    \item[Successione di Cauchy] $\{ a_n \}$ successione in uno spazio \textbf{metrico} $(X,d)$ in cui $\forall \varepsilon > 0$ esiste $N \in \mathbb{N} \mid d(a_n, a_m) < \varepsilon $ per ogni $ n,m \ge N$. (ovvero la distanza tra due immagini diminuisce definitivamente). \\
+    Differenze con una successione convergente:
+    \begin{enumerate}
+        \item È un concetto legato alla distanza, quindi richiede uno spazio metrico (mentre la convergenza no)
+        \item Non necessita del punto di accumulazione, ovvero del punto a cui converge. Infatti la def. è svincolata da esso, in quanto coinvolge solo la distanza relativa di due immagini. Quindi una successione di Cauchy certo che "converge", nel senso che si avvicina sempre di più a qualcosa, peccato che quel qualcosa può "non esistere", ovvero non appartenere all'insieme di definizione della succ., quindi per def. di convergenza (= succ. che converge a un punto \underline{di $X$}) non è convergente.
+    \end{enumerate}
+
+    \item[\myth{Lemma}] Successione convergente $\implies$ di Cauchy
+
+
+\item[\myth{Lemma}]
+    $\begin{cases}
+        \mbox{Successione di Cauchy} \\
+        \mbox{Possiede punti di accumulazione}
+    \end{cases}$
+    $\iff$ è convergente \\
+    In particolare: 
+    $\begin{cases}
+        \mbox{Successione di Cauchy} \\
+        \mbox{In uno sp. metrico compatto per successioni}
+    \end{cases}$
+    $\implies$ è convergente \\
+
+
+\item[\myth{Lemma}] Spazio metrico compatto $\implies$ compatto per successioni $\implies$ completo
+
+\item[\myth{Prop.}]Sottospazio di uno sp. metrico completo è chiuso $\iff$ completo rispetto alla metrica indotta
+
+\end{description}
+
+\section*{Spazi metrici + compatti}
+\begin{description}
+    \item[Spazio totalmente limitato] $(X,d)$ sp. metrico lo è se $\forall r \in \mathbb{R}^+$ è possibile ricoprire tale spazio con un numero finito di palle aperte di  raggio $r$.
+    \item[\myth{Oss.}] Metrico + totalmente limitato $\implies$ limitato
+    \item[\myth{Lemma}] Metrico + compatto per succ. $\implies$ tot. limitato
+    \item[\myth{Lemma}] Metrico + totalmente limitato $\implies$ 2-numerabile
+    \item[\myth{Teorema}] In uno spazio metrico sono equivalenti:
+    \begin{enumerate}
+        \item compatto
+        \item ogni succ. ha p.ti di accumulazione
+        \item compatto per successioni
+        \item completo + tot. limitato
+    \end{enumerate}
+    Inoltre queste condizioni $\implies$ 2-numerabile
+    \item[Sottospazio relativamente compatto] $A \subset X$ lo è se è contenuto in un sottospazio compatto di $X$.
+\end{description}
+
+\section*{Teorema di Baire}
+\begin{description}
+    \item[Sottoinsieme raro (mai-denso)] se la parte interna della sua chiusura è vuota (i suoi punti sono solo di frontiera)\\
+    NB a non invertire le cose: parte interna della chiusura $\ne$ chiusura della parte interna. \\
+    Pensare a $\mathbb{Q} \subset \mathbb{R}$ che ha parte interna vuota (infatti il più grande aperto \textbf{di $\mathbb{R}$ contenuto in $\mathbb{Q}$} è $\emptyset$) $\Rightarrow$ chiusura della parte interna vuota, ma la parte interna della chiusura (chiudere $(a,b) \subset \mathbb{Q}$ in $\mathbb{R}$ significa aggiungere gli estremi e i numeri razionali) è non vuota.
+    \item[Sottoinsieme magro] se è contenuto nell'unione di una famiglia numerabile di sottoinsiemi rari.
+    \item[Spazio di Baire] se ogni suo sottoinsieme magro ha parte interna vuota. \\
+    Esplicitato: se l'unione numerabile di ogni famiglia di insiemi chiusi con interno vuoto ha interno vuoto. (vedi unione numerabile di rette per l'origine non coprono $\mathbb{R}^2$, stessa cosa per unione numerabile di punti in $\mathbb{R} \implies$ spazi di Baire. Al contrario per  $\mathbb{Q}^2$ e $\mathbb{Q}$ che non lo sono)
+    \item[\myth{Lemma}] $A$ mai-denso $\iff$ $A^C$ denso \\
+    \textbf{Dim:}
+    \begin{align*}
+        A \mbox{ mai-denso } &\iff (\overline{A})^\circ = \emptyset \mbox{ (per def. di mai-denso)}\\
+        &\iff ((\overline{A})^\circ)^C = X \\
+        &\iff \overline{((\overline{A})^C)} = X \mbox{ (commutato compl. e p. interna)}\\
+        &\iff \overline{((A^C)^\circ)} = X \mbox{ (commutato compl. e chiusura)}\\
+        &\iff (A^C)^\circ \mbox{ è denso in } X \mbox{ (per def di denso)}\\
+        &\iff A^C \mbox{ contiene un aperto denso}
+    \end{align*}
+    \item[\myth{Teorema di Baire}] 
+    \begin{align*}
+       \mbox{ Spazio metrico completo } &\implies \bigcup \mbox{ numerabile  di sottoinsiemi rari è un raro } \\
+    &\iff \bigcap \mbox{ numerabile di aperti densi è densa } \\
+    &\iff \mbox{ spazio di Baire}
+    \end{align*}
+    
+\end{description}
+
+\section*{Teoremi}
+\begin{theorem}[Esistenza di una topologia data una base]
+    $X$ un insieme e $\mathcal{B} \subset \mathcal{P}(X)$.
+\begin{equation*}
+    \mbox{Esiste una topologia su $X$ di cui $\mathcal{B}$ è una base} \Longleftrightarrow 
+    \begin{cases}
+    X = \cup \{B \mid B\in \mathcal{B}\} \\ 
+  A \cap B = \cup \{C \mid C \in \mathcal{B}\} \quad   \forall A,B \in \mathcal{B}
+\end{cases}
+\end{equation*}
+\end{theorem}
+
+\begin{myproof}
+    
+\end{myproof}
+
+\part*{Esempi}
+\begin{description}
+    \item[Topologia cofinita (del complementare finito)] $\tau_c = \{X, \emptyset, A \mid X \setminus A \mbox{ finito}\}$. Quindi i chiusi sono i sottoinsiemi finiti. \\
+    NB: uno spazio con la topologia cofinita è \textbf{sempre compatto}
+    \item[Topologia indiscreta] $\tau_{in} =\{X, \emptyset\}$. È la meno fine.
+    \item[Topologia discreta] $\tau_{d} =\{\mathcal{P}(X)\}$ (può essere indotta dalla distanza $x \ne y \Rightarrow d(x,y)=1, x = y \Rightarrow d(x,y) = 0$). È la più fine.
+    \item[Topologia euclidea] $\tau_{eu} =\{X, \emptyset, B(x,r)\}$ con $x \in X, r \in \mathbb{R}^+$
+    \item[Topologia semirette aperte] $\tau =\{\mathbb{R}, \emptyset, (-\infty,a) : a \in \mathbb{R} \}$
+   \item[Topologia intervalli semiaperti (retta di Sorgenfrey)] 
+   \item[Connesso non connesso per archi] Pettine e la pulce (comb space)
+   \item[T0 non T1] Topologia delle semirette aperte, del punto particolare
+   \item[T1 non T2] Topologia cofinita 
+   \item[1-numerabile (e separabile) non 2-numerabile (neanche metrizzabile)] La retta di Sorgenfrey (p.116)
+   \item[C.p.s non compatto] 
+\end{description}
+
+\end{document}

@@ -1,0 +1,3930 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{geometry} %Per impostare i  margini del foglio
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+%\setcounter{secnumdepth}{1} %per subsection non numerate ma nell'indice
+\usepackage[italian]{babel} %Mette in italiano tutte le parole fisse di LaTeX (v. "TITOLO")
+\usepackage[utf8]{inputenc} %Gestisce i caratteri accentati
+\usepackage{comment} %Per  usare \begin{comment}
+\usepackage{amsthm} %per gli ambienti theorem
+\usepackage{amsmath} %cose matematiche
+\usepackage{amssymb} %cose matematiche
+\usepackage{mathrsfs} %per \mathscr
+\usepackage{dsfont} %per \mathds{1}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{units} %per \nicefrac{}{} 
+\usepackage{cancel} %per \cancel{}
+\usepackage{caption} %mettere le descrizioni
+\usepackage{graphicx} %Importare foto
+\usepackage{booktabs}
+%\pagestyle{empty} %per togliere il numero della pagina
+\usepackage{xcolor} %per \color{} e \textcolor{}{}
+\usepackage{empheq} 
+%\usepackage{enumitem} %Insieme  ai vari \renewcommand per fare elenchi coi numeri belli
+\usepackage[shortlabels]{enumitem}
+\usepackage{physics} %Per avere \nabla in grassetto
+\usepackage[most]{tcolorbox} %Box colorati teoremi
+\usepackage{mdframed}
+\usepackage{framed}
+\usepackage{color,soul} %per evidenziare con il comando highlight \hl
+\usepackage{hyperref} %per URL (con \url{}) e hyperlink
+\usepackage{tikz} %robe  disegnate
+\usepackage{tikz-cd}
+\usetikzlibrary{matrix,shapes}
+\usepackage{color}
+\definecolor{shadecolor}{rgb}{0.902344, 0.902344, 0.902344}
+\usepackage{wasysym} %per \lightning
+\usepackage{todonotes}
+
+
+%DA BARABBA%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{tikz}
+%\usepackage[unicode=true,pdfusetitle,
+% bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+% breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+% {hyperref}
+\usepackage{changepage}
+\usepackage{multirow}
+
+\usepackage{array}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{calc}
+\usepackage{units}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{todonotes}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{wasysym}
+\PassOptionsToPackage{obeyFinal}{todonotes}
+
+\newlist{casenv}{enumerate}{4}
+\setlist[casenv]{leftmargin=*,align=left,widest={iiii}}
+\setlist[casenv,1]{label={{\itshape\ \casename} \arabic*.},ref=\arabic*}
+\setlist[casenv,2]{label={{\itshape\ \casename} \roman*.},ref=\roman*}
+\setlist[casenv,3]{label={{\itshape\ \casename\ \alph*.}},ref=\alph*}
+\setlist[casenv,4]{label={{\itshape\ \casename} \arabic*.},ref=\arabic*}
+
+\providecommand{\exercisename}{Esercizio}
+\theoremstyle{definition}
+\newtheorem*{xca*}{\protect\exercisename}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\DeclareMathOperator*{\rot}{rot}
+%\DeclareMathOperator*{\divergence}{div}
+\DeclareMathOperator*{\mis}{mis}
+\DeclareMathOperator*{\vers}{vers}
+\DeclareMathOperator*{\diag}{diag}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\tab}{tab}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\newcommand{\noun}[1]{\textsc{#1}}
+\newcommand{\lyxmathsym}[1]{\ifmmode\begingroup\def\b@ld{bold}
+  \text{\ifx\math@version\b@ld\bfseries\fi#1}\endgroup\else#1\fi}
+
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%RINOMINA DI COMANDI
+%\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+%\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+%\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+\newcommand{\bv}{\boldsymbol} %per scrivere i vettori in  grassetto usare \bv
+\newcommand{\cv}[2]{\begin{pmatrix} #1 \\ #2 \end{pmatrix}} %column vector di due dim
+\newcommand{\cvv}[3]{\begin{pmatrix} #1 \\ #2 \\ #3 \end{pmatrix}} %column vector di tre dim
+\newcommand{\myth}{\normalfont \scshape \textcolor{red}} %mio modo custom di mettere teoremi/lemmi/proposizioni
+\newcommand{\re}{\mathbb{R}} %numeri reali
+\newcommand{\na}{\mathbb{N}} %numeri naturali
+\newcommand{\pr}{\text{I\kern-0.15em P}} %probabilità
+\newcommand{\ex}{\mathbb{E}} %operatore valore atteso/media
+\newcommand{\om}{\Omega} %spazio campionario
+\newcommand{\F}{\mathcal{F}} %%sigma algebra, famiglia degli eventi
+\newcommand{\myeq}[1]{\stackrel{\mathclap{\normalfont\mbox{\tiny{#1}}}}{=}} %scrivere soppra all'uguale con \myeq{<cosa voglio scrivere>}
+\newcommand{\mylist}[1]{\textnormal{\textsc{#1}}}
+\newcommand{\notimplies}{%
+\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}  %per \notimplies
+
+\newcommand\myfunc[5]{         %per scrivere funzioni con dominio, codominio e dove va un elemento
+  \begingroup
+  \setlength\arraycolsep{0pt}
+  #1\colon\begin{array}[t]{c >{{}}c<{{}} c}
+             #2 & \to & #3 \\ #4 & \mapsto & #5 
+          \end{array}%
+  \endgroup}
+
+\newcommand{\numberset}{\mathbb} %da EPIC
+\newcommand{\R}{\numberset{R}}
+\newcommand{\C}{\numberset{C}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%NUOVI STILI
+\newtheoremstyle{indentdefinition}
+{5mm}                % Space above
+{5mm}                % Space below
+{\addtolength{\leftskip}{0mm}\setlength{\parindent}{0em}}        % Theorem body font % (default is "\upshape")
+{0mm}                % Indent amount
+{\bfseries}       % Theorem head font % (default is \mdseries)
+{:}               % Punctuation after theorem head % default: no punctuation
+{ }               % Space after theorem head
+{\thmname{#1} \thmnumber{#2} \thmnote{\textnormal{(\textcolor{blue}{#3})}}}                % Theorem head spec
+
+\newtheoremstyle{indenttheorem}
+{5mm}                % Space above
+{5mm}                % Space below
+{\addtolength{\leftskip}{10mm}\setlength{\parindent}{0em}}        % Theorem body font % (default is "\upshape")
+{-10mm}                % Indent amount
+{\bfseries\scshape\color{red}}       % Theorem head font % (default is \mdseries)
+{.}               % Punctuation after theorem head % default: no punctuation
+{ }               % Space after theorem head
+{\thmname{#1} \thmnumber{#2} \thmnote{(\textnormal{#3})}}                % Theorem head spec
+
+\newtheoremstyle{myremark}
+{5mm}                % Space above
+{5mm}                % Space below
+{}        % Theorem body font % (default is "\upshape")
+{}                % Indent amount
+{\itshape}       % Theorem head font % (default is \mdseries)
+{}               % Punctuation after theorem head % default: no punctuation
+{ }               % Space after theorem head
+{\thmname{#1} \thmnote{(\textbf{#3})}}                % Theorem head spec
+
+\newtheoremstyle{indentgeneral}
+{5mm}                % Space above
+{5mm}                % Space below
+{\addtolength{\leftskip}{10mm}\setlength{\parindent}{0em}}        % Theorem body font % (default is "\upshape")
+{-10mm}                % Indent amount
+{}       % Theorem head font % (default is \mdseries)
+{}               % Punctuation after theorem head % default: no punctuation
+{3mm}               % Space after theorem head
+{\thmnote{\textbf{#3}}}                % Theorem head spec
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%NUOVI AMBIENTI
+
+\theoremstyle{indentdefinition}
+\newtheorem{defn}{Definizione}[section]
+
+\theoremstyle{indenttheorem}
+\newtheorem{thm}{Teo.}
+\newtheorem{prop}{Prop.}
+\newtheorem{lem*}{Lemma}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Cor.}
+
+\theoremstyle{myremark}
+\newtheorem*{rem*}{Osservazione}
+\newtheorem{example*}{Esempio}
+\newtheorem{notation*}{Notazione}
+
+\theoremstyle{indentgeneral}
+\newtheorem*{gen}{}
+
+\newtheorem{lyxalgorithm}[thm]{\protect\algorithmname}
+\theoremstyle{plain}
+
+
+\theoremstyle{plain}
+\providecommand{\lemmaname}{Lemma}
+
+\newenvironment{dimo}{\begin{quote}\textit{\textbf{Dimostrazione.}}}{\end{quote}} %dimostrazione con indentatura
+\newenvironment{lyxlist}[1]
+	{\begin{list}{}
+		{\settowidth{\labelwidth}{#1}
+		 \setlength{\leftmargin}{\labelwidth}
+		 \addtolength{\leftmargin}{\labelsep}
+		 \renewcommand{\makelabel}[1]{##1\hfil}}}
+	{\end{list}}
+
+\newsavebox{\mybox}  %per ambiente \myboxed
+\newenvironment{myboxed} 
+{\noindent\begin{lrbox}{\mybox}\begin{minipage}{\textwidth}}
+{\end{minipage}\end{lrbox}\fbox{\usebox{\mybox}}}
+
+\newenvironment{QandA}{\begin{enumerate}[label=\arabic*.]\bfseries}
+                      {\end{enumerate}}
+\newenvironment{answered}{\par\normalfont}{}
+
+
+%\tcolorboxenvironment{theorem}{
+%enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{prop}{
+%enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{lem*}{
+%enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{eq}{
+%enhanced jigsaw,colframe=orange,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{defin}{
+%enhanced jigsaw,colframe=cyan,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{prop}{
+%enhanced jigsaw,colframe=yellow,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+
+\begin{document}
+\title{\textbf{Analisi Numerica}}
+\author{Alessandro Sosso, Marco Ambrogio Bergamo}
+\date{Anno 2023-2024}
+
+\maketitle
+\tableofcontents{}
+
+\section*{Preliminari Meschini}
+\begin{defn}
+Spazio vettoriale, Norma
+\end{defn}
+
+\begin{thm}[Disuguaglianza di Cauchy-Schwarz]
+$\left\langle x,y\right\rangle =\left|x^{T}\cdot y\right|\leq\left\Vert x\right\Vert _{2}\cdot\left\Vert y\right\Vert _{2}$
+\end{thm}
+
+\begin{defn}[Norma matriciale]
+ $\left\Vert A\cdot B\right\Vert \leq\left\Vert A\right\Vert \cdot\left\Vert B\right\Vert $
+e Norma matriciale indotta $$\left\Vert A\right\Vert \coloneqq\sup_{x\in\mathbb{R}^{n}}\frac{\left\Vert Ax\right\Vert }{\left\Vert x\right\Vert }=\sup_{\left\Vert x\right\Vert =1}\left\Vert Ax\right\Vert $$
+\end{defn}
+
+\begin{defn}
+Spettro di una matrice $\Lambda\left(A\right)$, Raggio spettrale
+$\rho\left(A\right)=\max_{\lambda\in\Lambda\left(A\right)}\left|\lambda\right|$
+\end{defn}
+
+\begin{thm}
+Se $A$ simmetrica $\Longrightarrow$ $\left\Vert A\right\Vert _{2}=\rho\left(A\right)$
+\end{thm}
+
+\begin{prop}
+\textup{$\left\Vert A\right\Vert $} norma matriciale indotta $\Longrightarrow$
+$\rho\left(A\right)\leq\left\Vert A\right\Vert $
+\end{prop}
+
+\begin{myboxed}
+\begin{thm}
+$\rho\left(A\right)=\inf\left\Vert A\right\Vert $ per tutte le possibili
+norme matriciali
+\end{thm}
+\end{myboxed}
+
+\begin{myboxed}
+\begin{thm}[Decomposizione in valori singolari]
+$A\in\mathbb{R}^{m\times n}$, allora $\exists U\in\mathbb{R}^{m\times m},V\in\mathbb{R}^{n\times n}$
+ortogonali, $\exists\Sigma\in\mathbb{R}^{m\times n}$ diagonale (di
+elementi detti valori singolari) tali che $A=U\Sigma V^{T}$
+\end{thm}
+\end{myboxed}
+
+\begin{proof}
+   P. 11. Supponiamo $m\ge n$. Per induzione su $m$
+\end{proof}
+
+\begin{defn}[Raggio spettrale] $\rho(A)\coloneqq\max_{\lambda\in\sigma(A)}\abs{\lambda}$ è l'autovalore di modulo massimo
+    
+\end{defn}
+
+\pagebreak{}
+
+\part{Primo semestre}
+
+\section{Buona posizione e numero di condizionamento di un problema}
+\subsection{Problema numerico}
+\begin{defn}[Problema ben posto/stabile]
+  $d\in D$, $x\in X$ con $D,X$ sottoinsiemi di spazi \textbf{normati}. Un problema ben posto è $$F\left(x,d\right)=0$$ tale che
+\begin{enumerate}
+\item Esiste una soluzione
+\item La soluzione è unica
+\item La soluzione dipende con continuità coi dati
+\end{enumerate}
+\end{defn}
+\begin{example*}[Problema mal posto]
+Numero di soluzioni di $P_{a}\left(x\right)=x^{4}-x^{2}\left(2a-1\right)+a\left(a-1\right)$
+in funzione di $a$
+\end{example*}
+
+\begin{defn}[Funzione risolvente] Se il problema è ben posto, ovvero ammette soluzione unica, allora esiste una funzione $$\begin{array}{ccccc}
+   G:  & D & \to & X & \text{ \textbf{continua}}\\
+     & d & \mapsto & x &
+\end{array}$$
+e abbiamo $F(G(d),d)=0$ e $x+\delta x =G(d+\delta d)$.
+\end{defn}
+
+\begin{defn}[Errore] In generale i dati saranno perturbati $d+\delta d$ e  $G(d+\delta d)=x+\delta x$ in modo che 
+$$F(x+\delta x, d+\delta d)=0$$
+    \begin{align*}
+\textsc{Assoluto } & \norm{\delta x}_X & \textsc{Relativo } &  \frac{\norm{\delta x}_X}{\norm{x}_X} \text{ se } \norm{x}_X \ne0
+\end{align*}
+\end{defn}
+
+\paragraph{Proprietà di Lipschitzianità} In generale richiediamo oltre alla dipendenza continua dai dati, anche la lip., ovvero che valga:
+$$\boxed{\exists K_0=K_0(d)\mid \forall\delta d:d+\delta d\in D,\;\norm{\delta x}_X\le K_0\norm{\delta d}_D}$$
+Questa proprietà è più adatta ad esprimere il \hl{concetto di \textbf{stabilità numerica}: piccole perturbazioni sui dati danno luogo a perturbazioni \textbf{dello stesso ordine di grandezza} sulla soluzione.}
+
+\begin{defn}[Numero di condizionamento]
+Data $G\colon D\rightarrow X$ risolvente e $\delta x\coloneqq G\left(d+\delta d\right)-G\left(d\right)$
+\begin{align*}
+&\textsc{Relativo } \quad K\left(d\right)=\lim_{\delta\rightarrow0}\left(\sup_{\left\Vert \delta d\right\Vert \leq\delta}\left\{ \frac{\nicefrac{\left\Vert \delta x\right\Vert }{\left\Vert x\right\Vert }}{\nicefrac{\left\Vert \delta d\right\Vert }{\left\Vert d\right\Vert }}\right\} \right) =\lim_{\delta\rightarrow0}\left(\sup_{\left\Vert \delta d\right\Vert \leq\delta}\left\{ \frac{\norm{\delta x}}{\norm{\delta d}}\frac{\norm{d}}{\norm{x}}\right\} \right)\\
+&\textsc{Assoluto } \quad \hat{K}\left(d\right)=\lim_{\delta\rightarrow0}\left(\sup_{\left\Vert \delta d\right\Vert \leq\delta}\left\{ \frac{\left\Vert \delta x\right\Vert }{\left\Vert \delta d\right\Vert }\right\} \right)
+\end{align*}
+
+L'assoluto è utile per es. quando $d=0$ o $x=0$. \hl{È una \textbf{misura} della bontà di dipendenza continua dai dati}.
+\end{defn}
+
+\begin{rem*}
+    Il libro la definisce
+    \begin{align*}
+\textsc{Relativo } & K\left(d\right)=\sup\left\{ \frac{\nicefrac{\left\Vert \delta x\right\Vert }{\left\Vert x\right\Vert }}{\nicefrac{\left\Vert \delta d\right\Vert }{\left\Vert d\right\Vert }},\; \delta d\ne 0,\;d+\delta d\in D\right\} & \textsc{Assoluto } & {K}_{\text{abs}}\left(d\right)=\sup\left\{ \frac{\left\Vert \delta x\right\Vert }{\left\Vert \delta d\right\Vert },\; \delta d\ne 0,\;d+\delta d\in D\right\}
+\end{align*}
+\end{rem*}
+
+
+
+\begin{defn}[Buon condizionamento]
+$K\left(d\right)$ piccolo (o $\hat{K}\left(d\right)$). Cioè ad un errore relativo sui dati corrisponde un errore piccolo sulla soluzione.
+\end{defn}
+
+\begin{myboxed}
+\begin{rem*}
+$K\left(d\right)<+\infty$ vuol dire $\exists k_{0}>0$ tale che $\frac{\left\Vert \delta x\right\Vert }{\left\Vert x\right\Vert }\leq k_{0}\frac{\left\Vert \delta d\right\Vert }{\left\Vert d\right\Vert }$
+per $\left\Vert \delta d\right\Vert $ sufficientemente piccolo. \\
+Infatti, fissato $\delta$ "piccolo", ho che 
+$$\sup_{\left\Vert \delta d\right\Vert \leq\delta}\left\{ \frac{\nicefrac{\left\Vert \delta x\right\Vert }{\left\Vert x\right\Vert }}{\nicefrac{\left\Vert \delta d\right\Vert }{\left\Vert d\right\Vert }}\right\} \approx K(d)\ge \frac{\nicefrac{\left\Vert \delta x\right\Vert }{\left\Vert x\right\Vert }}{\nicefrac{\left\Vert \delta d\right\Vert }{\left\Vert d\right\Vert }}\quad \forall \delta d\in D:\norm{\delta D}\le \delta$$
+e quindi $\frac{\left\Vert \delta x\right\Vert }{\left\Vert x\right\Vert }\leq K(d)\frac{\left\Vert \delta d\right\Vert }{\left\Vert d\right\Vert }$
+\end{rem*}
+\begin{example*}[Sistema lineare] Per semplicità perturbo solo il termine noto:
+$$\begin{cases}
+    Ax=b \\
+    A\left(x+\delta x\right)=b+\delta b 
+\end{cases}\implies A\delta x=\delta b\implies \delta x=A^{-1}\delta b$$
+allora
+$$\sup_{\delta  b\ne 0}\frac{\norm{\delta x}}{\norm{\delta b}}=\sup\frac{\norm{A^{-1}\delta b}}{\norm{\delta b}}=\norm{A^{-1}}$$
+e quindi 
+$$K(b)=\norm{A^{-1}}\cdot\frac{\norm{b}}{\norm{x}}=\frac{\norm{A^{-1}}\norm{Ax}}{\norm{x}}\overset{\star}{\textcolor{red}{\le}}\norm{A^{-1}}\norm{A}\eqqcolon K(A) $$
+$\star$ poiché $\norm{Ax}\le\norm{A}\norm{x}$. In conclusione abbiamo che 
+$$\boxed{\frac{\norm{\delta x}}{\norm{x}}\le K(A)\frac{\norm{\delta b}}{\norm{b}}} \quad \text{ con } K(A)=\norm{A^{-1}}\norm{A}$$
+\end{example*}
+\end{myboxed}
+
+\begin{rem*}[Funzione risolvente differenziabile]
+    Supponiamo $D\subseteq \re^m$ e $X\subseteq\re^n$, $G$ differenziabile. Allora
+    $$G(d+\delta d)=G(d)+G'(d)\cdot\delta d+o(\norm{\delta d}) \quad \text{Taylor}$$
+    allora $\delta x=G(\tilde{d})-G(d)=G'(d)\cdot\delta d+o(\norm{\delta d})$ e 
+    $${K}_{\text{abs}}\left(d\right)=\lim_{\delta\rightarrow0}\left(\sup_{\left\Vert \delta d\right\Vert \leq\delta}\left\{ \frac{\left\Vert \delta x\right\Vert }{\left\Vert \delta d\right\Vert }\right\} \right)\approx\lim_{\delta\rightarrow0}\left(\sup_{\left\Vert \delta d\right\Vert \leq\delta}\left\{ \frac{\norm{G'(d)\cdot\delta d}+o(\norm{\delta d})}{\left\Vert \delta d\right\Vert }\right\} \right)
+    =\left\Vert G'\left(d\right)\right\Vert$$
+    $$K(d)\approx \norm{G'(d)}\frac{\norm{d}}{\norm{G(d)}}$$
+    ovvero:
+\end{rem*}
+
+\begin{defn}[Numero di condizionamento al primo ordine] Dal ragionamento appena fatto per funzioni risolventi derivabili:
+     $$\boxed{K(d)\approx \norm{G'(d)}\frac{\norm{d}}{\norm{G(d)}}  \quad \quad  {K}_{\text{abs}}(d)\approx\left\Vert G'\left(d\right)\right\Vert}$$
+\end{defn}
+
+\begin{example*}[Equazione non lineare]
+    
+\end{example*}
+\subsection{Metodo numerico}
+\begin{defn}[Metodo numerico]
+Successione di problemi $F_{n}\left(x_{n},d_{n}\right)=0$ (detti problemi approssimati)
+tali che $x_{n}\rightarrow x$ quando $d_{n}\rightarrow d$, ovvero che la \textbf{soluzione numerica} $x_n$ converga alla \textbf{soluzione esatta} $x$.\\
+Consideriamo il problema ben posto con risolvente $G:D\to X$. Un metodo numerico è un \textbf{insieme di trasformazioni elementari} 
+$$\phi_i:D_i\to D_{i+1} \quad i=1,\dots, r$$
+tali che
+\begin{itemize}
+    \item $D_0=D, \quad D_{r+1}=X$
+    \item $x_0=d, \quad x_{i+1}=\phi_i(x_i),\quad x_{r+1}=x$
+    \item $\phi_r\circ\dots\circ\phi_0\eqqcolon \widetilde{G}\approx G$
+\end{itemize}
+NB: ogni operazione è affetta da \textbf{roundoff}: $\tilde{x}_{i+1}=fl(\phi_i(\tilde{x}_i))$
+\end{defn}
+
+\begin{defn}[Metodo ben posto]
+    Se i problemi approssimati $F_{n}\left(x_{n},d_{n}\right)=0$ sono ben posti $\forall n$
+\end{defn}
+
+
+
+\begin{defn}[Metodo consistente]
+Un metodo numerico $\left\{ F_{n}\right\} _{n}$ si dice
+\begin{align*}
+\textsc{Consistente } & F_{n}\left(x,d\right)\longrightarrow F\left(x,d\right)=0 & \textsc{Fortemente consistente } & F_{n}\left(x,d\right)=0\quad\forall\,n
+\end{align*}
+\end{defn}
+
+\begin{defn}[Metodo stabile/ben condizionato] Se i problemi approssimati $F_{n}\left(x_{n},d_{n}\right)=0$ sono ben condizionati, ovvero $K_n(d_n)$ piccolo $\forall n$, o anche
+$$K_{\phi_i}(x_i)=\frac{\norm{J\phi_i(x_i)}\norm{x_i}}{\norm{\phi_i(x_i)}} \quad \text{ è "piccola"}$$
+ $\left\{ F_{n}\right\} _{n}$ stabile se $\exists\,k_{0}>0,\delta_{0}>0$
+tali che $\forall\,n$ $\left\Vert \delta x_{n}\right\Vert \leq k_{0}\left\Vert \delta d_{n}\right\Vert $
+con $\left\Vert \delta d_{n}\right\Vert \leq\delta_{0}\quad\forall\,\delta d_{n}$,
+ovvero i problemi sono uniformemente ben condizionati
+\end{defn}
+
+
+
+\begin{defn}[Numero di condizionamento asintotico rel/ass]
+    $$K^{num}(d)=\lim_{k\to\infty}\sup_{n\ge k}K_n(d) \quad \quad K^{num}_{abs}(d)=\lim_{k\to \infty}\sup_{n\ge k}K_{abs,n}(d)$$
+\end{defn}
+
+
+\begin{rem*}
+$\left\{ F_{n}\right\} _{n}$ stabile $\Longleftrightarrow$ $\sup_{n}K_{n}\left(d_{n}\right)\leq+\infty$
+\end{rem*}
+\begin{defn}[Convergenza]
+$\left\{ F_{n}\right\} _{n}$ convergente se $$\forall\,\varepsilon>0\quad\exists\,\begin{cases}
+n_{0}(\varepsilon) \\
+\delta_{0}(n_0,\varepsilon)>0
+\end{cases}  \text{
+tali che } \forall\,\begin{cases}
+    n\geq n_{0} \\
+    \delta d_{n} \text{ con } \left\Vert \delta d_{n}\right\Vert \leq\delta_{0}
+\end{cases} \quad \text{vale} \quad 
+\left\Vert G\left(d\right)-G_{n}\left(d+\delta d_{n}\right)\right\Vert \leq\varepsilon$$
+\end{defn}
+
+\begin{defn}[Errore ass/rel di un metodo]
+Danno misura della convergenza di $x_n$:
+$$E(x_n)=\norm{x-x_n}\quad \quad E_{rel}(x_n)=\frac{\norm{x-x_n}}{\norm{x}}\quad (x\ne0)$$
+\end{defn}
+
+\begin{thm}[Lax-Richtmyer]
+Un metodo 
+$$\text{convergente} \begin{array}{c}
+     \implies \\
+     \underset{+\text{consistente}}{\impliedby}
+\end{array} \text{stabile}$$
+\end{thm}
+
+\begin{proof}[Dimostrazione (per i sistemi lineari)]
+\begin{align*}
+ & \implies & \overset{\delta x_{n}}{\left\Vert \overbrace{G_{n}\left(d\right)-G_{n}\left(d+\delta d_{n}\right)}\right\Vert } & \leq\overset{\longrightarrow0\text{ per convergenza}}{\left\Vert \overbrace{G_{n}\left(d\right)-G\left(d\right)}\right\Vert }+\overset{\leq k_{0}\left\Vert \delta d\right\Vert \longrightarrow0}{\left\Vert \overbrace{G\left(d\right)-G\left(d+\delta d_{n}\right)}\right\Vert }+\overset{\longrightarrow0\text{ per convergenza}}{\left\Vert \overbrace{G\left(d+\delta d_{n}\right)-G_{n}\left(d+\delta d_{n}\right)}\right\Vert }\\
+ & \impliedby & \left\Vert G\left(d\right)-G_{n}\left(d+\delta d_{n}\right)\right\Vert  & \leq\overset{\left\Vert x-A_{n}^{-1}d\right\Vert \leq\left\Vert A_{n}x-d\right\Vert \longrightarrow0}{\left\Vert \overbrace{G\left(d\right)-G_{n}\left(d\right)}\right\Vert }+\overset{\leq k_{0}\left\Vert \delta d\right\Vert \longrightarrow0}{\left\Vert \overbrace{G_{n}\left(d\right)-G_{n}\left(d+\delta d_{n}\right)}\right\Vert }
+\end{align*}
+\end{proof}
+\begin{defn}[Analisi a priori e a posteriori dell'errore]
+\end{defn}
+
+\begin{itemize}
+\item \noun{Analisi a priori}:
+\begin{itemize}
+\item \emph{Analisi in avanti}: dato l'errore $\delta d$ studio l'effetto
+sull'errore della soluzione $\delta x$
+\item \emph{Analisi all'indietro}: dato l'errore della soluzione $\delta x$
+cerco di determinare $\delta d$
+\end{itemize}
+\item \noun{Analisi a posteriori}: Stimo l'errore della soluzione dopo il
+calcolo (per esempio col residuo $r=F\left(x_{n},d\right)$)
+\end{itemize}
+
+\begin{defn}[Sorgenti di errore]
+    $$e=\begin{cases}
+        e_{\text{matematico}} \begin{cases}
+              e_{\text{sul PF}}=\text{errore sul modello matematico del problema fisico}\\
+                e_{\text{sui dati}}=\text{errore sulla misurazione dei dati}
+        \end{cases}\\
+        + \\
+          e_{\text{computazionale}} \begin{cases}
+                e_{n}=\text{discretizzazione numerica (troncamento, numero finito di passi nei $\lim_{\to\infty}$}) \\
+                e_a=\text{di arrotondamento (roundoff)}
+          \end{cases}
+    \end{cases}$$
+    Un metodo numerico è convergente se l'$ e_{\text{computazionale}}$ può essere ridotto arbitrariamente aumentando lo sforzo computazionale.
+\end{defn}
+
+\begin{defn}[Altre caratteristiche di un metodo numerico]
+    Abbiamo:
+    \begin{itemize}
+        \item \textbf{Accuratezza}: errori piccoli rispetto a tolleranza fissata. Quantificata con l'ordine di infinitesimo di $e_n$ risp. al parametro della discretizzazione.
+        \item  \textbf{Affidabilità}: se applicato a tanti test l'errore totale può essere tenuto al di sotto di una tolleranza con probabilità maggiore rispetto a quella prestabilita
+        \item \textbf{Efficienza}: colplessità computazionale sia la più bassa possibile
+        \item \textbf{Complessità (di un problema)}: minima complessità tra tutti gli algoritmi (che è il loro tempo di esecuzione) 
+    \end{itemize}
+\end{defn}
+
+\section{Aritmetica finita}
+Un calcolatore può rappresentare solo un numero finito di numeri $\mathbb{F}\subset\re$. Ci sono due limitazoni:
+    \begin{enumerate}
+        \item Non si possono rappresentare numeri troppo grandi o troppo piccoli
+        \item I numeri rappresentati sono in un numero discreto
+    \end{enumerate}
+\paragraph{Numeri floating point} $x\in F$ è rappresentato come 
+$$x=(-1)^s(0.a_1\dots a_t)\beta
+^e$$
+con 
+\begin{itemize}
+    \item $s=\{0,1\}$ segno
+    \item $a_i$   cifre significative 
+    \item $t$ numero di cifre significative
+    \item $\beta$ base
+    \item $e$ ordine di grandezza
+\end{itemize}
+\paragraph{Doppia precisione}
+ \begin{defn}[Unità di roundoff]
+Aritmetica finita $F\subseteq\mathbb{R}$, $u$ unità di roundoff
+per cui $\forall\,x\in\mathbb{R}\;\exists\,x^{\prime}\in F$ tale che $\left|x-x^{\prime}\right|\leq u\left|x\right|$
+\end{defn}
+\begin{defn}[$\varepsilon$ macchina]
+Sia $x\in\re$, $x_{min}<\abs{x}<x_{max}\implies \exists\varepsilon\in\re$, $\abs{\varepsilon}\le u\quad\mid\quad fl(x)=x(1-\varepsilon)$
+$$\varepsilon_{mc}=\min\{x\in F\mid 1\oplus x>1\}$$
+\end{defn}
+
+
+\subsection{Operazioni in $\mathbb{F}$}
+\begin{align*}
+    \ast&\rightarrow \text{ operazione in }\re \\
+    \circledast&\rightarrow \text{ operazione in }F: \boxed{x\circledast y\coloneqq fl(x\ast y)}
+\end{align*}
+usando l'$\varepsilon$ macchina si ha $\exists\varepsilon\in\re$, $\abs{\varepsilon}\le u$ tale che   $$x\circledast y=(x\ast y)(1+\varepsilon)$$
+\begin{rem*}
+    Molte proprietà delle operazioni in $\re$ non valgono in aritmetica finita, come la \textbf{proprietà associativa}
+\end{rem*}
+\paragraph{Stabilità} In somma multipla sommare prima le coppie che hanno somma in modulo minore
+\paragraph{Cancellazione} L'errore relativo di $a-b$ diventa molto grande se sono vicini
+
+
+
+\pagebreak{}
+
+\section{Metodi diretti per sistemi lineari}
+\begin{defn}[Metodi diretti/iterativi] Abbiamo:
+\begin{itemize}
+    \item \textbf{Metodi diretti}: calcolano la soluzione esatta in un numero finito di passaggi
+    \item \textbf{Metodi iterativi}: calcolano la soluzione esatta in un numero infinito di passaggi, ovvero calcolano una successione $(x_k)_k$ a valori in $\re^n$ t.c. $x_k\to x$
+\end{itemize}
+    
+\end{defn}
+\subsection{Sistemi lineari}
+\begin{defn}[Sistema lineare approssimato]
+\label{def:sistema-lineare-approssimato}$Ax=b\quad\longrightarrow\quad\left(A+\delta A\right)\left(x+\delta x\right)=\left(b+\delta b\right)$
+\end{defn}
+
+\begin{defn}[Numero di condizionamento di una matrice]
+    È $$K\left(A\right)\coloneqq\left\Vert A\right\Vert \cdot\left\Vert A^{-1}\right\Vert $$
+\end{defn}
+
+\begin{myboxed}
+\begin{rem*}
+$K\left(A\right)=\frac{\sigma_{\max}\left(A\right)}{\sigma_{\min}\left(A\right)} $, ($\sigma$ valori singolari),
+per $A$ SPD vale $K_{2}\left(A\right)=\frac{\lambda_{\max}\left(A\right)}{\lambda_{\min}\left(A\right)}$ ($\lambda$ autovalori)
+\end{rem*}
+\end{myboxed}
+\begin{proof}
+    $\norm{A}_2\overset{\star}{=}\sqrt{\rho(A^TA)}=\sqrt{\rho(A^2)}=\sqrt{\sigma_{max}^2}=\sigma_{max}$ dove non dimostriamo $\star$ e $\rho$ è il raggio spettrale. \\
+    Inoltre vale $\sigma(A^{-1})=1/\sigma(A)$ e dalla def. di numero di cond. segue la tesi.
+\end{proof}
+
+\begin{rem*}
+$K\left(A\right)>1$ in quanto $1=\left\Vert I\right\Vert =\left\Vert A\cdot A^{-1}\right\Vert \leq\left\Vert A\right\Vert \cdot\left\Vert A^{-1}\right\Vert =K\left(A\right)$
+\end{rem*}
+
+
+\begin{prop}[Stima a priori dell'errore]
+   Abbiamo che 
+$$\boxed{\frac{\norm{\delta x}}{\norm{x}}\le K(A)\frac{\norm{\delta b}}{\norm{b}}} \quad \text{ con } K(A)=\norm{A^{-1}}\norm{A}$$
+\end{prop}
+
+\begin{proof}
+      Per semplicità perturbo solo il termine noto:
+$$\begin{cases}
+    Ax=b \\
+    A\left(x+\delta x\right)=b+\delta b 
+\end{cases}\implies A\delta x=\delta b\implies \delta x=A^{-1}\delta b$$
+allora
+$$K_{abs}=\sup_{\delta  b\ne 0}\frac{\norm{\delta x}}{\norm{\delta b}}=\sup\frac{\norm{A^{-1}\delta b}}{\norm{\delta b}}=\norm{A^{-1}}$$
+e quindi 
+$$K(b)=K_{abs}\cdot\frac{\norm{b}}{\norm{x}}=\norm{A^{-1}}\cdot\frac{\norm{b}}{\norm{x}}=\frac{\norm{A^{-1}}\norm{Ax}}{\norm{x}}\overset{\star}{\textcolor{red}{\le}}\norm{A^{-1}}\norm{A}\eqqcolon K(A) $$
+$\star$ poiché $\norm{Ax}\le\norm{A}\norm{x}$.
+\end{proof}
+
+\begin{lem}
+\label{lem:invertibilita-matrice-perturbata}Preso $\left\Vert B\right\Vert <1$
+$\Longrightarrow$ $I+B$ invertibile e $\left\Vert \left(I+B\right)^{-1}\right\Vert \leq\frac{1}{1-\left\Vert B\right\Vert }$
+\end{lem}
+
+\begin{proof}
+Per assurdo, $I+B$ non invertibile $\Longrightarrow$ $\exists x\in\ker\left(I+B\right)$
+non nullo $\Longrightarrow$ $I\cdot x=-B\cdot x$ $\Longrightarrow$
+$\left\Vert x\right\Vert =\left\Vert B\cdot x\right\Vert \leq\left\Vert B\right\Vert \cdot\left\Vert x\right\Vert $
+$\Longrightarrow$ $\left\Vert B\right\Vert \geq1$, $\text{\lightning}$
+
+\[
+I=\left(I+B\right)^{-1}\left(I+B\right)\quad\Longrightarrow\quad\left(I+B\right)^{-1}=I-B\left(I+B\right)^{-1}\quad\Longrightarrow\quad\left\Vert \left(I+B\right)^{-1}\right\Vert \leq1+\left\Vert B\right\Vert \cdot\left\Vert \left(I+B\right)^{-1}\right\Vert 
+\]
+\end{proof}
+\begin{cor}
+Se $A$ invertibile e $\left\Vert A^{-1}\right\Vert \cdot\left\Vert \delta A\right\Vert <1\quad\Longrightarrow\quad A+\delta A$
+invertibile
+
+\end{cor}
+
+\begin{proof}
+$A+\delta A$ invertibile $\quad\Longleftrightarrow\quad$ $A^{-1}\left(A+\delta A\right)=I+A^{-1}\delta A$
+invertibile
+ $$\norm{A^{-1}\delta A}\le \norm{A^{-1}}\norm{\delta A}<1$$
+ da cui la tesi e $\norm{\delta A}\le \frac{1}{\norm{A^{-1}}}$ per il lemma
+\end{proof}
+
+\begin{thm}
+Preso $\delta A$ tale che $\left\Vert A^{-1}\right\Vert \cdot\left\Vert \delta A\right\Vert <1$,
+allora per il \nameref{def:sistema-lineare-approssimato} vale: 
+\[
+\frac{\left\Vert \delta x\right\Vert }{\left\Vert x\right\Vert }\leq\frac{K\left(A\right)}{1-K\left(A\right)\frac{\left\Vert \delta A\right\Vert }{\left\Vert A\right\Vert }}\left(\frac{\left\Vert \delta A\right\Vert }{\left\Vert A\right\Vert }+\frac{\left\Vert \delta b\right\Vert }{\left\Vert b\right\Vert }\right)
+\]
+\end{thm}
+
+\begin{proof}
+\begin{align*}
+\left(A+\delta A\right)\left(x+\delta x\right)=\left(b+\delta b\right) &\implies
+\bcancel{A\cdot x}+\delta A\cdot x+\left(A+\delta A\right)\delta x =\bcancel{b}+\delta b \\
+&\implies \delta x = \overset{\clubsuit}{\overbrace{\left(A+\delta A\right)^{-1}}}\overset{\spadesuit}{\overbrace{\left(\delta b-\delta A\cdot x\right)}}
+\end{align*}
+
+
+
+\begin{align*}
+\left\Vert \clubsuit\right\Vert  & \overset{\star}{=}\left\Vert A^{-1}\left(I+A^{-1}\delta A\right)^{-1}\right\Vert \leq\left\Vert A^{-1}\right\Vert \left\Vert \left(I+A^{-1}\delta A\right)^{-1}\right\Vert \overset{\text{ per \eqref{lem:invertibilita-matrice-perturbata}}}{\leq}\frac{\left\Vert A^{-1}\right\Vert }{1-\left\Vert A^{-1}\delta A\right\Vert }\leq\frac{\left\Vert A^{-1}\right\Vert }{1-\left\Vert A^{-1}\right\Vert \left\Vert \delta A\right\Vert }
+\end{align*}
+
+in $\star$: $(A+\delta A)^{-1}=(\textcolor{red}{AA^{-1}}(A+\delta A))^{-1}=(A(I_n+A^{-1}\delta A))^{-1}$
+
+\begin{align*}
+\left\Vert \spadesuit\right\Vert  & \leq\left\Vert \delta A\right\Vert \left\Vert x\right\Vert +\left\Vert \delta b\right\Vert \overset{\star}{\leq}\left\Vert A\right\Vert \left\Vert x\right\Vert \left(\frac{\left\Vert \delta A\right\Vert }{\left\Vert A\right\Vert }+\frac{\left\Vert \delta b\right\Vert }{\left\Vert b\right\Vert }\right)\qquad\text{in \ensuremath{\star} moltiplico per }1=\frac{\left\Vert Ax\right\Vert }{\left\Vert b\right\Vert }\leq\frac{\left\Vert A\right\Vert \left\Vert x\right\Vert }{\left\Vert b\right\Vert }
+\end{align*}
+\end{proof}
+\begin{rem*}
+Se $\frac{\left\Vert \delta A\right\Vert }{\left\Vert A\right\Vert },\frac{\left\Vert \delta b\right\Vert }{\left\Vert b\right\Vert }=O\left(u\right),\;$
+con $u$ unità di roundoff e $O\left(\bullet\right)$ $<<$ordine di$>>$  allora
+\begin{align}\label{eq:stima-errore-rel-sistemi-lineari}
+    \frac{\left\Vert \delta x\right\Vert }{\left\Vert x\right\Vert }\le \frac{K(A)}{1-K(A)O(u)}O(u)=K(A)O(u)
+\end{align}
+\end{rem*}
+
+\subsection{Sistemi triangolari}
+
+\begin{defn}[Matrice triangolare superiore/inferiore]
+    $A\in \re^{n\times n}$ con $a_{ij}=0$ per $i>j$ (superiore) o  $i<j$ (inferiore) 
+\end{defn}
+
+\begin{prop}[Determinante di matirice triangolare] $\det A=\prod_{i=1}^na_{ii}$
+    
+\end{prop}
+\begin{cor} Abbiamo
+\begin{itemize}
+    \item   $A$ triangolare è invertibile $\iff a_{ii}\ne0\quad\forall i=1\dots n$
+    \item   $A$ triangolare $\implies \sigma(A)=\{a_{ii}\mid i=1\dots n\}$
+\end{itemize}
+\end{cor}
+
+\begin{prop}
+    $A,B$ triangolari superiori (inferiori) $\implies A\cdot B$ triangolare supreiore (inferiore)
+\end{prop}
+
+\paragraph{Backward substitution} Se  $A$ trangolare \textbf{superiore}
+\begin{align*}
+    Ax=b\implies \begin{cases}
+        a_{11}x_1+  \dots \dots+ & a_{1n}x_n  =b_1 \\
+       \qquad\quad  a_{22}x_2+ \dots+  & a_{2n}x_n  =b_2 \\
+           & \vdots \\
+         & a_{nn}x_n =b_n
+    \end{cases}
+\end{align*}
+Per risolvere il sistema si usa backsubstitution:
+\begin{align*}
+    x_n&=\frac{b_n}{a_{nn}}\\
+    x_{n-1}&=\frac{b_{n-1}-a_{n-1,n}x_n}{a_{n-1,n-1}} \\
+    &\vdots \\
+    x_i&=\frac{b_i-\sum_{j=i+1}^na_{ij}x_j}{a_{ii}}
+\end{align*}
+
+\paragraph{Forward substitution} Se  $A$ trangolare \textbf{inferiore}
+il sistema il sistema si risolve con forwardsubstitution:
+\begin{align*}
+    x_1&=\frac{b_1}{a_{11}}\\
+    &\vdots \\
+    x_i&=\frac{b_i-\sum_{j=1}^{i-1}a_{ij}x_j}{a_{ii}}
+\end{align*}
+
+\begin{defn}[Costo computazionale]
+numero di operazioni floating point (\textbf{flops}) effettuate dall'algoritmo    
+\end{defn}
+
+\begin{myboxed}
+\begin{rem*}
+    Per i  gli algoritmi di backsubstitution/forwardsubstitution il numero di operazioni per calcolare $x_i$ è: $(n-i)$ prodotti, $(n-i)$ somme, 1 divisione. Quindi il costo computazionale è:
+    $$\sum_{i=1}^n2(n-i)+1\approx 2\sum_{i=1}^n(n-i)=2\left[\sum_{i=1}^nn-\sum_{i=1}^ni\right]=2(n^2-\frac{n(n-1)}{2})=2n^2-n^2+n=n^2+n\approx n^2=O(n^2)$$
+\end{rem*}
+\end{myboxed}
+
+\begin{thm}[Inversa di una matrice triangolare]
+$A$ triangolare superiore (inferiore) $\implies A^{-1}$ triangolare superiore (inferiore)
+\end{thm}
+
+\begin{proof}
+Sia $A^{-1}=\left[x^{\left(1\right)},\ldots,x^{\left(n\right)}\right]$,
+risolvo $AA^{-1}=I\rightarrow Ax^{\left(i\right)}=e_{i}$ con backsubstitution
+ottengo $x^{\left(i\right)}=\left(x_{1}^{\left(i\right)},\ldots,x_{i}^{\left(i\right)},0,\ldots,0\right)^{T}$
+\end{proof}
+\begin{thm}
+$\left|\delta T\right|\leq\left(nu+O\left(u^{2}\right)\right)\left|T\right|$
+\end{thm}
+
+\begin{cor}
+$\frac{\left\Vert \delta x\right\Vert }{\left\Vert x\right\Vert }\leq\frac{K\left(T\right)\cdot n\cdot u}{1-K\left(T\right)\cdot n\cdot u}=K\left(T\right)\cdot n\cdot u+O\left(u^{2}\right)$
+\end{cor}
+
+
+
+
+\subsection{Eliminazione di Gauss e Fattorizzazione $LU$}
+\subsubsection{Eliminazione di Gauss}
+Voglio trovare un algoritmo che mi porti da un sistema lineare ad uno triangolare:
+$$Ax=b\longrightarrow Ux=y \quad U \text{ triangolare}$$
+faccio successione di sistemi lineari $A^{(i)}x=b^{(i)}$ t.c. $\begin{cases}
+    A^{(1)}=A \\
+    b^{(1)}=b
+\end{cases}$ e  $\begin{cases}
+    A^{(n)}=U \\
+    b^{(n)}=y
+\end{cases} $
+
+\begin{itemize}
+    \item[(1)] $\begin{cases}
+                  A^{(1)}=A \\
+                    b^{(1)}=b
+                \end{cases}$
+    \item[(2)] $\begin{cases}
+                  a_{ij}^{(2)}= a_{ij}^{(1)}-l_{i1} a_{1j}^{(1)}\\
+                    b_i^{(2)}= b_i^{(1)}-l_{i1}b_1^{(1)}
+                \end{cases}$ per $i=2\dots n$, $j=1\dots n$ con $l_{i1}=\frac{a_{i1}^{(1)}}{a_{11}^{(1)}}\implies$ ho "eliminato" la prima colonna (tranne $a_{11}$)
+    \item[(k+1)] $\begin{cases}
+                  a_{ij}^{(k+1)}= a_{ij}^{(k)}-l_{ik} a_{kj}^{(k)}\\
+                    b_i^{(k+1)}= b_i^{(k)}-l_{ik}b_k^{(k)}
+                \end{cases}$ per $i=k+1\dots n$, $j=k+1\dots n$ con $l_{ik}=\frac{a_{ik}^{(k)}}{a_{kk}^{(k)}}\implies$ ho "reso triangolari" le prime $k$ colonne \\
+                ovvero
+                $$\begin{cases}
+                    A^{(k+1)}=L_kA^{(k)} \\
+                    b^{(k+1)}=L_kb^{(k)}
+                \end{cases} \quad \text{con}\quad L_k=\boldsymbol{I}_{n}-l_{k}\cdot e_{k}^{T}=\begin{bmatrix}
+1 & 0 & \dots &  & & \dots & 0 \\
+0 & \ddots &  &  &  & & \\
+\vdots &  & 1 &  & & & \vdots \\
+ &  & -l_{k+1,k} & 1 &  & & \\
+ &  & -l_{k+2,k} & 0 & 1 & &  \\
+ &  & \vdots & \vdots &  &\ddots & 0 \\
+0 & \dots & -l_{nk} & 0 & \dots & 0 & 1 
+\end{bmatrix}\quad \text{e } l_k=\begin{pmatrix} 0 \\ \vdots \\ 0 \\ l_{k+1,k} \\ \vdots \\ l_{nk}
+                \end{pmatrix}$$
+                oppure: colonna della sottomatrice che parte dalla riga $k+1$-esima e colonna $k$-esima: 
+                $$A_j^{(k+1)}=A_j^{(k)}-a_{kj}^{(k)}\bv{l}_k\quad \text{con } (\bv{l}_k)_i=\frac{a_{ik}^{(k)}}{a_{kk}^{(k)}}$$
+    \item[(n)]  $\begin{cases}
+    A^{(n)}=U \\
+    b^{(n)}=y
+\end{cases} $
+\end{itemize}
+
+\begin{myboxed}
+\paragraph{Costo computazionale} al passo $k$ ho 
+\begin{itemize}
+    \item $n-k$ divisioni
+    \item $2(n-k)(n-k+1)$ prodotti e sottrazioni
+    \item $2(n-k)$ ...
+\end{itemize}
+$=(n-k)(1+2(n-k+1)+2)=(n-k)(2n-2k+5)\implies \sum_{k=1}^{n-1}(n-k)(2n-2k+5)\approx 2\sum_{k=1}^{n-1}(n-k)^2=2\sum_{k=1}^{n-1}k^2=2\frac{(2n-1)(n-1)}{6}\approx \frac{2}{3}n^3=O(n^3)$
+\end{myboxed}
+
+\begin{rem*}
+   $ e_j^Tl_k=0$ $\forall j\le k$
+\end{rem*}
+
+\begin{myboxed}
+\begin{rem*} Abbiamo
+$$L_{k}^{-1}=I_n+l_ke_k^T$$
+Dim: $(I_n-l_ke_k^T)(I_n+l_ke_k^T)=I_n-\cancel{l_ke_k^T}+\cancel{l_ke_k^T}-l_k\underbrace{(e_k^Tl_k)}_{=0}e_k^T=I_n$
+\end{rem*}
+\end{myboxed}
+
+
+\subsubsection{Fattorizzazione $LU$}
+Vediamo da prima  con $L_{k}$ $k$-esimo
+passaggio dell'eliminazione di Gauss che 
+$$U=A^{(n)}=L_{n-1}A^{(n-1)}=L_{n-1}L_{n-2}A^{(n-2)}=\dots=L_{n-1}\dots L_1 \underbrace{A^{(1)}}_{=A}$$
+Allora
+$$A=\underbrace{L_1^{-1}L_2^{-1}\dots L_{n-1}^{-1}}_{\coloneqq L}U=LU$$
+
+\begin{myboxed}
+Vediamo che $L$ è triangolare:   dato che
+$L_{k}^{-1}=\left(\boldsymbol{I}_{n}-l_{k}\cdot e_{k}^{T}\right)^{-1}=\boldsymbol{I}_{n}+l_{k}\cdot e_{k}^{T}$, allora $L=\prod_{k=1}^{n}\left(\boldsymbol{I}_{n}+l_{k}\cdot e_{k}^{T}\right)=\boldsymbol{I}_{n}+\sum_{k=1}^{n}l_{k}\cdot e_{k}^{T}$
+$$[\dots]$$
+$$L=\bv{I}_n+\sum_{i=1}^{n-1}l_ie_i^T=\begin{bmatrix}
+1 & 0 & \dots & 0 \\
+l_{21} & 1 &  & \vdots \\
+\vdots &  & \ddots & 0 \\
+l_{n1} & l_{n2} & \dots & 1 
+\end{bmatrix} $$
+\end{myboxed}
+
+Le entrate di $L$ sono i coefficienti dell'eliminazione di Gauss
+
+\begin{defn}[Fattorizzazione $LU$]
+    data $A\in\re^{n\times n}$ è la sua scomposizione in $A=LU$ con $L\in\re^{n\times n}$ triangolare inferiore e $U\in\re^{n\times n}$ triangolare superiore
+\end{defn}
+
+ $Ax=b\;\Rightarrow\enskip LUx=b$
+e quindi risolvo $\left\{ \begin{array}{l}
+L\hat{b}=b\\
+Ux=\hat{b}
+\end{array}\right. \longrightarrow$ è equivalente all'eliminazione di Gauss
+
+
+%
+\begin{thm}
+Sia $A\in\re^{n\times n}$, esiste ed è unica la sua fattorizzazione LU $\iff$ la matrice $A_k=\begin{bmatrix}
+a_{11} & \dots & a_{1k} \\
+\vdots &  & \vdots \\
+a_{1k} & \dots & a_{kk} 
+\end{bmatrix} $ (minore principale $k$-esimo) è non singolare (det$\ne 0$) per $k=1\cdots n-1$
+\end{thm}
+
+\begin{proof}
+    \todo{P. 25}
+\end{proof}
+
+\subsubsection{Per matrici a bande}
+\begin{defn}[Matrice a banda]
+$A$ matrice a banda di ampiezza $p$ se $a_{ij}=0$ per $\left|i-j\right|>p$
+\end{defn}
+
+\begin{prop}
+    Sia $A$ a banda di ampiezza $p$, se $\exists!$ la sua fattorizzazione $LU\implies L,U$ anch'esse a banda con la stessa ampiezza
+\end{prop}
+\begin{proof}
+    \todo{P. 26}
+\end{proof}
+
+\begin{myboxed}
+\begin{rem*}
+    Posso modificare l'algoritmo per calcolare la fattorizzazione $LU$ se $A$ è a banda per renderlo più efficiente. P. 27
+\end{rem*}
+\end{myboxed}
+
+\subsubsection{Stabilità dell'eliminazione di Gauss}
+Abbiamo $A=LU$ e dall'aritmetica finita
+$$\begin{cases}
+    \widetilde{L}=L+\delta L \\
+    \widetilde{U}=U+\delta U \\
+    \widetilde{A}=A+\delta A=(L+\delta L)(U+\delta U)=LU+\delta LU+L\delta U+\delta L\delta U \\
+\end{cases}$$
+Supponiamo che
+$$\frac{\norm{\delta L}}{\norm{L}}=O(u),\quad\quad \frac{\norm{\delta U}}{\norm{U}}=O(u)\quad \text{ per }u\to0$$
+allora
+\begin{align*}
+    \norm{\delta A}=\norm{\widetilde{A}-A}&\le \norm{\delta LU}+\norm{L\delta U}+\overset{=O(u^2\norm{L}\norm{U})}{\cancel{\norm{\delta L\delta U}}} \\
+    &\le \norm{\delta L}\norm{U}+\norm{L}\norm{\delta U} \\
+    &=O(u\norm{L}\norm{U})+O(u\norm{L}\norm{U})
+\end{align*}
+E quindi
+$$\frac{\norm{\delta A}}{\norm{A}}=O\left(u\frac{\norm{L}\norm{U}}{\norm{A}}\right),\quad\quad \frac{\norm{\delta x}}{\norm{x}}=O\left(K(A)\frac{\norm{\delta A}}{\norm{A}}\right) \quad\text{ricorda \ref{eq:stima-errore-rel-sistemi-lineari}}$$
+
+\begin{rem*}
+    Se $\norm{L},\norm{U}\gg \norm{A}$ può esserci instabilità. Vediamo che scambiando le equazioni (ovvero le righe) queste due norme possono passare da essere molto maggiori di quella di $A$ ad essere piccole, per esempio mi \textbf{conviene mettere alla prima riga la riga col primo elemento maggiore}. Quindi adottiamo il seguente:
+\end{rem*}
+
+\subsubsection{Pivoting (scambiare righe)}
+Sia $A^{(k)}$ la matrice ottenuta al $k$-esimo passo del metodo di Gauss. 
+\begin{defn}[Elemento pivotale] Nel MEG l'elemento $a_{kk}^{(k)}$
+    
+\end{defn}
+\begin{defn}[Pivoting parziale]
+    Al passo $k$ scambio
+    $$\text{riga $k$-esima}\longleftrightarrow \text{riga $i$-esima con }i=\argmax_{s=k\dots n}\abs{a_{sk}^{(k)}}$$
+    ovvero a ogni passaggio dell'eliminazione di Gauss faccio $A^{(k+1)}=L_{k}P_{k}A^{\left(k\right)}$
+($P$ matrice di permutazione delle righe per il pivoting parziale),
+quindi $L_{n-1}P_{n-1}\ldots L_{1}P_{1}A=U$, definisco ora $L_{k}^{\prime}=P_{n-1}\ldots P_{k+1}L_{k}P_{k+1}^{-1}\ldots P_{n-1}^{-1}$
+da cui $\underset{L^{-1}}{\underbrace{L_{n-1}^{\prime}\ldots L_{1}^{\prime}}}\underset{P}{\underbrace{P_{n-1}\ldots P_{1}}}A=U$
+e quindi $PA=LU$.
+
+\end{defn}
+
+\begin{rem*}
+    $L_k'$ ha la stessa struttura di $L_k$:
+    \begin{align*}
+L_{k}^{\prime} & =\boldsymbol{I}_{n}-P_{n-1}\ldots P_{k+1}l_{k}\underset{e_{k}^{T}}{\underbrace{e_{k}^{T}P_{k+1}^{-1}\ldots P_{n-1}^{-1}}}=\boldsymbol{I}_{n}-\left(P_{n-1}\ldots P_{k+1}l_{k}\right)e_{k}^{T}
+\end{align*}
+\end{rem*}
+
+
+\begin{defn}[Matrice di permutazione] Prendo la matrice identità e ne permuto le righe. Se moltiplicata a sx ad una matrice mi permuta le righe
+\end{defn}
+
+
+\begin{prop}
+La fattorizzazione con il pivoting esiste sempre se $A$ non singolare:
+$$A\in\re^{n\times n}\text{ non singolare}\implies\exists P\in\re^{n\times n}\text{ matrice di perm.}:\; PA=LU$$
+\end{prop}
+
+\begin{rem*}
+    Il sistema lineare diventa
+    $$Ax=b\longrightarrow \underbrace{PA}_{=LU}x=Pb\longrightarrow\begin{cases}
+        Ly=Pb \\
+        Ux=y
+    \end{cases}$$
+\end{rem*}
+
+\begin{defn}[Pivoting totale]
+    
+\end{defn}
+
+\begin{example*}[Calcolo del determinante] Normalmente $\det A=\sum_{i=1}^{i+j}a_{ij}\det(A_{ij})$ che ha costo $O(n!)$. 
+\begin{align*}
+PA=LU\implies A=P^{-1}LU \implies  \det\left(A\right) & =\overset{\left(-1\right)^{\delta}}{\overbrace{\det\left(P^{-1}\right)}}\overset{1}{\overbrace{\det\left(L\right)}}\det\left(U\right)=\left(-1\right)^{\delta}\prod_{i=1}^{n}u_{ii}
+\end{align*}
+Ha il costo della $LU$ ovvero $O(\frac{2}{3}n^3)$
+\end{example*}
+
+\begin{example*}[Calcolo dell'inversa] $A\in\re^{n\times n}$ invertibile, $A^{-1}\coloneqq X$, $\begin{cases}
+    X=(x^{(1)},\dots,x^{(n)}) \\
+    I_n=(e^{(1)},\dots,e^{(n)})
+\end{cases}$, $AX=I_n\iff Ax^{(j)}=e^{(j)}$ con $j=1,\dots,n$. Allora
+$$PA=LU\implies A=P^{-1}LU\implies L\underbrace{Ux^{(j)}}_{y^{(j)}}=Pe^{(j)}\iff\begin{cases}
+    Ux^{(j)}=y^{(j)} \\
+    Ly^{(j)}=Pe^{(j)} 
+\end{cases}$$
+\end{example*}
+
+\begin{lyxalgorithm}[algoritmo di Thomas]
+{[}...{]}
+\end{lyxalgorithm}
+
+\begin{lyxalgorithm}[Fattorizzazione di Cholesky]
+Per $A$ SPD $\implies$ si può scrivere come $A=H^TH$ con $H$ triangolare superiore.
+\[
+A=\begin{bmatrix}a & w^{T}\\
+w & \boldsymbol{K}
+\end{bmatrix}=\begin{bmatrix}1 & 0\\
+w & \boldsymbol{I}_{n-1}
+\end{bmatrix}\cdot\begin{bmatrix}a & w^{T}\\
+0 & {\scriptstyle \boldsymbol{K}-\frac{ww^{T}}{a}}
+\end{bmatrix}=\begin{bmatrix}\alpha & 0\\
+\frac{w}{\alpha} & \boldsymbol{I}_{n-1}
+\end{bmatrix}\cdot\begin{bmatrix}\alpha & \nicefrac{w^{T}}{\alpha}\\
+0 & {\scriptstyle \boldsymbol{K}-\frac{ww^{T}}{a}}
+\end{bmatrix}=\begin{bmatrix}\alpha & 0\\
+\frac{w}{\alpha} & \boldsymbol{I}_{n-1}
+\end{bmatrix}\cdot\begin{bmatrix}1 & 0\\
+0 & {\scriptstyle \boldsymbol{K}-\frac{ww^{T}}{a}}
+\end{bmatrix}\cdot\begin{bmatrix}\alpha & \nicefrac{w^{T}}{\alpha}\\
+0 & \boldsymbol{I}_{n-1}
+\end{bmatrix}
+\]
+\end{lyxalgorithm}
+
+
+\subsection{Fattorizzazione $QR$}
+\begin{defn}[fattorizzazione $QR$]
+\label{def:fattorizzazione-QR}$A\in\re^{m\times n}$ con $m\ge n$. Una fattorizzazione del tipo $$A=QR$$ con
+$Q\in\mathbb{R}^{m\times m}$ ortogonale e $R\in\mathbb{R}^{m\times n}$
+trapezioidale con le righe dalla $n+1$ in poi nulle 
+\end{defn}
+
+\begin{defn}[fattorizzazione $QR$ ridotta]
+$A=\widetilde{Q}\widetilde{R}\in\mathbb{R}^{m\times n}$ con $\widetilde{Q}\in\mathbb{R}^{m\times n}$
+a colonne ortonormali e $\widetilde{R}\in\mathbb{R}^{n\times n}$
+triangolare superiore
+\end{defn}
+
+\begin{rem*}
+    $A=QR=(\widetilde{Q}\mid X)\cv{\widetilde{R}}{\bv{0}}=\widetilde{Q}\widetilde{R}+\cancel{X\bv{0}}$
+\end{rem*}
+
+\begin{rem*}
+    Metodi per il calcolo:
+    \begin{itemize}
+        \item Completa: metodo di Householder 
+        \item Ridotta: metodo di Gram-Schmidt standard (instabile) e modificato
+    \end{itemize}
+\end{rem*}
+
+\begin{rem*}
+    $A$ ha rango massimo $\iff\widetilde{R}$ invertibile
+\end{rem*}
+
+\begin{prop}
+    $\sigma_i(A)=\sigma_i(R)$ e quindi $K(A)=\frac{\sigma_1(A)}{\sigma_n(A)}=K(R)$
+\end{prop}
+\begin{proof}
+Abbiamo: $A^TA=V\Sigma^TU^TU\Sigma V^T=V\Sigma^T\Sigma V^T$ quindi $\boxed{\sigma_i(A)=\sqrt{\lambda(A^TA)}}$. \\
+Allora $\sigma_i(A)=\sqrt{\lambda(A^TA)}=\sqrt{\lambda(R^TQ^TQR)}=\sqrt{\lambda(R^TR)}=\sigma_i(R)$
+\end{proof}
+
+\begin{lyxalgorithm}[metodo di Gram-Schmidt standard (s.g.s)]
+Presi $A=\begin{bmatrix}a_{1} & \ldots & a_{n}\end{bmatrix}$ e $Q=\begin{bmatrix}q_{1} & \ldots & q_{n}\end{bmatrix}$ abbiamo
+\begin{align*}
+ & A=QR\left\{ \begin{array}{l}
+a_{1}=r_{11}q_{1}\\
+a_{2}=r_{12}q_{1}+r_{22}q_{2}\\
+\vdots\\
+a_{n}=r_{1n}q_{1}+r_{2n}q_{2}+\ldots+r_{nn}q_{n}
+\end{array}\right. &  & \left\{ \begin{array}{l}
+q_{1}=\nicefrac{1}{r_{11}}(a_{1})\\
+q_{2}=\nicefrac{1}{r_{22}}\left(a_{2}-r_{12}q_{1}\right)\\
+\vdots\\
+q_{n}=\nicefrac{1}{r_{nn}}\left(a_{n}-\sum_{i=1}^{n-1}r_{in}q_{i}\right)
+\end{array}\right. &  & \begin{array}{l}
+\begin{cases}
+r_{ij}=\left\langle q_{i},a_{j}\right\rangle  & i<j\\
+r_{jj}=\left\Vert \widetilde{q_{j}}\right\Vert _{2}
+\end{cases}\\
+\\
+\widetilde{q_{j}}=a_{j}-\sum_{i=1}^{j-1}r_{ij}q_{i}
+\end{array}
+\end{align*}
+Costo: $2mn^2+O(mn)$
+\end{lyxalgorithm}
+
+\begin{lyxalgorithm}[metodo di Gram-Schmidt modificato (s.g.m)]
+Più stabile in aritmetica discreta, al posto di fissare $a_{j}$
+e rimuovere le proiezioni di $a_{j}$ dai vettori $q_{i}$, fisso
+$q_{i}$ e ne sottraggo le proiezioni a tutti i vettori $a_{j}$\\
+Costo: $2mn^2$
+\end{lyxalgorithm}
+
+\begin{lyxalgorithm}[metodo di Houseolder]
+\todo{p. 43-44}
+\end{lyxalgorithm}
+
+
+\subsection{Sistemi sovradeterminati}
+Sia $Ax=b$ con $A\in\re^{m\times n}$, $m\ge n$, $b\in\re^m$, rango$(A)=n$. In generale non ha soluzione, a meno che $b\in$rango$(A)$: al posto di trovare $Ax=b$, ovvero $Ax-b=0$, trovo il vettore $x$ che ha immagine \textbf{più vicina} a $b$, ovvero il
+$$\min_{x\in\re^n}\norm{b-Ax}_2^2=\min_{x\in\re^n}\sum_{i=1}^n(b_i-\sum_{j=1}^ma_{ij}x_j)^2$$
+detto \textbf{problema dei minimi quadrati}. Devo trovare il minimo della funzione
+\begin{align*}
+    \varphi(x)&=\norm{b-Ax}_2^2\\
+    &= (b-Ax)^T(b-Ax) \\
+    &= \norm{b}_2^2+x^TA^TAx\underbrace{-b^TAx-x^TA^Tb}_{-2x^TA^Tb} \quad b^TAx =\text{al trasposto poiché scalare}\\
+    &= \norm{b}_2^2+x^TA^TAx-2\textcolor{red}{x^T}A^Tb \quad \text{scegliere $\textcolor{red}{x^T}$ nel raccogliere}\\
+\end{align*}
+\begin{itemize}
+    \item $\grad\varphi(x)=2A^TAx-2A^Tb$
+    \item $H_\varphi=2A^TA>0$ poiché $x^T(A^TA)x=(Ax)^T(Ax)=\norm{Ax}_2^2>0$ per $x\ne 0$ poiché $A$ iniettiva
+\end{itemize}
+allora esiste punto di minimo (unico) in corrispondenza di $\grad\varphi(x)=0\iff A^TAx=A^Tb$
+
+\begin{myboxed}
+\begin{rem*}
+    Questo sistema può essere molto mal condizionato
+    $$K(A^TA)=(K(A))^2$$
+\end{rem*}
+\end{myboxed}
+\begin{proof}
+   Dobbiamo usare
+   \begin{itemize}
+       \item $K\left(A\right)=\frac{\sigma_{\max}\left(A\right)}{\sigma_{\min}\left(A\right)} $ \\
+       
+       \scriptsize{$\norm{A}_2\overset{\star}{=}\sqrt{\rho(A^TA)}=\sqrt{\rho(A^2)}=\sqrt{\sigma_{max}^2}=\sigma_{max}$ dove non dimostriamo $\star$ e $\rho$ è il raggio spettrale. \\
+    Inoltre vale $\sigma(A^{-1})=1/\sigma(A)$ e dalla def. di numero di cond. segue la tesi.}
+    \normalsize
+       \item $\sigma_i(A)=\sqrt{\lambda_i(A^TA)}$\\
+       \scriptsize{abbiamo: $A^TA=V\Sigma^TU^TU\Sigma V^T=V\Sigma^T\Sigma V^T$ quindi ${\sigma_i(A)=\sqrt{\lambda(A^TA)}}$.}
+       \normalfont
+   \end{itemize}
+   Quindi $$K(A^TA)=\frac{\lambda_{\max}(A^TA)}{\lambda_{\min}(A^TA)}=\frac{\sigma^2_{\max}(A)}{\sigma^2_{\min}(A)}=\left(\frac{\sigma_{\max}(A)}{\sigma_{\min}(A)}\right)^2=K(A)^2$$
+\end{proof}
+
+\begin{rem*}[con $QR$] Se $A=QR$ abbiamo $\cancel{R^T}Q^TQRx=\cancel{R^T}Q^Tb\implies \boxed{Rx=Q^Tb}$ e so che $K(R)=K(A)$
+    
+\end{rem*}
+
+
+\pagebreak{}
+
+\section{Metodi iterativi per sistemi lineari}
+\begin{defn}[metodo iterativo]
+$\lim_{k\rightarrow+\infty}x^{\left(k\right)}=x$ con $x$ soluzione
+di $Ax=b$
+\end{defn}
+
+
+\subsection{Metodi iterativi stazionari}
+\begin{defn}[metodo iterativo stazionario]
+\label{def:metodo-iterativo-stazionario}$x^{\left(k+1\right)}=Bx^{\left(k\right)}+f$
+\end{defn}
+
+\begin{defn}[consistenza]
+Un metodo iterativo stazionario si dice consistente se vale $x=Bx+f$
+per $Ax=b$
+\end{defn}
+
+\begin{prop}
+In un metodo iterativo convergente $\implies$ consistente
+\end{prop}
+\begin{proof}
+$x^{\left(k+1\right)}=Bx^{\left(k\right)}+f\underset{k\to+\infty}{\overset{x^{(k)\text{ converge}}}{\implies}}x=Bx+f$
+\end{proof}
+
+\begin{rem*}[Errore]
+    Se il metodo è \hl{consistente} ($\iff x=Bx+ f$) risulta $$\underbrace{x-x^{(k+1)}}_{\coloneqq e^{(k+1)}}=(Bx+\bcancel{f})-(Bx^{(k)}+\bcancel{f})=B\underbrace{(x-x^{(k)})}_{\coloneqq e^{(k)}}\implies \boxed{e^{(k+1)}=Be^{(k)}}$$ e quindi
+    
+    \begin{align*}
+    e^{(k+1)}&=Be^{(k)}\\
+        e^{(k)}&=B^{k}e^{(0)} \\
+         \norm{e^{(k)}}&\le \norm{B^{k}}\norm{e^{(0)}} \implies \frac{ \norm{e^{(k)}}}{\norm{e^{(0)}}}\le\norm{B^{k}}
+    \end{align*}
+\end{rem*}
+
+\begin{myboxed}
+\begin{thm}
+Un \nameref{def:metodo-iterativo-stazionario} \hl{consistente} converge
+$\forall\,x_{0}\in\mathbb{R}^{n}$ $\Longleftrightarrow$ $\rho\left(B\right)<1$
+($\rho\left(B\right)\coloneqq\max_{\lambda\in\Lambda\left(B\right)}\left|\lambda\right|$)
+\end{thm}
+\end{myboxed}
+
+\begin{proof}
+Abbiamo:
+\begin{itemize}
+    \item[$\implies$] Se fosse $\rho(B)\ge1$ prendo autovalore $\lambda$ con $\abs{\lambda}\ge 1$ e $x^{(0)}=x-v$ con $x$ sol. esatta e $v$ autovettore associato, così
+    $$e^{(k+1)}=B^{k+1}\underbrace{e^{(0)}}_{=x-x^{(0)}=v}=B^{k+1}v=\lambda^{k+1}v$$
+    e quindi $\norm{e^{(k+1)}}=\abs{\lambda}^{k+1}\norm{v}$ diverge per $k\to\infty$
+    \item[$\impliedby$] $\rho\left(B\right)=\inf_{ \norm{\cdot}}\left\Vert B\right\Vert $,
+quindi $\exists\left\Vert \cdot\right\Vert _{*}$ per cui $\rho\left(B\right)\leq\left\Vert B\right\Vert _{*}<1$,
+dunque $\left\Vert e^{\left(k\right)}\right\Vert _{*}\leq\left\Vert B\right\Vert^k_{*}\left\Vert e^{\left(0\right)}\right\Vert _{*}\overset{k\to\infty}{\to}0$
+\end{itemize}
+
+\end{proof}
+\begin{rem*}
+Se $\left\Vert B\right\Vert <1\quad\Longrightarrow\quad$ 
+il metodo converge e la \hl{convergenza è monotona} (in quella norma), ovvero $\left\Vert e^{\left(k+1\right)}\right\Vert =\left\Vert Be^{\left(k\right)}\right\Vert \leq\left\Vert B\right\Vert \cdot\left\Vert e^{\left(k\right)}\right\Vert <\left\Vert e^{\left(k\right)}\right\Vert $
+\end{rem*}
+\begin{lyxalgorithm}[metodo di Splitting]
+\label{def:metodo-di-splitting}Pongo 
+$$A=P-N$$  
+con $P$ (invertibile) detto \textcolor{blue}{\textit{precondizionatore}}. Quindi si ha 
+$$(P-N)x=b\implies Px=Nx+b \implies x^{\left(k+1\right)}=P^{-1}\left(Nx^{\left(k\right)}+b\right)$$
+Vale che
+\[
+x^{\left(k+1\right)}=P^{-1}\left(Nx^{\left(k\right)}+b\right)=P^{-1}\left(\left(P-A\right)x^{\left(k\right)}+b\right)=x^{\left(k\right)}+P^{-1}\left(b-Ax^{\left(k\right)}\right)=x^{\left(k\right)}+P^{-1}r^{\left(k\right)}
+\]
+Quindi posso riscrivere come
+$$\boxed{x^{\left(k+1\right)}=x^{\left(k\right)}+P^{-1}r^{\left(k\right)}=x^{\left(k\right)}+\delta^{(k)}}$$
+dove $\boxed{r^{(k)}=b-Ax^{(k)}}$ è chiamato \textbf{residuo al passo $k$}. Ovvero \hl{a ogni passo prendo il vettore precedente e ci aggiungo la preimmagine (tramite $P$) del residuo}.
+\end{lyxalgorithm}
+
+\begin{rem*}[Convergenza]
+    Dato che $B=P^{-1}\underbrace{N}_{P-A}=I-P^{-1}A$, allora 
+    $$\boxed{\text{metodo splitting converge}\iff \rho(I_n-P^{-1}A)<1}$$
+    Una situazione ideale è quella in cui $I_n-P^{-1}A\approx 0$ ovvero $P\approx A$, ovvero \hl{$P$ "simile" ad $A$, ma più facile da invertire}. \\
+    Vediamo che $\sigma(I-P^{-1}A)=\{1-\lambda,\;\lambda\in \sigma(P^{-1}A)\}$ quindi deve essere $\abs{1-\lambda}<1\quad \forall\lambda\in\sigma(P^{-1}A)$ e quindi
+    $$\text{Metodo converge}\iff\sigma(P^{-1}A)\subseteq\{z\in\mathbb{C}\mid\abs{1-z}<1\}$$
+\end{rem*}
+
+\begin{rem*}
+Il \nameref{def:metodo-di-splitting} è consistente, $Ax=b\;\Rightarrow\;\left(P-N\right)x=b\;\Rightarrow\;x=P^{-1}\left(Nx+b\right)$.
+\end{rem*}
+
+\begin{rem*}[Criterio d'arresto]
+    L'algoritmo si ferma se
+    $$\frac{\norm{r^{(k)}}_2}{\norm{r^{(0)}}_2}\le\eta \longrightarrow\text{ tolleranza fissata}$$
+    Se il criterio d'arresto è soddisfatto vale $r^{(k)}=b-Ax^{(k)}=A(\underbrace{A^{-1}b}_{x}-x^{(k)})=Ae^{(k)}$
+\end{rem*}
+
+\subsubsection{Metodi di Jacobi e di Gauss-Seidel}
+
+Considerando ora
+\begin{align*}
+A & =D-E-F & D & \quad\text{diagonale ($d_{ii}=a_{ii}$)} & E & \quad\text{strett. inferiore ($e_{ij}=-a_{ij}$)} & F & \quad\text{strett. superiore ($f_{ij}=-a_{ij}$)}
+\end{align*}
+
+\begin{lyxalgorithm}[metodo di Jacobi]
+\label{def:metodo-di-jacobi}\textup{Preso $A=\overset{P}{\overbrace{D}}-\overset{N}{\overbrace{\left(E+F\right)}}$,
+ho
+\begin{align*}
+Dx^{\left(k+1\right)} & =\left(E+F\right)x^{\left(k\right)}+b & x_{i}^{\left(k+1\right)} & =\frac{1}{a_{ii}}\left(b_{i}-\sum_{j=1,j\neq i}^{n}a_{ij}x_{j}^{\left(k\right)}\right) & B_{J} & =I-D^{-1}A
+\end{align*}
+}
+\end{lyxalgorithm}
+
+\begin{lyxalgorithm}[metodo di Gauss-Seidel]
+\label{def:metodo-di-gauss-seidel}\textup{Preso $A=\overset{P}{\overbrace{D-E}}-\overset{N}{\overbrace{F}}$,
+ho
+\begin{align*}
+\left(D-E\right)x^{\left(k+1\right)} & =Fx^{\left(k\right)}+b & x_{i}^{\left(k+1\right)} & =\underbrace{\frac{1}{a_{ii}}}_{D^{-1}}\left(\underbrace{b_{i}-\sum_{j=i+1}^{n}a_{ij}x_{j}^{\left(k\right)}}_{Fx^{(k)}+b}-\underbrace{\sum_{j=1}^{i-1}a_{ij}x_{j}^{\left(k+1\right)}}_{Ex^{(k+1)}}\right) & B_{GS} & =\left(D-E\right)^{-1}F
+\end{align*}
+}
+\end{lyxalgorithm}
+
+\begin{lem}
+$\left\Vert A\right\Vert _{\infty}=\sup_{x\in\mathbb{R}^{n}}\frac{\left\Vert Ax\right\Vert _{\infty}}{\left\Vert x\right\Vert _{\infty}}=\max_{i}\sum_{j=1}^{n}\left|a_{ij}\right|$
+\end{lem}
+\begin{proof}
+     \todo{p. 49}
+\end{proof}
+
+\begin{defn}[dominanza diagonale stretta per righe]
+\label{def:dominanza-diagonale-stretta}$\left|a_{ii}\right|>\sum_{j=1,j\neq i}^{n}\left|a_{ij}\right|\qquad\forall\,i=1,\ldots,n$ 
+\end{defn}
+
+
+\begin{thm}
+Se $A$ è a \nameref{def:dominanza-diagonale-stretta} per righe,
+il \nameref{def:metodo-di-jacobi} e il \nameref{def:metodo-di-gauss-seidel}
+sono convergenti, cioè $Ax=b$ converge $\forall x^{(0)}\in\re^n$
+\end{thm}
+
+\begin{proof}
+\begin{align*}
+\left(B_{J}\right)_{ij} & =D^{-1}\left(E+F\right)=\begin{cases}
+-\frac{a_{ij}}{a_{ii}} & \text{se }i\neq j\\
+0 & \text{se }i=j
+\end{cases} & \left\Vert B_{J}\right\Vert _{\infty} & =\max_{i}\sum_{\substack{j=1\\
+j\neq i
+}
+}^{n}\frac{\left|a_{ij}\right|}{\left|a_{ii}\right|}=\max_{i}\frac{1}{a_{ii}}\sum_{\substack{j=1\\
+j\neq i
+}
+}^{n}{\left|a_{ij}\right|}<1
+\end{align*}
+quindi $\rho(B_J)\le \norm{B_J}_\infty<1  \iff$ converge
+\end{proof}
+\begin{thm}
+Se $A$ è SPD $\Longrightarrow$ il \nameref{def:metodo-di-gauss-seidel}
+converge.
+\end{thm}
+
+\begin{thm}
+Se $A$ è tridiagonale $\Longrightarrow$ $\rho\left(B_{GS}\right)=\rho^{2}\left(B_{J}\right)$
+\end{thm}
+
+\begin{cor}
+Se $A$ è SPD e tridiagonale, il \nameref{def:metodo-di-jacobi} converge.
+\end{cor}
+
+\begin{rem*}[Costo computazionale]Sia $$x^{(k+1)}=x^{\left(k\right)}+\underbrace{P^{-1}\overbrace{\left(b-Ax^{\left(k\right)}\right)}^{=r^{(k)}}}_{=\delta^{(k)}}$$
+quindi
+\begin{itemize}
+    \item Calcolo del residuo: $b-Ax^{\left(k\right)}=r^{(k)} \implies 2n^2$
+    \item Risoluzione di $P\delta^{(k)}=r^{(k)}\implies n$ (Jacobi) o $n^2$ (Gauss-Seidel)
+    \item Calcolo di $x^{(k+1)}=x^{(k)}+\delta^{(k)}$
+\end{itemize}
+in tutto abbiamo $=O(n^2)$ flops per iterazione, quindi se il numero di iterazioni per avere la convergenza è $\ll n$ questi approcci sono convenienti rispetto alle $O(n^3)$ operazioni dei metodi diretti (come la $LU$)
+
+\end{rem*}
+
+\begin{example*}
+Esempi di criteri di arresto
+\begin{align*}
+\text{Tolleranza scelta}\quad & \left\Vert r^{\left(k\right)}\right\Vert \leq\eta\quad\text{(vale \ensuremath{\left\Vert e^{\left(k\right)}\right\Vert _{2}\leq K\left(A\right)\left\Vert r^{\left(k\right)}\right\Vert _{2}}} & \text{Numero di iterazioni}\quad & k>N_{\max}
+\end{align*}
+\end{example*}
+
+\subsubsection{Metodi di Richardson (NO)}
+\begin{defn}[metodo di Richardson]
+\label{def:metodo-di-richardson}$x^{\left(k+1\right)}=x^{\left(k\right)}+\alpha P^{-1}r^{\left(k\right)}$.
+$P$ (invertibile) e $R_{\alpha}=I-\alpha P^{-1}A$
+\end{defn}
+
+\begin{rem*}
+Il \nameref{def:metodo-di-richardson} è consistente, $x=x+\alpha P^{-1}\cancel{\left(b-Ax\right)}$.
+\end{rem*}
+\begin{thm}
+Un \nameref{def:metodo-di-richardson} converge $\forall\,x_{0}\in\mathbb{R}^{n}$
+$\Longleftrightarrow$ $\frac{2\cdot\Re\left(\lambda\right)}{\alpha\left|\lambda\right|^{2}}>1\quad\forall\,\lambda\in\Lambda\left(P^{-1}A\right)$
+\end{thm}
+
+\begin{proof}
+\begin{align*}
+\rho\left(R_{\alpha}\right) & =\max_{\lambda\in\Lambda\left(P^{-1}A\right)}\left|1-\alpha\lambda\right|<1 & \left|1-\alpha\lambda\right|^{2} & =\left(1-\alpha\cdot\Re\left(\lambda\right)\right)^{2}+\alpha^{2}\Im^{2}\left(\lambda\right)<1 & \alpha\left|\lambda\right|^{2} & <2\cdot\Re\left(\lambda\right)
+\end{align*}
+\end{proof}
+\begin{cor}
+\label{cor:convergenza-richardson-autovalori-reali-positivi}Se gli
+autovalori di $P^{-1}A$ sono reali e positivi $\lambda_{1}\geq\ldots\geq\lambda_{n}>0$,
+la condizione diventa $0<\alpha<\frac{2}{\lambda_{1}}$. Inoltre $\alpha_{\text{opt}}=\frac{2}{\lambda_{1}+\lambda_{n}}$
+minimizza il raggio spettrale, ovvero $\rho\left(R_{\alpha_{\text{opt}}}\right)=\min_{\alpha}\rho\left(R_{\alpha}\right)=\frac{\lambda_{1}-\lambda_{n}}{\lambda_{1}+\lambda_{n}}$
+\end{cor}
+
+\begin{proof}
+Conseguenza diretta del teorema precedente. $\rho\left(R_{\alpha}\right)=\max\left(1-\alpha\lambda_{n},\alpha\lambda_{1}-1\right)$,
+da cui $\alpha_{\text{opt}}=\frac{2}{\lambda_{1}+\lambda_{n}}$
+\end{proof}
+\begin{defn}[condizionamento spettrale]
+$\chi\left(M\right)=\frac{\lambda_{1}}{\lambda_{n}}$, con $M$ di
+autovalori reali e positivi $\lambda_{1}\geq\ldots\geq\lambda_{n}>0$
+\end{defn}
+
+\begin{rem*}
+$\chi\left(M\right)\geq1$, e se $M$ SPD $\chi\left(M\right)=K_{2}\left(M\right)=\left\Vert M\right\Vert _{2}\cdot\left\Vert M^{-1}\right\Vert _{2}$
+\end{rem*}
+%
+\begin{rem*}
+$\rho\left(R_{\alpha_{\text{opt}}}\right)=\frac{\chi\left(P^{-1}A\right)-1}{\chi\left(P^{-1}A\right)+1}$
+\end{rem*}
+\begin{defn}
+Data $A$ SPD, pongo $\left\Vert M\right\Vert _{A}=\sqrt{v^{T}Av}$
+\end{defn}
+
+\begin{thm}
+\label{thm:stima-errore-richardson}Siano $P$, $A$ SPD e $\alpha$
+che soddisfa la condizione di \ref{cor:convergenza-richardson-autovalori-reali-positivi},
+allora $\left\Vert e^{\left(k+1\right)}\right\Vert _{A}\leq\rho\left(R_{\alpha}\right)\left\Vert e^{\left(k\right)}\right\Vert _{A}$.
+\end{thm}
+
+\begin{proof}
+\begin{align*}
+\left\Vert e^{\left(k+1\right)}\right\Vert _{A} & =\left\Vert R_{\alpha}e^{\left(k\right)}\right\Vert _{A}=\left\Vert A^{\nicefrac{1}{2}}R_{\alpha}e^{\left(k\right)}\right\Vert _{2}=\left\Vert A^{\nicefrac{1}{2}}R_{\alpha}A^{-\nicefrac{1}{2}}A^{\nicefrac{1}{2}}e^{\left(k\right)}\right\Vert _{2}\leq\left\Vert A^{\nicefrac{1}{2}}R_{\alpha}A^{-\nicefrac{1}{2}}\right\Vert _{2}\left\Vert A^{\nicefrac{1}{2}}e^{\left(k\right)}\right\Vert _{2}\\
+ & =\left\Vert I-\alpha A^{\nicefrac{1}{2}}P^{-1}A^{-\nicefrac{1}{2}}\right\Vert _{A}\left\Vert e^{\left(k\right)}\right\Vert _{A}\\
+\left\Vert I-\alpha A^{\nicefrac{1}{2}}P^{-1}A^{-\nicefrac{1}{2}}\right\Vert _{A} & =\rho\left(I-\alpha A^{\nicefrac{1}{2}}P^{-1}A^{-\nicefrac{1}{2}}\right)=\rho\left(I-\alpha P^{-1}A\right)=\rho\left(R_{\alpha}\right)
+\end{align*}
+\end{proof}
+\begin{rem*}
+Se $P=I$, allora $\rho\left(R_{\alpha_{\text{opt}}}\right)=\frac{\chi\left(A\right)-1}{\chi\left(A\right)+1}=\frac{K_{2}\left(A\right)-1}{K_{2}\left(A\right)+1}$,
+se $K_{2}\left(A\right)\gg1$ la convergenza può essere lenta. Il
+precondizionatore serve a ridurre $\chi\left(P^{-1}A\right)\approx1$
+\end{rem*}
+
+\subsection{Metodo del gradiente (non stazionario)}
+
+Se $A$ SPD, per risolvere $Ax=b$ basta trovare il minimo di $$\Phi\left(y\right)=\frac{1}{2}y^{T}Ay-y^{T}b$$
+siccome $\nabla\Phi\left(y\right)=\frac{1}{2}\left(A^{T}+A\right)y-b=Ay-b$,
+e dunque $\nabla\Phi\left(x\right)=0\;\Leftrightarrow\;Ax=b$.\\
+Inoltre se in $x$ il gradiente è nullo, tale punto è di minimo globale, infatti: 
+\begin{align*}
+\Phi\left(y\right) & =\Phi\left(x+\left(y-x\right)\right)=\frac{1}{2}x^{T}Ax+\frac{1}{2}\left(y-x\right)^{T}A\left(y-x\right)+\left(y-x\right)^{T}Ax-x^{T}b-\left(y-x\right)^{T}b=\\
+ & =\Phi\left(x\right)+\underset{=0}{\underbrace{\frac{1}{2}\left(y-x\right)^{T}\cancel{\left(Ax-b\right)}}}+\underset{>0}{\underbrace{\frac{1}{2}\left(y-x\right)^{T}A\left(y-x\right)}}>\Phi\left(x\right)\qquad\Longrightarrow\qquad\frac{1}{2}\left\Vert y-x\right\Vert _{A}=\Phi\left(y\right)-\Phi\left(x\right)
+\end{align*}
+
+\begin{lyxalgorithm}[Impostazione del metodo]
+\label{def:metodo-del-gradiente}$x^{\left(k+1\right)}=x^{\left(k\right)}+\alpha_{k}p^{\left(k\right)}$
+dove $\begin{cases}
+    \alpha_k \text{ \textbf{passo}}\\
+    \bv{p}^{(k)} \text{ \textbf{direzione di spostamento}} 
+\end{cases}$ con
+\begin{itemize}
+    \item $p^{\left(k\right)}$ da scegliere $\forall k$
+    \item $\alpha_{k} =\argmin_{\alpha}\Phi\underbrace{(\overbrace{x^{\left(k\right)}+\alpha_{k}p^{\left(k\right)}}^{x^{(k+1)}})}_{\coloneqq F(\alpha)}$ \\
+    poiché 
+    \begin{itemize}
+        \item $F(\alpha)=\frac{1}{2}(x^{(k)}+\alpha p^{(k)})^TA(x^{(k)}+\alpha p^{(k)})-(x^{(k)}+\alpha p^{(k)})^Tb=\frac{\alpha^2}{2}p^{(k)T}Ap^{(k)}+\alpha p^{(k)^T}Ax^{(k)}-\alpha p^{(k)^T}b+$costanti (\textbf{parabola})
+        \item $F'(\alpha)=\alpha p^{(k)^T}Ap^{(k)}+p^{(k)^T}(Ax^{(k)}-b)=0\iff \alpha=\frac{p^{\left(k\right)}{}^{T}r^{\left(k\right)}}{p^{\left(k\right)}{}^{T}Ap^{\left(k\right)}}$
+    \end{itemize}
+\end{itemize}
+Quindi sarà 
+$$\boxed{\alpha_{k}=\frac{p^{\left(k\right)}{}^{T}r^{\left(k\right)}}{p^{\left(k\right)}{}^{T}Ap^{\left(k\right)}}=\frac{(p^{(k)},r^{(k)})}{(p^{(k)},p^{(k)})_A}}$$
+quindi otteniamo l'algoritmo (bisogna scegliere $p^{(k)}$ per ogni $k$):
+\begin{align*}
+    \alpha_{k}&=\frac{p^{\left(k\right)}{}^{T}r^{\left(k\right)}}{p^{\left(k\right)}{}^{T}Ap^{\left(k\right)}} \\
+    x^{(k+1)}&=x^{(k)}+\alpha_kp^{(k)} \\
+    r^{(k+1)}&\overset{\star}{=}r^{(k)}-\alpha_kAp^{(k)} \quad 
+\end{align*}
+dove $\star=b-Ax^{(k+1)}=b-A(x^{(k)}+\alpha_kp^{(k)})=b-Ax^{(k)}-\alpha_kAp^{(k)}=\star$.
+\end{lyxalgorithm}
+
+\begin{rem*}
+    Questa scelta di $\alpha_k$ implica ed è equivalente  a $r^{(k+1)}\perp p^{(k)}$, infatti (scrivendo $p$ per $p^{(k)}$)
+\begin{align*}
+    (r^{(k+1)},p^{(k)})=(r-\alpha_kAp,p)=(r,p)-\alpha_k(Ap,p)=(r,p)-\frac{(p,r)}{\cancel{(Ap,p)}}\cancel{(Ap,p)}=(r,p)-(r,p)=0
+\end{align*}
+\end{rem*}
+
+\begin{lyxalgorithm}[metodo del gradiente]
+\label{def:metodo-del-gradiente}Scegliamo
+\begin{itemize}
+    \item $p^{\left(k\right)}  =-\nabla\Phi\left(x^{\left(k\right)}\right)=b-Ax^{\left(k\right)}=r^{\left(k\right)}$ (direzione in cui $\Phi$ decresce più velocemente)
+    \item $\alpha_{k}=\frac{r^{\left(k\right)}{}^{T}r^{\left(k\right)}}{r^{\left(k\right)}{}^{T}Ar^{\left(k\right)}}=\frac{(r^{(k)},r^{(k)})}{(r^{(k)},r^{(k)})_A}$ \\
+\end{itemize}
+quindi otteniamo l'algoritmo
+\begin{align*}
+    \alpha_{k}&=\frac{r^{\left(k\right)}{}^{T}r^{\left(k\right)}}{r^{\left(k\right)}{}^{T}Ar^{\left(k\right)}} \\
+    x^{(k+1)}&=x^{(k)}+\alpha_kr^{(k)} \\
+    r^{(k+1)}&\overset{\star}{=}r^{(k)}-\alpha_kAr^{(k)} \quad 
+\end{align*}
+dove $\star=b-Ax^{(k+1)}=b-A(x^{(k)}+\alpha_kr^{(k)})=b-Ax^{(k)}-\alpha_kAr^{(k)}=\star$.
+\end{lyxalgorithm}
+
+\begin{rem*}
+    Questa scelta di $\alpha_k$ implica ed è equivalente  a $r^{(k+1)}\perp r^{(k)}=p^{(k)}$ è quindi $p^{(k+1)}\perp p^{(k)}=p^{(k)}$, infatti (scrivendo $r$ per $r^{(k)}$)
+\begin{align*}
+    (r^{(k+1)},r^{(k)})=(r-\alpha_kAr,r)=(r,r)-\alpha_k(Ar,r)=(r,r)-\frac{(r,r)}{\cancel{(Ar,r)}}\cancel{(Ar,r)}=(r,r)-(r,r)=0
+\end{align*}
+ovvero ogni direzione è perpendicolare a quella precedente, ovvero con questo passo  arrivo a tangere una curva di livello. \\
+    In questo modo \hl{la convegenza è molto lenta se $\frac{\lambda_1}{\lambda_n}$ è grande (immagina ellissi molto stirate)}.
+\end{rem*}
+
+\begin{thm}
+\label{thm:stima-errore-gradiente}Sia $A$ SPD, allora per il \nameref{def:metodo-del-gradiente}
+vale $\left\Vert e^{\left(k+1\right)}\right\Vert _{A}\leq\frac{K_{2}\left(A\right)-1}{K_{2}\left(A\right)+1}\left\Vert e^{\left(k\right)}\right\Vert _{A}$.
+\end{thm}
+
+\begin{proof}
+Direttamente da \ref{thm:stima-errore-richardson} con $P=I$ e $A$
+SPD.
+\end{proof}
+
+\subsubsection{Metodo del gradiente coniugato}
+
+Voglio $x^{\left(k+1\right)}=x^{\left(k\right)}+\alpha_{k}p^{\left(k\right)}$ con 
+$$p^{(k)}=r^{(k)}+\overset{\text{diff. da prima}}{\boxed{\beta_kp^{(k-1)}}}$$
+con $\beta_k$ scelto in modo che $p^{(k-1)}Ap^{(k)}=0$ ($A$-ortogonale). Allora deve essere
+$$p^{(k-1)}Ap^{(k)}=p^{(k-1)}A(r^{(k)}+\beta_kp^{(k-1)})=0\implies\beta_k=-\frac{p^{\left(k-1\right)}{}^{T}Ar^{\left(k\right)}}{p^{\left(k-1\right)}{}^{T}Ap^{\left(k-1\right)}}=\boxed{-\frac{(p^{(k)-1},r^{(k)})_A}{(p^{(k-1)},p^{(k-1)})_A}}$$
+
+\begin{prop}
+$\alpha_{k}=\cfrac{\left\Vert r^{\left(k\right)}\right\Vert _{2}^{2}}{p^{\left(k\right)}{}^{T}Ap^{\left(k\right)}}$
+e $\beta_{k}=\cfrac{\left\Vert r^{\left(k+1\right)}\right\Vert _{2}^{2}}{\left\Vert r^{\left(k\right)}\right\Vert _{2}^{2}}$
+\end{prop}
+
+\begin{rem*}
+    Ciò, come vedremo con spazi di Krylov, implica che $p^{(j)}Ap^{(k)}=0 \quad \forall j<k$, ovvero ogni nuova direzione è $A$-ortogonale a \textbf{tutte} quelle prima.
+\end{rem*}
+
+\begin{defn}[spazio di Krylov]
+$V_{k}=\left\langle r^{(0)},Ar^{(0)},\ldots,A^{k-1}r^{(0)}\right\rangle$,
+$V_{j}\subseteq V_{k}$ per $j\leq k$. In generale sono definiti
+$$K_k(A,\bv{v})=\text{span}\{\bv{v},A\bv{v},\ldots,A^{k-1}\bv{v}\}$$
+\end{defn}
+\begin{rem*}
+    Abbiamo
+    \begin{itemize}
+        \item $V_k\subseteq V_{k+1}$
+        \item $v\in V_k\implies Av\in V_{k+1}$
+        \item Se $x^{(0)}=0\implies r^{(0)}=b-Ax^{(0)}=b$ e $V_k=\left\langle b,Ab,\ldots,A^{k-1}b\right\rangle$
+    \end{itemize}
+\end{rem*}
+
+\begin{myboxed}
+\begin{lem}
+$V_{k}=\left\langle r^{\left(0\right)},\ldots,r^{\left(k-1\right)}\right\rangle=\left\langle p^{\left(0\right)},\ldots,p^{\left(k-1\right)}\right\rangle$, in particolare $$x^{(k+1)}=\sum_{i=0}^k\alpha_ip^{(i)}+x^{(0)}\in V_k+x^{(0)} \quad \text{(spazio affine)}$$
+\end{lem}
+\end{myboxed}
+
+\begin{proof}
+Per induzione su $k$ 
+\begin{itemize}
+    \item $k=1$ ovvio \\
+    \item Dimostriamo che $V_{k}=\left\langle r^{\left(0\right)},\ldots,r^{\left(k-1\right)}\right\rangle=\left\langle p^{\left(0\right)},\ldots,p^{\left(k-1\right)}\right\rangle  \implies V_{k+1}=\left\langle r^{\left(0\right)},\ldots,r^{\left(k\right)}\right\rangle=\left\langle p^{\left(0\right)},\ldots,p^{\left(k\right)}\right\rangle$. \\
+    Abbiamo
+    $$\begin{cases}
+        p^{(k-1)}\in \left\langle r^{(0)},\dots,r^{(k-1)}\right\rangle \quad \text{ip. indutt.}\\
+        p^{(k)}=r^{(k)}+\beta_kp^{(k-1)}
+    \end{cases}\implies\begin{cases}
+        p^{(k)}=r^{(k)}+\beta_kp^{(k-1)}\in \left\langle r^{(0)},\dots,r^{(k)}\right\rangle \\
+         r^{(k)}=p^{(k)}-\beta_kp^{(k-1)}\in \left\langle p^{(0)},\dots,p^{(k)}\right\rangle \\
+    \end{cases}\implies\text{tesi}$$
+    \item $r^{(k)}=b-Ax^{(k)}=b-A(x^{(k-1)}+\alpha_{k-1}p^{(k)})=\underbrace{r^{(k-1)}}_{\in V_k}-\alpha_k\underbrace{Ap^{(k-1)}}_{\in A_{k+1}}\in A_{k+1}$
+    \item $A^kr^{(0)}=A(A^{k-1}r^{(0)})\overset{\text{ip.ind.}}{=}A(\sum_{i=0}^{k-1}\alpha_ip^{(i)})=\sum_{i=0}^{k-1}\alpha_iAp^{(i)}\in \left\langle r^{(0)},\dots,r^{(k)}\right\rangle $ \\
+    Se $\alpha_i\ne 0: Ap^{(i)}=\frac{r^{(i+1)}-r^{(i)}}{\alpha^{(i)}}\in \left\langle r^{(0)},\dots,r^{(i+1)}\right\rangle  $
+\end{itemize}
+\end{proof}
+
+\begin{defn}[$A$-ortogonalità a uno spazio]
+\label{rem:A-ortogonalita} $u\in\re^n, V\subseteq\re^\infty$ allora $u\perp_AV$ se $\forall v\in V: u^TAv=0$ ($A$ SPD)
+\end{defn}
+
+\begin{myboxed}
+\begin{thm}
+\label{thm:ortogonalita-spazio-Krylov}Un metodo della forma $x^{\left(k+1\right)}=x^{\left(k\right)}+\alpha_{k}p^{\left(k\right)}$
+per cui valga l'\nameref{rem:A-ortogonalita} soddisfa
+$$\begin{cases}
+r^{(k)}\perp V_k \\
+p^{(k)}\perp_AV_k
+\end{cases}\quad   \forall k\in \mathbb{N}$$
+\end{thm}
+\end{myboxed}
+
+\begin{proof}
+Per induzione su $k$. 
+\begin{itemize}
+    \item Per $k=1$, ho $V_1=\left\langle p^{(0)} \right\rangle$ e $\begin{cases}
+        r^{(1)}\perp p^{(0)} \quad\text{per def. di $\alpha_0$}\\
+        p^{(1)}\perp_A p^{(0)} \quad\text{per def. di $\beta_0$}
+    \end{cases}$ 
+    \item Supponendo $\begin{cases}
+        r^{(k)}\perp V_k \\
+        p^{(k)}\perp_A V_k
+    \end{cases}\iff \begin{cases}
+        p^{(j)T}r^{(k)}=0\quad\forall j=0,\dots,k-1\\
+        p^{(j)T}Ap^{(k)}=0\quad\forall j=0,\dots,k-1
+    \end{cases}$, siccome $V_k=\left\langle p^{\left(0\right)},\ldots,p^{\left(k-1\right)}\right\rangle$
+    
+    \begin{itemize}
+        \item Dimostriamo $r^{(k+1)}\perp V_{k+1}$. Abbiamo
+        $$r^{(k+1)}\perp V_{k+1}\iff p^{(j)T}r^{(k+1)}=0 \quad\forall j\le k$$
+        Vediamo che:
+        \[
+        p^{\left(j\right)T}r^{\left(k+1\right)}=\begin{cases}
+        p^{\left(k\right)T}r^{\left(k+1\right)}=0 \quad \text{per costr. di $\alpha_k$} & \text{se }j=k\\
+        p^{\left(j\right)T}r^{\left(k+1\right)}=p^{\left(j\right)T}\left(r^{\left(k\right)}-\alpha_{k}Ap^{\left(k\right)}\right)=\bcancel{p^{\left(j\right)T}r^{\left(k\right)}}-\alpha_{k}\bcancel{p^{\left(j\right)T}Ap^{\left(k\right)}}=0 & \text{se }j<k
+        \end{cases}
+        \]
+        \item Dimostriamo $p^{(k+1)}\perp_A V_{k+1}$. Abbiamo
+        $$p^{(k+1)}\perp_A V_{k+1}\iff p^{(j)T}Ap^{(k+1)}=0 \quad\forall j\le k$$
+        Vediamo che:
+        \[
+        p^{\left(j\right)T}Ap^{\left(k+1\right)}=\begin{cases}
+        p^{\left(k\right)T}Ap^{\left(k+1\right)}=0 \quad \text{per costr. di $\beta_k$} & \text{se }j=k\\
+        p^{\left(j\right)T}Ap^{\left(k+1\right)}=p^{\left(j\right)T}A\left(r^{\left(k+1\right)}+\beta_{k}p^{\left(k\right)}\right)=\bcancel{p^{\left(j\right)T}Ar^{\left(k+1\right)}}+\beta_{k}\bcancel{p^{\left(j\right)T}Ap^{\left(k\right)}}=0 & \text{se }j<k
+        \end{cases}
+        \]
+        dove il primo addendo è zero poiché per il lemma $p^{(j)}\in V_{j+1}\implies Ap^{(j)}\in V_{j+2}\subseteq V_{k+1}$ (poiché $j\le k+1$). Quindi $p^{\left(j\right)T}Ar^{\left(k+1\right)}=(\overset{\in V_{k+1}}{Ap^{(j)}})^Tr^{(k+1)}=0$ in quanto $r^{(k+1)}\perp V_k$
+    \end{itemize}
+
+    
+\end{itemize}
+
+
+\end{proof}
+\begin{lyxalgorithm}[metodo del gradiente coniugato]
+\label{def:metodo-del-gradiente-coniugato}$x^{\left(k+1\right)}=x^{\left(k\right)}+\alpha_{k}p^{\left(k\right)}$
+con 
+\begin{align*}
+p^{\left(k\right)} & =\begin{cases}
+r^{\left(0\right)} & k=0\\
+r^{\left(k\right)}+\beta_{k-1}p^{\left(k-1\right)} & k\geq1
+\end{cases} & \beta_{k} & =\frac{p^{\left(k\right)}{}^{T}Ar^{\left(k+1\right)}}{p^{\left(k\right)}{}^{T}Ap^{\left(k\right)}} & \alpha_{k} & =\frac{p^{\left(k\right)}{}^{T}r^{\left(k\right)}}{p^{\left(k\right)}{}^{T}Ap^{\left(k\right)}}
+\end{align*}
+\hl{$\beta_{k}$ è tale che $p^{\left(k\right)}{}^{T}Ap^{\left(k+1\right)}=0$},
+siccome $p^{\left(k\right)}{}^{T}Ap^{\left(k+1\right)}=p^{\left(k\right)}{}^{T}A\left(r^{\left(k+1\right)}+\beta_{k}p^{\left(k\right)}\right)=p^{\left(k\right)}{}^{T}Ar^{\left(k+1\right)}+\beta_{k}p^{\left(k\right)}{}^{T}Ap^{\left(k\right)}$
+\end{lyxalgorithm}
+
+\begin{myboxed}
+\begin{prop}
+Se $\underline{k}$ tale che $\dim\left(V_{\underline{k}}\right)=\dim\left(V_{\underline{k}+1}\right)=\underline{k}$
+(equivalentemente $V_{\underline{k}}=V_{\underline{k}+1}$) $\Longrightarrow$
+$x^{\left(\underline{k}\right)}=x$ soluzione esatta
+\end{prop}
+\end{myboxed}
+
+\begin{proof}
+$V_{\underline{k}}=V_{\underline{k}+1}=\left\langle r_0,\dots,r_{\underline{k}}\right\rangle\quad\Longrightarrow\quad r_{\underline{k}}\in V_{\underline{k}}$,
+ma $r_{\underline{k}}\perp V_{\underline{k}}$ quindi $r_{\underline{k}}=0$
+\end{proof}
+
+\begin{myboxed}
+\begin{cor}
+Il \nameref{def:metodo-del-gradiente-coniugato} converge sempre in
+al più $n$ iterazioni
+\end{cor}
+\end{myboxed}
+
+\begin{myboxed}
+\begin{thm} Sia $\norm{\cdot}_A$ la norma indotta da $A$ (indotta dal prod. scalare $(x,y)_A=x^TAy$), allora
+$$\left\Vert e^{\left(k\right)}\right\Vert _{A}=\left\Vert x-x^{\left(k\right)}\right\Vert _{A}=\min_{y\in x^{\left(0\right)}+V_{k}}\left\Vert x-y\right\Vert _{A}$$
+ovvero \hl{ogni soluzione approssimata $x^{\left(k\right)}$ è il punto più vicino (rispetto alla distanza indotta da $A$) dello spazio $x^{\left(0\right)}+V_{k}$ alla soluzione esatta $x$}. \\
+In particolare $\left\Vert e^{\left(k+1\right)}\right\Vert _{A}\leq\left\Vert e^{\left(k\right)}\right\Vert _{A}$
+\end{thm}
+\end{myboxed}
+
+\begin{proof} $x^{(k)}=x^{(0)}+\sum_{j=0}^{k-1}\alpha_jp^{(j)}\in x^{(0)}+V_k$. Sia $y\in x^{(0)}+V_k,\; y\ne x^{(k)}\implies y-x^{(k)}\in V_k $. Allora
+$$\left\Vert y-x\right\Vert^2_{A}=\left\Vert \left(y-x^{\left(k\right)}\right)+\left(x^{\left(k\right)}-x\right)\right\Vert^2 _{A}=\underset{-e^{\left(k\right)}}{\left\Vert \underbrace{x^{\left(k\right)}-x}\right\Vert^2_{A}}+\left\Vert y-x^{\left(k\right)}\right\Vert^2_{A}-\bcancel{2\left(y-x^{\left(k\right)}\right)\underset{r^{\left(k\right)}}{\underbrace{Ae^{\left(k\right)}}}}\ge \left\Vert x^{\left(k\right)}-x\right\Vert^2_{A} $$
+\end{proof}
+\begin{prop}
+$V_{k}=\left\{ r^{\left(0\right)},Ar^{\left(0\right)},\ldots,A^{k-1}r^{\left(0\right)}\right\} =\left\{ p\left(A\right)r^{\left(0\right)}\mid p\in\mathbb{P}_{k-1}\right\} $
+con $\mathbb{P}_{k}$ polinomi di $\deg\leq k$
+\end{prop}
+
+\begin{proof}
+Per induzione su $k$
+\end{proof}
+\begin{thm}
+Sia $\Pi_{k}\coloneqq\left\{ p\in\mathbb{P}_{k}\mid p\left(0\right)=1\right\}=\{a_0+a_1X+\dots+a_kX^k:a_0=1\} $, allora
+
+$$\frac{\left\Vert e^{\left(k\right)}\right\Vert _{A}}{\left\Vert e^{\left(0\right)}\right\Vert _{A}}=\min_{p\in\Pi_{k}}\frac{\left\Vert p\left(A\right)e^{\left(0\right)}\right\Vert _{A}}{\left\Vert e^{\left(0\right)}\right\Vert _{A}}\leq\min_{p\in\Pi_{k-1}}\left(\max_{\lambda\in\Lambda\left(A\right)}\left|p\left(\lambda\right)\right|\right)$$
+
+\end{thm}
+
+\begin{proof}
+\todo{p. 56}
+\end{proof}
+\begin{cor}
+Se $A$ ha $l$ autovalori distinti, il \nameref{def:metodo-del-gradiente-coniugato}
+converge in al più $l$ iterazioni.
+\end{cor}
+
+\begin{proof}
+\todo{p. 57}
+\end{proof}
+\begin{thm}
+\label{thm:stima-errore-gradiente-coniugato}Vale 
+$$\min_{p\in\Pi_{k-1}}\left(\max_{\lambda\in\Lambda\left(A\right)}\left|p\left(\lambda\right)\right|\right)\leq2\left(\frac{\sqrt{K_{2}\left(A\right)}-1}{\sqrt{K_{2}\left(A\right)}+1}\right)^{k}$$
+e dunque in particolare $$\left\Vert e^{\left(k\right)}\right\Vert _{A}\leq2\left(\frac{\sqrt{K_{2}\left(A\right)}-1}{\sqrt{K_{2}\left(A\right)}+1}\right)^{k}\left\Vert e^{\left(0\right)}\right\Vert _{A}$$
+\end{thm}
+
+\begin{rem*}
+Il \nameref{def:metodo-del-gradiente-coniugato} converge più rapidamente
+del \nameref{def:metodo-del-gradiente} siccome $\sqrt{K_{2}\left(A\right)}\leq K_{2}\left(A\right)$
+(\ref{thm:stima-errore-gradiente} e \ref{thm:stima-errore-gradiente-coniugato}). \\
+Se $K(A)\approx 1$ la convergenza è rapida, se $K(A)\gg 1$ la convergenza potrebbe essere lenta
+\end{rem*}
+
+\subsubsection{Metodo del gradiente coniugato precondizionato}
+
+Provo ora a risolvere con il \nameref{def:metodo-del-gradiente-coniugato}
+$P^{-\nicefrac{1}{2}}AP^{-\nicefrac{1}{2}}\widetilde{x}=P^{-\nicefrac{1}{2}}b$
+sostituendo $\widetilde{x}^{\left(k\right)}=P^{-\nicefrac{1}{2}}$,
+$x^{\left(k\right)}\widetilde{r}^{\left(k\right)}=P^{-\nicefrac{1}{2}}r^{\left(k\right)}$
+e $\widetilde{p}^{\left(k\right)}=P^{-\nicefrac{1}{2}}p^{\left(k\right)}$
+\begin{lyxalgorithm}[metodo del gradiente coniugato precondizionato]
+$x^{\left(k+1\right)}=x^{\left(k\right)}+\alpha_{k}p^{\left(k\right)}$
+con 
+\begin{align*}
+p^{\left(k\right)} & =\begin{cases}
+r^{\left(0\right)} & k=0\\
+r^{\left(k\right)}+\beta_{k-1}p^{\left(k-1\right)} & k\geq1
+\end{cases} & z^{\left(k\right)} & =P^{-1}r^{\left(k\right)} & \beta_{k} & =\frac{r^{\left(k+1\right)}{}^{T}z^{\left(k+1\right)}}{r^{\left(k\right)}{}^{T}r^{\left(k\right)}} & \alpha_{k} & =\frac{r^{\left(k\right)}{}^{T}z^{\left(k\right)}}{p^{\left(k\right)}{}^{T}Ap^{\left(k\right)}}
+\end{align*}
+\end{lyxalgorithm}
+
+
+\subsection{Precondizionatori algebrici, Sparsità}
+
+Considerando ora
+\begin{align*}
+A & =D-E-F & D & \quad\text{diagonale} & E & \quad\text{strett. inferiore} & F & \quad\text{strett. superiore}
+\end{align*}
+
+\begin{example*}
+Esempi di precondizionatori algebrici
+\begin{align*}
+\text{\textsc{Jacobi }} & P_{J}=D & \text{\textsc{Gauss-Seidel simmetrico }} & P_{SGS}=\left(D-E\right)D^{-1}\left(D-E\right)^{T}\\
+\text{\textsc{Gauss-Seidel }} & P_{GS}=D-E & \text{\textsc{Cholesky incompleto}} & A=\hat{R}^{T}\hat{R}
+\end{align*}
+\end{example*}
+\pagebreak{}
+
+\section{Calcolo di Autovalori e Autovettori}
+Dato che non esiste una formula per calcolare le radici di un polinomio di grado maggiore o uguale a 5 (teo.), tutti i metodi sono \textbf{iterativi}.
+
+\subsection{Localizzazione geometrica degli autovalori}
+
+Siccome $\left|\lambda\right|\leq\left\Vert A\right\Vert \quad\forall\,\lambda\in\Lambda\left(A\right)$
+, tutti gli autovalori si trovano in un cerchio di raggio $\left\Vert A\right\Vert $
+centrato nell'origine
+
+\begin{myboxed}
+\begin{thm}[teorema dei cerchi di Gershgorin]
+Data $A\in\mathbb{C}^{n\times n}$, allora 
+\[
+\Lambda\left(A\right)\subseteq S_{R}\coloneqq\bigcup_{i=1}^{n}R_{i}\qquad\text{con}\quad R_{i}\coloneqq\left\{ z\in\mathbb{C}\mid\left|z-a_{ii}\right|\leq{\scriptstyle \sum_{j=1,j\neq i}^{n}}\left|a_{ij}\right|\right\} 
+\]
+$R_{i}$ detti cerchi riga. Analogamente $\Lambda\left(A\right)\subseteq S_{C}$
+per le colonne ($S_{R}$ per $A^{T}$)
+\end{thm}
+\end{myboxed}
+
+\begin{proof} Sia $\lambda\in \Lambda(A)$. Se $\lambda=a_{ii}$ per qualche $i$ ho finito. Preso $\lambda\neq a_{ii}$, il suo autovettore $v$ e $D=\diag\left(A\right)$
+diagonale di $A$, vale 
+\begin{align*}
+    Av&=\lambda v\\
+    Av\textcolor{red}{-Dv}&=\lambda v\textcolor{red}{-Dv}\\
+    (A-D)v&=(\lambda I-D) v  \quad \text{con $(\lambda I-D)$ diag. e invertibile} \\
+    v&=(\lambda I-D)^{-1}(A-D) v
+\end{align*}
+da cui
+\[
+\left\Vert v\right\Vert _{\infty}\leq\left\Vert \left(\lambda I-D\right)^{-1}\left(A-D\right)\right\Vert_{\infty}\left\Vert v\right\Vert _{\infty}\quad \overset{\norm{v}\ne 0}{\implies} \quad1\leq\left\Vert \left(\lambda I-D\right)^{-1}\left(A-D\right)\right\Vert _{\infty}\overset{\exists i}{=}\sum_{\substack{j=1\\
+j\neq i
+}
+}^{n}\frac{\left|a_{ij}\right|}{\left|\lambda-a_{ii}\right|}=\frac{1}{{\left|\lambda-a_{ii}\right|}}\sum_{\substack{j=1\\
+j\neq i
+}
+}^{n}{\left|a_{ij}\right|}
+\]
+nella sommatoria abbiamo messo $j\ne i$ poiché per $j=i$ il numeratore è 0 essendo elemento della matrice $A-D$ che ha la diagonale vuota.
+\end{proof}
+\begin{cor}
+Una matrice a \nameref{def:dominanza-diagonale-stretta} è non singolare
+\end{cor}
+
+\begin{proof}
+Siccome $\left|a_{ii}\right|>\sum_{j=1,j\neq i}^{n}\left|a_{ij}\right|$,
+nessun $R_{i}$ interseca l'origine e dunque $0$ non può essere autovalore
+\end{proof}
+\begin{thm}[primo teorema di Gershgorin]
+\textup{$\Lambda\left(A\right)\subseteq S_{R}\cap S_{C}$}
+\end{thm}
+\begin{proof}
+    $\Lambda(A)=\Lambda(A^T)$
+\end{proof}
+
+\begin{thm}[secondo teorema di Gershgorin]
+\textup{Se $\exists\,1\leq m\leq n$ tale che $S_{1}\coloneqq\bigcup_{i=1}^{m}R_{i}$
+e $S_{2}\coloneqq\bigcup_{i=m+1}^{n}R_{i}$ sono disgiunti, allora
+$S_{1}$ contiene esattamente $m$ autovalori (con molteplicità) e
+$S_{2}$ ne contiene $m-n$. }Analogamente per le colonne.
+\end{thm}
+
+\begin{cor}
+Un cerchio di Gershgorin disgiunto dagli altri contiene esattamente
+$1$ autovalore, e se $A\in\mathbb{R}^{n\times n}$ \hl{tale autovalore
+è reale} (poiché se fosse complesso dovrebbe contenere anche il coniugato)
+\end{cor}
+
+
+\subsection{Analisi del condizionamento}
+
+$\widetilde{A}=A+E$ con $E$ matrice di perturbazione ($\left\Vert E\right\Vert \ll\left\Vert A\right\Vert $)
+\begin{thm}[teorema di Bauer-Fike]
+\label{thm:teorema-Bauer-Fike}$A\in\mathbb{C}^{n\times n}$ diagonalizzabile
+e $E\in\mathbb{C}^{n\times n}$, allora $\forall\,\mu\in\Lambda\left(A+E\right)$
+vale
+\[
+\min_{\lambda\in\Lambda\left(A\right)}\left|\lambda-\mu\right|\leq K_{p}\left(X\right)\left\Vert E\right\Vert _{p}
+\]
+con $X$ matrice con colonne gli autovettori di $A$ (e dunque $K_{p}\left(X\right)=\left\Vert X\right\Vert _{p}\cdot\left\Vert X^{-1}\right\Vert _{p}$).
+\end{thm}
+
+\begin{proof}
+Preso $\lambda\notin\Lambda\left(A\right)$, autovettore $v$, e posto
+$v=X\hat{v}$ e $D=X^{-1}AX$ diagonale
+\begin{align*}
+\left(A+E\right)v & =\mu v & X^{-1}\left(A+E\right)X\hat{v} & =\mu\hat{v} & \left(D+X^{-1}EX\right)\hat{v} & =\mu\hat{v} & \left(\mu I-D\right)\hat{v} & =X^{-1}EX\hat{v}
+\end{align*}
+\[
+\left\Vert \hat{v}\right\Vert _{p}=\left\Vert \left(\mu I-D\right)^{-1}X^{-1}EX\hat{v}\right\Vert _{p}\leq\left\Vert \left(\mu I-D\right)^{-1}\right\Vert _{p}\left\Vert E\right\Vert _{p}\underset{K_{p}\left(X\right)}{\underbrace{\left\Vert X^{-1}\right\Vert _{p}\left\Vert X\right\Vert _{p}}}\left\Vert \hat{v}\right\Vert _{p}
+\]
+\end{proof}
+
+\subsection{Metodi delle potenze}
+
+Data $A\in\mathbb{C}^{n\times n}$ diagonalizzabile di autovalori
+$\left|\lambda_{1}\right|\geq\ldots\geq\left|\lambda_{n}\right|\geq0$
+e \hl{base di autovettori unitari $\mathscr{B}=\{x_{1},\ldots,x_{n}\}$}
+\begin{lyxalgorithm}[metodo delle potenze] Per determinare l'autovalore di modulo max:
+\label{def:metodo-delle-potenze}$q^{\left(k+1\right)}=\cfrac{Aq^{\left(k\right)}}{\left\Vert Aq^{\left(k\right)}\right\Vert _{2}}=\cfrac{A^{k}q^{\left(0\right)}}{\left\Vert A^{k}q^{\left(0\right)}\right\Vert _{2}}$
+con $\left\Vert q^{\left(0\right)}\right\Vert _{2}=1$ e $\nu^{\left(k\right)}=\left(q^{\left(k\right)}\right)^{*}Aq^{\left(k\right)}$
+\begin{align*}
+q^{\left(0\right)} & =\sum_{i=1}^{n}\alpha_{i}x_{i} & A^{k}q^{\left(0\right)} & =\sum_{i=1}^{n}\alpha_{i}A^{k}x_{i}=\sum_{i=1}^{n}\alpha_{i}\lambda_{i}^{k}x_{i}
+\end{align*}
+\end{lyxalgorithm}
+
+\begin{defn}[$O$-grande] Se $g(x)$ è definitivamente $\ne 0$ per $x\to x_0$ allora $f(x)=O(g(x))$ significa $\frac{f(x)}{g(x)}$ definitivamente limitato per $x\to x_0$, ovvero
+$$\frac{f(x)}{g(x)}\le c\iff f(x)\le cg(x)\quad\text{defin. per $x\to x_0$}$$
+    
+\end{defn}
+
+\begin{myboxed}
+\begin{thm}[Ordine di convergenza] \label{thm:ordine-di-convergenza}
+Se $\left|\lambda_{1}\right|>\left|\lambda_{2}\right|$\textup{ e
+$\alpha_{1}\neq0$, allora 
+\begin{align*}
+\min_{\substack{x\in\left\langle x_{1}\right\rangle \\
+\left\Vert x\right\Vert _{2}=1
+}
+}\left\Vert x-q^{\left(k\right)}\right\Vert _{2} & \le c\abs{\frac{\lambda_{2}}{\lambda_{1}}}^k=O\left(\left|\frac{\lambda_{2}}{\lambda_{1}}\right|^{k}\right) & \left|\lambda_{1}-\nu^{\left(k\right)}\right| & =O\left(\left|\frac{\lambda_{2}}{\lambda_{1}}\right|^{k}\right)
+\end{align*}
+}
+Il $\min$ nella tesi serve perché so che $q^{(k)}$ tende alla \textbf{direzione} dell'autovalore max (ovvero all'autospazio $\left\langle x_{1}\right\rangle$) ma se l'autovalore è negativo continua a oscillare avvicinandosi a $+ x_{1}$ o $- x_{1}$, quindi l'errore lo calcolo da quello più vicino dei due.
+\end{thm}
+\end{myboxed}
+
+\begin{proof}
+\textbf{(I)} Scompongo
+\begin{align*}
+A^{k}q^{\left(0\right)}  =\sum_{i=1}^{n}\alpha_{i}\lambda_{i}^{k}x_{i}=\alpha_{1}\lambda_{1}^{k}(x_{1}+\overset{W^{\left(k\right)}}{\overbrace{\sum_{i=2}^{n}\frac{\alpha_{i}}{\alpha_{1}}\left(\frac{\lambda_{i}}{\lambda_{1}}\right)^{k}x_{i}}})
+\end{align*}
+Ho che 
+$$\begin{cases}
+    x^{\left(k\right)}  \coloneqq\frac{\alpha_{1}\lambda_{1}^{k}}{\left|\alpha_{1}\lambda_{1}^{k}\right|}x_{1} \in \langle x^{(1)}\rangle,\quad \norm{x^{(k)}}_2=1\\
+    q^{(k)}=\frac{A^kq^{(0)}}{\norm{A^kq^{(0)}}}=\frac{\alpha_1\lambda_1^k}{\abs{\alpha_1\lambda_1^k}}\frac{x^{(1)}+W^{(k)}}{\norm{x^{(1)}+W^{(k)}}}
+\end{cases}$$
+\begin{align*}
+\left\Vert q^{\left(k\right)}-x^{\left(k\right)}\right\Vert _{2}&=
+\left\Vert \left(\frac{x_{1}+W^{\left(k\right)}}{\left\Vert x_{1}+W^{\left(k\right)}\right\Vert }-x_{1}\right)\frac{\alpha_1\lambda_1^k}{\abs{\alpha_1\lambda_1^k}}\right\Vert _{2}\\
+&=\left\Vert \frac{x_{1}+W^{\left(k\right)}}{\left\Vert x_{1}+W^{\left(k\right)}\right\Vert }-x_{1}\right\Vert _{2}\\
+&\leq\left|\frac{1}{\left\Vert x_{1}+W^{\left(k\right)}\right\Vert }-1\right|+\frac{\left\Vert W^{\left(k\right)}\right\Vert }{\left\Vert x_{1}+W^{\left(k\right)}\right\Vert } \quad\text{ho raccolto $x^{(1)}$ che ha norma 1}\\
+& \overset{\star}{=}O\left(\abs{\frac{\lambda_{2}}{\lambda_{1}}}^{k}\right) \quad \star\text{ per dim. vedi sotto}
+\end{align*}
+Vediamo che $\norm{W^{(k)}}=O\left(\abs{\frac{\lambda_{2}}{\lambda_{1}}}^{k}\right)$:
+$$\norm{W^{(k)}}=\norm{\sum_{i=2}^{n}\frac{\alpha_{i}}{\alpha_{1}}\left(\frac{\lambda_{i}}{\lambda_{1}}\right)^{k}x^{(i)}}=\norm{\sum_{i=2}^{n}\frac{\alpha_{i}}{\alpha_{1}}\left(\frac{\lambda_{i}}{\lambda_{1}}\right)^{k}}\le \abs{\frac{\lambda_{i}}{\lambda_{1}}}^{k}{\sum_{i=2}^{n}\abs{\frac{\alpha_{i}}{\alpha_{1}}}}=c\abs{\frac{\lambda_{i}}{\lambda_{1}}}^{k}$$
+Quindi valgono (ricordando la def. di $O$ grande):
+$$\begin{cases}
+    \norm{x^{(1)}+W^{(k)}}=1+O\left(\abs{\frac{\lambda_{2}}{\lambda_{1}}}^{k}\right) \\
+    \nicefrac{O\left(\abs{\frac{\lambda_{2}}{\lambda_{1}}}^{k}\right)}{\left(1+O\left(\abs{\frac{\lambda_{2}}{\lambda_{1}}}^{k}\right)\right)}=O\left(\abs{\frac{\lambda_{2}}{\lambda_{1}}}^{k}\right)
+\end{cases}$$
+e così otteniamo la tesi.\\
+\textbf{(II)} Abbiamo ($^*=$trasposto coniugato):
+$$\begin{cases}
+    \nu^{(k)}=q^{(k)*}Aq^{(k)}=q^{(k)*}A(q^{(k)}-x^{(1)})+q^{(k)*}Ax^{(1)}\\
+    \lambda_1=x^{(1)*}Ax^{(1)}
+\end{cases}\implies \nu^{(k)}-\lambda_1=q^{(k)*}A(q^{(k)}-x^{(1)})+(q^{(k)}-x^{(1)})^*Ax^{(1)}$$
+Quindi
+\begin{align*}
+    \abs{\nu^{(k)}-\lambda_1}&\le \abs{q^{(k)*}A(q^{(k)}-x^{(1)})} + \abs{(q^{(k)}-x^{(1)})^*Ax^{(1)}}\\
+    &\le \underbrace{\norm{q^{(k)}}}_{=1}\norm{A}\underbrace{\norm{q^{(k)}-x^{(1)}}}_{O\left(\abs{\frac{\lambda_{2}}{\lambda_{1}}}^{k}\right)}+\underbrace{\norm{q^{(k)}-x^{(1)}}}_{O\left(\abs{\frac{\lambda_{2}}{\lambda_{1}}}^{k}\right)}\norm{A}\underbrace{\norm{x^{(1)}}}_{=1}
+\end{align*}
+\end{proof}
+
+\begin{rem*}
+    La convergenza è rapida se $\lambda_1\gg \lambda_2$
+\end{rem*}
+
+\begin{myboxed}
+\begin{cor}[Velocità di convergenza per mat. reali simm.]
+Se $\left|\lambda_{1}\right|>\left|\lambda_{2}\right|$ e $A$ è inoltre \textbf{reale e simmetrica}, allora 
+$$\left|\lambda_{1}-\nu^{\left(k\right)}\right|=O\left(\left|\frac{\lambda_{2}}{\lambda_{1}}\right|^{2k}\right)$$
+Se $\left|\lambda_{1}\right|=\left|\lambda_{2}\right|$ allora \hl{prendere il \textbf{primo autovalore in modulo minore di $\lambda_1$}}.
+\end{cor}
+\end{myboxed}
+
+\begin{proof}
+    \todo{p. 62}
+\end{proof}
+
+\begin{rem*}[Criterio d'arresto] Se $(\lambda, v)$ autocoppia di $A$, allora $Av=\lambda v\iff \norm{Av-\lambda v}=0$. Allora se $(\nu^{(k)},q^{(k)})$ approssimano $(\lambda, v)$ abbiamo $\norm{Aq^{(k)}-\nu^{(k)}q^{(k)}}\approx 0$ e quindi un criterio d'arresto può essere
+$$\left\Vert r^{\left(k\right)}\right\Vert _{2}=\left\Vert Aq^{\left(k\right)}-\nu^{\left(k\right)}q^{\left(k\right)}\right\Vert _{2}\leq\varepsilon$$
+Presa $E^{\left(k\right)}\coloneqq-r^{\left(k\right)}\left(q^{\left(k\right)}\right)^{*}$
+si ha
+\begin{align*}
+\left(A+E^{\left(k\right)}\right)q^{\left(k\right)} & =Aq^{\left(k\right)}-r^{\left(k\right)}=\nu^{\left(k\right)}q^{\left(k\right)} & \left\Vert E^{\left(k\right)}\right\Vert _{2} & =\left\Vert r^{\left(k\right)}\right\Vert _{2}\left\Vert q^{\left(k\right)}\right\Vert _{2}=\left\Vert r^{\left(k\right)}\right\Vert _{2}\leq\varepsilon
+\end{align*}
+
+E quindi per il \nameref{thm:teorema-Bauer-Fike} $\min_{\lambda\in\Lambda\left(A\right)}\left|\lambda-\nu^{\left(k\right)}\right|\leq K_{2}\left(X\right)\left\Vert E\right\Vert _{2}\leq\varepsilon\cdot K_{2}\left(X\right)$
+\end{rem*}
+
+\begin{rem*}[Costo computazionale]
+    $z^{(k)}=Aq^{(k-1)}$: $2n^2$ flops se $A$ densa, $2\cdot\text{nnz}(A)$ flops se $A$ sparsa (con $\text{nnz}(A)$ i non zeri di $A$)
+\end{rem*}
+
+
+\begin{lyxalgorithm}[metodo delle potenze inverse]
+\label{def:metodo-delle-potenze-inverse}Per determinare l'autovalore
+più vicino a $\mu$ (detto \textbf{shift}) applico il \nameref{def:metodo-delle-potenze}
+su $\left(A-\mu I\right)^{-1}$ infatti ha gli stessi autovettori:
+\begin{align*}
+    (\lambda,v)\text{ autocoppia di $A$} &\iff Av=\lambda v\\
+    &\iff  Av\textcolor{red}{-\mu v}=\lambda v \textcolor{red}{-\mu v} \\
+    &\iff (A-\mu I)v=(\lambda-\mu)v \\
+    &\iff  (A-\mu I)^{-1}v=\frac{1}{(\lambda-\mu)}v\\
+    &\iff \left(\frac{1}{\lambda-\mu},v\right)  \text{ autocoppia di }(A-\mu I)^{-1}
+\end{align*}
+e quindi l'autovalore di modulo massimo di $(A-\mu I)^{-1}$ corrisponde all'autovalore di $A$ più vicino a $\mu$
+\end{lyxalgorithm}
+
+\begin{rem*}[Ordine di convergenza]
+Il \nameref{thm:ordine-di-convergenza} assicura che se $\exists m\in\{1,\dots,n\}$ t.c. $\abs{\mu-\lambda_m}<\abs{\mu-\lambda_i}\quad \forall i\ne m$ allora $\begin{cases}
+    q^{(k)}\to x_m \\
+    \nu^{(k)}\to\lambda_m
+\end{cases}$.\\
+L'ordine di convergenza è $$O\left(\frac{\abs{\lambda_m-\mu}}{\abs{\lambda_t-\mu}}\right)^k \quad \text{dove }\abs{\lambda_t-\mu}\ge \abs{\lambda_i-\mu}\quad \forall i\ne m$$
+\end{rem*}
+
+\begin{rem*}
+Nel caso in cui $\left|\lambda_{1}\right|=\left|\lambda_{2}\right|$
+il \nameref{def:metodo-delle-potenze}
+\end{rem*}
+\begin{itemize}
+\item per $\lambda_{1}=\lambda_{2}$ converge ancora, siccome $A^{k}q^{\left(0\right)}=\sum_{i=1}^{n}\alpha_{i}\lambda_{i}^{k}x_{i}\approx\lambda_{1}^{k}\left(\alpha_{1}x_{1}+\alpha_{2}x_{2}\right)$
+\item per $\lambda_{1}\neq\lambda_{2}$ la convergenza non è garantita
+\end{itemize}
+
+\subsection{Metodi basati sulla \nameref{def:fattorizzazione-QR} (NO)}
+\begin{lyxalgorithm}[metodo $QR$] Per approssimare tutti gli autovalori:
+\label{alg:metodo-QR}Fattorizzato $T_{k-1}=Q_{k}R_{k}$, scrivo
+$T_{k}=R_{k}Q_{k}$ ($T_{0}=A$).
+\end{lyxalgorithm}
+
+\begin{rem*}
+Vale che $T_{k}=\left(Q_{1}Q_{2}\ldots Q_{k}\right)^{T}A\left(Q_{1}Q_{2}\ldots Q_{k}\right)$,
+quindi tutti i $T_{k}$ sono simili a $A$ attraverso matrici ortogonali.
+Inoltre la stabilità non cambia, in quanto 
+\begin{align*}
+\widetilde{T_{k}}=\widehat{Q}_{k}^{T}\widetilde{A}\widehat{Q}_{k}^{T} & =\widehat{Q}_{k}^{T}\left(A+E\right)\widehat{Q}_{k}^{T}=T_{k}+\widehat{Q}_{k}^{T}E\widehat{Q}_{k}^{T} & \left\Vert \widehat{Q}_{k}^{T}E\widehat{Q}_{k}^{T}\right\Vert _{2} & =\left\Vert E\right\Vert _{2}
+\end{align*}
+\end{rem*}
+\begin{thm}
+Presa $A\in\mathbb{R}^{n\times n}$ di autovalori $\left|\lambda_{1}\right|>\ldots>\left|\lambda_{n}\right|>0$,
+allora 
+\[
+\lim_{k\rightarrow+\infty}T_{k}=\begin{bmatrix}\lambda_{1} & t_{1\,2} & \cdots & t_{1\,n}\\
+0 & \lambda_{2} & \cdots & t_{2\,n}\\
+\vdots & \vdots & \ddots & \vdots\\
+0 & 0 & \cdots & \lambda_{n}
+\end{bmatrix}
+\]
+
+e se $A$ è simmetrica, $T_{k}$ converge a una diagonale
+\end{thm}
+
+\begin{lem}
+$A^{k}=Q_{1}{\scriptstyle \cdots}Q_{k}R_{k}{\scriptstyle \cdots}R_{1}\quad\forall\,k\geq1$
+\end{lem}
+
+\begin{proof}
+Per induzione, dato $A^{k}=Q_{1}{\scriptstyle \cdots}Q_{k}R_{k}{\scriptstyle \cdots}R_{1}$
+ho che 
+\[
+Q_{1}{\scriptstyle \cdots}Q_{k+1}R_{k+1}{\scriptstyle \cdots}R_{1}=Q_{1}{\scriptstyle \cdots}Q_{k}T_{k+1}R_{k}{\scriptstyle \cdots}R_{1}=Q_{1}{\scriptstyle \cdots}Q_{k-1}T_{k}Q_{k}R_{k}{\scriptstyle \cdots}R_{1}=\ldots=\overset{A}{\overbrace{T_{0}}}\overset{A^{k}}{\overbrace{Q_{1}{\scriptstyle \cdots}Q_{k}R_{k}{\scriptstyle \cdots}R_{1}}}=A^{k+1}
+\]
+\end{proof}
+%
+\begin{proof}[Dimostrazione del teorema]
+Prendo $A=X\Lambda Y$, con $\Lambda$ diagonale con gli autovalori
+in ordine decrescente, $X$ colonne autovettori, $Y=X^{-1}$, $X=QR$
+e $Y=LU$, da cui
+\[
+Q_{1}{\scriptstyle \cdots}Q_{k}R_{k}{\scriptstyle \cdots}R_{1}=A^{k}=X\Lambda^{k}Y=QR\Lambda^{k}LU=QR\overset{\longrightarrow I\text{ per }k\rightarrow+\infty}{\left(\overbrace{\Lambda^{k}L\Lambda^{-k}}\right)}\Lambda^{k}U
+\]
+\begin{align*}
+\underset{\hat{Q}_{k}}{\underbrace{Q_{1}{\scriptstyle \cdots}Q_{k}}}\underset{\hat{R}_{k}}{\underbrace{R_{k}{\scriptstyle \cdots}R_{1}U^{-1}\Lambda^{-k}R^{-1}}} & D=Q\overset{\longrightarrow I\text{ per }k\rightarrow+\infty}{\overbrace{R\Lambda^{k}L\Lambda^{-k}R^{-1}}}D & \text{dunque }\begin{cases}
+\hat{Q}_{k}\longrightarrow QD\\
+\hat{R}_{k}D\longrightarrow I
+\end{cases}
+\end{align*}
+\[
+T_{k}=\underset{\hat{Q}_{k}}{\left(\underbrace{Q_{1}{\scriptstyle \cdots}Q_{k}}\right)}^{T}T_{0}\underset{\hat{Q}_{k}}{\left(\underbrace{Q_{1}{\scriptstyle \cdots}Q_{k}}\right)}=\hat{Q}_{k}^{T}X\Lambda X^{-1}\hat{Q}_{k}=\underset{\longrightarrow D}{\underbrace{\hat{Q}_{k}^{T}Q}}R\Lambda R^{-1}\underset{\longrightarrow D}{\underbrace{Q^{T}\hat{Q}_{k}}}\longrightarrow DR\Lambda R^{-1}D
+\]
+\end{proof}
+\begin{rem*}
+Il metodo $QR$ può essere visto come una serie di metodi delle potenze
+in cui parto da una matrice $I$ moltiplico le colonne per $A$ e
+poi a ogni passaggio ortogonalizzo.
+\end{rem*}
+\begin{defn}[matrice di Hessenberg]
+\label{def:matrice-di-Hessenberg}$H$ di Hessenberg se $h_{ij}=0\quad\forall\,i>j+1$ 
+\end{defn}
+
+\begin{lyxalgorithm}[metodo di Hessenberg-$QR$]
+Trasformo $A$ in una \nameref{def:matrice-di-Hessenberg} tramite
+\ref{alg:riduzione-matrice-Hessenberg} e poi applico il \nameref{alg:metodo-QR}
+(la complessità computazionale per la \nameref{alg:fattorizzazione-QR-matrice-Hessenberg}
+è di $O\left(n^{2}\right)$)
+\end{lyxalgorithm}
+
+\begin{defn}[trasformazioni di Householder]
+\begin{align*}
+P & =I-2\frac{vv^{T}}{\left\Vert v\right\Vert _{2}^{2}} & v & =x\pm e_{m}\left\Vert x\right\Vert _{2} & Px & =\pm e_{m}\left\Vert x\right\Vert _{2}=\begin{pmatrix}0 & \ldots & 0 & \left\Vert x\right\Vert _{2} & 0 & \ldots & 0\end{pmatrix}^{T}
+\end{align*}
+\end{defn}
+
+\begin{lyxalgorithm}[triangolarizzazione di Householder]
+$Q_{n-1}\ldots Q_{1}A=R$ con $Q_{j}=\begin{bmatrix}I_{j-1} & 0\\
+0 & P_{j}
+\end{bmatrix}$ e $P_{j}$ matrice di Householder opportuna
+\[
+\underset{A}{\begin{bmatrix}\times & \times & \times\\
+\times & \times & \times\\
+\times & \times & \times
+\end{bmatrix}}\longrightarrow\underset{Q_{1}A}{\begin{bmatrix}\times & \times & \times\\
+\ocircle & \times & \times\\
+\ocircle & \times & \times
+\end{bmatrix}}\longrightarrow\underset{Q_{1}Q_{2}A}{\begin{bmatrix}\times & \times & \times\\
+\ocircle & \times & \times\\
+\ocircle & \ocircle & \times
+\end{bmatrix}}
+\]
+\end{lyxalgorithm}
+
+\begin{lyxalgorithm}[riduzione a matrice di Hessenberg]
+\label{alg:riduzione-matrice-Hessenberg}Devo trovare $T_{0}=Q_{0}^{T}AQ_{0}$,
+$Q_{0}=P_{1}\ldots P_{n-2}$ con $Q_{k}=\begin{bmatrix}I_{k} & 0\\
+0 & \widehat{P_{k}}
+\end{bmatrix}$ e $\widehat{P_{k}}$ matrice di Householder
+\[
+\underset{A}{\begin{bmatrix}\times & \times & \times & \times\\
+\times & \times & \times & \times\\
+\times & \times & \times & \times\\
+\times & \times & \times & \times
+\end{bmatrix}}\longrightarrow\underset{P_{1}^{T}AP_{1}}{\begin{bmatrix}\times & \times & \times & \times\\
+\times & \times & \times & \times\\
+\ocircle & \times & \times & \times\\
+\ocircle & \times & \times & \times
+\end{bmatrix}}\longrightarrow\underset{P_{2}^{T}P_{1}^{T}AP_{1}P_{2}}{\begin{bmatrix}\times & \times & \times & \times\\
+\times & \times & \times & \times\\
+\ocircle & \times & \times & \times\\
+\ocircle & \ocircle & \times & \times
+\end{bmatrix}}
+\]
+\end{lyxalgorithm}
+
+\begin{defn}[matrici elementari di Givens]
+$i,k\in\left\{ 1,\ldots,n\right\} $ e $\theta\in\left[0,2\pi\right]$,
+$G\left(i,k,\theta\right)$ ortogonale è la rotazione di $\theta$
+sul piano $\left\langle e_{i},e_{k}\right\rangle $
+\[
+G\left(i,k,\theta\right)=\begin{bmatrix}I_{i-1}\\
+ & \cos\theta &  & \sin\theta\\
+ &  & I_{k-i-1}\\
+ & -\sin\theta &  & \cos\theta\\
+ &  &  &  & I_{n-k}
+\end{bmatrix}
+\]
+\end{defn}
+
+\begin{rem*}
+$G\left(i,k,\theta\right)$ permette di annullare $1$ componente
+di un vettore lasciandone inalterate $n-2$
+\begin{align*}
+\theta & =\arctan\left(-\frac{x_{k}}{x_{i}}\right) & \begin{bmatrix}y_{i}\\
+y_{k}
+\end{bmatrix} & =\begin{bmatrix}\cos\theta & \sin\theta\\
+-\sin\theta & \cos\theta
+\end{bmatrix}\begin{bmatrix}x_{i}\\
+x_{k}
+\end{bmatrix}=\begin{bmatrix}\sqrt{x_{i}^{2}+x_{k}^{2}}\\
+0
+\end{bmatrix}
+\end{align*}
+%
+\end{rem*}
+\begin{lyxalgorithm}[fattorizzazione $QR$ di una \nameref{def:matrice-di-Hessenberg}]
+\label{alg:fattorizzazione-QR-matrice-Hessenberg}$A$ \nameref{def:matrice-di-Hessenberg},
+$R=Q^{T}A$ con $Q^{T}=G_{n-1}^{T}\ldots G_{1}^{T}$ (applico le matrici
+di Givens per annullare l'ultima componente per ogni colonna)
+\[
+\underset{A}{\begin{bmatrix}\boxed{\times} & \times & \times & \times\\
+\boxed{\times} & \times & \times & \times\\
+\ocircle & \times & \times & \times\\
+\ocircle & \ocircle & \times & \times
+\end{bmatrix}}\longrightarrow\underset{G_{1}^{T}A}{\begin{bmatrix}\times & \times & \times & \times\\
+\ocircle & \boxed{\times} & \times & \times\\
+\ocircle & \boxed{\times} & \times & \times\\
+\ocircle & \ocircle & \times & \times
+\end{bmatrix}}\longrightarrow\underset{G_{2}^{T}G_{1}^{T}A}{\begin{bmatrix}\times & \times & \times & \times\\
+\ocircle & \times & \times & \times\\
+\ocircle & \ocircle & \boxed{\times} & \times\\
+\ocircle & \ocircle & \boxed{\times} & \times
+\end{bmatrix}}\longrightarrow\underset{G_{3}^{T}G_{2}^{T}G_{1}^{T}A}{\begin{bmatrix}\times & \times & \times & \times\\
+\ocircle & \times & \times & \times\\
+\ocircle & \ocircle & \times & \times\\
+\ocircle & \ocircle & \ocircle & \times
+\end{bmatrix}}
+\]
+\end{lyxalgorithm}
+
+\begin{thm}[formula di Shermann-Morris]
+$A\in\mathbb{R}^{n\times n}$ invertibile e $u,v\in\mathbb{R}^{n}$,
+$A+uv^{T}$ invertibile $\Longleftrightarrow$ $1+v^{T}A^{-1}u\neq0$,
+e
+\[
+\left(A+uv^{T}\right)^{-1}=A^{-1}-\frac{A^{-1}uv^{T}A^{-1}}{1+v^{T}A^{-1}u}
+\]
+\end{thm}
+
+\pagebreak{}
+\part{Secondo semestre}
+
+
+
+\section{Zeri di funzione e ottimizzazione}
+\begin{myboxed}
+\begin{thm}[Condizionamento del problema di ottimizzazione]
+Radice di molteplicità $m$, $$K_{\text{abs}}\left(d\right)\simeq\left|\frac{m!\cdot\delta d}{f^{\left(m\right)}\left(\alpha\right)}\right|^{\nicefrac{1}{m}}\frac{1}{\left|\delta d\right|}$$
+In particolare per $m=1$ abbiamo
+$$K_{\text{abs}}\left(d\right)\simeq\frac{1}{\abs{f'(x)}}\qquad K\left(d\right)\simeq\frac{1}{\abs{f'(x)}}\frac{\abs{d}}{\abs{\alpha}}$$
+\end{thm}
+\end{myboxed}
+
+\begin{proof}
+\begin{align*}
+\bcancel{d}+\delta d=f(\alpha+\delta\alpha)=\bcancel{f\left(\alpha\right)}+\sum_{k=1}^{m}\frac{f^{\left(k\right)}\left(\alpha\right)}{k!}\left(\delta\alpha\right)^{k}+o\left(\left\Vert \delta\alpha\right\Vert ^{m}\right)&\overset{\star}{\implies} \delta d=\frac{f^{\left(m\right)}\left(\alpha\right)}{m!}\left(\delta\alpha\right)^{m}\\
+&\implies\delta\alpha=\frac{m!\cdot\delta d}{f^{\left(m\right)}\left(\alpha\right)}^{\nicefrac{1}{m}}
+\end{align*}
+$\star$ dato che le derivate $k=1\ldots m-1$ si annullano per ipotesi. Allora
+$$K_{\text{abs}}\left(d\right)\simeq \frac{\abs{\delta\alpha}}{\abs{\delta d}} \simeq\left|\frac{m!\cdot\delta d}{f^{\left(m\right)}\left(\alpha\right)}\right|^{\nicefrac{1}{m}}\frac{1}{\left|\delta d\right|}$$
+\end{proof}
+
+\begin{rem*}
+    Per $\abs{f'(x)}$ piccola il problema è mal condizionato.
+\end{rem*}
+
+\begin{defn}[Ordine di convergenza]
+$x^{\left(k\right)}$ converge ad $\alpha$ con ordine $p$ se: $$\frac{\left|x^{\left(k+1\right)}-\alpha\right|}{\left|x^{\left(k\right)}-\alpha\right|^{p}}\leq C$$
+definitivamente in $k$
+\end{defn}
+
+\begin{lyxalgorithm}[Impostazione del metodo]
+$f\colon\left[a,b\right]\rightarrow\mathbb{R}$ continua, $f(\alpha)=0$, per il teo. di Lagrange $\exists\xi$ t.c.
+$$\frac{f(\alpha)-f(x)}{\alpha-x}=f'(\xi)\quad \xi\in[\alpha, x]$$
+da cui otteniamo, essendo $f(\alpha)=0$
+$$f(x)+(\alpha-x)f'(\xi)=0$$
+che suggerisce il metodo iterativo: dato $x^{(k)}$ si calcola $x^{(k+1)}$ risolvendo
+$$f(x^{(k)})+(x^{(k+1)}-x^{(k)})q_k=0$$
+dove $q_k$ è opportuna approssimazione di $f'(x^{(k)})$. Ciò equivale a \hl{trovare il punto di intersezione tra asse $x$ e retta di pendenza $\textcolor{blue}{q_k}$  passante per $\textcolor{red}{(x^{(k)},f(x^{(k)}))}$},  scritta in forma più esplicita (voglio $y=0$)
+$$y-\textcolor{red}{f(x^{(k)})}=\textcolor{blue}{q_k}(\overset{\text{incognita}}{\boxed{x^{(k+1)}}}-\textcolor{red}{x^{(k)}})$$
+esplicitando l'incognita:
+$$\boxed{x^{(k+1)}=\textcolor{red}{x^{(k)}}-\textcolor{blue}{q_k}^{-1}\textcolor{red}{f(x^{(k)})}}$$
+\end{lyxalgorithm}
+
+\begin{lyxalgorithm}[Metodo di Bisezione]
+\noun{Ipotesi:} $f\colon\left[a,b\right]\rightarrow\mathbb{R}$ continua,
+$f\left(a\right)\cdot f\left(b\right)<0$
+\end{lyxalgorithm}
+
+\begin{lyxalgorithm}[Vari metodi]
+\[
+\begin{array}{rlll}
+\text{\emph{Metodo delle corde }} & q_{k}=\frac{f\left(b\right)-f\left(a\right)}{b-a} & {\scriptstyle \text{(con \ensuremath{f\left(a\right)\cdot f\left(b\right)<0})}}  & \text{ordine 1}\\
+\text{\emph{Metodo delle secanti }} & q_{k}=\frac{f\left(x^{\left(k\right)}\right)-f\left(x^{\left(k-1\right)}\right)}{x^{\left(k\right)}-x^{\left(k-1\right)}}& {\scriptstyle \text{(assegnati i due dati iniziali $x^{(-1)},x^{(0)}$)}}  & \text{ordine $\frac{1+\sqrt{5}}{2}$}\\
+\text{\emph{Regula falsi }} & q_{k}=\frac{f\left(x^{\left(k\right)}\right)-f\left(x^{\left(k'\right)}\right)}{x^{\left(k\right)}-x^{\left(k'\right)}} & {\scriptstyle \text{(con \ensuremath{k'} più grande \ensuremath{<k} tale per cui \ensuremath{f(x^{\left(k\right)})\cdot f(x^{\left(k'\right)})<0})}} & \\
+\text{\emph{Metodo di Newton }} & q_{k}=f'(x^{(k)}) & {\scriptstyle \text{(con $f\in  C^1(J)$, $f'(x)\ne 0$ $\forall x\in J$)}}  & \text{ordine 2 (se rad. sempl.)}
+\end{array}
+\]
+\end{lyxalgorithm}
+
+\begin{myboxed}
+\begin{thm}[Teorema di convergenza locale]
+Sia $f\colon I\rightarrow\mathbb{R}$, $x_{0}\in I$, $f\in C^{2}$,
+se $\exists\,M$ tale che $\left|\frac{f^{\prime\prime}\left(x\right)}{f^{\prime}\left(y\right)}\right|\leq M$
+$\forall\,\left(x,y\right)\in I^{2}$, allora $\left|x_{0}-\alpha\right|<\frac{2}{M}$
+(con $\alpha$ zero di $f$) $\Longrightarrow$ Metodo di Newton converge
+con ordine 2.
+\end{thm}
+\end{myboxed}
+
+\begin{proof}
+Sviluppo di Taylor in $x^{(k)}$ al primo ordine con errore di Lagrange:
+$$f(x)=f(x^{(k)})+f^{\prime}(x^{(k)})(x-x^{\left(k\right)})+\frac{f^{\prime\prime}\left(\xi\right)}{2}\left(x-x^{\left(k\right)}\right)^{2}$$
+In particolare vale per $x=\alpha$:
+\begin{align*}
+0&=f(\alpha)=f(x^{(k)})+f^{\prime}(x^{(k)})(\alpha-x^{\left(k\right)})+\frac{f^{\prime\prime}\left(\xi\right)}{2}\left(\alpha-x^{\left(k\right)}\right)^{2}  \\
+&=\underset{-x^{\left(k+1\right)}}{\boxed{\frac{f\left(x^{\left(k\right)}\right)}{f^{\prime}\left(x^{\left(k\right)}\right)}-x^{\left(k\right)}}}+\alpha+\frac{f^{\prime\prime}\left(\xi\right)}{2f^{\prime}\left(x^{\left(k\right)}\right)}\left(\alpha-x^{\left(k\right)}\right)^{2} \quad \text{ho raccolto $f'(x^{(k)})$}
+\end{align*}
+Quindi
+$$\frac{\left(\alpha-x^{\left(k+1\right)}\right)}{\left(\alpha-x^{\left(k\right)}\right)^{2}}\overset{\star}{=}-\frac{1}{2}\frac{f^{\prime\prime}\left(\xi\right)}{f^{\prime}\left(x^{\left(k\right)}\right)}\quad \text{ovvero} \quad \abs{e_{k+1}}\le \frac{1}{2}\abs{\frac{f^{\prime\prime}\left(\xi\right)}{f^{\prime}\left(x^{\left(k\right)}\right)}}e_k^2$$
+Dimostriamo che converge: abbiamo, con $J$ intorno di $\alpha$
+\begin{align*}
+    f\in C^2(J)&\implies \frac{1}{2}\abs{\frac{f^{\prime\prime}\left(x\right)}{f^{\prime}\left(y\right)}}\le M \quad \text{per un $M$ e }\forall x,y\in J\\
+    &\implies \abs{e_{k+1}}\le Me_k^2 \\
+    &\implies  M\abs{e_{k+1}}\le (Me_k)^2\le (Me_0)^{2k+1}\\
+    &\implies  \abs{e_{k+1}}\le\frac{1}{M}(Me_0)^{2k+1}\\
+    &\implies  \abs{e_{k}}\le \frac{1}{M}(Me_0)^{2k}\overset{k\to+\infty}{\longrightarrow}0 \qquad \text{se } \abs{Me_0}<1\iff \abs{e_0}<\frac{1}{M}\\
+\end{align*}
+quindi se $\abs{e_{k}}=\abs{\alpha-x_0}$ è abbastanza piccolo il metodo converge e da $\star$
+$$\frac{\abs{\alpha-x^{\left(k+1\right)}}}{\abs{\alpha-x^{\left(k\right)}}^{2}}=\abs{\frac{1}{2}\frac{f^{\prime\prime}\left(\xi\right)}{f^{\prime}\left(x^{\left(k\right)}\right)}}\le M\implies\text{ converge di ordine 2}$$
+\end{proof}
+
+\subsection{Metodo di Punto Fisso}
+Data $f:[a,b]\to\re$ la posso scomporre in $f(x)=x-\phi(x)$ e quindi $\phi(x)=x-f(x)$ e ottengo
+$$f(x)\iff x-\phi(x)=0\iff \phi(x)=x \quad \text{($x$ punto fisso di $\phi$)}$$
+La scelta di $\phi$ non è unica: mi basta scegliere $\phi(x)=x+F(f(x))$ con $F$ continua e $F(0)=0$ (stessi zeri di $f$)
+\begin{lyxalgorithm}[Metodo di Picard o di punto fisso]
+Presa $\phi\colon\mathbb{R}\rightarrow\mathbb{R}$ cerchiamo $\alpha\in\mathbb{R}$
+tale che $\phi\left(\alpha\right)=\alpha$. Prendo $x_{0}$ fissato
+e $x_{n+1}=\phi\left(x_{n}\right)$
+\end{lyxalgorithm}
+
+\begin{thm}[Teorema delle Contrazioni]
+Presa $\phi\colon\left[a,b\right]\rightarrow\left[a,b\right]$
+continua, essa ha un punto fisso. Se è contrattiva ($\left|\phi\left(x\right)-\phi\left(y\right)\right|\leq L\left|x-y\right|$ $\forall x,y\in[a,b]$
+con $L<1$), tale punto è unico.
+\end{thm}
+
+\begin{proof}
+\noun{Esistenza}\quad{}Prendo $g\left(x\right)=\phi\left(x\right)-x$,
+ho $$\begin{cases}
+    g\left(a\right)\leq0 \quad \text{essendo } \phi(x)\ge a \;\forall x\in[a,b] \text{ quindi } \phi(a)\ge a\\
+    g\left(b\right)\geq0 \quad \text{essendo } \phi(x)\le b \;\forall x\in[a,b] \text{ quindi } \phi(b)\le b
+\end{cases}\implies\text{teorema degli
+zeri}$$ 
+\noun{Unicità}\quad{}Per assurdo $\alpha_{1}$ e $\alpha_{2}$ punti
+fissi distinti, $\left|\alpha_{1}-\alpha_{2}\right|=\left|\phi\left(\alpha_{1}\right)-\phi\left(\alpha_{2}\right)\right|\leq L\left|\alpha_{1}-\alpha_{2}\right|$
+con $L<1$
+\end{proof}
+
+\begin{myboxed}
+\begin{thm}[Teorema di convergenza globale]
+Per il metodo di Picard, se $\phi$ continua e contrattiva allora
+\begin{align*}
+    \lim_{k\to\infty}x_k&=\alpha\quad \forall x_0\in[a,b] \quad \text{convergenza globale}\\
+    \left|x_{k}-\alpha\right|&\leq\frac{L^{k}}{1-L}\left|x_{1}-x_{0}\right| \quad\text{stima a priori dell'errore}\\
+    \left|x_{k}-\alpha\right|&\leq\frac{L}{1-L}\left|x_{k}-x_{k-1}\right| \quad\text{stima a posteriori dell'errore}
+\end{align*}
+\end{thm}
+\end{myboxed}
+
+\begin{proof} \textbf{Convergenza globale}: per ogni $x_k$
+\begin{align*}
+    \abs{x_k-\alpha}&=\abs{\phi(x_{k-1})-\phi(\alpha)} \\
+    &\le \overset{\spadesuit}{\boxed{L\abs{x_{k-1}-\alpha}}}\\
+    &\le [\dots] \text{ ripetere questo procedimento a }\abs{x_{k-1}-\alpha} \\
+    &\le \overset{\heartsuit}{\boxed{L^k\abs{x_0-\alpha}}} \overset{k\to+\infty}{\longrightarrow}0 \quad \text{(essendo $L<1$)}
+\end{align*}
+\textbf{Stima a priori}: 
+\begin{align*}
+    \abs{x_0-\alpha}&\le\abs{x_0-x_1}+\abs{x_1-\alpha}\\
+    &\le \abs{x_0-x_1}+L\abs{x_0-\alpha} \\
+    &\le \frac{\abs{x_0-x_1}}{1-L} \quad \text{ho portato a sx un addendo e poi diviso}
+\end{align*}
+ora sostituire in $\heartsuit$.\\
+\textbf{Stima a posteriori}:
+\begin{align*}
+ \abs{x_{k-1}-\alpha}&\le\abs{x_{k-1}-x_k}+\abs{x_k-\alpha}\\
+    &\le \abs{x_{k-1}-x_k}+L\abs{x_{k-1}-\alpha} \\
+    &\le \frac{\abs{x_{k-1}-x_k}}{1-L} \quad \text{ho portato a sx un addendo e poi diviso}
+\end{align*}
+ora sostituire in $\spadesuit$.
+\end{proof}
+
+\begin{myboxed}
+\begin{cor}[Convergenza globale nei chiusi]
+    Se $\phi$ derivabile con $\abs{\phi'(x)}\le L<1\;\forall x\in[a,b]$, allora $x_k\longrightarrow\alpha\;\forall x_0\in[a,b]$. Ovvero
+    $$\abs{\phi'(x)}<1\;\forall x\in[a,b]\quad (\alpha\in[a,b])\implies \text{convergente in }[a,b]$$
+\end{cor}
+\end{myboxed}
+
+\begin{myboxed}
+\begin{thm}[Teorema di convergenza locale]
+Se $\alpha$ punto fisso di $\phi\in C^{1}\left(J\right)$, $J$
+intorno di $\alpha$
+$$\text{se } \left|\phi^{\prime}\left(\alpha\right)\right|<1\implies
+\exists\delta>0:\quad
+ x_{k}\longrightarrow\alpha\quad \forall\left|x_{0}-\alpha\right|\leq\delta$$ . Vale inoltre che
+$$\lim_{k\rightarrow+\infty}\frac{x_{k+1}-\alpha}{x_{k}-\alpha}=\phi^{\prime}\left(\alpha\right)$$
+\end{thm}
+\end{myboxed}
+
+\begin{proof} \textbf{Convergenza locale}: $\begin{cases}
+    \abs{\phi'\left(\alpha\right)}<1 \\
+    \phi(x) \quad \text{continua}
+\end{cases}\implies\exists\delta>0$ t.c. $\abs{\phi'\left(\alpha\right)}<1\quad \forall x\in [\alpha-\delta,\alpha+\delta]$, quindi $\phi$ è contrazione su $ [\alpha-\delta,\alpha+\delta]$. Dobbiamo verificare che $\phi$ mappa tale intervallo in se stesso: per induzione (no sbatti). Applico teo. convergenza globale a tale int. \\
+ \textbf{Limite}:
+ $$x_{k+1}-\alpha=\phi(x_k)-\phi(\alpha)\overset{\text{teo.Lagr.}}{=}\phi'(\xi_k)(x_k-\alpha)\quad \xi_k\in[\alpha,x_k]$$
+ Abbiamo $\begin{cases}
+     x_k\to\alpha\implies\xi_k\to\alpha\\
+     \phi' \quad\text{continua in intorno di }\alpha
+ \end{cases}\implies\phi'(\xi_k)\to \phi'(\alpha)$ \\
+ Quindi la tesi applicando questo all'ugualianza appena sopra.
+\end{proof}
+
+\begin{rem*}
+    \hl{Se $\abs{\phi'(\alpha)}=1$ non si può dire niente a priori sulla convergenza, se $\abs{\phi'(\alpha)}>1$ non si può avere convergenza}
+\end{rem*}
+
+\begin{myboxed}
+    \begin{prop}
+        Se $\abs{\phi'(\alpha)}>1$ non si può avere convergenza
+    \end{prop}
+\end{myboxed}
+
+\begin{proof}
+$$\abs{x_{k+1}-\alpha}=\abs{\phi(x_k)-\phi(\alpha)}\overset{\text{teo.Lagr.}}{=}\abs{\phi'(\xi_k)(x_k-\alpha)}=\abs{\phi'(\xi_k)}\abs{(x_k-\alpha)}$$
+essendo $\phi'$ continua in un intorno di $\alpha\implies$ per $x_k$ suffic. vicino ho $\phi'(\xi_k)>1\implies\abs{x_{k+1}-\alpha}>\abs{x_{k}-\alpha}\implies$ no convergenza
+\end{proof}
+
+\begin{rem*}[Newton come caso particolare di punto fisso]
+$\phi\left(x\right)=x-\frac{f\left(x\right)}{f^{\prime}\left(x\right)}$,
+punti fissi di $\varphi$ $\leftrightarrow$ zeri di $f$
+\end{rem*}
+
+\begin{myboxed}
+\begin{thm}[Ordine di convergenza di Picard]
+Dato $\alpha\in I\subseteq\mathbb{R}$ punto fisso di $\phi\in C^{p+1}\left(I\right)$
+tale che $\begin{cases}
+    \phi^{(i)}(\alpha)=0 \quad i=1,\ldots,p\\
+     \phi^{(p+1)}(\alpha)\ne0
+\end{cases}$,
+allora il metodo di punto fisso converge localmente con ordine $p+1$
+e vale $$\lim_{k\rightarrow+\infty}\frac{x_{k+1}-\alpha}{\left(x_{k}-\alpha\right)^{p+1}}=\frac{\phi^{\left(p+1\right)}\left(\alpha\right)}{\left(p+1\right)!}$$
+\end{thm}
+\end{myboxed}
+
+\begin{proof}
+Taylor con errore di Lagrange:
+\[
+x_{k+1}-\alpha=\phi\left(x_{k}\right)-\phi\left(\alpha\right)=\bcancel{\sum_{i=1}^{p}\frac{\phi^{\left(i\right)}\left(\alpha\right)}{i!}\left(x_{k}-\alpha\right)^{i}}+\frac{\phi^{\left(p+1\right)}\left(\xi\right)}{\left(p+1\right)!}\left(x_{k}-\alpha\right)^{p+1}
+\]
+quindi si ha la prima tesi dividendo per l'ultimo fattore e la seconda tesi ricordando che $\xi\overset{k\to\infty}{\rightarrow}\alpha$ poiché $x_k\overset{k\to\infty}{\rightarrow}\alpha$ 
+\end{proof}
+
+\begin{rem*}
+    A parità di ordine di convergenza, tanto più piccola è $\phi^{(p+1)}(\alpha)$ tanto più rapida è la convergenza. (devo scegliere bene $\phi$)
+\end{rem*}
+
+\begin{myboxed}
+\begin{prop}[Ordine metodo Newton con punto fisso]
+    Se $\alpha$ radice semplice ha ordine 2, altrimenti 1
+\end{prop}
+\end{myboxed}
+\begin{proof}
+    Se $\alpha$ radice semplice $\phi(x)=x-\frac{f(x)}{f'(x)}$, calcolare $\phi'(x)$ e vedi che $\phi'(\alpha)=0$, poi $\phi''(x)$ e vedi che $\phi''(\alpha)\ne 0$.\\
+    Se $\alpha$ radice multipla scrivo $f(x)=(x-\alpha)^mh(x)$ con $m>1$ molteplicità e $h(\alpha)\ne 0$, rifaccio il procedimento di prima e vedo $\phi'(\alpha)=1-\frac{1}{m}\ne0$
+\end{proof}
+
+\begin{lyxalgorithm}[Metodo di Newton modificato]
+    Se la radice $\alpha$ ha molteplicità $m>1$ voglio trovare un modo per ripristinare l'ordine quadratico. Ho visto che in Newton ho  $\phi'(\alpha)=1-\frac{1}{m}$ quindi se avessi  $\phi'(\alpha)=1-\frac{1}{m}\textcolor{red}{\cdot m}=0$ sarei a posto. Quindi pongo:
+    $$x_{k+1}=x_k-m\frac{f(x)}{f'(x)}$$
+\end{lyxalgorithm}
+
+\begin{rem*}[criteri di arresto] Ponendo $f(\alpha+\delta\alpha)=\delta d$ (residuo) e ricordando
+$$\frac{\abs{\delta\alpha}}{\abs{\delta d}}\approx K_{abs}=\frac{1}{\abs{f'(x)}}\implies\abs{\delta\alpha}\approx\frac{1}{\abs{f'(\alpha)}}\abs{\delta d}$$
+nel caso di metodi iterativi $\alpha+\delta\alpha=x_k$ e $\delta d=f(x_k)$. \\
+Esempi di criteri d'arresto:
+\begin{itemize}
+    \item \textbf{Controllo del residuo}:
+\[
+\boxed{\left|f\left(x_{k}\right)\right|}\leq\varepsilon \qquad\qquad\abs{e_k}=\left|\alpha-x_{k}\right|\leq\frac{1}{\left|f^{\prime}\left(\alpha\right)\right|}\boxed{\left|f\left(x_{k}\right)\right|}\\
+\]
+Vediamo che se $$\begin{cases}
+    \abs{f'(\alpha)}\approx 1 \implies \abs{e_k}\approx\varepsilon \\
+    \abs{f'(\alpha)}\ll 1 \implies \frac{1}{\abs{f'(x)}}\gg 1 \implies \text{test non affidabile}\\
+    \abs{f'(\alpha)}\gg 1 \implies \frac{1}{\abs{f'(x)}}\ll 1 \implies \text{test troppo  restrittivo}\\
+\end{cases}$$
+\item \textbf{Controllo dell'incremento}:
+\[
+\begin{array}{rlll}
+\text{si arresta se} & \boxed{\left|x_{k+1}-x_{k}\right|}\leq\varepsilon & x_{k+1}-x_{k}=e_{k}-e_{k+1} & \left|e_{k}\right|\approx\frac{1}{\left|1-f^{\prime}\left(\alpha\right)\right|}\boxed{\left|x_{k+1}-x_{k}\right|}
+\end{array}
+\]
+\begin{align*}
+    \begin{cases}
+        x_{k+1}-x_k=(x_{k+1}-\alpha)+(\alpha-x_k)=e_k-e_{k+1}\\
+        e_{k+1}=\alpha-x_{k+1}=\phi(\alpha)-\phi(x_{k+1})\overset{\text{Lagr.}}{=}\phi'(\xi_k)(\alpha-x_k)=\phi'(\xi_k)e_k
+    \end{cases}
+\end{align*}
+Allora
+$$x_{k+1}-x_k=e_k-e_{k+1}=e_k-\phi'(\xi_k)e_k=(1-\phi'(\xi_k))e_k$$
+e quindi
+\begin{align*}
+    e_k&=\frac{1}{1-\phi'(\xi_k)}(x_{k+1}-x_k) \quad\text{ dove $\phi'(\xi_k)\approx\phi'(\alpha)$  se $\phi'$ varia poco nell'intorno}\\
+    \abs{e_k}&\approx\frac{1}{\abs{1-\phi'(\alpha)}}\overbrace{\abs{x_{k+1}-x_k}}^{<\varepsilon}
+\end{align*}
+Vediamo che 
+$$\begin{cases}
+    {\phi'(\alpha)}\approx 1 \implies  \text{test non affidabile}\\
+    {\phi'(\alpha)}=0 \implies \text{test è ottimale}\\
+    -1\ge{\phi'(\alpha)}\ge 0 \implies \text{test affidabile}\\
+\end{cases}$$
+\end{itemize}
+\end{rem*}
+\subsubsection{Stabilità del metodo delle iterazioni di punto fisso}
+Vogliamo vedere come si propagano gli errori di arrotondamento dovuti al fatto che non operiamo in aritmetica esatta.
+\begin{thm}[Stabilità del metodo di punto fisso]
+$\tilde{x}_{k+1}=\phi\left(\tilde{x}_{k}\right)+\delta_{k}$, $\phi:\mathbb{R}\rightarrow\mathbb{R}$
+derivabile con derivata $\leq L<1$ e $\left|\delta_{k}\right|\leq\delta$,
+allora 
+\[
+\left|\tilde{x}_{k}-\alpha\right|\leq\frac{\delta}{1-L}+\frac{L^{k}}{1-L}\left|\tilde{x}_{1}-\tilde{x}_{0}\right|
+\]
+\end{thm}
+\begin{proof}
+\todo{P. 18}
+\end{proof}
+
+\subsection{Sistemi non lineari}
+\begin{lyxalgorithm}[Metodo di Newton vettoriale]
+$\boldsymbol{x}_{k+1}=\boldsymbol{x}_{k}-\left[D\phi\left(\boldsymbol{x}_{k}\right)\right]^{-1}\phi\left(\boldsymbol{x}_{k}\right)$
+(con $\det\left(D\phi\right)\neq0$)
+\end{lyxalgorithm}
+
+
+\subsection{Radici di Polinomi}
+\begin{defn}[Formula di Horner]
+$P_{n}\left(x\right)=a_{0}+x\left(a_{1}+x\left(a_{2}+\ldots+x\left(a_{n-q}+a_{n}x\right)\ldots\right)\right)$
+\end{defn}
+
+\begin{defn}[Metodo di deflazione]
+Trovo uno zero, divido con Ruffini, ripeto.
+\end{defn}
+
+\begin{defn}[Funzione Logistica]
+$f_{\lambda}\colon\left[0,1\right]\rightarrow\mathbb{R}\quad x\mapsto\lambda x\left(1-x\right)$
+, con $1\leq\lambda\leq4$ (per avere almeno un punto fisso e $f_{\lambda}\leq1$).
+Il punto fisso $x=\frac{\lambda-1}{\lambda}$ è attrattivo per $1<\lambda<3$
+\end{defn}
+
+
+\pagebreak{}
+
+\section{Approssimazione di funzioni}
+\begin{defn}[Funzione interpolante]
+$p\colon\mathbb{R}\rightarrow\mathbb{R}$ interpola $\left(\overset{\text{nodi}}{x_{i}},\overset{\text{dati}}{y_{i}}\right)$
+se vale $p\left(x_{i}\right)=y_{i}\;\forall\,i$
+\end{defn}
+\paragraph{Tipi di interpolazione}Abbiamo
+\begin{itemize}
+    \item \textbf{polinomiale}: con polinomio
+    \item \textbf{trigonoetrica}: con polinomio trigonometrico
+    \item \textbf{composita (spline)}: è solo localmente un polinomio
+\end{itemize}
+
+\paragraph{A cosa serve}:
+\begin{itemize}
+    \item sostituire $f$ con funzione più semplice da trattare (integrare/derivare)
+    \item trovare funzione polinomiale che descriva dati sperimentali (se sono molti)
+\end{itemize}
+
+
+\subsection{Interpolazione polinomiale di Lagrange}
+Date $n+1$ coppie $\left\{ \left(x_{i},y_{i}\right)\right\} _{i=0,\dots,n}$ si cerca polinomio interpolatore di grado $m$ $\Pi_m(x)\in\mathbb{P}_m$ 
+\begin{itemize}
+    \item $n<m$ problema sottodeterminato
+    \item $n=m$ unicità (vedi sotto)
+    \item $n>m$ problema sovradeterminato (minimi quadrati)
+\end{itemize}
+
+\begin{myboxed}
+\begin{thm}[Lagrange - esistenza e unicità del polinomio interpolatore]
+Date $n+1$ coppie $\left\{ \left(x_{i},y_{i}\right)\right\} _{i=0,\dots,n}$
+esiste un unico polinomio $p$ di grado al più $n$ che le interpola
+\end{thm}
+\end{myboxed}
+
+\begin{proof}
+Dimostrando unicità e esistenza
+
+\emph{Unicità}. Prendo $p,q\in\mathbb{P}_{n}$ interpolanti, $p-q=\omega$
+con $\omega\left(x_{i}\right)=0\quad\forall i=0,\dots,n$, quindi è di grado $n$ con $n+1$ zeri $\overset{\text{th.Fond.Algebra}}{\implies}\omega\equiv0$ e dunque
+$p\equiv q$.
+
+\emph{Esistenza}. Costruzione esplicita di $p$ dalla base di Lagrange $\{l_i\}_{i=0}^n$ e 
+$p\left(x\right)=\sum_{i=0}^{n}l_{i}\left(x\right)\cdot y_{i}$
+\[
+l_{i}\left(x\right)=\frac{\left(x-x_{0}\right)\cdots\left(x-x_{i-1}\right)\left(x-x_{i+1}\right)\cdots\left(x-x_{n}\right)}{\left(x_{i}-x_{0}\right)\cdots\left(x_{i}-x_{i-1}\right)\left(x_{i}-x_{i+1}\right)\cdots\left(x_{i}-x_{n}\right)}=\prod_{\substack{j=0\\
+j\neq i
+}
+}^{n}\frac{x-x_{j}}{x_{i}-x_{j}}
+\]
+Quindi abbiamo $$\begin{cases}
+    l_i(x_i)=1 \\
+    l_i(x_j)=0 
+\end{cases}\implies l_i(x_j)=\delta_{ij}$$
+Dimostriamo che sono linearmente indipendenti: dobbiamo vedere che
+$$q(x)=\sum_{i=0}^na_il_i(x)\equiv 0\implies a_i=0\quad\forall i=0,\dots,n$$
+in effetti questo dovrebbe valere in particolare  per gli $x_j$:
+$$q(x_j)=\sum_{i=0}^na_i\underbrace{l_i(x_j)}_{=\delta_{ij}}= 0\implies a_j=0\quad\forall j=0,\dots,n$$
+Quindi essendo $\{l_i\}_{i=0}^n$ $n+1$ polinomi di grado $n$ linearmente indip. formano una base per $\mathbb{P}_n$. Verificare l'inerpolazione (ovvia).
+\end{proof}
+
+\begin{defn}[Polinomio interpolatore e nodale]
+Polinomio interpolatore $\Pi_{n}f$ di grado al più $n$, Polinomio
+nodale $$\omega_{n+1}\coloneqq\prod_{i=0}^n(x-x_i)$$
+\end{defn}
+
+\begin{rem*}
+    Possiamo riscrivere gli elementi della base di Lagr. in funzione del polinomio nodale:
+    $$l_i(x)=\frac{\omega_{n+1}(x)}{(x-x_i)\omega'_{n+1}(x_i)}$$
+\end{rem*}
+
+\begin{myboxed}
+\begin{thm}[Errore di Lagrange in uno sviluppo di Taylor] Sia $f:(a,b)\to \re $ derivabile $n$ volte in $x_0\in (a,b)$ allora sia $T_n(x)$ il polinomio di Taylor di grado $n$ generato da $f$ con centro $x_0$. Se inoltre $f\in C^{n+1}((a,b))$ allora $\forall x\in(a,b)\;\exists \xi\in[x_0,x]$ t.c.
+$$f(x)-T_n(x)\coloneqq E_n(x)=\frac{f^{\left(n+1\right)}\left(\xi\right)}{\left(n+1\right)!}(x-x_0)^{n+1}\qquad \xi\in[x_0,x]$$
+\end{thm}
+\end{myboxed}
+
+\begin{proof}
+    \noun{Wlog} $x>x_0$ Vogliamo dimostrare
+    $$\frac{g(x)}{w(x)}\coloneqq\frac{\overbrace{f(x)-T_n(x)}^{\coloneqq g(x)}}{\underbrace{(x-x_0)^{n+1}}_{\coloneqq w(x)}}=\frac{f^{\left(n+1\right)}\left(\xi\right)}{\left(n+1\right)!}$$
+    Osserviamo che 
+    $$\begin{cases}
+        g(x_0)=g'(x_0)=\dots=g^{(n)}(x_0)=0\\
+        g^{(n+1)}(x)=f^{(n+1)}(x) \quad (\star)
+    \end{cases}\qquad\qquad \begin{cases}
+        w(x_0)=w'(x_0)=\dots=w^{(n)}(x_0)=0\\
+        w^{(n+1)}(x)=(n+1)! \quad (\star)
+    \end{cases}$$
+    Vediamo che $g(x),w(x)$ soddisfano le ip. del th. di Cauchy in $[x_0,x]$: $\exists\xi_1\in(x_0,x)$ t.c
+    $$\frac{g(x)-\overset{=0}{g(x_0)}}{w(x)-\underset{=0}{w(x_0)}}=\frac{g'(\xi_1)}{w'(\xi_1)}\implies \frac{g(x)}{w(x)}=\frac{g'(\xi_1)}{w'(\xi_1)}$$
+    Vediamo che $g'(x),w'(x)$ soddisfano le ip. del th. di Cauchy in $[x_0,x]$: $\exists\xi_2\in(x_0,x)$ t.c
+    $$\frac{g'(x)-\overset{=0}{g'(x_0)}}{w'(x)-\underset{=0}{w'(x_0)}}=\frac{g''(\xi_2)}{w''(\xi_2)}\implies \frac{g'(x)}{w'(x)}=\frac{g''(\xi_1)}{w''(\xi_1)}$$
+    Procedere così ottenendo una sequenza di $(n+1)$ numeri $\xi_1,\dots,\xi_{n+1}$ t.c. $x_0<\xi_{n+1}<\dots<\xi_1$ e ponendo $\xi\coloneqq\xi_{n+1}$
+    $$\frac{g(x)}{w(x)}=\frac{g'(\xi_1)}{w'(\xi_1)}=\frac{g''(\xi_2)}{w''(\xi_2)}=\dots=\frac{g^{(n+1)}(\xi_{n+1})}{w^{(n+1)}(\xi_{n+1})}\overset{(\star)}{=}\frac{f^{\left(n+1\right)}\left(\xi\right)}{\left(n+1\right)!}$$
+\end{proof}
+
+\begin{myboxed}
+\begin{thm}[Errore di interpolazione di Lagrange]
+\label{thm:errore-lagrange}Sia $x\in \text{Dominio}(f)$, supponiamo  $f\in C^{n+1}(I_x)$, con $I_x$ il più piccolo intervallo che contiene i nodi $\{x_i\}_{i=0}^n$ e il punto $x$. Allora l'errore di interpolazione nel punto $x$ è dato da:
+$$E_{n}\left(x\right)\coloneqq f\left(x\right)-\Pi_{n}f\left(x\right)=\frac{f^{\left(n+1\right)}\left(\xi_x\right)}{\left(n+1\right)!}\omega_{n+1}\left(x\right)\qquad \xi_x\in I_x$$
+\end{thm}
+\end{myboxed}
+
+\begin{proof} La tesi è ovvia per $x=x_i$ per un certo $i=0,\dots,n$. Allora \textbf{fissiamo} $x\ne \{x_i\}_i$ e definisco
+$$G(t)=E_n(t)-\omega_{n+1}(t)\underbrace{\frac{E_n(x)}{\omega_{n+1}(x)}}_{\text{cost.}}\quad\quad t\in I_x$$
+
+Vediamo che $\begin{cases}
+    f\in C^{n+1}(I_x) \\
+    \omega_{n+1}\in\mathbb{P}_{n+1}
+\end{cases}\implies G\in C^{n+1}(I_x)$ e che $G$ si annulla in $n+2$ punti distinti $\{x_i\}_{i=1}^n,\,x$:
+\begin{align*}
+    G(x_i)=\underbrace{E_n(x_i)}_{=0}-\underbrace{\omega_{n+1}(x_i)}_{=0}\frac{E_n(x)}{\omega_{n+1}(x)}=0\\
+    G(x)={E_n(x)}-\cancel{\omega_{n+1}(x)}_{=0}\frac{E_n(x)}{\cancel{\omega_{n+1}(x)}}=0\\
+\end{align*}
+Quindi
+$$\begin{cases}
+    G\in C^{n+1}(I_x) \\
+    n+2\text{ zeri}
+\end{cases}\overset{\text{th.Rolle}}{\implies} G'(t) \text{ ha }n+1 \text{ zeri}\overset{\text{reiterato}}{\implies}G^{(j)}\text{ ha }n+2-j \text{ zeri}\implies G^{(n+1)}\text{ ha zero in }\xi_x$$
+Calcoliamo
+$$G^{(n+1)}(t)=E_n^{(n+1)}(t)-\omega_{n+1}^{(n+1)}(t)\frac{E_n(x)}{\omega_{n+1}(x)}$$
+vediamo che
+$$\begin{cases}
+    E_n^{(n+1)}(t)=f^{(n+1)}(t)-\overbrace{(\Pi_nf)^{(n+1)}(t)}^{=0}= f^{(n+1)}(t) \quad \text{poiché }\Pi_nf\in\mathbb{P}_n\\
+    \omega_{n+1}^{(n+1)}(t)=(n+1)! \quad \text{poiché derivata $(n+1)$ di $p\in\mathbb{P}_{n+1}$ è la derivata del solo termine di grado $n+1$}
+\end{cases}$$
+e quindi
+$$G^{(n+1)}(t)=f^{(n+1)}(t)-(n+1)!\frac{E_n(x)}{\omega_{n+1}(x)}\overset{G^{(n+1)}(\xi_x)=0}{\implies}E_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}\omega_{n+1}(x)$$
+\end{proof}
+
+\begin{defn}[matrice di interpolazione]
+\label{def:matrice-di-interpolazione}$X$ matrice triangolare inferiore
+con $n$-esima riga la $n$-upla di punti di interpolazione all'$n$-esimo
+passaggio (riga $\leftrightarrow$ set di nodi in numero crescente)
+\end{defn}
+
+\begin{defn}[Norma del massimo/infinito] Sia $f\in C^0([a,b])$, allora
+$$\norm{f}_\infty\coloneqq\max_{x\in[a,b]}\abs{f(x)}$$
+\end{defn}
+
+\begin{defn}[Polinomio di miglior approssimazione uniforme] Fissata $f$ e la matrice di interpolazione $X$, indichiamo:
+$$E_{n.\infty}\coloneqq\norm{f-\Pi_nf}_\infty\qquad n=0,1,\ldots \text{ (righe di $X$)}$$
+Allora $p^*_n\in\mathbb{P}_n$ è il polinomio di miglior approssimazione uniforme (ovvero nella norma infinito) se
+$$E^*_n\coloneqq\norm{f-p^*_n}_\infty=\min_{q_n\in\mathbb{P}_n}\norm{f-q_n}_\infty$$
+    Non è detto che $p^*_n$ sia un polinomio interpolatore di $f$
+\end{defn}
+
+\begin{defn}[Operatore di interpolazione]
+    Esso è
+    $$\begin{array}{cccc}
+        \Pi_n: & C^0([a,b]) & \to & \mathbb{P}_n\subset C^0([a,b])  \\
+         & f & \mapsto & \Pi_nf
+    \end{array}$$
+    è lineare e $\Pi_np=p\quad\forall p\in\mathbb{P}_n$. Inoltre
+    $$\norm{\Pi_n}_\infty\coloneqq\sup_{\substack{f\in C^0([a,b]) \\ \norm{f}_\infty=1 }}\norm{\Pi_nf}_\infty$$
+\end{defn}
+
+
+
+\begin{defn}[Costante di Lebesgue]
+Sia $X$ matrice di interpolazione, è 
+$$\Lambda_{n}\left(X\right)=\norm{\sum_{i=0}^{n}\abs{l_{i}(x)
+}}_{\infty}$$
+\end{defn}
+
+\begin{myboxed}
+    \begin{thm}[Significato della costante di Lebesgue]\label{thm-cost-lebesgue} Vale
+$$\Lambda_{n}\left(X\right)=\norm{\Pi_n}_\infty$$
+    \end{thm}
+\end{myboxed}
+
+\begin{proof}
+    Facciamo $\ge$ e poi $\le$.
+    \begin{itemize}
+        \item \underline{$\left\Vert \Pi_{n}\right\Vert _{\infty}\le\left\Vert \sum_{i=0}^{n}\left|l_{i}^{\left(n\right)}\right|\right\Vert _{\infty}$:}
+
+\begin{align*}
+    \left\Vert \Pi_{n}\right\Vert _{\infty}&=\sup_{\substack{f\in C^{0}\left[a,b\right]\\
+\left\Vert f\right\Vert _{\infty}=1
+}
+}\left\Vert \Pi_{n}f\right\Vert _{\infty}\\
+&=\sup_{\substack{f\in C^{0}\left[a,b\right]\\
+\left\Vert f\right\Vert _{\infty}=1
+}
+}\max_{x\in\left[a,b\right]}\left|\Pi_{n}f\left(x\right)\right|\\
+&\leq\sup\max\sum_{i=0}^{n}\overset{\leq\left\Vert f\right\Vert _{\infty}=1}{\overbrace{\left|f\left(x_{i}\right)\right|}}\left|l_{i}^{\left(n\right)}\right|\\
+&\leq\sup\max_{x\in\left[a,b\right]}\sum_{i=0}^{n}\left|l_{i}^{\left(n\right)}\right|=\left\Vert \sum_{i=0}^{n}\left|l_{i}^{\left(n\right)}\right|\right\Vert _{\infty}
+\end{align*}
+
+
+        
+        \item \underline{$\left\Vert \Pi_{n}\right\Vert _{\infty}\ge\left\Vert \sum_{i=0}^{n}\left|l_{i}^{\left(n\right)}\right|\right\Vert _{\infty}$:} dimostrando che esiste $\substack{\overline{f}\in C^{0}\left[a,b\right]\\
+\left\Vert \overline{f}\right\Vert _{\infty}=1
+}
+$, tale che $\left\Vert \Pi_{n}\overline{f}\right\Vert _{\infty}\geq\left\Vert \sum_{i=0}^{n}\left|l_{i}^{\left(n\right)}\right|\right\Vert _{\infty}$.
+Presi
+$$\begin{cases}
+    \overline{x} \text{ t.c. }\left\Vert \sum_{i=0}^{n}\left|l_{i}^{\left(n\right)}\right|\right\Vert _{\infty}=\sum_{i=0}^{n}\left|l_{i}^{\left(n\right)}\left(\overline{x}\right)\right|_{\infty}\\
+\overline{f}=\sign\left(l_{i}^{\left(n\right)}\left(\overline{x}\right)\right)
+\end{cases}$$
+abbiamo
+\begin{align*}
+\left\Vert \Pi_{n}\overline{f}\right\Vert _{\infty} &=\max_{x\in\left[a,b\right]}\left|\Pi_{n}\overline{f}\left(x\right)\right|\\
+&\geq\left|\Pi_{n}\overline{f}\left(\overline{x}\right)\right|\\
+&=\left|\sum_{i=0}^{n}\overline{f}\left(x_{i}\right)l_{i}^{\left(n\right)}\left(\overline{x}\right)\right|\\
+&=\left|\sum_{i=0}^{n}\sign\left(l_{i}^{\left(n\right)}\left(\overline{x}\right)\right)l_{i}^{\left(n\right)}\left(\overline{x}\right)\right|\\
+&=\sum_{i=0}^{n}\sign\left(l_{i}^{\left(n\right)}\left(\overline{x}\right)\right)l_{i}^{\left(n\right)}\left(\overline{x}\right)\\
+&=\sum_{i=0}^{n}\left|l_{i}^{\left(n\right)}\left(\overline{x}\right)\right|=\max_{x\in\left[a,b\right]}\sum_{i=0}^{n}\left|l_{i}^{\left(n\right)}\right|=\left\Vert \sum_{i=0}^{n}\left|l_{i}^{\left(n\right)}\right|\right\Vert _{\infty}
+\end{align*}
+    \end{itemize}
+\end{proof}
+
+\begin{myboxed}
+\begin{cor}
+Vale che $$E_{n,\infty}\leq\left(1+\Lambda_{n}\left(X\right)\right)E_n^*$$
+\end{cor}
+\end{myboxed}
+
+\begin{proof}(Lunga, p. 37)
+\[
+E_{n,\infty}\coloneqq\left\Vert f-\Pi_{n}f\right\Vert _{\infty}\leq\left\Vert f-p_{n}^{*}\right\Vert _{\infty}+\overset{\Pi_{n}\left(p_{n}^{*}-f\right)}{\left\Vert \overbrace{p_{n}^{*}-\Pi_{n}f}\right\Vert _{\infty}}\leq\left(1+\left\Vert \Pi_{n}\right\Vert _{\infty}\right)\left\Vert f-p_{n}^{*}\right\Vert _{\infty}
+\]
+con $\left\Vert \Pi_{n}\right\Vert _{\infty}\coloneqq\sup_{\substack{f\in C^{0}\left[a,b\right]\\
+\left\Vert f\right\Vert _{\infty}=1
+}
+}\left\Vert \Pi_{n}f\right\Vert _{\infty}$, poi applico \nameref{thm-cost-lebesgue}.
+\end{proof}
+
+\begin{rem*} Abbiamo
+\begin{itemize}
+    \item L'effetto della scelta dei nodi  d'interpolazione su $E_{n,\infty}(x)$ dipende dal valore della costante di Lebesgue
+    \item Si ha che $\exists X^*$ matrice d'interpolazione che minimizza la costante di Lebesgue, ma in generale non è possibile determinare esplicitamente gli elementi
+    \item $\forall$ matrice di interpolazione $X$ $\exists C>0$ tale che
+    \begin{align*}
+        &\Lambda_{n}\left(X\right)\geq\frac{2}{\pi}\log\left(n+1\right)-C\\
+        \implies &\Lambda_{n}\overset{n\to+\infty}{\longrightarrow}+\infty
+    \end{align*}
+    \item  $\forall$ matrice di interpolazione $X$ su $[a,b]$ $\exists f\in C^0([a,b])$ t.c. $\Pi_nf$ \textbf{non converge uniformemente} a $f\implies$ \hl{non è possibile approssimare con l'interpolazione polinomiale tutte le funzioni continue} (v. controesempio di Runge)
+\end{itemize}
+
+\end{rem*}
+
+\begin{example*}[Fenomeno di Runge]
+Interpolando su $\left[-5,5\right]$ con nodi equispaziati $f\left(x\right)=\frac{1}{1+x^{2}}$,
+vale che $\lim_{n\rightarrow+\infty}\left|f-\Pi_{n}f\right|=+\infty$
+per $\left|x\right|>3.63$
+\end{example*}
+\begin{defn}[nodi di Chebyshev]  (per  far funzionare meglio le cose)
+\label{def:nodi-di-chebyshev}$x_{i}=\cos\left(\frac{2i-1}{2n}\pi\right)$
+oppure $x_{i}=\cos\left(\frac{i}{n}\pi\right)$
+\end{defn}
+
+\begin{rem*}
+Per i nodi equispaziati vale $\Lambda_{n}\left(X\right)=\frac{2^{n+1}}{e\cdot n\cdot\log n}$,
+mentre i \nameref{def:nodi-di-chebyshev} minimizzano $\Lambda_{n}\left(X\right)=O\left(\log\left(n\right)\right)$,
+e vale che $\lim_{n\rightarrow+\infty}\left|f-\Pi_{n}f\right|=0$
+\end{rem*}
+
+\begin{myboxed}
+\begin{thm}[Stabilità di $\Pi_n$]
+Per quanto riguarda la stabilità dell'operatore $\Pi_n$, vale che $$\left\Vert \Pi_{n}f-\Pi_{n}\tilde{f}\right\Vert _{\infty}\leq\Lambda_{n}\left(X\right)\left\Vert f-\tilde{f}\right\Vert _{\infty}$$
+dove
+\begin{itemize}
+    \item $\left\Vert f-\tilde{f}\right\Vert _{\infty}$ è la massima perturbazione sui dati
+    \item $\Lambda_{n}\left(X\right)$ è il coefficiente di amplificazione delle perturbazioni sui dati
+\end{itemize}
+quindi la perturbazione massima è controllata da $\Lambda_{n}\left(X\right)$
+\end{thm}
+\end{myboxed}
+
+\begin{proof} Siano $\tilde{f}(x_i)$ approssimazioni dei valori $f(x_i)\;\forall i=0,\dots,n$
+\begin{align*}
+\left\Vert \Pi_{n}f-\Pi_{n}\tilde{f}\right\Vert _{\infty} & =\max_{x\in\left[a,b\right]}\left|\sum_{i=0}^{n}\left(f\left(x_{i}\right)-\tilde{f}\left(x_{i}\right)\right)l_{i}^{\left(n\right)}\left(x\right)\right|\leq\max_{x\in\left[a,b\right]}\sum_{i=0}^{n}\left|f\left(x_{i}\right)-\tilde{f}\left(x_{i}\right)\right|\left|l_{i}^{\left(n\right)}\left(x\right)\right|=\\
+ & \leq\max_{i=0,\ldots,n}\left|f\left(x_{i}\right)-\tilde{f}\left(x_{i}\right)\right|\underset{\Lambda_{n}\left(X\right)}{\underbrace{\max_{x\in\left[a,b\right]}\sum_{i=0}^{n}\left|l_{i}^{\left(n\right)}\left(x\right)\right|}}\leq\Lambda_{n}\left(X\right)\max_{i=0,\ldots,n}\left|f\left(x_{i}\right)-\tilde{f}\left(x_{i}\right)\right|
+\end{align*}
+\end{proof}
+
+\begin{rem*}
+    Abbiamo
+    \begin{itemize}
+        \item A piccole perturbazioni sui dati corrispondono piccole variazioni sul polinomio interpolatore purché $\Lambda_{n}\left(X\right)$ sia piccola
+        \item \hl{$\Lambda_{n}\left(X\right)$ fornisce il \textbf{numero di condizionamento}} del problema dell'interpolazione polinomiale
+        \item per $n$ grande l'iterpolazione polin. sui nodi equispaziati può essere instabile
+    \end{itemize}
+\end{rem*}
+
+\begin{prop}
+    $\Lambda_{n}\left(X\right)\ge 1$
+\end{prop}
+
+\begin{proof}
+    Abbiamo
+    $$\Pi_n1=1=\sum_{j=0}^n1\cdot l_j(x)\implies\sum_{j=0}^nl_j(x)=1$$
+    Quindi
+    $$1=\norm{1}_\infty=\norm{\sum_{j=0}^nl_j(x)}_\infty=\max_{[a,b]}\abs{\sum_{j=0}^nl_j(x)}\le \max_{[a,b]}\sum_{j=0}^n\abs{l_j(x)}=\norm{\sum_{j=0}^n\abs{l_j(x)}}_\infty=\Lambda_n$$
+\end{proof}
+
+\subsection{Forma di Newton del polinomio interpolatore}
+\paragraph{Impostazione} Date $\{(x_i,y_i)\}_{i=0}^n$ vogliamo scrivere il polinomio interpolatore come
+$$\Pi_{n}f=\Pi_{n-1}f+q_{n} \quad \text{ con }\begin{cases}
+    \Pi_{n-1}f \text{ interpolatore su } \{(x_i,y_i)\}_{i=0}^{n-1}\\
+    q_{n}\left(x_{i}\right)=0 \text{ per }
+x_{i}=0,\dots,n-1
+\end{cases}$$
+Dovendo essere $q_n$ di grado $n$ con $n$ zeri deve essere per forza
+$$q_n(x)=\Pi_{n}f-\Pi_{n-1}f=a_n\underbrace{(x-x_0)(x-x_1)\dots(x-x_{n-1})}_{=\omega_n}\quad \text{ con }\begin{cases}
+    a_n\in\re\\
+    \omega_n \text{ polinomio nodale $n$-esimo}
+\end{cases}$$
+quindi
+$$\boxed{q_n(x)=a_{n}\cdot\omega_{n}\left(x\right) }$$
+Un modo comodo per trovare $a_n$ è valutarlo in $x_n$ (impongo \textcolor{red}{$\Pi_{n}f(x_n)$ interpolatore}):
+$$a_n=\frac{q_n(x_n)}{w_n(x_n)}=\frac{\textcolor{red}{\Pi_{n}f(x_n)}-\Pi_{n-1}f(x_n)}{w_n(x_n)}=\frac{\textcolor{red}{f\left(x_{n}\right)}-\Pi_{n-1}f\left(x_{n}\right)}{\omega_{n}\left(x_{n}\right)}\eqqcolon f\left[x_{0},\dots,x_{n}\right]$$
+
+\begin{defn}[$n$-esima differenza divisa] Dall'impostazione precedente è
+$$f\left[x_{0},\dots,x_{n}\right]\coloneqq\frac{f\left(x_{n}\right)-\Pi_{n-1}f\left(x_{n}\right)}{\omega_{n}\left(x_{n}\right)}=a_n $$
+\end{defn}
+
+\begin{defn}[Rappresentazione di Newton] Se poniamo $f[x_0]=f(x_0)$ e $\omega_0(x)\equiv 1$ otteniamo per ricorsione
+\begin{equation}
+{\Pi_{n}f=\sum_{j=0}^{n}f\left[x_{0},\dots,x_{j}\right]\omega_{j}\left(x\right)}\label{eq:interpolazione-newton}
+\end{equation}
+\end{defn}
+
+\begin{rem*}
+    Notiamo che $${\Pi_{n}f=\sum_{j=0}^{n}f\left[x_{0},\dots,x_{j}\right]\omega_{j}\left(x\right)}=\sum_{j=0}^{n}f\left(x_{j}\right)l_{j}^{\left(n\right)}\left(x\right)=\sum_{j=0}^{n}\overset{=l_j}{\boxed{\frac{\omega_{n+1}\left(x\right)}{\left(x-x_{j}\right)\omega_{n+1}^{\prime}\left(x_{j}\right)}}}f\left(x_{j}\right)=\omega_{n+1}\left(x\right)\sum_{j=0}^{n}\frac{f\left(x_{j}\right)}{\left(x-x_{j}\right)\omega_{n+1}^{\prime}\left(x_{j}\right)}$$
+    e quindi uguagliando i coefficienti di $\omega_n$ (facendo attenzione alla semplificazione a destra $\nicefrac{\omega_{n+1}}{(x-x_n)}=\omega_n$):
+    $$f\left[x_{0},\dots,x_{\textcolor{red}{n}}\right]=\sum_{j=0}^{n}\frac{f\left(x_{j}\right)}{\omega_{n+1}^{\prime}\left(x_{j}\right)}$$
+\end{rem*}
+
+\begin{thm}
+Vale che $$f\left[x_{0},\dots,x_{n}\right]=\frac{f\left[x_{1},\dots,x_{n}\right]-f\left[x_{0},\dots,x_{n-1}\right]}{x_{n}-x_{0}}$$
+\end{thm}
+
+\begin{proof} (LUNGA, p. 47)
+Uguagliando i coefficienti di $x^{n}$ di \nameref{eq:interpolazione-newton}
+si ha $f\left[x_{0},\dots,x_{n}\right]=\sum_{j=0}^{n}\frac{f\left(x_{j}\right)}{\omega_{n+1}^{\prime}\left(x_{j}\right)}$,
+da cui 
+\begin{align*}
+\frac{f\left[x_{1},\dots,x_{n}\right]-f\left[x_{0},\dots,x_{n-1}\right]}{x_{n}-x_{0}} & =\frac{\sum_{j=1}^{n}\frac{f\left(x_{j}\right)}{\omega_{n+}^{\prime}\left(x_{j}\right)}-\sum_{j=0}^{n-1}\frac{f\left(x_{j}\right)}{\omega_{n-}^{\prime}\left(x_{j}\right)}}{x_{n}-x_{0}}\\
+ & =\frac{\frac{f\left(x_{n}\right)}{\omega_{n+}^{\prime}\left(x_{n}\right)}+\sum_{j=1}^{n-1}f\left(x_{j}\right)\left(\frac{1}{\omega_{n+}^{\prime}\left(x_{j}\right)}-\frac{1}{\omega_{n-}^{\prime}\left(x_{j}\right)}\right)-\frac{f\left(x_{0}\right)}{\omega_{n-}^{\prime}\left(x_{0}\right)}}{x_{n}-x_{0}}\\
+ & =\frac{\frac{f\left(x_{n}\right)\left(x_{n}-x_{0}\right)}{\omega_{n+}^{\prime}\left(x_{n}\right)}+\sum_{j=1}^{n-1}f\left(x_{j}\right)\frac{x_{n}-x_{0}}{\omega_{n+1}^{\prime}\left(x_{j}\right)}-\frac{f\left(x_{0}\right)\left(x_{n}-x_{0}\right)}{\omega_{n-}^{\prime}\left(x_{0}\right)}}{x_{n}-x_{0}}=f\left[x_{0},\dots,x_{n}\right]
+\end{align*}
+\end{proof}
+
+\begin{rem*}[Costo computazionale]
+\todo{p. 50}
+\end{rem*}
+\begin{prop}[Errore di interpolazione con le differenze] 
+    
+\end{prop}
+
+\subsection{Interpolazione composita di Lagrange (polinomiale a tratti)}
+\paragraph{Impostazione}  Dato che in generale con nodi equispaziati $\Pi_nf$ non converge uniformemente a $f$ per $n\to\infty$ allora, dato intervallo $[a,b]$
+\begin{itemize}
+\item Divido $[a,b]$ in $N$ sottointervalli $I_j=[x_j,x_{j+1}]$ con $j=0,\dots, N-1$ di ampiezza $h_j$ e sia $h\coloneqq \max h_j$.
+\item Uso interpolazione di Lagr. su ogni sottointervallo: ognuno lo divido in $k+1$ nodi equispaziati ($k$ grado del polin.)
+\end{itemize}
+\begin{defn}[Spazio dei polinomi a tratti di grado $k$]
+    esso è 
+    $$X_h^k=\{v\in C^0([a,b]): v|_{I_j}\in\mathbb{P}_k(I_j)\quad\forall j=0,\dots, N-1\}$$
+\end{defn}
+
+\begin{defn}[Polinomio interpolatore composito]
+    è $\Pi_h^k\in X_h^k$ ovvero
+    $$\left(\Pi_h^kf\right)|_{I_j}=\Pi_h^k\left(f|_{I_j}\right)$$
+\end{defn}
+
+\begin{example*}[Interpolazione lineare a tratti]
+    
+\end{example*}
+
+\begin{prop}[Errore] In generale vale:
+    $$\boxed{\norm{f-\Pi_h^kf}_\infty\le Ch^{k+1}\norm{f^{(k+1)}}_\infty}$$
+    in particolare, per l'interpolazione lineare a tratti ($k=1$) vale $C=\nicefrac{1}{8}$, ovvero
+    $$\norm{f-\Pi_h^1f}_\infty\le \frac{1}{8}h^2\norm{f''}_\infty$$
+\end{prop}
+\begin{proof}
+    \todo{p. 53}
+\end{proof}
+
+\begin{rem*}
+    Se $h\to 0$ allora converge sempre uniformemente.
+\end{rem*}
+
+\subsection{Funzioni spline}
+Siano $x_0,\dots,x_n$ $n+1$ nodi distinti in $[a,b]$ t.c. $\boxed{a=x_0}<x_1<\dots<\boxed{x_n=b}$
+\begin{defn}[Spline]
+$s_k\colon\left[a,b\right]\rightarrow\mathbb{R}$ si dice spline di
+grado $k\geq1$ se $s_k\vert_{\left[x_{i},x_{i+1}\right]}\in \mathbb{P}_{k}$
+e $s_k\in C^{k-1}\left(\left[a,b\right]\right)$
+\end{defn}
+
+\begin{rem*}[Gradi di libertà] Abbiamo
+\begin{itemize}
+    \item $s_k\vert_{\left[x_{i},x_{i+1}\right]}\in \mathbb{P}_{k}\implies$ [coeff. per ogni $I_j$] $\cdot$ [numero di intervalli] = $(k+1)n$ coefficienti 
+    
+\item $s_k\in C^{k-1}\left(\left[a,b\right]\right)\implies $ [$k$ condizioni di continuità]  $\cdot$ [numero di nodi interni] = $k(n-1)$
+\end{itemize}
+Quindi [gradi  di libertà]-[restrizioni]= $(k+1)n-k(n-1)=\boxed{n+k}$ gradi di libertà
+\begin{itemize}
+    \item Interpolatoria: $s_k(x_i)=f(x_i)\quad i=0,\dots, n \implies$ [condizioni di interpolazione] = $n+1$ 
+\end{itemize}
+In totale $n+k-(n+1)=\boxed{k-1}$ gradi di libertà.
+\end{rem*}
+
+\begin{defn}[Spline periodiche e naturali]  
+Dato che le spline interpolatorie hanno $k-1$ gradi di libertà, posso
+imporre $k-1$ condizioni aggiuntive ai bordi:
+\begin{align*}
+\textsc{Spline Periodiche } & s_k^{(m)}(a)=s_k^{(m)}(b)\quad \forall m=1,\dots,k-1\\
+\textsc{Spline Naturali } & s_k^{(l+j)}(a)=s_k^{(l+j)}(b)=0\quad \forall j=0,\dots,l-2 \quad \text{con } k=2l-1,\;l\ge 1 \quad \text{$k$ dispari}
+\end{align*}
+\end{defn}
+
+\begin{example*}[spline cubiche] per $k=3$ le condizioni diventano
+  \begin{align*}
+\textsc{Spline Periodiche } & s^{\prime}\left(x_{0}\right)=f^{\prime}\left(x_{0}\right),s^{\prime}\left(x_{n}\right)=f^{\prime}\left(x_{n}\right) \\
+\textsc{Spline Naturali } & s^{\prime\prime}\left(x_{0}\right)=s^{\prime\prime}\left(x_{n}\right)=0
+\end{align*}
+
+\end{example*}
+
+\subsubsection{Spline di grado 1 ($k=1$)}
+\textbf{Stima dell'errore}:
+$$\boxed{\norm{f-\Pi_h^1f}_\infty\le \frac{M}{8}h^2}\qquad \text{con }M: \abs{f''(x)}\le M \;\forall x\in[a,b] \qquad \text{e }h=\max_{i=1\dots n}h_i$$
+\subsubsection{Spline di grado 3 ($k=3$)}
+\todo{Parte grossa da p. 59 a 63}
+
+\begin{myboxed}
+\begin{thm}[Proprietà di minimo dell'energia]
+$s$ spline cubica naturale o vincolata, vale che $$\int_{x_{0}}^{x_{n}}\left(s^{\prime\prime}\left(x\right)\right)^{2}dx\leq\int_{x_{0}}^{x_{n}}\left(g^{\prime\prime}\left(x\right)\right)^{2}dx$$
+$\forall\,g\in C^{k-1}\left(\left[x_{0},x_{n}\right]\right)$ che
+allo stesso modo interpola i punti e ha le stesse condizioni in $x_{0}$
+e $x_{n}$
+\end{thm}
+\end{myboxed}
+
+\begin{proof} Ricordando $(\alpha-\beta)^2=\alpha^2+\beta^2-2\alpha\beta=\alpha^2-\beta^2+2\beta^2-2\alpha\beta=\alpha^2-\beta^2-2\beta(\alpha-\beta)$, quindi ponendo $\alpha=g''$ e $\beta=s''$
+\begin{align*}
+0\leq\int_{x_{0}}^{x_{n}}\left(\left(g\left(x\right)-s\left(x\right)\right)^{\prime\prime}\right)^{2}dx & =\int_{x_{0}}^{x_{n}}\left(g^{\prime\prime}\left(x\right)\right)^{2}dx-\int_{x_{0}}^{x_{n}}\left(g^{\prime\prime}\left(x\right)\right)^{2}dx-\overset{\text{voglio dimostrare }=0}{\boxed{2\int_{x_{0}}^{x_{n}}s^{\prime\prime}\left(x\right)\left(g^{\prime\prime}\left(x\right)-s^{\prime\prime}\left(x\right)\right)dx}}
+\end{align*}
+Vediamo che 
+\begin{itemize}
+    \item[(I)] $\left[s''(g'-s')\right]'=s^{(3)}(g'-s')+s''(g''-s'')\overset{\text{teo.Fond.Int.}}{\implies} \left[s''(g'-s')\right]_{x_k}^{x_{k+1}}=\textcolor{blue}{\int s^{(3)}(g'-s')}+\textcolor{red}{\int s''(g''-s'')}$
+     \item[(II)] $\left[s^{(3)}(g-s)\right]'=s^{(4)}(g-s)+s^{(3)}(g'-s')\overset{\text{teo.Fond.Int.}}{\implies} \left[s^{(3)}(g-s)\right]_{x_k}^{x_{k+1}}=\int s^{(4)}(g-s)+\textcolor{blue}{\int s^{(3)}(g'-s')}$
+\end{itemize}
+$$\implies\textcolor{red}{\int_{x_{k}}^{x_{k+1}}s^{\prime\prime}\left(g^{\prime\prime}-s^{\prime\prime}\right)dx}= \left[s''(g'-s')\right]_{x_k}^{x_{k+1}}-\left[s^{(3)}(g-s)\right]_{x_k}^{x_{k+1}}+\int s^{(4)}(g-s)$$
+\begin{align*}
+\int_{x_{0}}^{x_{n}}s^{\prime\prime}\left(x\right)\left(g^{\prime\prime}\left(x\right)-s^{\prime\prime}\left(x\right)\right)dx &=\sum_{k=0}^{n-1}\textcolor{red}{\int_{x_{k}}^{x_{k+1}}s^{\prime\prime}\left(g^{\prime\prime}-s^{\prime\prime}\right)dx}\\
+&=\sum_{k=0}^{n-1} {{\left[s^{\prime\prime}\left(g^{\prime}-s^{\prime}\right)\right]_{x_{k}}^{x_{k+1}}}}-{{\sum_{k=0}^{n-1}\left[s^{(3)}(g-s)\right]_{x_k}^{x_{k+1}}+\sum_{k=0}^{n-1}\left[\int_{x_{k}}^{x_{k+1}}s^{(4)}(g-s)\right]}} \qquad \text{ per (I-II)} \\
+&=\overset{\clubsuit}{\overbrace{\left[s^{\prime\prime}\left(g^{\prime}-s^{\prime}\right)\right]_{x_{0}}^{x_{n}}}}-\overbrace{{{\left[s^{(3)}(g-s)\right]_{x_0}^{x_{n}}+\sum_{k=0}^{n-1}\left[\int_{x_{k}}^{x_{k+1}}s^{(4)}(g-s)\right]}}}^{\spadesuit} \quad \text{i nodi interni si canc.} \\
+&=0
+\end{align*}
+
+\begin{align*}
+\clubsuit & =s^{\prime\prime}\left(x_{n}\right)\left(g^{\prime}\left(x_{n}\right)-s^{\prime}\left(x_{n}\right)\right)-s^{\prime\prime}\left(x_{0}\right)\left(g^{\prime}\left(x_{0}\right)-s^{\prime}\left(x_{0}\right)\right)=0\quad\text{per le condizioni in \ensuremath{x_{0}} e \ensuremath{x_{n}}}\\
+\spadesuit & =\sum_{k=0}^{n-1}\left(\left[s^{(3)}\left(g-s\right)\right]_{x_{k}}^{x_{k+1}}-\int_{x_{k}}^{x_{k+1}}s^{(4)}\left(g-s\right)dx\right)=0\quad\text{perché \ensuremath{\begin{cases}
+g\left(x_{i}\right)=s\left(x_{i}\right)\\
+s^{(4)}\left(x\right)\equiv0
+\end{cases}}}
+\end{align*}
+\end{proof}
+
+\begin{rem*}
+    Quindi tra tutte le funzioni $C^2([a,b])$ che interpolano $g$ nei nodi $a=x_0<x_1<\dots<x_n=b$, \hl{la pline cubica naturale è quella che minimizza la curvatura, ovvero che oscilla di meno}.
+\end{rem*}
+
+\begin{prop}[Proprietà d'approssimazione]
+    p. 65
+\end{prop}
+
+\subsection{Interpolazione in più variabili}
+
+Cerco una base di Lagrange per i nodi su cui voglio interpolare per
+avere l'unisolvenza. Di solito interpolo sui triangoli per i polinomi
+generici o sui quadrati per i polinomi omogenei
+
+\subsection{Interpolazione astratta}
+\begin{defn}[Interpolazione in senso astratto]
+Prendo un $\mathbb{R}$-spazio vettoriale $V$ (può essere di funzioni, come $\mathbb{P}$) di base $\left\{ \varphi_{1},\ldots,\varphi_{n}\right\} $
+e con una base del duale $\left\langle \mathscr{L}_{1},\ldots,\mathscr{L}_{n}\right\rangle =V^{*}$
+con $$\mathscr{L}_{i}:V\to\re$$ detti gradi di libertà o \textbf{funzionali lineari} (funzionali perché possono prendere in pancia funzioni, come la valutazione della funzione di input in un punto). $v\in V$ interpola in
+senso astratto $\left(y_{1},\ldots,y_{n}\right)\in \re^n$ se $$\mathscr{L}_{i}\left(v\right)=y_{i}\quad \forall i=1,\ldots,n$$
+\end{defn}
+
+\begin{defn}[Unisolvenza]
+Un sistema di gradi di libertà è unisolvente se $\forall\left(y_{1},\ldots,y_{n}\right)$
+esiste unico $v\in V$ che li interpola.
+\end{defn}
+
+\begin{defn}[Matrice di Haar]
+$\left(H\right)_{ij}=\mathscr{L}_{i}\left(\varphi_{j}\right)$, $H=\begin{pmatrix}\mathscr{L}_{1}\left(\varphi_{1}\right) & \cdots & \mathscr{L}_{1}\left(\varphi_{n}\right)\\
+\vdots & \ddots & \vdots\\
+\mathscr{L}_{n}\left(\varphi_{1}\right) & \cdots & \mathscr{L}_{n}\left(\varphi_{n}\right)
+\end{pmatrix}$
+\end{defn}
+
+\begin{thm}
+Un sistema di gradi di libertà è unisolvente $\Longleftrightarrow$
+$\det\left(H\right)\neq0$, ovvero i funzionali sono linearmente indipendenti.
+\end{thm}
+
+\begin{proof}
+    p. 67
+\end{proof}
+
+\begin{example*}[Interpolazione polinomiale]
+    
+\end{example*}
+
+
+\subsection{Interpolazione nel senso dei minimi quadrati}
+\begin{defn}[Prodotto scalare e norma $L^{2}$ (euclidea)]
+Per $f,g$ funzioni $\left[a,b\right]\rightarrow\mathbb{R}$, ho
+\begin{align*}
+\left(f,g\right) & =\int_{a}^{b}f\left(x\right)g\left(x\right)dx & \left\Vert f\right\Vert _{L^{2}} & =\sqrt{\int_{a}^{b}\abs{f(x)}^2dx}=\sqrt{(f,f)}
+\end{align*}
+Mentre per il caso \textbf{discreto}: $f(x_i)$ con $i=0,\dots,n$
+\begin{align*}
+\left(f,g\right) & =\sum_{i=0}^nf\left(x_i\right)g\left(x_i\right) & \left\Vert f\right\Vert _{L^{2}} & =\sqrt{\sum_{i=0}^n\abs{f(x_i)}^2}=\sqrt{(f,f)}
+\end{align*}
+\end{defn}
+
+\begin{defn}[Funzioni ortogonali]
+    p. 70
+\end{defn}
+
+\begin{defn}[Sistema ortonogonale/ortonormale]
+    
+\end{defn}
+
+\begin{prop}
+    
+\end{prop}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{cor}
+    
+\end{cor}
+
+\begin{proof}
+    
+\end{proof}
+
+
+
+\begin{myboxed}
+    \begin{thm}[di miglior approssimazione nel senso dei minimi quadrati - caso continuo]
+        Siano $f\in C^0([a,b])$, $\{\phi_0,\ldots,\phi_n\}$ linearmente indipendenti, $\phi_i\in C^0([a,b])$. Allora 
+        $$\exists!g_n^*\in U\coloneqq \text{span}\{\phi_0,\ldots,\phi_n\} \text{ t.c }\norm{f-g_n^*}_2=\min_{g_n\in U}\norm{f-g_n}_2$$
+        Inoltre $g_n^*$ risolve il seguente sistema lineare
+        $$(f-g_n^*,\phi_k)=0\quad \forall k=0,\ldots,n\quad\text{\textbf{equazioni normali}}$$
+        dove $(\cdot,\cdot)$ è il prodotto scalare sopra definito.
+    \end{thm}
+\end{myboxed}
+
+\begin{proof}
+    Abbiamo
+    $$\begin{cases}
+        g^*_n\in U=\text{span}\{\phi_0,\ldots,\phi_n\}\implies  g^*_n=\sum_{j=0}^n c^*_j\phi_j \\
+        (f- g^*_n,\phi_k)=0\overset{\text{lin.}}{\implies} (g^*_n,\phi_k)=(f,\phi_k)
+    \end{cases}\implies \sum_{j=0}^nc^*_j\overset{\text{noti}}{(\phi_j,\phi_k)}=\overset{\text{noti}}{(f,\phi_k)}\quad \forall k=0,\dots, n \quad \text{Sist. lin.}$$
+    \begin{itemize}
+        \item \noun{Esistenza/unicità}: i coefficienti $c^*_j$ sono soluzione di tale sistema lineare. Essendo la matrice $(\phi_j,\phi_k)_{jk}$ quadrata mi basta dimostrare che è non singolare (invertibile) e ho sia la suriettività (\textbf{esistenza della sol.}) che l'inniettività (\textbf{unicità della sol.}).\\
+    Se \textbf{per assurdo fosse singolare}, il sistema omogeneo ammetterebbe soluzione non nulla ($\ker\ne0$), ovvero:
+    $$\exists \;c_0,\dots,c_n\text{ non tutti nulli }\mid \sum_{j=0}^nc_j(\phi_j,\phi_k)=0 \quad \forall k=0,\dots, n$$
+    e quindi
+    \begin{align*}
+\norm{\sum_{j=0}^nc_j\phi_j}_2^2=\left(\sum_{k=0}^nc_k\phi_k,\sum_{j=0}^nc_j\phi_j\right)=\sum_{k=0}^nc_k\underbrace{\left(\sum_{j=0}^nc_j(\phi_k,\phi_j)\right)}_{=0}=0\overset{\text{norma}}{\implies}\sum_{j=0}^nc_j\phi_j=0 \quad\text{\lightning}
+\text{ essendo $\{\phi_j\}$ l.i.}
+    \end{align*}
+    \item \noun{Proprietà di minimo}: dimostriamo che $\forall g_n=\sum_{j=0}^nc_j\phi_j$ con $c_j\ne c_j^*$ per almeno un indice $j$ è tale che $\norm{f-g_n}_2\ge\norm{f-g_n^*}_2$. Abbiamo
+    $$\begin{cases}
+        f-g_n=f-g_n^*+\overbrace{\sum_{j=0}^nc_j^*\phi_j}^{g_n^*}-\overbrace{\sum_{j=0}^nc_j\phi_j}^{g_n}=f-g_n^*+\sum_{j=0}^n(c_j^*-c_j)\phi_j \\
+        (f-g_n^*, \; \sum_{j=0}^n(c_j^*-c_j)\phi_j)=\sum_{j=0}^n(c_j^*-c_j)\underbrace{(f-g_n^*, \; \phi_j)}_{=0}=0
+    \end{cases}$$
+    e quindi
+    $$\norm{f-g_n}_2^2=(f-g_n,\;f-g_n)=\norm{f-g^*_n}_2^2+\underbrace{\norm{\sum_{j=0}^n(c_j+c_j^*)\phi_j}_2^2}_{\ge 0}+2 \underbrace{\left(f-g_n^*, \; \sum_{j=0}^n(c_j^*-c_j)\phi_j\right)}_{=0}$$
+    quindi $\norm{f-g_n}_2^2\ge\norm{f-g^*_n}_2^2\implies \norm{f-g_n}_2\ge\norm{f-g^*_n}_2$
+    \end{itemize}
+\end{proof}
+
+
+\begin{defn}[minimi quadrati discreti]
+\begin{align*}
+\left(f,g\right) & =\sum_{i=0}^{n}\omega_{i}f\left(x_{i}\right)g\left(x_{i}\right)dx & \left\Vert f\right\Vert _{L^{2}\text{-discreta}} & =\sqrt{\sum_{i=0}^{n}\omega_{i}f^{2}\left(x_{i}\right)}
+\end{align*}
+\end{defn}
+
+\begin{myboxed}
+    \begin{thm}[di miglior approssimazione nel senso dei minimi quadrati - caso discreto]
+        Dati $f(x_i)$, $\{x_i\}=S$ con $i=0,\dots,m$ ($m$ grado del polinomio, caso significativo quando $m>n$), siano $\{\phi_0,\ldots,\phi_n\}$ linearmente indipendenti, $\phi_i\in C^0([a,b])$. Allora 
+        $$\exists!g_n^*\in U\coloneqq \text{span}\{\phi_0,\ldots,\phi_n\} \text{ t.c }\norm{f-g_n^*}_2=\min_{g_n\in U}\norm{f-g_n}_2$$
+        Inoltre $g_n^*$ risolve il seguente sistema lineare
+        $$(f-g_n^*,\phi_k)=0\quad \forall k=0,\ldots,n\quad\text{\textbf{equazioni normali}}$$
+        dove $(\cdot,\cdot)$ è il prodotto scalare sopra definito.
+    \end{thm}
+\end{myboxed}
+
+\begin{proof}
+Abbiamo
+$$\begin{cases}
+     g^*_n\in U\implies  g^*_n=\sum_{i=0}^n c^*_i\phi_i \\
+     g_n\in U\implies  g_n=\sum_{i=0}^n c_i\phi_i \\
+\end{cases}\quad \text{ e }\quad \norm{f-g_n}_{2,S}^2=\sum_{i=0}^m\abs{f(x_i)-g_n(x_i)}^2$$
+allora cerco il minimo della funzione 
+$$\begin{array}{cccc}
+  d:   & \re^{n+1} &\to&\re\\
+     & (c_0,\dots,c_n) & \mapsto & \norm{f-g_n}_{2,S}^2
+\end{array}$$
+risolvendo $\grad d=\bv{0}$, ovvero risolvendo
+$$\frac{\partial d}{\partial c_k}=\sum_{i=0}^m2\left(f(x_i)-\sum_{j=0}^nc_j\phi_j(x_i)\right)\phi_k(x_i)=0\quad \forall k=0,\dots, n$$
+che divenda
+$$\sum_{i=0}^n\sum_{j=0}^nc_j\phi_j(x_i)\phi_k(x_i)=\sum_{i=0}^nf(x_i)\phi_k(x_i)\quad \forall k=0,\dots, n$$
+Vediamo che definendo 
+$$\tab f\coloneqq \cvv{f(x_0)}{\vdots}{f(x_m)}\qquad c\coloneqq\cvv{c_0}{\vdots}{c_n}\qquad A\coloneqq[\tab\phi_0\mid \dots\mid\tab\phi_n]\in\re^{(m+1)\times(n+1)}$$
+è equivalente a risolvere
+$$\sum_{i=0}^m(Ac)_i\phi_k(x_i)=(A^T\tab f)_k\implies (A^TAc)_k=(A^T\tab f)_k\implies\boxed{A^TAc=A^T\tab f}$$
+dove $A^TA$ è SPD $\implies$ rango massimo $\implies$ soluzione unica.
+\end{proof}
+
+\begin{thm}
+Se $c$ vettore dei coefficienti di $g$ e $A$ matrice matrice di
+valutazione della base nei punti $\left\{ x_{i}\right\} $, allora
+\[
+\left\Vert f-g\right\Vert ^{2}=\sum_{i=0}^{n}\left(\overset{b}{f\left(x_{i}\right)}-\overset{A\cdot c}{g\left(x_{i}\right)}\right)^{2}=\left\Vert b-A\cdot c\right\Vert _{2}^{2}\qquad\text{minimo quando}\quad A^{T}\cdot A\cdot c=A^{T}\cdot b
+\]
+\end{thm}
+
+\begin{proof}
+\begin{align*}
+\phi\left(x\right) & =\left\Vert b-A\cdot c\right\Vert _{2}^{2}=\left(b,b\right)-\left(b,A\cdot c\right)-\left(A\cdot c,b\right)+\left(A\cdot c,A\cdot c\right)=b^{T}\cdot b-2\cdot c^{T}\cdot A^{T}\cdot b+c^{T}\cdot A^{T}\cdot A\cdot c\\
+\nabla\phi\left(x\right) & =-2\cdot A^{T}\cdot b+2A^{T}\cdot A\cdot c=0\qquad\Longrightarrow\qquad A^{T}\cdot A\cdot c=A^{T}\cdot b
+\end{align*}
+\end{proof}
+\begin{defn}[Polinomi ortogonali di Legendre]
+$\phi_{0}\left(x\right)=1,\phi_{1}\left(x\right)=x,\phi_{i+1}\left(x\right)=\frac{2i+1}{i+1}x\phi_{i}\left(x\right)-\frac{1}{i+1}\phi_{i-1}\left(x\right)$
+\end{defn}
+
+\begin{defn}[Polinomi ortogonali di Chebyshev]
+$T_{i}\left(x\right)=\cos\left(i\arccos\left(x\right)\right)$, oppure
+$T_{i+1}\left(x\right)=2xT_{i}\left(x\right)-T_{i-1}\left(x\right)$
+\end{defn}
+
+
+
+
+
+
+
+\pagebreak{}
+
+\section{Integrazione Numerica}
+\begin{defn}[formula di quadratura]
+\label{def:formula-di-quadratura} è una formula del tipo
+$$I_{n}\left(f\right)=\sum_{i=0}^{n}\alpha_{i}f\left(x_{i}\right)\quad\text{ con }\begin{array}{ll}
+\alpha_{i} & \text{pesi di quadratura}\\
+x_{i} & \text{punti di quadratura}
+\end{array}$$
+che serve per approssimare $\intop_{a}^{b}f\left(x\right)dx=I\left(f\right)$.
+\end{defn}
+
+\begin{defn}[formula interpolatoria] Formula di quadratura in cui i pesi sono definiti come 
+$$\boxed{\alpha_i\coloneqq\int_a^bl_i(x)dx}$$
+con $$f_n=\Pi_nf=\sum_{i=0}^{n}f(x_i)l_i(x)\quad\quad l_i(x)=\text{i-esimo polin. base lagr.}$$
+
+Quindi è ottenuta sostituendo il polinomio interpolatore di grado $n$ nei
+punti di quadratura
+\[
+I_{n}\left(f\right)=\intop_{a}^{b}\sum_{i=0}^{n}f\left(x_{i}\right)l_{i}\left(x\right)dx=\sum_{i=0}^{n}f\left(x_{i}\right)\overset{\alpha_{i}}{\overbrace{\int_{a}^{b}l_{i}\left(x\right)dx}}
+\]
+ovvero è $$I_n(f)\coloneqq I(f_n)$$
+
+\end{defn}
+
+\begin{defn}[grado di esattezza/precisione]
+\label{def:grado-di-esattezza}Massimo $r\geq0$ per cui $I_{n}\left(p\right)=I\left(p\right)\quad\forall\,p\in\mathbb{P}_{r}$ 
+\end{defn}
+
+\begin{myboxed}
+\begin{thm}
+Una \nameref{def:formula-di-quadratura} a $n+1$ punti è interpolatoria
+$\Longleftrightarrow$ ha \nameref{def:grado-di-esattezza} $\geq n$
+\end{thm}
+\end{myboxed}
+\begin{proof}Doppia implicazione
+\begin{itemize}
+    \item[$\implies$] ovvio per la def.: $\Pi_nf=f$
+    \item[$\impliedby$] Dato che la formula ha grado di precisione $n$, integra esattamente ($\star$) i polinomi di grado $n$, in particolare gli $l_i$:
+    $$\int_a^bl_i(x)\overset{\star}{=}\sum_{j=0}^n\alpha_j\underbrace{l_i(x_j)}_{=\delta_{ij}}=\alpha_i \quad \forall i=0,\dots,n$$
+\end{itemize}
+\end{proof}
+
+\subsection{Formule di quadratura interpolatorie - formule di Newton-Cotes}
+\subsubsection{Formula del punto medio ($n=0$)}
+\begin{lyxalgorithm}[formula del punto medio] 
+\label{def:formula-punto-medio} si sostituisce $f$ con $\Pi_0f$ relativo al nodo $x_0=\frac{a+b}{2}$
+\begin{align*}
+I_{0}\left(f\right) & =\left(b-a\right)f\left(\frac{a+b}{2}\right) & E_{0}\left(f\right) & \coloneqq I\left(f\right)-I_{0}\left(f\right)=\frac{\left(b-a\right)^{3}}{24}f^{\prime\prime}\left(\xi\right)\quad\xi\in\left(a,b\right)\quad\text{(Se \ensuremath{f\in C^{2}\left(\left[a,b\right]\right)})}
+\end{align*}
+\end{lyxalgorithm}
+
+\begin{proof}[Dimostrazione dell'errore]
+Preso $c=\frac{a+b}{2}$ e la serie di Taylor $f\left(x\right)=f\left(c\right)+f^{\prime}\left(c\right)\left(x-c\right)+\frac{f^{\prime\prime}\left(\xi_{x}\right)}{2}\left(x-c\right)^{2}$
+\begin{align*}
+E_{0}\left(f\right)&\coloneqq\intop_{a}^{b}f\left(x\right)dx-\intop_{a}^{b}f\left(c\right)dx=\overset{\text{dispari in \ensuremath{\left[a,b\right]}}}{\bcancel{\intop_{a}^{b}f^{\prime}\left(c\right)\left(x-c\right)}}dx+\intop_{a}^{b}\frac{f^{\prime\prime}\left(\xi_{x}\right)}{2}\left(x-c\right)^{2}dx\overset{\text{media integ.}}{=}\frac{f^{\prime\prime}\left(\xi\right)}{2}\intop_{a}^{b}\left(x-c\right)^{2}dx\\
+&\overset{\star}{=}\frac{f^{\prime\prime}\left(\xi_{x}\right)}{2}\left(x-c\right)^{2} \frac{2}{3}\left(\frac{b-a}{2}\right)^3=\frac{\left(b-a\right)^{3}}{24}f^{\prime\prime}\left(\xi\right)
+\end{align*}
+dove $\star: \int_a^b(x-c)^2dx=2\int_c^b(x-c)^2=\frac{2}{3}(x-c)^3|_c^b\overset{\spadesuit}{=} \frac{2}{3}\left(\frac{b-a}{2}\right)^3$ \\
+dove $\spadesuit: \cancel{(c-c)^3}-(b-c)^3=-(b-\frac{a+b}{2})^3=-(\frac{a-b}{2})^3$
+\end{proof}
+\begin{rem*}[Grado di precisione] ha g.d.p 1: $f\in\mathbb{P}_1\implies f''=0\implies E_0(f)=0$
+    
+\end{rem*}
+\begin{lyxalgorithm}[formula del punto medio composita] $m$ sottointervalli di ampiezza 
+$h=\frac{b-a}{m}$, con nodi $x_{k}=a+\left(2k+1\right)\frac{h}{2}$ (\hl{multipli dispari di $\nicefrac{h}{2}$})
+\begin{align*}
+I_{0,m}\left(f\right) & =h\sum_{k=0}^{m-1}f\left(x_{k}\right) & E_{0}\left(f\right) & =\sum_{k=0}^{m-1}\frac{h^{3}}{24}f^{\prime\prime}\left(\xi_{k}\right)=\frac{h^{3}}{24}mf^{\prime\prime}\left(\xi\right)=\frac{h^{2}\left(b-a\right)}{24}f^{\prime\prime}\left(\xi\right)\quad\xi\in\left(a,b\right)
+\end{align*}
+\end{lyxalgorithm}
+
+\begin{thm}[teorema della media integrale]
+Presi $f\in C^{0}\left(\left[a,b\right]\right)$ e $g$ integrabile
+che non cambia segno in $\left[a,b\right]$, allora $\exists\xi\in\left(a,b\right)$
+tale che
+\[
+\intop_{a}^{b}f\left(x\right)g\left(x\right)dx=f\left(\xi\right)\intop_{a}^{b}g\left(x\right)dx
+\]
+\end{thm}
+
+\begin{thm}[teorema del valor medio discreto]
+Presi $u\in C^{0}\left(\left[a,b\right]\right)$, $x_{i=0,\ldots,s}\in\left[a,b\right]$
+e $\delta_{i=0,\ldots,s}$ costanti con lo stesso segno (ad esempio
+$\geq0$), allora $\exists\,\eta\in\left(a,b\right)$ tale che
+\[
+\sum_{i=0}^{s}\delta_{i}u\left(x_{i}\right)=u\left(\eta\right)\sum_{i=0}^{s}\delta_{i}
+\]
+\end{thm}
+
+\begin{proof}
+Presi $u_{m}=\min_{x\in\left[a,b\right]}u\left(x\right)=u\left(x_{m}\right)$,
+$u_{M}=\max_{x\in\left[a,b\right]}u\left(x\right)=u\left(x_{M}\right)$,
+ho 
+\[
+u_{m}\sum_{i=0}^{s}\delta_{i}\leq\sum_{i=0}^{s}\delta_{i}u\left(x_{i}\right)\leq u_{M}\sum_{i=0}^{s}\delta_{i}
+\]
+da cui definendo $U\left(x\right)=u\left(x\right)\sum_{i=0}^{s}\delta_{i}$
+ho $U\left(x_{m}\right)\leq\sum_{i=0}^{s}\delta_{i}u\left(x_{i}\right)\leq U\left(x_{M}\right)$,
+e dunque $U\left(\eta\right)=\sum_{i=0}^{s}\delta_{i}u\left(x_{i}\right)$
+\end{proof}
+
+\subsubsection{Formula del trapezio ($n=1$)}
+\begin{lyxalgorithm}[formula del trapezio]  si sostituisce $f$ con $\Pi_1f$ relativo ai nodi $x_0=a$ e $x_1=b$
+\label{def:formula-trapezio}
+\begin{align*}
+I_{1}\left(f\right) & =\frac{b-a}{2}\left(f\left(a\right)+f\left(b\right)\right) & E_{1}\left(f\right) & =-\frac{\left(b-a\right)^{3}}{12}f^{\prime\prime}\left(\xi\right)\quad\xi\in\left(a,b\right)\quad\text{(Se \ensuremath{f\in C^{2}\left(\left[a,b\right]\right)})}
+\end{align*}
+\end{lyxalgorithm}
+
+\begin{proof}[Dimostrazione dell'errore]
+Dalla formula dell'\nameref{thm:errore-lagrange}
+\[
+E_{1}\left(f\right)\coloneqq\intop_{a}^{b}f\left(x\right)-\Pi_{1}f\left(x\right)dx=\intop_{a}^{b}\frac{f^{\prime\prime}\left(\xi_{x}\right)}{2}\left(x-a\right)\left(x-b\right)dx\overset{\text{media integ.}}{=}\frac{f^{\prime\prime}\left(\xi\right)}{2}\intop_{a}^{b}\left(x-a\right)\left(x-b\right)dx
+\]
+\end{proof}
+\begin{rem*}
+    g.d.p.=1
+\end{rem*}
+\begin{lyxalgorithm}[formula del trapezio composita] $m$ sottointervalli di ampiezza
+$h=\frac{b-a}{m}$, $x_{k}=a+kh$
+\begin{align*}
+I_{1,m}\left(f\right) &=\sum_{k=0}^{m}\frac{h}{2}\left(f(x_i)+f(x_{i+1})\right)=\frac{h}{2}\left(f\left(a\right)+2\sum_{k=1}^{m-1}f\left(x_{k}\right)+f\left(b\right)\right) \\
+E_{1,m}\left(f\right) &=-\sum_{k=0}^{m-1}\frac{h^{3}}{12}f^{\prime\prime}\left(\xi_{k}\right)=-\frac{h^{2}\left(b-a\right)}{12}f^{\prime\prime}\left(\xi\right)\quad\xi\in\left(a,b\right)
+\end{align*}
+\end{lyxalgorithm}
+
+
+\subsubsection{Formula di Cavalieri-Simpson ($n=2$)}
+\begin{lyxalgorithm}[formula di Cavalieri-Simpson]
+\label{def:formula-cavalieri-simpson} si sostituisce $f$ con $\Pi_2f$ relativo ai nodi $x_{0},x_{1},x_{2}=a,\frac{a+b}{2},b$,
+i pesi sono $\alpha_{i}=\int_{a}^{b}l_{i}\left(x\right)dx$
+\begin{align*}
+I_{2}\left(f\right) & =\frac{b-a}{6}\left(f\left(a\right)+4f\left(\frac{a+b}{2}\right)+f\left(b\right)\right) & E_{2}\left(f\right) & =\frac{1}{90}\left(\frac{b-a}{2}\right)^{5}f^{\left(4\right)}\left(\xi\right)\quad\xi\in\left(a,b\right)
+\end{align*}
+\end{lyxalgorithm}
+
+\begin{rem*}
+    g.d.p.=3
+\end{rem*}
+
+\begin{lyxalgorithm}[formula di Cavalieri-Simpson composita]
+$h=\frac{b-a}{m}$, $x_{k}=a+k\frac{h}{2}$
+\begin{align*}
+I_{2,m}\left(f\right) & =\frac{h}{6}\left(f\left(a\right)+2\sum_{k=1}^{m-1}f\left(x_{2k}\right)+4\sum_{k=1}^{m-1}f\left(x_{2k+1}\right)+f\left(b\right)\right) & E_{2,m}\left(f\right) & =-\frac{b-a}{180}\left(\frac{h}{2}\right)^{4}f^{\left(4\right)}\left(\xi\right)\quad\xi\in\left(a,b\right)
+\end{align*}
+\end{lyxalgorithm}
+
+
+\subsubsection{Formule di Newton-Cotes (generalizzazione)}
+\begin{lyxalgorithm}[formule di Newton-Cotes]
+\label{alg:formule-newton-cotes} si sostituisce $f$ con $\Pi_nf$ relativo ai nodi equispaziati $x_{k}=x_{0}+k\frac{x_{n}-x_{0}}{n}=x_0+kh$
+, $\begin{array}{lll}
+\text{chiuse se } & x_{0}=a & x_{n}=b\\
+\text{aperte se } & x_{0}=a+h & x_{n}=b-h
+\end{array}$ \\
+Attuo cambio di variabile $x=x_0+th$:
+\begin{align*}
+l_{i}\left(x\right) & =\prod_{\substack{j=0\\
+j\neq i
+}
+}^{n}\frac{x-x_{j}}{x_{i}-x_{j}}=\prod_{\substack{j=0\\
+j\neq i
+}
+}^{n}\frac{\cancel{a}+th-\cancel{a}-jh}{\cancel{a}+ih-\cancel{a}-jh}=h\prod_{\substack{j=0\\
+j\neq i
+}
+}^{n}\frac{t-j}{i-j} & \alpha_{i} & =\int_{a}^{b}l_{i}\left(x\right)dx=h\int_{0}^{n}\overbrace{\prod_{\substack{j=0\\
+j\neq i
+}
+}^{n}{\frac{t-j}{i-j}}}^{\varphi_{i}\left(t\right)}dt
+\end{align*}
+\begin{align*}
+I_{n}\left(f\right) & =\sum_{i=0}^{n}\alpha_{i}f\left(x_{i}\right) & E_{n}\left(f\right) & =\left\{ \begin{array}{lll}
+M_{n}\left(b-a\right)^{n+3}f^{\left(n+2\right)}\left(\xi\right) & \quad n\text{ pari} & \quad f\in C^{n+2}\left(\left[a,b\right]\right)\\
+K_{n}\left(b-a\right)^{n+2}f^{\left(n+1\right)}\left(\xi\right) & \quad n\text{ dispari} & \quad f\in C^{n+1}\left(\left[a,b\right]\right)
+\end{array}\right.
+\end{align*}
+\end{lyxalgorithm}
+
+\begin{rem*}[Grado di precisione]
+    $\begin{cases}
+        n \text{ pari}\implies n+1\\
+        n \text{ dispari}\implies n\\
+    \end{cases}$
+\end{rem*}
+
+\begin{lyxalgorithm}[\nameref{alg:formule-newton-cotes} composite]
+{[}...{]}
+\end{lyxalgorithm}
+
+\begin{thm}
+$E_{n,m}\left(f\right)=O\left(h^{n+p}\right)$ con $p=2$ per $n$
+pari, $p=1$ per $n$ dispari
+\end{thm}
+
+\begin{proof}
+Per $n$ pari
+\[
+E_{n,m}\left(f\right)=\sum_{k=1}^{m}M_{n}h^{n+3}f^{\left(n+2\right)}\left(\xi_{k}\right)=M_{n}h^{n+3}\sum_{k=1}^{m}f^{\left(n+2\right)}\left(\xi_{k}\right)=M_{n}h^{n+3}mf^{\left(n+2\right)}\left(\xi\right)=M_{n}\left(b-a\right)h^{n+2}f^{\left(n+2\right)}\left(\xi\right)
+\]
+\end{proof}
+
+
+
+\begin{rem*}[analisi a posteriori dell'errore]
+Siccome $E_{n,m}\left(f\right)=O\left(h^{n+p}\right)$, vale che
+$E_{n,2m}\left(f\right)\approx\frac{1}{2^{n+p}}E_{n,m}\left(f\right)$,
+da cui 
+\[
+E_{n,2m}\left(f\right)\approx\frac{1}{2^{n+p}-1}\left(I_{n,2m}\left(f\right)-I_{n,m}\left(f\right)\right)
+\]
+\end{rem*}
+\begin{proof}
+\begin{align*}
+\left(1-\frac{1}{2^{n+p}}\right)I\left(f\right) & \approx I_{n,2m}\left(f\right)-\frac{1}{2^{n+p}}I_{n,m}\left(f\right) & I\left(f\right) & \approx\frac{2^{n+p}}{2^{n+p}-1}I_{n,2m}\left(f\right)-\frac{1}{2^{n+p}-1}I_{n,m}\left(f\right)
+\end{align*}
+Sottraendo da ambo i lati $I_{n,2m}\left(f\right)$ ho la tesi
+\end{proof}
+
+\subsubsection{Adattività}
+
+{[}...{]}
+
+\subsection{Integrazione Gaussiana}
+Approccio alternativo a Newton-Cotes. Sia $w\colon\left[-1,1\right]  \rightarrow\mathbb{R}$ non negativa, integrabile e assolutamente continua (\textbf{funzione peso}).
+\begin{align*}
+L_{w}^{2}\left(\left[-1,1\right]\right) & =\left\{ f\colon\left[-1,1\right]\rightarrow\mathbb{R},\int_{-1}^{1}f\left(x\right)w\left(x\right)dx<+\infty\right\}  & \left(f,g\right)_{w} & =\int_{-1}^{1}f\left(x\right)g\left(x\right)w\left(x\right)dx\\
+I_{w}\left(f\right) & =\int_{-1}^{1}f\left(x\right)w\left(x\right)dx\approx I_{n,w}\left(f\right)   \coloneqq\sum_{i=0}^{n}\alpha_{i}f\left(x_{i}\right)
+\end{align*}
+
+\begin{align*}
+I_{n,w}\left(f\right) & =\int_{-1}^{1}\Pi_{n}f\left(x\right)w\left(x\right)dx & \alpha_{i} & =\int_{-1}^{1}l_{i}\left(x\right)w\left(x\right)dx
+\end{align*}
+
+\begin{myboxed}
+\begin{thm}[teorema di Jacobi]
+Preso $m>0$, $I_{n,w}(f)=\sum_{i=0}^{n}\alpha_{i}f\left(x_{i}\right)$ ha \nameref{def:grado-di-esattezza} $n+m$
+$\Longleftrightarrow$ il polinomio nodale $\omega_{n+1}$ è ortogonale
+a $\mathbb{P}_{m-1}$, ovvero $$\int_{-1}^{1}\omega_{n+1}\left(x\right)p_{m-1}\left(x\right)w\left(x\right)dx=0\quad\forall\,p\in\mathbb{P}_{m-1}$$
+\end{thm}
+\end{myboxed}
+
+\begin{proof}
+Doppia implicazione\\
+\begin{itemize}
+    \item[$\impliedby$] Preso $f\in\mathbb{P}_{n+m}$, posso scriverlo
+$f=\omega_{n+1}p_{m-1}+q_{n}$ con $\begin{cases}
+    p_{m-1}\in\mathbb{P}_{m-1} \\
+    q_{n}\in\mathbb{P}_{n}
+\end{cases}$ e quindi $q_n=f-\omega_{n+1}p_{m-1}$. Se la formula è interpolatoria ($n+1$ nodi) $\implies$ ha g.d.p. almeno $n\implies q_n\in\mathbb{P}_n$ integrato esattamente:
+
+\begin{align*}
+\sum_{i=0}^{n}\alpha_{i}f\left(x_{i}\right)=\sum_{i=0}^n\alpha_i\underbrace{\omega_{n+1}(x_i)}_{=0}p_{m-1}(x_i)+\underbrace{\sum_{i=0}^{n}\alpha_{i}q_{n}\left(x_{i}\right)}_{=\int_{-1}^1q_n(x)w(x)dx}=\int_{-1}^{1}f(x)w(x)dx-\int_{-1}^{1}\underbrace{\omega_{n+1}(x_i)}_{=0}p_{m-1}w(x)
+\end{align*}
+Quindi $\int_{-1}^{1}f(x)w(x)dx=\sum_{i=0}^{n}\alpha_{i}f\left(x_{i}\right)\overset{f\in\mathbb{P}_{n+m}}{\implies}$ la formula di quadratura ha g.d.p. $n+m$
+
+\item[$\implies$]Preso $p_{m-1}\in\mathbb{P}_{m-1}$,
+\[
+\int_{-1}^{1}\underbrace{\omega_{n+1}\left(x\right)p_{m-1}\left(x\right)}_{\in\mathbb{P}_{m+n}}w\left(x\right)dx\overset{\text{g.d.p}=m+n}{=}\sum_{i=0}^{n}\alpha_{i}\overset{0}{\overbrace{\omega_{n+1}\left(x_{i}\right)}}p_{m-1}\left(x_{i}\right)=0
+\]
+\end{itemize}
+\end{proof}
+
+\begin{myboxed}
+\begin{cor}
+Il grado massimo di una formula con $n+1$ punti è $2n+1$
+\end{cor}
+\end{myboxed}
+
+\begin{proof}
+Per assurdo $2n+2$, prendo ad esempio $p=\omega_{n+1}$ e ottengo
+$\int_{-1}^{1}\omega_{n+1}^{2}\left(x\right)w\left(x\right)dx=0$,
+$\text{\lightning}$
+\end{proof}
+
+\begin{myboxed}
+\begin{rem*}
+Scegliendo $m=n+1$, si ha che 
+\begin{align*}
+    I_{n,\omega}(f) \text{ ha g.d.p } 2n+1 \text{ (massimo)} &\iff \int_{-1}^{1}\omega_{n+1}\left(x\right)p\left(x\right)w\left(x\right)dx=0\quad\forall\,p\in\mathbb{P}_{n} \\
+     &\iff \overset{\in\mathbb{P}_{n+1}}{\omega_{n+1}}\perp \mathbb{P}_n \\
+     &\iff \text{nodi } x_i \text{ sono radici di polin. (grad. $n+1$)} \perp \mathbb{P}_n
+\end{align*}
+Tale polinomio è il polinomio nodale $\omega_{n+1}$ ortogonale a $\mathbb{P}_{n}$. La dimensione di $\mathbb{P}_{n}^{\perp}\subseteq \mathbb{P}_{n+1}$ è $1$, quindi esisterà solo un polinomio nodale di questo tipo. Voglio dunque trovare una
+successione di polinomi \textbf{monici} $p_n\in\mathbb{P}_n$ tali che $$p_{n}\perp \underbrace{p_{0},\ldots,p_{n-1}}_{\text{base}} \quad \mathbb{P}_{n-1}=\text{span}\{p_{0},\ldots,p_{n-1}\} $$
+i \hl{nodi saranno gli zeri di tale $p_n$}. \\
+\hl{I pesi si trovano} risolvendo:
+$$\int_{-1}^1p_j(x)\omega(x)dx=\sum_{i=0}^{n}\alpha_ip_j(x_i) \quad \forall j=0,\dots, n-1  \quad \text{(impongo il g.d.p. max)}$$
+oppure
+$$\alpha_i=\int_{-1}^1l_i(x) \quad \text{(def. di pesi interpolatori)}$$
+con $l_i=\prod_{\substack{j=0\\
+j\neq i}}^{n}\frac{x-x_{j}}{x_{i}-x_{j}}$
+\end{rem*}
+\end{myboxed}
+
+\begin{defn}[polinomi ortogonali della quadratura gaussiana]
+Dati $p_{-1}\left(x\right)=0$ e $p_{0}\left(x\right)=1$
+\begin{align*}
+p_{k+1}\left(x\right) & =\left(x-\gamma_{k}\right)p_{k}\left(x\right)-\beta_{k}p_{k-1}\left(x\right) & \gamma_{k} & \coloneqq\frac{\left(xp_{k},p_{k}\right)_{w}}{\left(p_{k},p_{k}\right)_{w}} & \beta_{k} & \coloneqq\frac{\left(p_{k},p_{k}\right)_{w}}{\left(p_{k-1},p_{k-1}\right)_{w}}
+\end{align*}
+\end{defn}
+
+\begin{proof}
+Per induzione, $k=1$ ovvio, suppongo $p_{i}\perp p_{j}$ per $j<i\leq k$,
+voglio dimostrare $p_{k+1}\perp p_{j}$ per $j\leq k$
+\begin{align*}
+ & j\leq k-2 & \left(p_{k+1},p_{j}\right)_{w} & =\left(xp_{k},p_{j}\right)_{w}-\gamma_{k}\bcancel{\left(p_{k},p_{j}\right)_{w}}-\beta_{k}\bcancel{\left(p_{k-1},p_{j}\right)_{w}}=(p_{k},\overset{\in\mathbb{P}_{k-1}}{\overbrace{xp_{j}}})_{w}=0\\
+ & j=k-1 & \left(p_{k+1},p_{k-1}\right)_{w} & =\left(xp_{k},p_{k-1}\right)_{w}-\gamma_{k}\bcancel{\left(p_{k},p_{k-1}\right)_{w}}-\beta_{k}\left(p_{k-1},p_{k-1}\right)_{w}=(p_{k},\overset{p_{k}}{\overbrace{xp_{j}}})_{w}-\left(p_{k},p_{k}\right)_{w}=0\\
+ & j=k & \left(p_{k+1},p_{k-1}\right)_{w} & =\bcancel{\left(xp_{k},p_{k}\right)_{w}-\gamma_{k}\left(p_{k},p_{k}\right)_{w}}-\beta_{k}\bcancel{\left(p_{k-1},p_{k}\right)_{w}}=0
+\end{align*}
+\end{proof}
+\begin{lem}
+Se $w\left(x\right)$ è pari, allora $p_{k}\left(-x\right)=\left(-1\right)^{k}p_{k}\left(x\right)$
+\end{lem}
+
+\begin{proof}
+{[}...{]}
+\end{proof}
+\begin{prop}
+Se $w\left(x\right)$ è pari, allora vale $\gamma_{k}=0\quad\forall\,k$ 
+\end{prop}
+
+\begin{proof}
+Dal teorema sopra, in $\gamma_{k}$ vale $\left(xp_{k},p_{k}\right)_{w}=\int_{-1}^{1}xp_{k}^{2}\left(x\right)w\left(x\right)dx=0$
+perché l'integranda è dispari
+\end{proof}
+\begin{defn}[polinomi ortogonali di Lagrange]
+Per $w\left(x\right)\equiv1$, allora i polinomi sono detti di Lagrange
+e valgono
+\begin{align*}
+p_{0}\left(x\right) & =1 & p_{1}\left(x\right) & =x & p_{i+1}\left(x\right) & =xp_{i}\left(x\right)-\beta_{k}p_{i-1}\left(x\right) & \beta_{k} & \coloneqq\frac{\left(p_{k},p_{k}\right)}{\left(p_{k-1},p_{k-1}\right)}
+\end{align*}
+e si dimostra che $\left(p_{k},p_{k}\right)=\left(k+\frac{1}{2}\right)^{-1}$
+e dunque $\beta_{k}=\frac{k-\frac{1}{2}}{k+\frac{1}{2}}=\frac{2k-1}{2k+1}$
+\end{defn}
+
+\pagebreak{}
+
+\section{Approssimazione di Equazioni Differenziali Ordinarie}
+\begin{defn}[problema di Cauchy]
+\label{def:problema-di-cauchy}Dato $I=\left[a,b\right]\subseteq\mathbb{R}$,
+$f\colon I\times\mathbb{R}\rightarrow\mathbb{R}$ continua, $t\in I,y_{0}\in\mathbb{R}$,
+trovare $y\in C^{1}\left(I\right)$ tale che
+\[
+\begin{cases}
+y^{\prime}\left(t\right)=f\left(t,y\left(t\right)\right)\\
+y\left(t_{0}\right)=y_{0}
+\end{cases}
+\]
+\end{defn}
+
+\begin{defn}[equazione integrale di Volterra]
+$y\left(t\right)=y_{0}+\intop_{t_{0}}^{t}f\left(s,y\left(s\right)\right)ds\quad\forall t\in\left(a,b\right)$
+\end{defn}
+
+\begin{defn}[lipschitzianità]
+\end{defn}
+
+\begin{defn}[stabilità secondo Lyapunov]
+Il \nameref{def:problema-di-cauchy} è detto stabile se $\exists\,C>0$
+tale che $\forall\,\varepsilon>0$ sufficientemente piccolo, il problema
+perturbato
+\begin{equation}
+\begin{cases}
+z^{\prime}\left(t\right)=f\left(t,z\left(t\right)\right)+\delta\left(t\right)\\
+z\left(t_{0}\right)=y_{0}+\delta_{0}
+\end{cases}\text{ con \ensuremath{\left|\delta_{0}\right|<\varepsilon} e \ensuremath{\left|\delta\left(t\right)\right|<\varepsilon} \ensuremath{\forall\,t\in I}}\label{eq:problema-perturbato}
+\end{equation}
+soddisfa $\left|y\left(t\right)-z\left(t\right)\right|<C\varepsilon\quad\forall\,t\in I$
+\end{defn}
+
+\begin{thm}
+Se $f$ Lipschitz $\Longrightarrow$ Il \nameref{def:problema-di-cauchy}
+ammette una e una sola soluzione ed è stabile secondo Lyapunov
+\end{thm}
+
+
+\subsection{Metodi ad un passo}
+
+Presi $N+1$ punti equispaziati in $I=\left[t_{0},t_{0}+T\right]$,
+$t_{j}=t_{0}+jh$ con $h=\frac{T}{N}$, approssimo $y\left(t_{j}\right)\eqqcolon y_{j}\approx u_{j}$
+(con $u_{0}=y_{0}$)
+\begin{defn}[metodi a un passo]
+Se $\forall\,j\geq0$ la stima $u_{j+1}$ dipende solo da $u_{j}$
+\end{defn}
+
+\begin{lyxalgorithm}[metodo di Eulero in avanti]
+\label{alg:metodo-eulero-avanti}$u_{j+1}=\textcolor{red}{u_{j}}+hf\left(t_{j},u_{j}\right)$
+\end{lyxalgorithm}
+
+Definiti ora $e_{j}\coloneqq y_{j}-u_{j}=\overbrace{\left(y_{j}-z_{j}\right)}^{\text{discretiz.}}+  \overbrace{\left(z_{j}-u_{j}\right)}^{\text{propagaz.err.}}$
+e $z_{j+1}\coloneqq \textcolor{red}{y_{j}}+hf\left(t_{j},y_{j}\right)$
+
+
+\begin{defn}[errore locale/globale di troncamento] abbiamo
+\begin{align*}
+    \noun{Errore locale di troncamento:} & \qquad\tau_{j}\left(h\right)\coloneqq\frac{y_{j}-z_{j}}{h} \\
+    \noun{Errore globale di troncamento:} & \qquad\tau\left(h\right)\coloneqq\max_{j=0,\dots,N}\left|\tau_{j}\left(h\right)\right|
+\end{align*}
+Da Taylor
+\[
+y_{j+1}=y_{j}+h\underset{f\left(t_{j},y_{j}\right)}{\underbrace{y^{\prime}\left(t\right)}}+\frac{h^{2}}{2}y^{\prime\prime}\left(\xi_{j}\right)\quad\Rightarrow\quad\tau_{j+1}\left(h\right)=\frac{h}{2}y^{\prime\prime}\left(\xi_{j}\right)
+\]
+\end{defn}
+Si ha che
+\begin{align*}
+\left|y_{j+1}-z_{j+1}\right| & \leq h\tau\left(h\right) & \left|z_{j+1}-u_{j+1}\right| & \leq\left|y_{j}+hf\left(t_{j},y_{j}\right)-u_{j}-hf\left(t_{j},u_{j}\right)\right|\leq\left|e_{j}\right|+h\overset{L\left|y_{j}-u_{j}\right|}{\overbrace{\left|f\left(t_{j},y_{j}\right)-f\left(t_{j},u_{j}\right)\right|}}
+\end{align*}
+\[
+\left|e_{j+1}\right|=\left|y_{j+1}-u_{j+1}\right|\leq\left|z_{j+1}-u_{j+1}\right|+\left|y_{j+1}-z_{j+1}\right|\leq\left(1+hL\right)\left|e_{j}\right|+h\tau\left(h\right)\leq\frac{e^{LT}-1}{L}\tau\left(h\right)
+\]
+
+\begin{thm}
+Il \nameref{alg:metodo-eulero-avanti} con $u_{0}=y_{0}$, $f\in C^{1}\left(I\times\mathbb{R}\right)$
+e $M\coloneqq\max_{I}\left|y^{\prime\prime}\left(\xi\right)\right|$
+soddisfa 
+\[
+\left|e_{j+1}\right|\leq\frac{e^{L\left(t_{j+1}-t_{0}\right)}-1}{L}\frac{M}{2}h
+\]
+
+Con gli errori di arrotondamento $\overline{u_{0}}=y_{0}+\eta_{0}$,
+$\overline{u_{j+1}}=\overline{u_{j}}+hf\left(t_{j},\overline{u_{j}}\right)+\eta_{j+1}$
+e $\eta=\max\left|\eta_{k}\right|$ diventa 
+\[
+\left|e_{j+1}\right|\leq e^{L\left(t_{j+1}-t_{0}\right)}\left(\left|\eta_{0}\right|+\frac{1}{L}\left(\frac{M}{2}h+\frac{\eta}{h}\right)\right)
+\]
+non è più $\rightarrow0$ per $h\rightarrow0^{+}$, ma ci sarà un
+$h_{\text{opt}}$ che minimizzerà l'errore
+\end{thm}
+
+\begin{lyxalgorithm}[metodo di Eulero all'indietro/implicito]
+\label{alg:metodo-eulero-indietro}$u_{j+1}=u_{j}+hf\left(t_{j+1},u_{j+1}\right)$
+\end{lyxalgorithm}
+
+\begin{lyxalgorithm}[metodo di Crank-Nicolson]
+\label{alg:metodo-Crank-Nicolson}$u_{j+1}=u_{j}+\frac{h}{2}\left(f\left(t_{j},u_{j}\right)+f\left(t_{j+1},u_{j+1}\right)\right)$ \\
+Proviene da $$y_{j+1}-y_j=\int_{t_j}^{t_{j+1}}f(s,y(s))ds\overset{\text{metodoTrapezi}}{\approx} \frac{h}{2}(\underbrace{f(t_j,y_j)}_{\text{eul.esplicito}}+\underbrace{f(t_{j+1},y_{j+1})}_{\text{eul.implicito}})$$
+\end{lyxalgorithm}
+
+\begin{lyxalgorithm}[metodo di Heun] (versione esplicita di C-N)
+\label{alg:metodo-Heun}$u_{j+1}=u_{j}+\frac{h}{2}\left(f\left(t_{j},u_{j}\right)+f\left(t_{j+1},u_{j}+hf\left(t_{j},u_{j}\right)\right)\right)$
+\end{lyxalgorithm}
+
+\begin{prop}
+Se $hL<1$, allora il \nameref{alg:metodo-eulero-indietro} e il \nameref{alg:metodo-Crank-Nicolson}
+hanno una e una sola soluzione.
+\end{prop}
+
+\begin{proof}[Dimostrazione (Eulero)]
+La funzione $g\left(z\right)=u_{j}+hf\left(t_{j+1},z\right)$ è una
+contrazione per $hL<1$
+\end{proof}
+\begin{lyxalgorithm}[metodo a un passo generalizzato]
+$u_{j+1}=u_{j}+h\Phi\left(t_{j},u_{j},h,f\right)$, da cui si può
+scrivere $y\left(t+h\right)=y\left(t\right)+h\Phi\left(t,y\left(t\right),h,f\right)+\overset{\text{residuo}}{\sigma\left(t,h\right)}$
+\end{lyxalgorithm}
+
+\begin{defn}[errore di troncamento globale]
+$\tau\left(h\right)=\max_{t\in\left[t_{0},t_{0}+T\right]}\frac{\left|\sigma\left(t,h\right)\right|}{h}$
+\end{defn}
+
+\begin{defn}[consistenza di un metodo]
+\label{def:consistenza-di-un-metodo}Se $\lim_{h\rightarrow0^{+}}\tau\left(h\right)=0$.
+Consistenza di ordine $p$ se $\tau\left(h\right)=O\left(h^{p}\right)$\\
+\hl{errore di troncamento/discretizzazione controllato}
+\end{defn}
+
+\begin{myboxed}
+\begin{prop}
+Se $f\in C^{1}\left(I\times\mathbb{R}\right)$ il \nameref{alg:metodo-eulero-indietro}
+è consistente di ordine $1$
+\end{prop}
+\end{myboxed}
+
+\begin{proof}
+\begin{align*}
+\Phi\left(t,y\left(t\right),h,f\right) & =f\left(t+h,z\right) & z & =y\left(t\right)+hf\left(t+h,z\right)\;\rightarrow\;z-y\left(t\right)=O\left(h\right)\;\rightarrow\;f\left(t+h,z\right)=f\left(t,y\left(t\right)\right)+O\left(h\right)
+\end{align*}
+\[
+\sigma\left(t,h\right)=\overset{hf\left(t,y\left(t\right)\right)+O\left(h^{2}\right)}{\overbrace{y\left(t+h\right)-y\left(t\right)}}-hf\left(t+h,z\right)=O\left(h^{2}\right)
+\]
+\end{proof}
+
+\begin{myboxed}
+\begin{prop}
+Se $f\in C^{2}\left(I\times\mathbb{R}\right)$ il \nameref{alg:metodo-Crank-Nicolson}
+è consistente di ordine $2$
+\end{prop}
+\end{myboxed}
+
+\begin{prop}
+Se $f\in C^{2}\left(I\times\mathbb{R}\right)$ il \nameref{alg:metodo-Heun}
+è consistente di ordine $2$
+\end{prop}
+
+\begin{defn}[zero stabilità per metodi a un passo]
+Se $\exists\,h_{0}>0,C>0$ tali che $\forall\,h\in\left(0,h_{0}\right)$
+vale che $\left|z_{j}-u_{j}\right|\leq C\varepsilon$ con $\left\{ z_{j}\right\} $
+soluzione del problema perturbato
+\begin{align*}
+z_{j+1} & =z_{j}+h\left[\Phi\left(t_{j},u_{j},h,f\right)+\delta_{j+1}\right] & z_{0} & =y_{0}+\delta_{0} & \text{ con \ensuremath{\left|\delta_{i}\right|\leq\varepsilon}}
+\end{align*}
+\hl{errore di propagazione controllato}
+\end{defn}
+
+\begin{thm}
+\label{thm:condizione-zero-stabilita}Se $\Phi$ è Lipschitziana di
+costante $\Lambda$ rispetto al secondo argomento uniformemente rispetto
+a $h\leq h_{0}$ e $t\in\left[t_{0},t_{0}+T\right]$, allora il metodo
+è zero-stabile.
+\end{thm}
+
+\begin{proof}
+\begin{align*}
+\left|e_{j}\right|=\left|z_{j}-u_{j}\right| & =\left|z_{j-1}+h\Phi\left(t_{j-1},z_{j-1}\right)+h\delta_{j}-u_{j-1}-h\Phi\left(t_{j-1},u_{j-1}\right)\right|\leq\\
+ & \leq\left|e_{j}\right|+h\underset{\Lambda\left|e_{j}\right|\quad\text{\ensuremath{\Lambda} indipedete da \ensuremath{h} o \ensuremath{t_{j-1}}}}{\underbrace{\left|\Phi\left(t_{j-1},z_{j-1}\right)-\Phi\left(t_{j-1},u_{j-1}\right)\right|}}+h\left|\delta_{j}\right|\leq\left(1+h\Lambda\right)\left|e_{j-1}\right|+h\varepsilon\leq e^{\Lambda T}\left(1+\frac{1}{\Lambda}\right)\varepsilon
+\end{align*}
+\end{proof}
+\begin{defn}[convergenza di un metodo]
+Se $\lim_{h\rightarrow0^{+}}\left|y_{j}-u_{j}\right|=0$, convergenza
+di ordine $p$ se $\left|y_{j}-u_{j}\right|=O\left(h^{p}\right)$
+\end{defn}
+
+\begin{myboxed}
+\begin{thm}
+Un metodo $\begin{cases}
+    \text{consistente (errore di troncamento controllato)}\\
+    \text{zero stabile (errore di propagazione controllato)}
+\end{cases}\implies$ convergente.
+Inoltre consistenza di ordine $p$ $\Longrightarrow$ convergenza
+di ordine $p$
+\end{thm}
+\end{myboxed}
+
+\begin{proof}
+\begin{align*}
+y_{j+1} & =y_{j}+h\left[\Phi\left(t_{j},y_{j}\right)+\frac{\sigma\left(t_{j},h\right)}{h}\right] & u_{j+1} & =u_{j}+h\Phi\left(t_{j},u_{j}\right) & \frac{\sigma\left(t_{j},h\right)}{h} & \leq\tau\left(h\right)\overset{h\rightarrow0^{+}}{\longrightarrow}0
+\end{align*}
+
+La tesi da \eqref{thm:condizione-zero-stabilita} con $z_{j}=y_{j}$,
+$\frac{\sigma\left(t_{j},h\right)}{h}=\delta_{j+1}$ e $\varepsilon=\tau\left(h\right)$
+\end{proof}
+Dato $\lambda\in\mathbb{C}^{-}=\left\{ z\in\mathbb{C}\mid\Re\left(z\right)<0\right\} $,
+introduciamo il problema modello
+\[
+\begin{cases}
+y^{\prime}\left(t\right)=\lambda\cdot y\left(t\right)\\
+y\left(t_{0}\right)=1
+\end{cases}
+\]
+
+\begin{defn}[assoluta stabilità]
+Un metodo è assolutamente stabile se per il problema modello $u_{j}\overset{t_{j}\rightarrow+\infty}{\longrightarrow}0$.
+La regione di assoluta stabilità è $A=\left\{ z=h\lambda\in\mathbb{C}\mid u_{j}\overset{t_{j}\rightarrow+\infty}{\longrightarrow}0\right\} $
+\end{defn}
+
+\begin{defn}[$A$-stabilità]
+Quanto a regione di assoluta stabilità è $A=\mathbb{C}^{-}$
+\end{defn}
+
+
+\subsection{Sistemi di Equazioni Differenziali Ordinarie}
+
+Ez
+
+\subsection{Metodi a più passi (multistep)}
+\begin{defn}[metodo multistep]
+\label{def:metodo-multistep}{[}...{]}
+\end{defn}
+
+\begin{lyxalgorithm}[metodo del punto medio]
+\label{alg:metodo-punto-medio}$u_{j+1}=u_{j-1}+2hf\left(t_{j},u_{j}\right)$
+\end{lyxalgorithm}
+
+\begin{lyxalgorithm}[metodo di Simpson]
+\label{alg:metodo-di-simpson}$u_{j+1}=u_{j-1}+\frac{h}{3}\left[f\left(t_{j-1},u_{j-1}\right)+4f\left(t_{j},u_{j}\right)+f\left(t_{j+1},u_{j+1}\right)\right]$
+\end{lyxalgorithm}
+
+\begin{lyxalgorithm}[metodo multistep generalizzato]
+Dato un metodo multistep a $p+1$ passi ($b_{-1} = 0$ per metodo esplicito):
+    \[
+    u_{j+1} = \sum_{k=0}^p a_k u_{j-k} + h \sum_{k=-1}^p b_k f(t_{j-k},u_{j-k})
+    \]
+\end{lyxalgorithm}
+
+\begin{lyxalgorithm}[metodo di Adams]
+\label{alg:metodo-di-adams}$u_{j+1}=u_{j}+h\sum_{k=-1}^{p}b_{k}f\left(t_{j-k},u_{j-k}\right)$
+$\begin{array}{lll}
+\text{implicito se } & b_{-1}\neq0 & \text{(Adams-Moulton)}\\
+\text{esplicito se } & b_{-1}=0 & \text{(Adams-Baskford)}
+\end{array}$ con i coefficienti ottenuti interpolando $f$ con un polinomio nei
+punti $t_{j-p},\ldots,t_{j}\left(,t_{j+1}\right)$
+\end{lyxalgorithm}
+
+\begin{defn}[residuo]
+\label{def:residuo-di-un-metodo}$\sigma\left(t,h\right)=y\left(t+h\right)-\sum_{k=0}^{p}a_{k}y\left(t-kh\right)-h\sum_{k=-1}^{p}b_{k}y^{\prime}\left(t-kh\right)$
+\end{defn}
+
+\begin{thm}
+Un \nameref{def:metodo-multistep} è consistente \eqref{def:consistenza-di-un-metodo}
+$\Longleftrightarrow$ $\sum_{k=0}^{p}a_{k}=1$ e $-\sum_{k=0}^{p}ka_{k}+\sum_{k=-1}^{p}b_{k}=1$;
+è consistente di ordine $q$ $\Longleftrightarrow$ vale la condizione
+precedente e $\sum_{k=0}^{p}\left(-k\right)^{q}a_{k}+q\sum_{k=-1}^{p}\left(-k\right)^{q-1}b_{k}=1$
+\end{thm}
+
+\begin{proof}
+Sostituendo $y\left(t-kh\right)=y\left(t\right)-khy^{\prime}\left(t\right)+o\left(h\right)$
+e $f\left(t-kh,y\left(t-kh\right)\right)=f\left(t,y\left(t\right)\right)+o\left(1\right)$
+in \ref{def:residuo-di-un-metodo}
+\begin{align*}
+\sigma\left(t,h\right) & =y\left(t\right)-h\overset{f\left(t,y\left(t\right)\right)}{\overbrace{y^{\prime}\left(t\right)}}-\sum_{k=0}^{p}a_{k}\left(y\left(t\right)-khy^{\prime}\left(t\right)\right)-h\sum_{k=-1}^{p}b_{k}f\left(t,y\left(t\right)\right)+o\left(h\right)\\
+ & =\left(1-\sum_{k=0}^{p}a_{k}\right)y\left(t\right)+hf\left(t,y\left(t\right)\right)\left(1-\sum_{k=0}^{p}a_{k}k-\sum_{k=-1}^{p}b_{k}\right)+o\left(h\right)\\
+\frac{\sigma\left(t,h\right)}{h} & =\frac{\left(1-\sum_{k=0}^{p}a_{k}\right)}{h}y\left(t\right)+f\left(t,y\left(t\right)\right)\left(1-\sum_{k=0}^{p}a_{k}k-\sum_{k=-1}^{p}b_{k}\right)+o\left(1\right)\longrightarrow0
+\end{align*}
+Per l'ordine $q$ la dimostrazione è analoga sviluppando con Taylor
+fino al grado $q$ e $q+1$ rispettivamente
+\end{proof}
+\begin{rem*}
+Se $y\in C^{2}$, un metodo consistente lo è di ordine almeno $1$
+\end{rem*}
+
+\subsubsection{Stabilità per i metodi multistep}
+
+Studiando il problema $\begin{cases}
+y^{\prime}\left(t\right)=0\\
+y\left(0\right)=1
+\end{cases}$ si ottiene il \nameref{def:metodo-multistep} $u_{j+1}=\sum_{k=0}^{p}a_{k}u_{j-k}$
+\begin{defn}[$1{^\circ}$ polinomio caratteristico]
+\label{def:polinomio-caratteristico}$\rho\left(r\right)=r^{p+1}-\sum_{k=0}^{p}a_{k}r^{p-k}$
+associato al \nameref{def:metodo-multistep} $u_{j+1}=\sum_{k=0}^{p}a_{k}u_{j-k}$
+\end{defn}
+
+\begin{rem*}
+Se il metodo è consistente $\Longrightarrow$ $1-\sum_{k=0}^{p}a_{k}=0$
+$\Longrightarrow$ $1$ è radice del \nameref{def:polinomio-caratteristico}
+$\rho\left(r\right)$
+\end{rem*}
+\begin{defn}[zero stabilità per metodi multistep]
+Se $\exists\,h_{0}>0,C>0$ tali che $\forall\,h\in\left(0,h_{0}\right)$
+vale che $\left|z_{j}-u_{j}\right|\leq C\varepsilon$ con $\left\{ z_{j}\right\} $
+soluzione del problema perturbato
+\begin{align*}
+z_{j+1} & =\sum_{k=0}^{p}a_{k}z_{j-k}+h\delta_{j+1} & z_{k} & =y_{k}+\delta_{k}\text{ per \ensuremath{k=0,\ldots,p}} & \text{ con \ensuremath{\left|\delta_{i}\right|\leq\varepsilon}}
+\end{align*}
+\end{defn}
+
+\textbf{Condizione della radice}:
+\label{cond:condizione-della-radice}Un \nameref{def:metodo-multistep}
+soddisfa la condizione della radice se date $r_{0},\ldots,r_{p}$
+radici di $\rho\left(r\right)$ vale $\left|r_{i}\right|\leq1$ e
+se $\left|r_{i}\right|=1$ $\Rightarrow$ $r_{i}$ è una radice semplice.
+
+
+\begin{thm}
+Un \nameref{def:metodo-multistep} consistente è zero stabile $\Longleftrightarrow$
+soddisfa la \nameref{cond:condizione-della-radice}
+\end{thm}
+
+\begin{proof}[Dimostrazione ($\Longrightarrow$)]
+Supponiamo $\left|r\right|>1$ radice reale di $\rho\left(r\right)$
+e definiamo $w_{j}=\varepsilon\frac{r^{j}}{r^{p}}\eqqcolon\gamma r^{j}$,
+prendo $\delta_{j}=\begin{cases}
+w_{j} & j=0,\ldots,p\\
+0 & j\geq p+1
+\end{cases}$ e $u_{0}=\ldots=u_{p}=0\Longrightarrow u_{j}=0\;\forall j\geq0$,
+da cui $z_{j}=w_{j}$ e $\left|z_{j}\right|=\left|z_{j}-u_{j}\right|\longrightarrow0$
+\end{proof}
+\begin{example*}
+\[
+\begin{array}{lll}
+\text{\nameref{alg:metodo-punto-medio} } & \rho\left(r\right)=r^{2}-1 & r_{0}=1,r_{1}=-1\\
+\text{\nameref{alg:metodo-di-simpson} } & \rho\left(r\right)=r^{2}-1 & r_{0}=1,r_{1}=-1\\
+\text{\nameref{alg:metodo-di-adams} } & \rho\left(r\right)=r^{p-1}-r^{p} & r_{1}=\ldots=r_{p}=0
+\end{array}
+\]
+\end{example*}
+\begin{thm}[teorema di equivalenza]
+Un \nameref{def:metodo-multistep} è convergente $\Longleftrightarrow$
+è zero stabile e l'errore sui dati iniziali $\rightarrow0$ per $h\rightarrow0^{+}$.
+In tal caso il metodo ha ordine $q$ $\Longleftrightarrow$ è consistente
+di ordine $q$
+\end{thm}
+
+\begin{thm}[prima barriera di Dahlquist]
+Un \nameref{def:metodo-multistep} zero stabile a $q$ passi non
+può avere ordine maggiore di $q+p$ con $p=2$ per $q$ pari, $p=1$
+per $q$ dispari.
+\end{thm}
+
+\pagebreak{}
+
+
+
+\part{Recap ed esame}
+\section{Recap Barabba}
+
+\begin{align*}
+\text{\textsc{Errore di Lagrange}}\quad & E_{n}\left(x\right)\coloneqq f\left(x\right)-\Pi_{n}f\left(x\right)=\frac{f^{\left(n+1\right)}\left(\xi\right)}{\left(n+1\right)!}\omega_{n+1}\left(x\right)\\
+\text{\textsc{Minimi quadrati}}\quad & A^{T}\cdot A\cdot c=A^{T}\cdot b\\
+\text{\textsc{Metodi Stazionari}\quad} & \text{Covergenza}\Longleftrightarrow\rho\left(B\right)<1\quad{\scriptstyle \text{(serve consistenza)}}\qquad\left\Vert B\right\Vert <1\Longrightarrow\left\Vert e^{\left(k+1\right)}\right\Vert \leq\left\Vert B\right\Vert \cdot\left\Vert e^{\left(k\right)}\right\Vert \\
+\text{\textsc{Metodi di Richardson}\quad} & \text{Covergenza}\Longleftrightarrow\frac{2\cdot\Re\left(\lambda\right)}{\alpha\left|\lambda\right|^{2}}>1\quad{\scriptstyle \forall\,\lambda\in\Lambda\left(P^{-1}A\right)}\qquad{\scriptstyle \alpha_{\text{opt}}=\frac{2}{\lambda_{1}+\lambda_{n}}}\qquad{\scriptstyle \rho\left(R_{\alpha_{\text{opt}}}\right)=\frac{\lambda_{1}-\lambda_{n}}{\lambda_{1}+\lambda_{n}}}\\
+\text{\textsc{Gershgorin}\quad} & \Lambda\left(A\right)\subseteq S_{R}\coloneqq\bigcup_{i=1}^{n}R_{i}\qquad\text{con}\quad R_{i}\coloneqq\left\{ z\in\mathbb{C}\mid\left|z-a_{ii}\right|\leq{\scriptstyle \sum_{j=1,j\neq i}^{n}}\left|a_{ij}\right|\right\} \\
+\text{\textsc{Matrice di Householder}\quad} & P=I-2\frac{vv^{T}}{\left\Vert v\right\Vert _{2}^{2}}\qquad v=x\pm e_{m}\left\Vert x\right\Vert _{2}\\
+\text{\textsc{Shermann-Morris}\quad} & \left(A+uv^{T}\right)^{-1}=A^{-1}-\frac{A^{-1}uv^{T}A^{-1}}{1+v^{T}A^{-1}u}\\
+\text{\textsc{Errore Newton-Cotes}\quad} & E_{n}\left(f\right)=\begin{cases}
+M_{n}\left(b-a\right)^{n+3}f^{\left(n+2\right)}\left(\xi\right) & n\text{ pari}\\
+K_{n}\left(b-a\right)^{n+2}f^{\left(n+1\right)}\left(\xi\right) & n\text{ dispari}
+\end{cases}\qquad{\scriptstyle E_{n,2m}\left(f\right)\approx\frac{1}{2^{n+p}-1}\left(I_{n,2m}\left(f\right)-I_{n,m}\left(f\right)\right)}\\
+\textsc{Errore Metodi ODE}\quad & \left|e_{j+1}\right|\leq\frac{e^{L\left(t_{j+1}-t_{0}\right)}-1}{L}\tau\left(h\right)\\
+\textsc{Multistep Generalizzato}\quad & u_{j+1}=\sum_{k=0}^{p}a_{k}u_{j-k}+h\sum_{k=0}^{p}b_{k}f\left(t_{j-k},u_{j-k}\right)+hb_{-1}f\left(t_{j+1},u_{j+1}\right)\\
+\textsc{Consistenza}\quad & \text{consistente di ordine \ensuremath{q}}\Longleftrightarrow\sum_{k=0}^{p}a_{k}=1\quad\text{e}\quad\sum_{k=0}^{p}\left(-k\right)^{q}a_{k}+q\sum_{k=-1}^{p}\left(-k\right)^{q-1}b_{k}=1\\
+\textsc{1° Polinomio Caratt.}\quad & \rho\left(r\right)=r^{p+1}-\sum_{k=0}^{p}a_{k}r^{p-k}\qquad\text{condizione della radice: \ensuremath{\left|r_{i}\right|<0} o semplici se \ensuremath{\left|r_{i}\right|=1} }\\
+\textsc{Condizione Zero Stabilità}\quad & \text{zero stabile}\Longleftrightarrow\text{condizione della radice}\quad{\scriptstyle \text{(serve consistenza)}}
+\end{align*}
+\vspace{2em}
+
+\begin{table}[H]
+\centering{}%
+\begin{tabular}{>{\raggedright}m{3cm}l}
+\toprule 
+\multicolumn{2}{c}{Sistemi lineari}\tabularnewline
+\midrule
+\midrule 
+Backsubstitution & \multirow{2}{*}{$O\left(n^{2}\right)\;{\scriptstyle =n^{2}}$}\tabularnewline
+\cmidrule{1-1} 
+Forwardsubstitution & \tabularnewline
+\bottomrule
+\end{tabular}\qquad{}%
+\begin{tabular}{>{\raggedright}p{2cm}>{\centering}m{2cm}>{\centering}m{2cm}l}
+\toprule 
+\multicolumn{4}{c}{$QR$}\tabularnewline
+\midrule
+\midrule 
+\multirow{1}{2cm}{Standard} & $Q\in\mathbb{R}^{m\times m}$ ortog & $Q\in\mathbb{R}^{m\times n}$ colonne ortonorm & \multirow{2}{*}{$O\left(mn^{2}\right)\;{\scriptstyle =2mn^{2}}$}\tabularnewline
+\cmidrule{1-3} \cmidrule{2-3} \cmidrule{3-3} 
+Ridotta & $R\in\mathbb{R}^{m\times n}$ triang inf & $R\in\mathbb{R}^{n\times n}$ triang sup & \tabularnewline
+\bottomrule
+\end{tabular}\vspace{2em}
+\begin{tabular}{>{\raggedright}m{2cm}>{\centering}m{2cm}>{\centering}m{2cm}ll}
+\toprule 
+\multicolumn{5}{c}{$LU$}\tabularnewline
+\midrule
+\midrule 
+Standard & \multirow{4}{2cm}{$L$ triang inf} & \multirow{4}{2cm}{$U$ triang sup} & $\det\left(A_{1:k,1:k}\right)\neq0$ & \multirow{2}{*}{$O\left(n^{3}\right)\;{\scriptstyle =\frac{2}{3}n^{3}}$}\tabularnewline
+\cmidrule{1-1} \cmidrule{4-4} 
+Pivoting parziale &  &  & $\det\left(A\right)\neq0$ & \tabularnewline
+\cmidrule{1-1} \cmidrule{4-5} \cmidrule{5-5} 
+Thomas &  &  & $A$ tridiagonale & $O\left(n\right)\;{\scriptstyle =8n}$\tabularnewline
+\cmidrule{1-1} \cmidrule{4-5} \cmidrule{5-5} 
+Cholesky &  &  & $A$ SPD & $O\left(n^{3}\right)\;{\scriptstyle =\frac{1}{3}n^{3}}$\tabularnewline
+\bottomrule
+\end{tabular}
+\end{table}
+
+\pagebreak{}
+
+\section{Scritto: formule e osservazioni per esercizi (da Epic)}
+
+\subsection{Primo semestre}
+\begin{itemize}
+    
+    \item Per ricavare il condizionamento del problema del calcolo di una funzione $G$ nel punto $d$ si usa la seguente formula, ricordando che lo jacobiano per $G:I\to\R$ corrisponde a $G'$:
+    \[
+    K_{ass}(d) = ||J_G(d)|| , \quad K_{rel}(d) = \frac{||J_G(d)||\,||d||}{||G(d)||}
+    \]
+    
+    \item Per stimare l'errore relativo in un metodo iterativo di matrice di iterazione $B$ e soluzione $x$ si può sfruttare che $Bx + f = x,\,Bx^{(k-1)}+f=x^{(k)}$ quindi, fissata una norma $||\cdot||$ vale:
+    \[
+    \frac{||x-x^{(k)}||}{||x||} \le ||B||^k
+    \]
+    Si ricorda che $||B||_\infty = \max_i \sum_j |B_{ij}|$
+
+    \item Se un cerchio di Gershgorin è disgiunto dagli altri dello stesso tipo (riga o colonna) allora conterrà un unico autovalore, che dovrà essere reale. Per avere matrice con tutti autovalori reali è sufficiente avere cerchi riga o colonna tutti disgiunti fra loro.
+    Posso sfruttare cerchi di Gershgorin per dare stima dello spettro, del raggio spettrale, degli autovalori minimo e massimo della matrice.
+    
+    \item Per risolvere problema ai minimi quadrati $\min_{x\in\R^2}||b-Ax||_2$ devo risolvere sistema delle equazioni normali: $A^TAx=A^Tb$. Sfruttando la fattorizzazione QR di $A$ mi riduco al sistema triangolare $Rx=Q^Tb$. Altrimenti posso affrontarlo come visto nel secondo semestre (vedere sotto).
+
+    \item Formula Sherman-Morrison per il calcolo dell'inversa di una matrice a cui sommo una "modifica di rango uno" ottenendo l'inversa della matrice iniziale sommata ancora a una "modifica di rango uno":
+    \[
+    (A+uv^T)^{-1} = A^{-1} - \frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}
+    \]
+\end{itemize}
+
+\subsection{Secondo semestre}
+\begin{itemize}
+
+    \item Per studiare la convergenza di un metodo iterativo $\phi(x)$ devo trovare i punti fissi e guardare il comportamento delle successioni: limitatezza e monotonia (disuguaglianze).
+    Ricordo infatti che se ho convergenza, essa deve essere a un punto fisso di $\phi$.
+    Per calcolare l'ordine di convergenza uso teorema di ordine di convergenza guardando il valore delle derivate nei punti fissi: $\phi^{(k)}(\bar x)=0$ allora ho ordine almeno $k+1$.
+    
+    \item Per trovare polinomio interpolatore $\Pi_nf(x)$ della funzione $f(x)$ di grado massimo $n$ nei nodi $\{x_i\}_{i=0}^n$, posso usare la scrittura di Lagrange
+    $\Pi_nf(x) = \sum_{i=0}^nf(x_i)l_i(x)$, dove $l_i(x)$ sono i polinomi della base di Lagrange:
+    \[
+    l_i(x) = \prod_{j=0,j\ne i}^n \frac{x-x_j}{x_i - x_j}
+    \]
+    O posso usare la scrittura di Newton
+    $\Pi_nf(x) = \sum_{i=0}^{n}f[x_0,\dots,x_i]\omega_i(x)$ dove
+    $\omega_i(x) = \prod_{k=0}^{k=i}(x-x_k)$ è il polinomio nodale riferito ai primi $i$ nodi, mentre $f[x_0,\dots,x_i]$ sono le differenze divise:
+    \[
+    f[x_0,\dots,x_j] = \frac{f[x_0,\dots,x_{j-1}]-f[x_1,\dots,x_j]}{x_0-x_j},\quad
+    f[x_k] = f(x_k)
+    \]
+    Per trovare una stima dell'errore di interpolazione uso:
+    \[
+    f(x) - \Pi_nf(x) = \frac{f^{(n+1)}(\xi_x)}{(n+1)!}\omega_{n+1}(x)
+    \]
+    
+    \item Formula dei trapezi e di Cavalieri-Simpson:
+    \[
+    I_1(f) = \frac{(b-a)}{2}\bigg[ f(a) + f(b) \bigg], \quad
+    I_2(f) = \frac{(b-a)}{6}\bigg[ f(a) + 4f\bigg( \frac{a+b}{2} \bigg) + f(b) \bigg]
+    \]
+    
+    \item Per la stima dell'errore di interpolazione con una spline lineare (lineare a tratti), uso la disuguaglianza:
+    \[
+    ||f-\Pi_h^1f||_\infty \le ||f''||_\infty\frac{h^2}{8}
+    \]
+    $S$ spline cubica su $[a,b]$ è naturale se $S''(a) = 0 = S''(b)$.
+
+    \item Per trovare $g_n^\ast$ polinomio di migliore approssimazione di $f$ devo risolvere il sistema delle equazioni normali. Prima trovo $\{\phi_i\}_{i=0}^n$ base dello spazio vettoriale su cui sto cercando $g_n^\ast$, \hl{non mi interessa sia ortogonale}, quindi posso considerare base canonica per i polinomi, importante è che sia base, e scrivo $g_n^\ast = \sum_{i=0}^nc_i\phi_i$.
+    \begin{enumerate}
+        \item Caso continuo su intervallo $[a,b]$: per trovare i coefficienti
+        $c_i$ pongo le condizioni $(g_n^\ast,\phi_i)=(f,\phi_i) \,\forall i=0,\dots,n$ dove $(h,g)=\int_a^bh(x)g(x)dx$
+        \item Caso discreto su punti $\mathbf{x} = \{ x_i \}_{i=0}^m$: risolvo sistema delle equazioni normali $A^TA\mathbf{c}=A^T \mathbf{y}$ dove $\mathbf{c} =(c_i)_{i=0}^n$ è il vettore colonna dei coefficienti di $g_n^\ast$ mentre indicando con $tab\,g = g(\mathbf{x})$ vettore colonna di valutazione di un funzione $g$ nei punti $x_i$ ho, $y = tab\,f$ mentre
+        \[
+        A = [ tab\,\phi_0,\dots,tab\,\phi_n] =
+        \begin{bmatrix}
+        \phi_0(x_0) & \dots & \phi_n(x_0) \\
+        \dots & \dots & \dots \\
+        \phi_0(x_m) & \dots & \phi_n(x_m)
+        \end{bmatrix}
+        \]
+    \end{enumerate}
+    
+    \item Dato problema generale di interpolazione lineare nello spazio $V$, data $\{ \Phi_i \}_{i=0}^n$ base di $V$ dove sto cercando interpolazione, e siano $L_i$ i funzionali lineari del problema, si ha esistenza e unicità della soluzione se
+    $\big|\bigl( L_i(\Phi_j) \bigr)_{i,j}\big| \ne 0$.
+    I funzionali possono essere valutazione in un punto, integrale su intervallo, calcolo della derivata in un punto$\dots$
+
+    \item Si ha in generale che una formula di quadratura a $n+1$ nodi è interpolatoria $\iff$ ha gdp almeno $n$. Grado di precisione $n$ significa che deve essere esatta $\forall p \in \numberset{P}_n$ quindi \hl{per trovare i pesi della formula posso imporre l'esattezza per $p=1,x,\dots,x^n$.} \\
+    Per trovare nodi in modo che gdp $= k$, impongo che la formula di quadratu\-ra sia esatta $\forall p \in \numberset{P}_k$, ovvero per $p=1,x,\dots,x^k$. \\
+    Una formula di quadratura interpolatoria a $n+1$ nodi ha gdp al massimo pari a $2n+1$, in questo caso è detta formula di Gauss.
+    I nodi della formula di Gauss a $n+1$ nodi, sono dati dalle radici del polinomio monico di grado $n+1$ ortogonale a tutti i polinomi di grado $\le n$ rispetto al prodotto
+    $(g,h) = \int_a^b g(x)h(x)w(x)dx$ con $w(x)$ funzione peso: considero una base $\mathcal{B}$ di $\numberset{P}_n$ (\hl{canonica va bene}) e cerco il polinomio che annulla l'integrale indicato $\forall p \in \mathcal{B}$.
+
+    \item Dato un metodo multistep a $p+1$ passi ($b_{-1} = 0$ per metodo esplicito):
+    \[
+    u_{j+1} = \sum_{k=0}^p a_k u_{j-k} + h \sum_{k=-1}^p b_k f(t_{j-k},u_{j-k})
+    \]
+    Per avere consistenza devo avere:
+    \[
+    \sum_{k=0}^p a_k = 1, \quad \sum_{k=0}^p (-k)a_k + \sum_{k=-1}^pb_k = 1
+    \]
+    Un metodo ha ordine $q\ge1$ se e solo se:
+    \[
+    \sum_{k=0}^p (-k)^ia_k + i\sum_{k=-1}^p (-k)^{i-1}b_k = 1 \quad \forall i=1,\dots,q
+    \]
+    Diciamo $\rho(r) = r^{p+1} - \sum_{k=0}^pa_kr^{p-k}$ il primo polinomio caratteristico associato.
+    \begin{itemize}
+        \item  Un metodo consistente è 0-stabile $\iff$ tutte le radici $r_0,\dots,r_p$ di $\rho(r)$ hanno modulo $\le 1$ e per $|r_i| = 1$ si ha $r_i$ radice semplice. 
+        \item Un metodo consistente è convergente $\iff$ è 0-stabile.
+    
+    \end{itemize}
+    Diciamo $\Pi(r) = \rho(r) - h\lambda \sum_{k=-1}^p b_kr^{p-k}$ il polinomio caratteristico associato. 
+    \begin{itemize}
+        \item Un metodo è assolutamente stabile se tutte le radici di $\Pi(r)$ hanno modulo $<1$, ciò dipende dal valore di $h$.
+    \end{itemize}
+    
+   
+\end{itemize}
+
+\end{document}

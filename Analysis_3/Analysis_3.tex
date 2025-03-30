@@ -1,0 +1,1012 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{geometry} %Per impostare i  margini del foglio
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+%\setcounter{secnumdepth}{1} %per avere le \subsection{} non numerate ma nell'indice
+\setcounter{tocdepth}{5}
+\usepackage[italian]{babel} %Mette in italiano tutte le parole fisse di LaTeX (v. "TITOLO")
+\usepackage[utf8]{inputenc} %Gestisce i caratteri accentati
+\usepackage{comment} %Per  usare \begin{comment}
+\usepackage{amsthm} %per gli ambienti theorem
+\usepackage{amsmath} %cose matematiche
+\usepackage{amssymb} %cose matematiche
+\usepackage{mathrsfs} %per \mathscr
+\usepackage{dsfont} %per \mathds{1}
+\usepackage{derivative} %per \pvd{}{}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{units} %per \nicefrac{}{} 
+\usepackage{cancel} %per \cancel{}
+\usepackage{caption} %mettere le descrizioni
+\usepackage{graphicx} %Importare foto
+\usepackage{booktabs}
+%\pagestyle{empty} %per togliere il numero della pagina
+\usepackage{xcolor} %per \color{} e \textcolor{}{}
+\usepackage{empheq} 
+%\usepackage{enumitem} %Insieme  ai vari \renewcommand per fare elenchi coi numeri belli
+\usepackage[shortlabels]{enumitem}
+\usepackage{physics} %Per avere \nabla in grassetto
+\usepackage[most]{tcolorbox} %Box colorati teoremi
+\usepackage{mdframed}
+\usepackage{framed}
+\usepackage{color,soul} %per evidenziare con il comando highlight \hl
+    \usepackage{hyperref} %per URL (con \url{}) e hyperlink
+\usepackage{tikz} %robe  disegnate
+\usepackage{tikz-cd}
+\usetikzlibrary{matrix,shapes}
+
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%RINOMINA DI COMANDI
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+\newcommand{\bv}{\boldsymbol} %per scrivere i vettori in  grassetto usare \bv
+\newcommand{\cv}[2]{\begin{pmatrix} #1 \\ #2 \end{pmatrix}} %column vector di due dim
+\newcommand{\cvv}[3]{\begin{pmatrix} #1 \\ #2 \\ #3 \end{pmatrix}} %column vector di tre dim
+\newcommand{\myth}{\normalfont \scshape \textcolor{red}} %mio modo custom di mettere teoremi/lemmi/proposizioni
+\newcommand{\re}{\mathbb{R}} %numeri reali
+\newcommand{\na}{\mathbb{N}} %numeri naturali
+\newcommand{\im}{\mathbb{C}} %numeri complessi
+\newcommand{\pr}{\text{I\kern-0.15em P}} %probabilità
+\newcommand{\ex}{\mathbb{E}} %operatore valore atteso/media
+\newcommand{\om}{\Omega} %spazio campionario
+\newcommand{\F}{\mathcal{F}} %%sigma algebra, famiglia degli eventi
+\newcommand{\myeq}[1]{\stackrel{\mathclap{\normalfont\mbox{\tiny{#1}}}}{=}} %scrivere soppra all'uguale con \myeq{<cosa voglio scrivere>}
+\newcommand{\mylist}[1]{\textnormal{\textsc{#1}}}
+\newcommand{\inner}{\langle\cdot{,}\cdot\rangle} %per prodotto scalare (interno) vuoto
+\newcommand{\inn}[2]{\langle #1, #2 \rangle}
+
+\newcommand\myfunc[5]{         %per scrivere funzioni con dominio, codominio e dove va un elemento
+  \begingroup
+  \setlength\arraycolsep{0pt}
+  #1\colon\begin{array}[t]{c >{{}}c<{{}} c}
+             #2 & \to & #3 \\ #4 & \mapsto & #5 
+          \end{array}%
+  \endgroup}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%NUOVI STILI
+\newtheoremstyle{indentdefinition}
+{5mm}                % Space above
+{5mm}                % Space below
+{\addtolength{\leftskip}{0mm}\setlength{\parindent}{0em}}        % Theorem body font % (default is "\upshape")
+{0mm}                % Indent amount
+{\bfseries}       % Theorem head font % (default is \mdseries)
+{:}               % Punctuation after theorem head % default: no punctuation
+{ }               % Space after theorem head
+{\thmname{#1} \thmnumber{#2} \thmnote{\textnormal{(\textcolor{blue}{#3})}}}                % Theorem head spec
+
+\newtheoremstyle{indenttheorem}
+{5mm}                % Space above
+{5mm}                % Space below
+{\addtolength{\leftskip}{10mm}\setlength{\parindent}{0em}}        % Theorem body font % (default is "\upshape")
+{-10mm}                % Indent amount
+{\bfseries\scshape\color{red}}       % Theorem head font % (default is \mdseries)
+{.}               % Punctuation after theorem head % default: no punctuation
+{ }               % Space after theorem head
+{\thmname{#1} \thmnumber{#2} \thmnote{(\textnormal{#3})}}                % Theorem head spec
+
+\newtheoremstyle{myremark}
+{5mm}                % Space above
+{5mm}                % Space below
+{}        % Theorem body font % (default is "\upshape")
+{}                % Indent amount
+{\itshape}       % Theorem head font % (default is \mdseries)
+{}               % Punctuation after theorem head % default: no punctuation
+{ }               % Space after theorem head
+{\thmname{#1} \thmnote{(\textbf{#3})}}                % Theorem head spec
+
+\newtheoremstyle{indentgeneral}
+{5mm}                % Space above
+{5mm}                % Space below
+{\addtolength{\leftskip}{10mm}\setlength{\parindent}{0em}}        % Theorem body font % (default is "\upshape")
+{-10mm}                % Indent amount
+{}       % Theorem head font % (default is \mdseries)
+{}               % Punctuation after theorem head % default: no punctuation
+{3mm}               % Space after theorem head
+{\thmnote{\textbf{#3}}}                % Theorem head spec
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%NUOVI AMBIENTI
+
+\theoremstyle{indentdefinition}
+\newtheorem{defn}{Definizione}[section]
+
+\theoremstyle{indenttheorem}
+\newtheorem{thm}{Teo.}
+\newtheorem{prop}{Prop.}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Cor.}
+
+\theoremstyle{myremark}
+\newtheorem*{oss}{Osservazione}
+\newtheorem{es}{Esempio}
+
+\theoremstyle{indentgeneral}
+\newtheorem*{gen}{}
+
+\newenvironment{dimo}{\begin{quote}\textit{\textbf{Dimostrazione.}}}{\end{quote}} %dimostrazione con indentatura
+\newenvironment{lyxlist}[1]
+	{\begin{list}{}
+		{\settowidth{\labelwidth}{#1}
+		 \setlength{\leftmargin}{\labelwidth}
+		 \addtolength{\leftmargin}{\labelsep}
+		 \renewcommand{\makelabel}[1]{##1\hfil}}}
+	{\end{list}}
+
+
+%\tcolorboxenvironment{theorem}{
+%enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{prop}{
+%enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{lem}{
+%enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{eq}{
+%enhanced jigsaw,colframe=orange,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{defin}{
+%enhanced jigsaw,colframe=cyan,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{prop}{
+%enhanced jigsaw,colframe=yellow,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+\title{\textbf{Analisi 3}}
+\author{Marco Ambrogio Bergamo}
+\date{Anno 2023-2024}
+
+\begin{document}
+\maketitle
+\tableofcontents{}
+
+\part{Successioni di funzioni, convergenze}
+\section{Successioni di funzioni}
+\subsection{Spazi funzionali}
+
+\begin{gen}[Spazio metrico]
+    La coppia $(X, d)$ dove $X$ è un \underline{insieme} e $d$ è una distanza, ovvero un'applicazione $d: X\times X \to \re$ tale che
+    \begin{enumerate}
+        \item (Non negatività) $d(x,y)\ge 0 \quad \forall x,y\in X$
+        \item (Definita positiva) $d(x,y)=0 \iff x=y$
+        \item (Simmetrica) $d(x,y)=d(y,x) \forall x,y\in X $
+        \item (Disugualianza triangolare) $d(x,y)\le d(x,z)+d(z,y) \quad \forall x,y,z\in X$
+    \end{enumerate}
+    \begin{align*}
+        \text{Definito: } d(x,y) & & \overset{\text{Induce}}{\longrightarrow} & &\text{Topologia: } \mathcal{T} \coloneqq (A\subseteq V \mid \forall x\in A \; \exists r>0 \text{ t.c. } \overbrace{\{y\in V\mid d(x,y)<r\}}^{B(x,r)}\subset A)
+\end{align*}
+\end{gen}
+
+\begin{es}[Spazi funzionali] Insiemi di funzioni con definite distanze tra funzioni:
+\begin{itemize}
+    \item \textbf{Metriche lagrangiane} In $C^0([a,b])$ (insieme delle funzioni continue su un compatto di $\re$ a $\re$)
+    $$d(f,g)\coloneqq\max_{t\in[a,b]}|f(t)-g(t)| \qquad\text{ di ordine 1} $$
+    In $C^k[a,b]$
+     $$d(f,g)\coloneqq\sum_{j=0}^{k}\max_{t\in[a,b]}|f^{(j)}(t)-g^{(j)}(t)|\qquad\text{ di ordine k} $$
+     \item \textbf{Metrica integrale} In $\tilde{C}(a,b)$ (insieme delle funzioni continue assolutamente integrabili in senso generalizzato su $(a,b)$:
+\begin{align*}
+     d(f,g)\coloneqq\int_a^b|f(t)-g(t)|dt \qquad\text{ di ordine 1} \\
+    d(f,g)\coloneqq\left(\int_a^b|f(t)-g(t)|^2dt\right)^2 \qquad\text{ di ordine 2}
+\end{align*}
+\end{itemize}
+    
+\end{es}
+
+\begin{gen}[Spazio normato]
+    La coppia $(V, ||\cdot||)$ dove $V$ è \underline{spazio vettoriale} su un campo $K$ ($\re$ o $\im$)  e $||\cdot||$ è una norma, ovvero un'applicazione $||\cdot||: V \to \re$ tale che
+    \begin{enumerate}
+        \item (Non negatività) $||x||\ge 0 \quad \forall x\in V$
+        \item (Definita positiva) $||x||=0 \iff x=0$
+        \item (Assoluta omogeneità) $||\lambda x||=|\lambda| ||x|| \quad \forall \lambda \in K, x\in V$
+        \item (Disugualianza triangolare) $||x+y||\le ||x||+||y||$
+    \end{enumerate}
+    \begin{align*}
+        \text{Definito: } ||x|| & & \overset{\text{Induce}}{\longrightarrow} & & d(x,y) \coloneqq ||x-y||  & & 
+        &\overset{\text{Induce}}{\longrightarrow} & & \text{Topologia} 
+\end{align*}
+\end{gen}
+
+
+
+\begin{gen}[Spazio di Banach]
+    È uno spazio normato (vettoriale con norma) \textbf{completo} rispetto alla metrica (indotta dalla norma).
+\end{gen}
+
+\begin{es}[Spazio delle funzioni limitate (bounded)] $\mathcal{B}(E)$ l'insieme delle funzioni limitate $f: E\to\re$, con $E$ insieme. Definiamo come norma di $f\in\mathcal{B}(E)$ la \textbf{norma uniforme (o sup norm)}:
+$$||f||_{\infty}=\sup_E|f|$$
+Tale spazio \underline{è completo} (DIM) rispetto a questa norma \\
+(Notare che la distanza indotta da tale norma è simile alla lagrangiana di ordine 1, qui abbiamo sup e non max). 
+
+\end{es}
+
+\begin{gen}[Spazio prehilbertiano/hermitiano]
+    La coppia $(H, \inner)$ dove $H$ è spazio vettoriale su un campo $K$ ($\re$ o $\im$)  e $\inner$ è prodotto interno, ovvero un'applicazione $\inner: V\times V \to K$ tale che
+    \begin{enumerate}
+        \item (Definita positiva) $\inn{x}{x}\ge 0 \quad \forall x \ne 0 \in V$
+        \item (Simmetria coniugata) $\inn{x}{y}=\overline{\inn{y}{x}}$
+        \item (Linearità nella prima componente) $\inn{x+a}{y}=\inn{x}{y}+\inn{a}{y}, \quad \inn{\lambda x}{y}=\lambda\inn{x}{y}$
+        \item (Antilinearità nella prima componente) $\inn{x}{y+b}=\inn{x}{y}+\inn{x}{b}, \quad \inn{x}{\lambda y}=\overline{\lambda}\inn{x}{y}$
+    \end{enumerate}
+    \begin{align*}
+        \text{Definito: } \inn{x}{y}  & & \overset{\text{Induce}}{\longrightarrow} 
+& & ||x|| \coloneqq \sqrt{\inn{x}{x}} & & \overset{\text{Induce}}{\longrightarrow} & & d(x,y) \coloneqq ||x-y||  & & \overset{\text{Induce}}{\longrightarrow} & & \text{Topol.}
+    \end{align*}
+\end{gen}
+
+\begin{gen}[Spazio hilbertiano]
+    È uno spazio prehilbertiano (vettoriale con prodotto interno) \textbf{completo} rispetto alla metrica (indotta dalla norma indotta dal prodotto interno). \\
+    Delle volte è facile trovare norme /distanze per le quali lo spazio è completo, ma difficile trovare l'espressione di un prodotto interno che induca tale norma.
+\end{gen}
+
+\begin{prop}
+    Distanza, norma e prodotto scalare solo applicazioni continue.
+\end{prop}
+
+
+
+\subsection{Serie e convergenza}
+
+$E$ insieme non vuoto e $(f_n)_n$ successione di funzioni $f_n: E \to \re$
+\begin{gen}[Convergenza assoluta]
+    Una serie $\sum_{n=0}^\infty a_n$ converge assolutamente se converge $\sum_{n=0}^\infty ||a_n||$ la serie delle norme.
+\end{gen}
+
+\begin{gen}[Convergenza condizionata]
+    Una serie che converge ma non converge assolutamente. \\
+    Es: serie armonica alternante
+\end{gen}
+
+\begin{gen}[Convergenza puntuale] 
+    $(f_n)_n$ converge puntualmente  in $E$ se $\forall x\in E$ esiste finito:
+    $$f(x)=\lim_{n\to+\infty}f_n(x)$$
+    Si dice $f_n \to f$ puntualmente in $E$
+\end{gen}
+
+\begin{gen}[Convergenza uniforme]
+$f_n \to f$ uniformemente in $E$ se 
+$$\forall \varepsilon>0 \;\exists n_\varepsilon\in\na \mid \forall n\ge n_\varepsilon \quad \forall x\in E: |f_n(x)-f(x)|\le \varepsilon$$
+Ciò implica che $f-\varepsilon\le f_n \le f+\varepsilon$, ovvero che $\forall\varepsilon$ il grafico di $f_n$ sta nell'\textbf{intorno tubolare di raggio $\varepsilon$}\\
+Si può anche scrivere:
+$$\lim_{n\to+\infty}\sup_E|f_n-f|=0$$
+Se  ci mettiamo nello spazio delle funzioni limitate $(\mathcal{B}(E), ||\cdot||_{\mathcal{B(E)}})$ abbiamo che $\sup_E|f_n-f|=d(f_n, f)$ (distanza indotta), quindi in tale spazio (stiamo escludendo tutti i casi di funzioni non limitate) convergenza uniforme equivale a convergenza in tale spazio: $f_n\to f $ in $\mathcal{B}(E)$
+\end{gen}
+
+\begin{thm}[Criterio di Cauchy per la convergenza uniforme]
+$(f_n)_n$ converge unif. in $E \iff \forall \varepsilon>0 \;\exists n_\varepsilon \mid \forall n,m\ge n_\varepsilon \; \forall x \in E: \; |f_n(x)-f_m(x)|\le \varepsilon$. \\
+Ovvero: 
+$$f_n\to f \text{ unif. in } E \iff\lim_{n,m\to+\infty}\sup_E|f_n-f_m|=0$$
+\end{thm}
+\begin{dimo} \\
+    $\implies$) Def. con $\varepsilon /2$: $\forall \varepsilon>0 \;\exists n_\varepsilon\in\na \mid \forall n\ge n_\varepsilon \quad \forall x\in E: |f_n(x)-f(x)|\le \frac{\varepsilon}{2}$ \\
+    $\implies \forall m,n \; \forall x\in E: $
+    $$|f_n-f_m|\le |f_n-f|+|f-f_m|\le\varepsilon/2+\varepsilon/2=\varepsilon \quad \text{(disug. triang)} \qed$$
+    
+    $\impliedby$) Fisso $x\in E$ e vario $n$, vedo che la successione $(f_n(x))_n$ è di Cauchy. Dato che è in $\re$ converge, sia $f(x)$ il valore limite. \\
+    Prendo l'ipotesi e passo al limite per $m\to+\infty$ e vedo che viene $\dots \forall x \in E: \; |f_n(x)-f(x)|\le \varepsilon $ che è la def. di convergenza uniforme.
+  
+\end{dimo}
+
+\begin{thm}[Inversione del limiti]
+    Sia:
+    \begin{itemize}
+        \item $\forall n: \lim_{x\to\overline{x}}f_n(x)=l_n$
+        \item $(f_n)_n \to f$  unif. in $E\setminus \{\overline{x}\}$
+    \end{itemize}
+    Allora i limiti
+    $$\lim_{n\to+\infty}l_n, \quad \lim_{x\to\overline{x}}f(x)$$
+    esistono finiti e \textbf{coincidono}.
+\end{thm}
+\begin{dimo}
+    \begin{itemize}
+        \item Per ip. $f$ converge unif. quindi è di Cauchy: $\forall \varepsilon>0 \;\exists n_\varepsilon \mid \forall n,m\ge n_\varepsilon \; \forall x \in E: \; |f_n(x)-f_m(x)|\le \varepsilon$. Facendo tendere in tale def. $x\to\overline{x}$ vediamo che è di Cauchy anche la succ. $(l_n)_n$. Essendo in $\re$ è convergente, con limite $l$.
+        \item Dobbiamo mostrare che $|f(x)-l|\to 0$ (è equiv. alla tesi, essendo $f(x)$ ed $l$ i due limiti sopra): fissato $\varepsilon>0$ sia $n_\varepsilon$ tale che  i termini delle due succ. sono abbastanza vicine ai propri limiti, ovvero:
+        $|f_{n_\varepsilon}-f|\le \varepsilon$ su $E\setminus\{\overline{x}\}$ e  $|l_{n_\varepsilon}-l|\le \varepsilon$. \\
+        Applico disugualianza triangolare:
+        $$|f(x)-l|\le |f(x)-f_{n_\varepsilon}(x)|+|f_{n_\varepsilon}(x)-l_{n_\varepsilon}|+|l_{n_\varepsilon}-l|\le 2\varepsilon+\underbrace{|f_{n_\varepsilon}(x)-l_{n_\varepsilon}|}_\star$$
+        \item Sia $U_\varepsilon(\overline{x})$ intorno di $\overline{x}$ tale che $\forall x \in U\setminus\{\overline{x}\}: \star \le \varepsilon$. \\
+        Allora $\forall x \in U\setminus\{\overline{x}\}: |f(x)-l|\le 3\varepsilon \quad \qed$
+    \end{itemize}
+\end{dimo}
+
+\begin{cor}
+    $(f_n)_n\to f$ unif. e ogni $f_n$ è continua $\implies f$ continua 
+\end{cor}
+
+\begin{dimo}
+    Sia $\overline{x}$ di accumulazione (altrimenti nulla da dim.), si apllichi il teorema con $l_n=f_n(\overline{x})$
+\end{dimo}
+\begin{thm}[Inversione dei limiti in generale]
+    
+\end{thm}
+\begin{defn}[Convergenza di una serie in uno spazio di Banach]
+    Sia $(X,\norm{\cdot})$  uno spazio di Banach. Sia $(x_n)_n$ una successione in $X$.
+$$\sum_\na x_k \text{ converge in $X$}\iff \left(\sum_{k=0}^mx_k\right)_m \text{ converge in $X$}$$
+ovvero la serie converge solo se converge la successione delle sue somme parziali.
+\end{defn}
+\begin{thm}[Convergenza assoluta implica convergenza in spazio di Banach]
+$\sum \norm{x_k}$ converge in $\re\implies \sum x_k$ converge in $X$
+\end{thm}
+\begin{dimo}
+$\sum \norm{x_k}$ converge in $\re\implies$ converge la successione delle somme parziali $\implies$ la succ. delle somme paziali è di Cauchy, quindi:
+
+    
+\end{dimo}
+
+\newpage
+\part{Analisi complessa}
+$z=x+iy=\rho e^{i\theta}$
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|l|} \hline 
+         $f(z)=$&  Def. &Def. come serie&  Come campo  vettoriale&  Dove continua& Dove olomorfa &Iniettiva \\ \hline 
+         $\frac{1}{z}$&  $(\frac{1}{\rho})e^{i(-\theta)}$&  &  &  $\im\setminus\{0\}$&  $\im\setminus\{0\}$&Si\\ \hline 
+         $z^n$&  $(\rho^n)e^{i(n\theta)}$&  &  &  &  &No\\ \hline 
+         $e^z$&  $(e^x)e^{iy}$&  &  $(e^x \cos y, e^x \sin y)$&  &  & No\\ \hline 
+         $\sin(z)$&  &  &  &  &  & No\\ \hline 
+         $\cos(z)$&  &  &  &  &  & No\\ \hline 
+         $\tan(z)$&  &  &  &  &  & No\\ \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Inverse (multifunzioni/funzioni polidrome)} a parte $1/z$ che è iniettiva ed è l'inversa di se stessa.
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|l|} \hline 
+         $f(z)=$&  Def. &Def. come serie&  Come campo  vettoriale&  Dove continua& Dove olomorfa &Iniettiva \\ \hline 
+         $\frac{1}{z}$&  $(\frac{1}{\rho})e^{i(-\theta)}$&  &  &  $\im\setminus\{0\}$&  $\im\setminus\{0\}$&Si\\ \hline 
+         $^n\sqrt{z}$&  $\rho^{1/n}e^{i(\frac{\theta+2k\pi}{n})}$&  &  &  &  &Si\\ \hline 
+         $\log(z)$&  $\log \rho + i(\theta+2k\pi)$&  &  &  $\im\setminus(-\infty, 0]$&  $\im\setminus(-\infty, 0]$& Si\\ \hline 
+         $\arcsin(z)$&  &  &  &  &  & Si\\ \hline 
+         $\arccos(z)$&  &  &  &  &  & Si\\ \hline 
+         $\arctan(z)$&  &  &  &  &  & Si\\ \hline
+    \end{tabular}
+\end{table}
+
+\section{Serie di potenze}
+
+\section{$\mathbb{C}$-differenziabilità}
+
+\begin{prop}
+    $f$ è $\mathbb{C}$-diff. in $a$ $\implies$ valgono condizioni di C-R
+\end{prop}
+
+\begin{prop}
+$$
+    \begin{cases}
+        f:\Omega\to\mathbb{C} \text{ $\re$-diff in $a$} \\
+        \text{valgono condizioni C-R in $a$}
+    \end{cases}
+    \implies f \text{ è $\mathbb{C}$-diff.  in $\Omega$}
+    $$
+\end{prop}
+
+\begin{thm}[Looman-Menchoff]
+$$
+    \begin{cases}
+        f:\Omega\to\mathbb{C} \text{ continua} \\
+        \text{valgono condizioni C-R in $a$}
+    \end{cases}
+    \implies f \text{ è $\mathbb{C}$-diff.  in $\Omega$}
+    $$
+\end{thm}
+
+\begin{thm}[Serie derivata]
+    $f$ analitica $\implies f$ $\mathbb{C}$-diff.
+\end{thm}
+
+\begin{dimo} Sia
+$$ f(z)= \sum_{n=0}^{\infty}c_n(z-a)^{n} \quad \quad g(z)\coloneqq \sum_{n=1}^{\infty}nc_n(z-a)^{n-1} \quad \text{Serie derivata)}$$
+con $R>0$ il raggio di convergenza di $f$. Si vede facilmente che $g(z)$ ha lo stesso raggio di conv. di $f$ con il criterio della radice ($\lim_{n\to\infty}\sqrt[n]{n|c_n|}=\sqrt[n]{n}\sqrt[n]{|c_n|}\to\sqrt[n]{|c_n|}\to  1/R$)
+    \begin{itemize}
+        \item WLOG $a=0$. Siano $w\in D_R(0)$, $r\in \re\mid |w|<r<R$, $h\in\im\mid |w+h|<r$. \item Dobbiamo \hl{dimostrare che il rapporto incrementale converge unif. alla serie derivata}, così $f$ è $\im$-diff., ovvero:
+        $$\frac{f(w+h)-f(w)}{h} \overset{unif.}{\longrightarrow} g(z) \quad h\to 0$$
+        ovvero 
+        $$\limsup_{h\to0}\abs{\frac{f(w+h)-f(w)}{h} - g(z)}\to 0$$
+        \item $\forall n\in\na$ dividiamo la serie (in \textbf{parte finita + coda}):
+        $$f(z)=S_N(z)+R_N(z)=\sum_{n=0}^{N}c_n(z)^{n}+\sum_{n=N+1}^{\infty}c_n(z)^{n}$$
+        \item Valutiamo il rapporto incrementale in funzione delle due serie divise:
+        $$\frac{f(w+h)-f(w)}{h}=\underbrace{\frac{S_N(w+h)-S_N(w)}{h}}_{I)}+\underbrace{\frac{R_N(w+h)-R_N(w)}{h}}_{II)}$$
+        \item[\textbf{I)}] $\lim_{h\to 0}\frac{S_N(w+h)-S_N(w)}{h}=S'_N(w)$, per la $\im$-diff. dei polinomi. Inoltre $\lim_{N\to\infty} S'_N(w)=g(w)$
+        \item[\textbf{II)}] $$\frac{R_N(w+h)-R_N(w)}{h}=\frac{1}{h}\sum_{N+1}^\infty c_n[(w+h)^n-w^n]$$
+        Dato che $a^n-b^n=(a-b)(a^{n-1}+a^{n-2}b+\dots+ab^{n-2}+b^{n-1})$ abbiamo
+        $$(w+h)^n-w^n=h[\underbrace{(w+h)^{n-1}+(w+h)^{n-2}w+\dots+(w+h)^0w^{n-1}}_{\text{$n$ termini}}]$$
+        dove nella quadra ci sono $n$ termini ognuno di modulo minore di $r^{n-1}$ (dato che $\abs{w+h}<r)$. Quindi 
+        $$\abs{(w+h)^n-w^n}\le\abs{h}nr^{n-1} \implies \abs{\text{(II)}}\le \sum_{n=N+1}^\infty  n\abs{c_n}r^{n-1}\underset{N\to\infty}{\longrightarrow}0$$
+        poiché siamo in $r<R$ quindi $f$ converge e quindi la "coda" della serie deve per forza tendere a zero.
+        \item Mettendo assieme:
+        $$\limsup_{h\to0}\abs{\frac{f(w+h)-f(w)}{h} - g(z)}\le \underbrace{\abs{S'_N(w)-g(w)}}_{\to 0}+\underbrace{\sum_{n=N+1}^\infty n\abs{c_n}r^{n-1}}_{\to 0} \underset{N\to\infty}{\longrightarrow}0$$
+(il primo addendo tende a 0 poiché $S'_N\to g(w)$). Da cui tesi. \qed        
+    \end{itemize}
+\end{dimo}
+
+\section{Integrazione lungo le curve}
+
+\subsection{Curve in $\mathbb{C}$}
+\subsection{Integrale lungo  una curva}
+\subsection{Primitive}
+\subsection{Integrale e forme differenziali}
+
+\section{Analicità delle funzioni $\mathbb{C}$-differenziabili}
+
+\begin{thm}[Cauchy-Goursat] $f:\Omega\to\im$ è $\im$-diff. $\implies \int_{\partial R}fdz=0$ per ogni rettangolo chiuso $R\subseteq \Omega$
+\end{thm}
+
+\begin{dimo}
+    Sia $A\coloneqq\abs{\int_{\partial R}fdz}$
+    \begin{itemize}
+        \item Suddivido il rettangolo in 4 rettangoli:
+        $$\int_{\partial R}fdz=\sum_{j=1}^4\int_{\partial R_j^1}fdz$$
+        Vedo che
+        $$A=\abs{\int_{\partial R}fdz}=\abs{\sum_{j=1}^4\int_{\partial R_j^1}fdz}\le\sum_{j=1}^4\abs{\int_{\partial R_j^1}fdz}$$
+        Allora esiste almeno uno dei 4 rettangoli (chiamiamo $j_1$) tale che:
+        $$\abs{\int_{\partial R_{j_1}^1}fdz}\ge \frac{1}{4}A$$
+        \item Ripeto tale procedimento partendo dal rettangolo $R_{j_1}^1$ (quello con int. in val assoluto "maggiore"/sopra la media). Vado avanti così ripetendo all'infinito. Il termine $k$-esimo della successione dei rettangoli è tale che 
+        $$\abs{\int_{\partial R_{j_k}^k}fdz}\ge \frac{1}{4^k}A$$
+        \item Essendo ogni rettangolo un compatto, l'intersezione di tutti è un solo punto quindi
+        $$\bigcap_{k\in\na}R_{j_k}^k=\{a\}$$
+        Usando la $\im$\textbf{-differenziabilità} di $f$ approssimiamola al primo ordine in $a$: 
+        $$f(z)=\underbrace{f(a)+f'(a)(z-a)}_{=P(z-a)}+\sigma(z) \quad \quad \sigma(z)=o(\abs{z-a})$$
+        Vediamo che per l'int. di $f$ sul rettangolo $k$-esimo ha solo contributo il termine $\sigma(z)$, infatti
+        $$\int_{\partial R_{j_k}^k}fdz=\underbrace{\int_{\partial R_{j_k}^k}P(z-a)dz}_{=0}+\int_{\partial R_{j_k}^k}\sigma(z)=\int_{\partial R_{j_k}^k}\sigma(z)$$
+        essendo $P(z-a)$ un polinomio che quindi ammette primitiva.
+        \item Essendo $\sigma(z)$ un o-piccolo di $\abs{z-a}$ allora esiste un intorno di tale valore per cui la funzione $\abs{\sigma(z)}$ sta sotto una qualsiasi funzione lineare in tale valore, ovvero fissato $\epsilon>0$ esiste $\delta>0$ tale che
+        $$\abs{\sigma(z)}\le\epsilon\abs{z-a} \quad\quad \text{per $\abs{z-a}<\delta$}$$
+        Notare (pensare al rettangolo inscritto nel cerchio) che $\abs{z-a}\le\text{diam}R_{j_k}^k$ quindi
+        $$\abs{\sigma(z)}\le\epsilon \text{diam}R_{j_k}^k$$
+        Allora
+        \begin{align*}
+            \abs{\int_{\partial R_{j_k}^k}\sigma(z)}&\le \epsilon\text{diam}R_{j_k}^k\text{lungh}(\partial R_{j_k}^k) \\
+            &=\epsilon (2^{-k}\text{diam}R)(2^{-k}\text{lungh}(\partial R) \\
+            &=\epsilon 4^{-k}\text{diam}R\cdot \text{lungh}(\partial R)
+        \end{align*}
+        \item Mettendo tutto assieme:
+        $$4^{-k}A\le \epsilon 4^{-k}\text{diam}R\cdot \text{lungh}(\partial R)$$
+        Per l'arbitrarietà di $\epsilon$: $A=0$
+    \end{itemize}
+\end{dimo}
+
+\begin{thm}
+    $f:\Omega\to\im$ è $\im$-diff in $\Omega \setminus \{a\} + f$ \textbf{continua} in $\Omega\implies \int_{\partial R}fdz=0$ per ogni rettangolo chiuso $R\subseteq \Omega$
+\end{thm}
+
+\begin{dimo}
+    Se la singolarità è fuori apposto, se è sul bordo faccio successione di rettangoli interni a $R$ che tendono ad esso, essendo $f$ continua allora l'integrale della di un termine della  successione (che è zero per  C-G) tende all'integrale del limite della succ, quindi tesi. Se è interna allora dividere in due rettangoli che hanno la singolarità sul bordo e siamo al caso  di prima.
+\end{dimo}
+
+\begin{lem}
+    $R$ rettangolo chiuso, $a\in\im$  \textbf{interno} ad $R \implies \int_{\partial R}\frac{1}{z-a}dz=2\pi i$
+\end{lem}
+
+\begin{dimo}
+    Fare riparam. $z=a+\rho(\theta)e^{i\theta}$, ricordando come diventa il $dz$. Svolgere i calcoli.
+\end{dimo}
+
+\begin{thm}[Formula di Cauchy per un rettangolo]
+$f:\Omega\to\im$ è $\im$-diff., $R\subseteq \Omega$ rettangolo $\implies\forall w$ interno ad $R$: $$f(w)=\frac{1}{2\pi i}\int_{\partial R}\frac{f(z)}{z-w}dz$$
+\end{thm}
+
+\begin{dimo}
+\begin{align*}
+     \int_{\partial R}\frac{f(z)}{z-w}dz &=\int_{\partial R}\frac{f(z)+f(w)-f(w)}{z-w}dz \\ &=
+     \int_{\partial R}\frac{f(z)-f(w)}{z-w}dz + \int_{\partial R}\frac{f(w)}{z-w}dz \\&= 
+     \int_{\partial R}g(z)dz+f(w)\int_{\partial R}\frac{1}{z-w}dz \\ &= 
+     0+f(w)2\pi i \quad \quad \text{ho usato lemma e teo. precedenti}\\ &
+     =f(w)2\pi i
+\end{align*}
+dove 
+$$g(z)\coloneqq 
+\begin{cases}
+\frac{f(z)-f(w)}{z-w} \quad z\in\Omega\setminus\{w\} \\
+f'(w) \quad z=w
+\end{cases}$$
+che è \textbf{continua} in $\Omega$ e $\im$-\textbf{differenziabile} in $\Omega\setminus\{w\}$
+   
+\end{dimo}
+
+\begin{thm}[Analiticità delle funzioni $\im$-diff.] 
+    $f:\Omega\to\im$ è $\im$-diff. $\implies f$ analitica in $\Omega$
+\end{thm}
+
+\begin{dimo}
+    Dobbiamo dim. che $\forall a\in\Omega$ la funzione $f$ può essere scritta come serie di potenze di centro $a$ in un intorno di $a$. Siano:
+    $$
+    \begin{cases}
+        R\subseteq\Omega \text{ rettangolo che contiene $a$} \\
+        \overline{D}_r(a)\subset R \text{ disco chiuso di centro $a$} \\
+        \zeta \in \partial R \\
+        z\in D_r(a) 
+    \end{cases}
+    $$
+    \begin{itemize}
+        \item Per \textbf{formula Cauchy}:
+        $$f(z)=\frac{1}{2\pi i}\int_{\partial R}\frac{f(\zeta)}{\zeta-z}d\zeta$$
+        \item \textbf{Sviluppiamo in serie} di potenze in $(z-a)$ la funzione integranda 
+        $$\frac{f(\zeta)}{\zeta-z}=f(\zeta)\frac{1}{\zeta-z}$$
+        Sviluppiamo il secondo fattore, andando a cercare la somma della \textbf{serie geometrica} (ricorda che $z<\zeta$):
+        \begin{align*}
+            \frac{1}{\zeta-z}=\frac{1}{\zeta-a-(z-a)}=\frac{1}{\zeta-a}\frac{1}{1-\frac{z-a}{\zeta-a}}=\frac{1}{\zeta-a}\sum_{n=0}^\infty\left(\frac{z-a}{\zeta-a}\right)^n
+        \end{align*}
+        Quindi
+        $$\frac{f(\zeta)}{\zeta-z}=\sum_{n=0}^\infty\frac{f(\zeta)}{\zeta-a}\left(\frac{z-a}{\zeta-a}\right)^n$$
+       
+        \item Studiamo la \textbf{convergenza}  di tale serie: essendo il cerchio chiuso $ \overline{D}_r(a)$ contenuto all'interno di $R$ esiste $0<\alpha<1$ tale che
+        $$\abs{\frac{z-a}{\zeta-a}}<\alpha \quad \quad \forall z,\zeta\; \text{come in def.}$$
+        ma allora la serie \textbf{converge totalmente \underline{$\forall\zeta$}} (e quindi \textbf{uniformemente})  poiché:
+        $$\abs{\frac{f(\zeta)}{\zeta-a}\left(\frac{z-a}{\zeta-a}\right)^n}\le \frac{\max_{\partial R}\abs{f}}{r}\alpha^n$$
+        
+        \item Allora, ricordando che
+        $$f_n \text{ continue, }\sum f_n\overset{unif.}{\longrightarrow}f \implies \int f=\sum \int f_n$$
+        possiamo \textbf{integrare per serie}:
+        $$f(z)=\frac{1}{2\pi i}\int_{\partial R}\frac{f(\zeta)}{\zeta-z}d\zeta=\sum_{n=0}^\infty (z-a^n)\underbrace{\frac{1}{2\pi i}\int_{\partial R}\frac{f(\zeta)}{(\zeta-a)^{n+1}}d\zeta}_{\coloneqq c_n}=\sum_{n=0}^\infty c_n(z-a)^n$$
+    \end{itemize}
+\end{dimo}
+
+\begin{thm}[Morera] $f:\Omega\to\im$ è $\im$-diff. $\impliedby\int_{\partial R}fdz=0$ per ogni rettangolo chiuso $R\subseteq \Omega$, e $f$ \textbf{continua}
+\end{thm}
+
+\begin{dimo}
+    Strana. Costruiamo funzione
+    $$F(z)=\int_{\gamma_z}f(\zeta)d\zeta \quad \quad \zeta\in\Omega$$
+    dove $\gamma_z$ è una quualunque curva da un fissato $z_0$ a $z$. Ci serve l'ip. che l'integrale è zero sulle curve chiuse per avere che tale  funzione non dipende dal cammino, ovvero è ben  def. Si dimostra che $F$ è $\im$-diff e $F'=f\implies f$ olomorfa (??).
+\end{dimo}
+
+\section{Integrali di linea di funzioni olomorfe}
+
+\section{Formule integrali per le derivate}
+
+\section{Sviluppo di Laurent. Funzuini meromorfe}
+\begin{thm}[Sviluppo di Laurent]
+    Data $f:\Omega\to\im$ olomorfa, dove $\Omega=\{z\in\im:r_1<\abs{z-a}<r_2\}$ è una corona circolare \textbf{aperta} con i due raggi t.c. $0\le r_1 < r_2 \le +\infty$, allora \textbf{esiste ed è unica} la successione $(c_m)_{m\in\mathbb{Z}}$ t.c.:
+    $$f(z)=\sum_{m=-\infty}^{+\infty}c_m(z-a)^m \quad \quad \forall z\in\Omega$$
+    e vale ancora la formula per i coefficienti di Taylor già trovata, ovvero
+    $$c_m=\frac{1}{2\pi i}\int_{\abs{z-a}=\rho}\frac{f(z)}{(z-a)^{m+1}}dz$$
+\end{thm}
+
+\begin{dimo}
+   (ESISTENZA) WLOG $a=0$. 
+    \begin{itemize}
+        \item Ricaviamo \underline{formula} per\textbf{ $f$ in funzione di integrali su circonf. concentriche}. Siano $\rho_1,\rho_2$ t.c. $r_1<\rho_1<\rho_2<r_2$, dimostriamo che, \hl{\textbf{fissato} $z : \rho_1<|z|<\rho_2$}, vale
+        $$f(z)=\frac{1}{2 \pi i}\int_{\abs{\zeta}=\rho_2}\frac{f(\zeta)}{\zeta-z}d\zeta-\frac{1}{2 \pi i}\int_{\abs{\zeta}=\rho_1}\frac{f(\zeta)}{\zeta-z}d\zeta \quad \quad $$
+        Lo si fa definendo 
+        $$g(\zeta)=
+        \begin{cases}
+            \frac{f(\zeta)-f(z)}{\zeta-z} \quad \zeta\in\Omega\setminus\{z\} \\
+            f'(z) \quad \zeta=z            
+        \end{cases}$$
+        che è \textbf{olomorfa in} $\Omega$, quindi per \textbf{omotopia}
+        $$\int_{\abs{\zeta}=\rho_2}g(\zeta)d\zeta=\int_{\abs{\zeta}=\rho_1}g(\zeta)d\zeta$$
+        sviluppando i calcoli (sostituire $g$ con la def. in ambo i membri) e ricordando l'int. di $1/(z-a)$ (=$0$ oppure $2\pi i$ in dipendenza se  $a$ è fuori o dentro) si trova la formula sopra. 
+        \item \textbf{Sviluppiamo in serie} i due integrali della formula con il solito procedimento di tirar fuori da $1/(\zeta-z)$ il termine della \textbf{serie geometrica}. NB: nei due casi si fa raccogliendo due cose diverse, perché la variabile deve essere $<1$, quindi nel primo raccolgo $1/\zeta$ e nel secondo $-1/z$. \\
+        Nel secondo bisogna fare due cambi di indice per far tornare la sommatoria bene.
+    \end{itemize}
+\end{dimo}ù
+\begin{defn}[Funzione meromorfa]
+    $\Omega$ aperto di $\im$, $E\subseteq \Omega$ chiuso e discreto (\textbf{insieme delle singolarità}). $f$ olomorfa su $\Omega\setminus E$ è meromorfa in $\Omega$ se $\forall a\in E$ esiste $r>0$ t.c.
+    $$h\cdot f=g \iff f=\frac{g}{h} \quad \quad \text{in } D_r(a)\setminus\{a\}$$
+    dove
+    $$\begin{cases}
+        g,h \text{ olomorfe in tutto } D_r(a) \\
+        h \not\equiv 0 \text{ al primo membro, oppure } h=0 \text{ al più in $a$ al secondo membro}
+    \end{cases}$$
+\end{defn}
+\begin{prop}[Caratt. funzioni meromorfe]
+    $f$ olomorfa in $D_r(a)\setminus\{a\}$. \\
+    Allora $f$ è \textbf{meromorfa} su $D_r(a)\iff$ il suo sviluppo di Laurent è \textbf{troncato a sinistra}.
+\end{prop}
+\begin{dimo}
+    \begin{itemize}
+        \item[$\impliedby)$] Facile, se è troncata a sx allora esiste $N$ t.c.
+        $$(z-a)^Nf(z)=\sum_{n=0}^{\infty}c_{n-N}(z-a)^n\coloneqq g(z)$$
+        Quindi $g$ olomorfa in un intorno di $a$ e $f$ soddisfa la def. di meromorfa (è il rapporto di $g$ e un polinomio).
+        \item[$\implies)$] \begin{itemize}
+            \item Come prima cosa bisogna dimostrare la ($\implies$) nella def.: se $h\not\equiv 0$ allora almeno un coeff. dello sviluppo di Taylor è non zero, indichiamo con $N$ il  minimo indice di un $c_n\ne0$. Allora
+        $$h(z)=(z-a)^N\underbrace{\sum_{k=0}^\infty a_{N+k}(z-a)^k}_{\varphi(z)}\coloneqq(z-a)^N\varphi(z)$$
+        Essendo $\varphi(a)=a_N\ne0$ e olomorfa in un intorno di $a$ allora esiste intorno $V$ di $a$ nel quale $\varphi\ne 0$, quindi \textbf{possiamo dividere per} $h$:
+        $$f(z)=\frac{g}{h}=\frac{g(z)}{(z-a)^N\varphi(z)}  \quad \text{in } D_r(a)\setminus\{a\}$$
+        \item Ora possiamo dim. la nostra implicazione. Come appena scritto
+         $$f(z)=\frac{1}{(z-a)^N}\cdot\frac{g(z)}{\varphi(z)}$$
+         con $g$ e $\varphi$ olomorfe, quindi
+         $$\frac{g(z)}{\varphi(z)}\coloneqq\sum_{n=0}^\infty b_n(z-a)^n$$
+         è lo sviluppo di Taylor del loro rapporto e quindi 
+         $$f(z)=\frac{1}{(z-a)^N}\cdot\sum_{n=0}^\infty b_n(z-a)^n=\sum_{n=0}^\infty b_n(z-a)^{n-N}=\sum_{m=-N}^\infty b_{N+m}(z-a)^m$$
+         cioè la tesi.
+        \end{itemize}
+    \end{itemize}
+\end{dimo}
+
+\section{Singolarità e residui}
+\begin{thm}[di estensione di Riemann]
+     $f$ olomorfa in $D_r(a)\setminus\{a\}$. \\
+     Se $\lim_{z\to a}(z-a)f(z)=0 \implies \exists\tilde{f}$ olomorfa in tutto $D_r(a)$ che \textbf{estende} $f$.
+\end{thm}
+
+\begin{thm}[Caratterizzszione funzioni meromorfe]
+     $f$ olomorfa in $\Omega\setminus E$, $E$ insieme chiuso e discreto (delle singolarità). \\
+     $f$ meromorfa in $\Omega \iff$ ogni singolarità è \textbf{eliminabile} (ha intorno in cui $f$ è limitata) oppure è un \textbf{polo} (limite del modulo di $f$ è $+\infty$)
+\end{thm}
+\begin{dimo}
+    Si usa th. di estensione di Riemann.
+\end{dimo}
+
+\begin{prop}[Caratterizzszione polo semplice]
+     $f$ olomorfa in $D_r(a)\setminus\{a\}$. \\
+     $a$ è polo semplice $\iff \lim_{z\to a}(z-a)f(z)=l\ne0$
+\end{prop}
+\begin{dimo}
+    \begin{itemize}
+        \item[$\implies$)] Se $a$ è polo semplice allora
+        $$f(z)=\frac{c_{-1}}{z-a}+h(z)$$
+        con $c_{-1}\ne0,h$ olomorfa in tutto $D_r(a)$. Quindi la tesi è ovvia ($h\to 0$ essendo polinomio).
+         \item[$\impliedby$)] Se vale l'ipotesi allora
+         $$\lim_{z\to a}(z-a)^2f(z)=(z-a)l\to0$$
+         Quindi per \textbf{teo. estensione di Riemann}: esiste una funzione $h$ olomorfa su tutto il disco che estende $(z-a)f(z)$, ovvero
+       $$  \begin{cases}
+             h(z)=(z-a)f(z) \quad z\in D_r(a)\setminus\{a\} \\
+             h(a)=\lim_{z\to a}h(z)=l
+         \end{cases}$$
+         dove $l\ne0$ per ip. Essendo $h$ \textbf{olomorfa} sia $\sum_nc_n(z-a)^n$ il suo sviluppo di Taylor, allora lo sviluppo di $f=\frac{h}{z-a}$ è 
+         $$f(z)=\frac{c_0}{z-a}+c_1+c_2(z-a)+\dots \quad \quad c_0=h(a)=l\ne0$$
+         Allora $a$ è polo semplice di $f$.
+    \end{itemize}
+\end{dimo}
+
+\section{Logaritmo in campo complesso}
+\begin{thm}[sul logaritmo]
+$f$ olomorfa in $\Omega$ aperto \textbf{semplicemente connesso}, e $f$ \textbf{mai nulla}. Allora:
+\begin{enumerate}
+    \item $ \exists g$ olomorfa su $\Omega$ t.c. $e^g=f$. Inoltre vale $g'=f'/f$
+    \item $g$ è unica a meno di costante additiva della forma $2k\pi i$, $k\in\mathbb{Z}$
+   
+\end{enumerate} 
+\end{thm}
+
+\begin{dimo}
+  \begin{enumerate}
+      \item $f'/f$ è olomorfa (in quanto rapporto di olomorfe e $f\ne0$ sempre, quindi non ha singolarità) in un semplicemente connesso $\implies$ ammette primitiva $\phi$. Abbiamo
+   $$\frac{d}{dz}(fe^{-\phi})=f'e^{-\phi}-f\phi'e^{-\phi}=e^{-\phi}(f'-f\frac{f'}{f})=0$$
+   Allora $fe^{-\phi}$ è costante (non nulla), che chiamiamo $e^c$. Risulta
+   $$e^{\phi+c}=e^\phi e^c=e^\phi \cdot fe^{-c}=f \implies g\coloneqq\phi+c \text{ soddisfa la richiesta.}$$
+    \item Siano $g_1,g_2$ due inverse dell'exp. su $\Omega$ (quindi $e^{g_1}=1\dots$), allora anche $e^{g_1-g_2}=1\implies g_1-g_2$ assume valori in $2\pi i\mathbb{Z}$: essendo una funzione continua deve essere costante.
+  \end{enumerate} 
+\end{dimo}
+
+\section{Teorema dei residui e applicazione al calcolo di integrali}
+\begin{thm}[dei residui] Ipotesi:
+\begin{itemize}
+    \item $\Omega$ aperto, $E\subseteq\Omega$ chiuso e discreto (\textbf{insieme delle singolarità}).
+    \item  $\gamma$ \textbf{curva chiusa} in $\Omega\setminus E$ (non passa sulle sing), omotopa a una costante come curva in $\Omega $ (può passare attorno ai punti di $E$, che appartengono ad $\Omega$, ma non può passare attorno agli eventuali buchi di $\Omega$).
+    \item $f$ olomorfa in $\Omega\setminus E$
+\end{itemize}
+Allora:
+$$\int_\gamma fdz=2\pi i\sum_{a\in E}\text{Res}(f,a)n(\gamma,a)$$
+    
+\end{thm}
+\begin{prop}[Integrali della forma $\int_{-\infty}^{+\infty}e^{iwx}g(x)dx$]
+    $g$ olomorfa con l'eccezione di un numero finito di singolarità in un aperto che contiene $H=\{z\in\im:\Im z\ge0\}$, e non stanno sull'asse reale. Se
+    \begin{itemize}
+        \item $\lim_{|z|\to+\infty}g(z)=0$, con $z\in H$
+        \item $w>0$
+    \end{itemize}
+    Allora:
+    $$\int_{-\infty}^{+\infty}e^{iwx}g(x)dx=2\pi i\sum_{a\in H}\text{Res}(e^{iwz}g(z),a)$$
+\end{prop}
+\begin{dimo}
+    L'integrale sul rettangolo che ha un lato sull'asse reale è la somma dei residui, vedo che per un rettangolo abbastanza grande i tre lati non sull'asse reale danno contributo zero.
+\end{dimo}
+\begin{prop}[Poli semplici sull'asse reale]
+$f$ olomorfa con l'eccezione di un numero finito di singolarità in un aperto che contiene $H=\{z\in\im:\Im z\ge0\}$, supponiamo che le singolarità sull'asse reale siano $a_1,\dots,a_q$ e siano tutte \textbf{poli semplici}. Supponiamo valga \textbf{una} delle seguenti:
+\begin{itemize}
+    \item $f$  soddisfa condizione di $p$ decrescita, 
+ ovvero $\lim_{|z|\to+\infty}\abs{f(z)z^p}<+\infty$ per $z\in H$ e $p>1$
+ \item $f$ è della forma $e^{iwx}g(x)$ e soddisfa le ip. della prop. sopra
+\end{itemize}
+    Allora:
+    $$\text{p.v.}\int_{-\infty}^{+\infty}f(x)dx=2\pi i\sum_{\Im a>0}\text{Res}(f,a)+\pi i\sum_{\Im a=0}\text{Res}(f,a)$$
+\end{prop}
+\begin{dimo}
+    usare il seguente lemma
+\end{dimo}
+\begin{lem}
+    $a$\textbf{ polo semplice} di una funzione. Sia 
+    $$\gamma_\varepsilon:[0,\alpha]\to\im \quad \theta\mapsto a+ \varepsilon e^{i\theta}$$
+    un arco di circonferenza di centro $a$, raggio $\varepsilon$, ampiezza $\alpha$. Allora
+    $$\lim_{\varepsilon\to0}\int_{\gamma_\varepsilon}f(z)dz=\alpha i \text{Res}(f,a)$$
+    \end{lem}
+    \begin{dimo}
+        
+    \end{dimo}
+
+
+\newpage
+\part{Equazioni differenziali}
+\section{Problemi ai valori iniziali per sistemi del primo ordine}
+\begin{defn}[Funzione lipschitziana nella seconda variabile uniformemente rispetto alla prima]
+    Sia $D\subseteq \re\times\re^N$. Lo è $f:D\to\re^N$ in $E\subseteq D$ se esiste costante $L_E>0$ tale che:
+    $$\abs{f(t,x_1)-f(t,x_2)} \le L_E\abs{x_1-x_2}$$
+    per ogni $(t,x_1),(t,x_2)\in E$ (ovvero per ogni $t$). \\
+    È \textbf{lip. locale} se non è richiesta su tutto $D$ ma su ogni compatto di $D$.
+\end{defn}
+\begin{thm}[Picard-Lindeloft/esistenza e unicità]
+    
+\end{thm}
+
+\begin{dimo}
+    Non la scrivo, vedi appunti su dispense. In generale è tutto il discorso del \textbf{teorema delle contrazioni} (vedi dispense Schimperna): basta dimostrare che se $f$ è \textbf{lipschitziana} nella seconda variabile allora l'operatore 
+    $$T: (X, \norm{\cdot}_{\infty})\to (BC^0(I), \norm{\cdot}_{\infty}) \quad\quad Tu(t)\coloneqq x_0+\int_{t_0}^tf(t,u(t))dt$$
+    (dove $X\subset  BC^0(I)$ sottoinsieme \textbf{chiuso} nello funzioni bounded-continuous) è una \textbf{contrazione} dello spazio di Banach $(BC^0(I), \norm{\cdot}_{\infty})$. Quindi \textbf{esiste ed è unico il punto fisso}, ovvero una funzione che è la soluzione. \\
+    $[$Prendo funzione qualunque, continuo a riapplicare l'operatore che essendo una contrazione accartoccia sempre di più lo spazio, fino a che non lo accartoccia tutto sull'unico punto che rimane fisso, quindi la successione converge a tale punto che soddisfa la \textbf{definizione integrale} di soluzione$]$
+\end{dimo}
+
+\begin{thm}[Prolungamento massimale]
+    $D\subseteq \re^{N+1}$ \textbf{aperto}, $f:D\to\re^N$ \textbf{continua}. Allora:
+    \begin{itemize}
+        \item[a)] $x(t)$ soluz. su int. massimale $\implies$ tale int. è \textbf{aperto}.
+        \item[b)] $(\omega_-,\omega_+)$ int. max  $\implies\forall K\subset D$ \textbf{compatto}, $\exists U(\omega_+)$ intorno di $\omega_+$ t.c. $(t,x(t))\not\in K$ per $t\in(\omega_-,\omega_+)\cap U$ \\
+        Ovvero \textbf{abbandono definitivo di ogni compatto di $D$}: $(t,x(t))\to\partial D$ per $t\to\omega_\pm$
+         \item[c)] Ogni soluzione \textbf{ammette prolungamento massimale}.
+    \end{itemize}
+\end{thm}
+
+\begin{dimo}
+    \begin{itemize}
+        \item[a)] Facile verificare: $J$ max $\implies$ aperto. Infatti se fosse chiuso $\implies\omega_+=\sup J\in J$, allora $\omega_+$ è interno a $D$ (aperto) e posso trovare un rettangolo  interno a $D$ centrato in $(\omega_+,x(\omega_+))$ a cui applicare Picard-Lindeloft con $t_0=\omega_+$ che mi assicura l'esistenza in $t_0+\alpha$
+        \item[b)] Dobbiamo dimostrare l'implicazione in b). Se $\omega_+=+\infty$ siamo apposto. Sia quindi $\omega_+<+\infty \in D$ (ovvero interno, se fosse sul bordo non ci sarebbe niente da dim).
+        \\Dimostriamo per \textbf{per assurdo}, ovvero \textbf{non $\impliedby$ non}. \\
+        \begin{itemize}
+            \item Negare la tesi significa che esiste un compatto $K\subset D$ t.c. 
+            \begin{align*}
+            \forall \text{ intorno }U(\omega_+): \; (t,x(t))\in K \text{ per } t\in U\cap(\omega_-,\omega_+) &\iff \exists \text{ successione } t_k\to\omega_+ \mid (t_k,x(t_k))\in K \\
+            &\iff (t_k,x(t_k))\to(\omega_+,\overline{x})\in K
+            \end{align*}
+            L'ultimo iff è poiché $K$ è compatto di $\re^{N+1}$ quindi completo. Nota: per forza di cose abbiamo dim. che $\omega_+\in K$, ovvero è interno/sulla frontiera (ma non fuori) e che $\overline{x}$ è finito (in quanto appartiene ad un compatto).
+            \item Dimostriamo che 
+            $$\underbrace{(t_k,x(t_k))\to(\omega_+,\overline{x})}_{i)}\implies \lim_{t\to\omega_+}x(t)=\overline{x}$$
+            in tal modo potrei estendere $x(t)$ in $\omega_+$ in modo $C^1$ mettendo $x(\omega_+)=\overline{x}$. Essa sarebbe ancora una soluzione, quindi $(\omega_-,\omega_+)$ non è massimale, che è la negazione dell'ipotesi del teo., quindi apposto. \\
+            Per dimostrarlo ricordiamo che 
+   
+            $$ \lim_{t\to\omega_+}x(t)=\overline{x}\iff \underbrace{\forall\varepsilon\,\exists\overline{k}\mid\forall k>\overline{k}: (t_k,x(t_k))\in B_\varepsilon((\omega_+,\overline{x}))}_{ii)}$$
+            ovvero per $k$ sufficientemente grande il grafico di $x$ ristretto a $[t_k, \omega_+)$ è contenuto nella palla $B_\varepsilon((\omega_+,\overline{x}))$ (che supponiamo tutta contenuta in $D$ dal momento che $\omega_+\in K$ e $K$ è compatto, quindi $\omega_+$ è interno a $D$). \\
+            Ancora una volta dimostriamo per \textbf{per assurdo}, ovvero \textbf{non i) $\impliedby$ non ii)} \\
+           \textbf{ Non ii)} significa che esiste $\overline{t}$ in cui il grafico attraversa la frontiera di B, ovvero esiste:
+            $$\overline{t}\coloneqq\sup\{t\in[t_k,\omega_+): (\tau,x(\tau))\in B\; \forall\tau\in[t_k,t)\}$$
+            Arriviamo ad una contraddizione poiché
+           $$ \begin{cases}
+                (\overline{t},x(\overline{t})) \text{ è il punto oltre al quale il grafico sta fuori la palla (sta sul bordo della palla)} \\
+                (t_k,x(t_k))\to(\omega_+,\overline{x}) \text{ (centro della palla)}
+            \end{cases}$$
+            quindi la distanza tra questi due punti tende al raggio della palla $\varepsilon$, ma d'altro canto la distanza tra le $x$ è proporzionale alla distanza ma la distanza tra le $x$ è controllata da $\overline{t}-t_k\to 0$  (?????) dato  che la pendenza di $x$ è limitata.
+            CASINO
+            
+                    
+        \end{itemize}
+        \item[c)] Non ho voglia. Sia $x:J\to\re^N$ e sia $b\coloneqq\sup J$. Studiamo solo la prolungabilità in $b$, ovvero a destra. \\
+        Se $x$ non è prolungabile in $b\implies J$ massimale, apposto. \\
+        Sia $x$ prolungabile in $b$: dobbiamo dim. che possiamo prolungarla a intervallo massimale.
+        $$\begin{cases}
+            x \text{  non è prolungabile in }b \implies J \text{ massimale} \\
+             x \text{   è prolungabile in }b \implies \text{aggiungiamo a $x$ il punto $x(b)$ e applichiamo Picard-Lindeloft}
+        \end{cases}$$
+        ovvero $x$ si prolunga a $b+\alpha_K$. Se il nuovo estremo appartiene ancora a un compatto  $K$ contenuto in $D$, allora possiamo riapplicare P-L. \textbf{Reiteriamo il procedimento} finché il punto non appartiene al $K$. Ma allora \textbf{reiteriamo la reiterazione} cambiando compatto, e ripetiamo per una successione di compatti che invadono $D$. \\ 
+        Ci sono sono altri dettagli per concludere che OMETTO
+    \end{itemize}
+\end{dimo}
+
+\begin{thm}[Esistenza globale]
+    $f:D\to R^N$ con $D=I\times\Omega$, $x:J\to\Omega$ soluzione massimale. Quindi
+    $$\begin{cases}
+        I = \text{ intervallo "globale" (dove è definita $f$)} \\
+        J = \text{ intervallo massimale (dove è definita la soluzione massimale)}
+    \end{cases}$$
+    Allora: 
+    $$f \text{ limitata} \implies J=I$$
+\end{thm}
+
+\begin{dimo}
+    Fissato $t_0\in J$, $\forall t\in J$ si  ha 
+    \begin{align*}
+        \abs{x(t)-x(t_0)}\le\abs{\int_{t_0}^tf(s,x(s))ds}\le M\abs{t-t_0} \quad \quad \text{(essendo $f$ limitata)}\\
+        \implies \abs{x(t)}\le\abs{x(t_0)}+ M\abs{t-t_0}
+    \end{align*}
+    Quindi $x$ è limitata sia dal basso che dall'alto da due rette, quindi non può avere asintoti verticali.
+\end{dimo}
+
+\begin{lem}[di Gronwall]
+    $I$ intervallo, $\beta\in C^0(I)$, \hl{$\beta\ge0$}, $a\in I,\alpha\in\re$. Se $u\in C^0(I)$ è una funzione t.c.
+    $$u(t)\le\alpha+\int_a^t\beta(s)u(s)ds \quad \forall t\ge a\in I \implies u(t)\le\alpha e^{\int_a^t\beta(s)ds } \forall t\ge a\in I$$
+    Ovvero, se $u(t)$ non è soluzione del prob. di Cauchy lineare
+    $$\begin{cases}
+        u'(t)=\beta(t)u(t) \\
+        u(a)=\alpha
+    \end{cases}$$
+    (se lo fosse ci sarebbe l'uguale in entrambi i membri dell'implicazione), ma è minore della formulazione integrale, allora è anche minore della "pseudo soluzione" dell'eq. lineare (secondo membro dell'implicazione).
+\end{lem}
+
+\begin{dimo}
+    MANCA (me l'ha chiesta)
+\end{dimo}
+
+\begin{cor}[Stima scarto tra due soluzioni con Gronwall]
+    $f:D\to\re^N$ continua e \textbf{localm. lipschitziana}, $x_1,x_2:J\to\re^N$ due soluzioni di $x'=f(t,x)$, sia $t_0\in J$. Allora abbiamo una stima della differenza tra i valori delle due soluzioni in $t\ge t_0$ data da:
+    $$\abs{x_1(t)-x_2(t)}\le \abs{x_1(t_0)-x_2(t_0)}e^{L_T(t-t_0)}$$
+    dove $L_T$ è una costante di lip. di $f$ in un compatto $D$ contenente i grafici delle soluzioni su $[t_0, T]$, con $T\in J\mid T\ge t\ge t_0$
+\end{cor}
+
+\begin{dimo}
+    Essendo $x_i$ soluzioni si ha
+    $$x_i(t)=x_i(t_0)+\int_{t_0}^tf(s,x_i(s))ds$$
+    Per ogni $t\in [t_0, T]$ si ha
+    \begin{align*}
+         \abs{x_1(t)-x_2(t)} &\le \abs{x_1(t_0)-x_2(t_0)}+\int_{t_0}^t\left(f(s,x_1(s))-f(s,x_2(s))\right)ds \\
+         &\le \abs{x_1(t_0)-x_2(t_0)}+\int_{t_0}^tL_T \abs{x_1(s)-x_2(s)}ds \\
+         &\le  \abs{x_1(t_0)-x_2(t_0)}e^{L_T(t-t_0)}
+    \end{align*}
+     dove nell'ultimo $\le$ abbiamo applicato \textbf{Gronwall} con $\alpha=\abs{x_1(t_0)-x_2(t_0)}, \beta=L_T, u(s)=\abs{x_1(s)-x_2(s)}$.
+   
+\end{dimo}
+
+\begin{cor}[Unicità con  Gronwall]
+    Due soluzioni sono uguali se coicidono in tutto  l'intervallo, quindi basta applicare la stima di sopra a due funzioni che  partono dallo stesso punto: il modulo della differenza  è  zero quindi coincidono (chiaramente siamo in ip. di lip.)
+\end{cor}
+
+\begin{thm}[del confronto]
+    Stiamo nel caso scalare, quindi $D\subseteq\re^2$ aperto, $f:D\to\re$ \textbf{loc. lip.}. Siano $x,u:J\to\re\in C^1$ con grafico in $D$ tali che ($a\in J)$:
+    $$\begin{cases}
+        u'(t)=f(t,u(t)) \text{ ($u$ soluzione)} \\
+        x'(t)\le f(t,x(t)) \text{ ($x$ ha pendenza puntualmente minore)} \\
+        x(a)\le u(a) \text{ (punto "iniziale" minore o uguale)}
+       
+    \end{cases}
+     \implies x(t)\le u(t) \quad\forall  t\ge a \in J$$
+\end{thm}
+
+\begin{dimo}
+    Facciamo \textbf{per assurdo}. Negare la tesi significa che  esiste $\overline{t}>a\in J$ t.c.
+    $$x(\overline{t})>u(\overline{t})$$
+    Sia $t_0=\sup\{t\in[a,\overline{t}]: x(t)\le u(t)\}$, allora \textbf{per continuità} delle due funzioni deve essere:
+    $$\begin{cases}
+        t_0<\overline{t} \\
+        x(t_0)=u(t_0) \\
+        x(t)>u(t) \quad \text{per } t_0<t<\overline{t}
+    \end{cases}$$
+
+    In $[t_0,\overline{t}]$ si ha
+    $$\begin{cases}
+        x(t)=x(t_0)+\int_{t_0}^tx'(s)ds\le x(t_0)+\int_{t_0}^tf(s,x(s))ds \quad \text{ (poiché $x'\le f$)} \\
+         u(t)=u(t_0)+\int_{t_0}^tf(s,u(s))ds
+    \end{cases}$$
+    \textbf{Sottraendo} membro a membro:
+    \begin{align*}
+        x(t)-u(t)&\le x(t_0)-u(t_0)+\int_{t_0}^t[f(s,x(s))-f(s,u(s))]ds \\
+        &\le L_K\int_{t_0}^t|x(s)-u(s)|ds  \quad \quad \text{$L_K$ cost. di lip. in un compatto $K$ che contiene i grafici in $[t_0,\overline{t}]$ }\\
+        &= L_K\int_{t_0}^t(x(s)-u(s))ds \quad \quad \text{poiché } x(t)\ge u(t) \\
+       &=0 \quad \quad \text{applicando \textbf{Gronwall} a $"u(t)"=x(t)-u(t)$ con  $\alpha=0$ }
+    \end{align*}
+    Ma allora $x(t)\le u(t)$, assurdo.
+\end{dimo}
+
+\begin{cor}[Crescita sottolineare]
+    $D=I\times\re$, $I$ aperto, $f:D\to\re$ continua t.c. 
+    $$\abs{f(t,x)}\le\varphi(t)+\psi(t)\abs{x}$$
+    con $\varphi,\psi\ge 0$ continue. Allora $x'=f(t,x)$ ha \textbf{esistenza globale} (ovvero i suoi intervalli massimali coincidono con $I$).
+\end{cor}
+
+\begin{dimo}
+    Sia $x:J\to\re$ soluzione di $x'=f(t,x)$, con $J$ int. massimale. Fissiamo $t_0\in J$. 
+    \begin{itemize}
+        \item \textbf{Stima dall'alto}: per ip. 
+        $$x'(t)=f(t,x)\le\varphi(t)+\psi(t)\abs{x(t)}$$
+        Prendiamo una soluzione ausiliaria $u$ con crescita lineare e con stesso punto di partenza (in realtà il val. ass), ovvero soluzione di
+        $$\begin{cases}
+            u'(t)=\varphi(t)+\psi(t)\abs{u(t)} \\
+            u(t_0)=\abs{x(t_0)}
+        \end{cases}$$
+        allora $u(t)\ge 0$ in $t\ge t_0$ poiché punto iniziale e derivata sono positivi, quindi possiamo togliere i valori assoluti e vediamo che ha \textbf{crescita lineare}, quindi (vedi sol. di sistema lineare del primo ordine) ha esistenza globale (a destra di $t_0$). \\
+        Possiamo applicare il \textbf{teo. del confronto} ed essendo $x(t_0)\le u(t_0)$ abbiamo 
+        $$x(t)\le u(t) \quad \quad \forall t\ge t_0$$
+        \item \textbf{Stima dal basso}: tutto identico ma con cambiati i segni, quindi
+         $$x'(t)=f(t,x)\ge-\varphi(t)-\psi(t)\abs{x(t)}$$
+         Considerando soluzione ausiliaria di 
+          $$\begin{cases}
+            v'(t)=-\varphi(t)-\psi(t)\abs{u(t)} \\
+            v(t_0)=-\abs{x(t_0)}
+        \end{cases}$$
+        allora $v(t)\le 0$ in $t\ge t_0$, quindi risolve eq. lin. primo ordine e ha  esistenza globale, per \textbf{teo. confronto}:
+           $$x(t)\ge v(t) \quad \quad \forall t\ge t_0$$
+    \end{itemize}
+\end{dimo}
+
+\begin{thm}[dipendenza dai dati per successioni] Dividiamo le ipotesi tra elementi della successione, elementi limite e convergenze:
+\begin{itemize}
+    \item \textbf{Successione}: siano 
+    \begin{itemize}
+        \item $(f_j)_j$ successione di funzioni \textbf{continue} $D\to\re^N$
+        \item $(t_0^j,x_0^j)$ successione di punti in $D$
+        \item $\phi_j$ soluzione del problema 
+        $$\begin{cases}
+            x'=f_j(t,x) \\
+            x(t_0^j)=x_0^j
+        \end{cases}$$
+    \end{itemize}
+    \item \textbf{Limiti}: supponiamo esistano
+    \begin{itemize}
+        \item $f_0:D\to\re^N$ \textbf{localmente lip. in} $D$
+        \item $(t_0,x_0)\in D $ 
+        \item $\phi_0$ soluzione del problema 
+        $$\begin{cases}
+            x'=f_0(t,x) \\
+            x(t_0)=x_0
+        \end{cases}$$
+    definita in $[a,b]$
+    \end{itemize}
+    \item \textbf{Convergenze}: tutto ciò tale che
+    \begin{itemize}
+        \item $f_j\to f_0$ \textbf{uniformemente  sui compatti di} $D$
+        \item $(t_0^j,x_0^j)\to(t_0,x_0) $
+    \end{itemize}
+\end{itemize}
+    ALLORA:
+    $$\phi_j\to\phi_0 \quad   \quad \text{uniformemente in $[a,b]$}$$
+\end{thm}
+
+\begin{thm}[dipendenza continua dai dati]
+    Riformulando ciò fatto sopra con un unica funzione vettoriale e in maniera continua si ha:
+    \begin{itemize}
+        \item \textbf{Insiemi: $G\subseteq \re\times\re^N\times\re^m$} \textbf{aperto}, quindi $(t,\bv{x},\bv{\lambda})\in G$, dove $\bv{\lambda}$ è il vettore di $m$ parametri.
+        \item \textbf{Funzione}: sia $f:G\to\re^N$ \textbf{continua, loc. lip.} (nella seconda variabile unif. risp. alla prima)
+        \item \textbf{Problema di Chaucy}: sia
+        $$\begin{cases}
+            x'=f(t,\bv{x},\bv{\lambda}) \\
+            x(t_0)=x_0
+        \end{cases}$$
+        e la sua soluzione unica sia $x(\cdot,t_0,\bv{x}_0,\bv{\lambda})$ e $(\omega_-(t_0,\bv{x}_0,\bv{\lambda}),\;\omega_+(t_0,\bv{x}_0,\bv{\lambda}))$ il suo int. max. di esistenza.
+    \end{itemize}
+    ALLORA:
+    \begin{enumerate}
+        \item La funzione $\omega_-(t_0,\bv{x}_0,\bv{\lambda})$ è \textbf{semicontinua superiormente}
+        \item La funzione $\omega_+(t_0,\bv{x}_0,\bv{\lambda})$ è \textbf{semicontinua inferormente}
+        \item l'insieme $$E=\{(t,t_0,\bv{x}_0,\bv{\lambda}):\; (t_0,\bv{x}_0,\bv{\lambda})\in G;\;\omega_-(t_0,\bv{x}_0,\bv{\lambda})<t<\omega_+(t_0,\bv{x}_0,\bv{\lambda})\}$$ è \textbf{aperto} (ovvero l'intervallo massimale dei tempi è aperto)
+        \item la funzione $$x:(t,t_0,\bv{x}_0,\bv{\lambda})\mapsto x(t, t_0,\bv{x}_0,\bv{\lambda})$$ è \textbf{continua} in $E$
+    \end{enumerate}
+\end{thm}
+
+\begin{defn}[Flusso]
+Sia $x'=f(x)$ un'eq. diff. autonoma. Allora il flusso è una sua soluzione con dato iniziale zero, ovvero è $$\varphi(t,\bv{x}_0)\coloneqq \bv{x}(t,0,\bv{x}_0)$$    
+\end{defn}
+
+\begin{defn}[Orbita]
+L'orbita di un punto $x_0\in\Omega$ (insieme di def. di $f$ autonoma) è l'immagine di tutta la soluzione $\varphi(\cdot,x_0)$
+\end{defn}
+
+\begin{prop}[Proprietà sistemi autonomi]
+Per sistemi autonomi valgono:
+\begin{itemize}
+    \item[a)] due orbite non possono avere alcun punto in comune 
+    \item[b)] se $x:J\to\Omega$ è soluzione non costante, allora è curva regolare, ovvero $x'(t)\ne 0$ per ogni $t\in J$
+\end{itemize}
+\end{prop}
+\begin{dimo}
+    \begin{itemize}
+       \item[a)] Se due orbite associate a due soluzioni diverse ($x^1,x^2$) si toccassero (per due  $t$ diversi) allora 
+       $$x^1(t_1)=x^2(t_2) \implies \overline{x}^1(t_2)=x^2(t_2)$$
+       con $\overline{x}^1(t)\coloneqq x^1(t-(t_2-t_1))$ è la \textbf{traslata temporale} di $x_1$ e in quanto tale è ancora soluzione. Dato che è soluzione e in uno stesso $t_2$ sono uguali allora per l'unicità $$ \overline{x}^1\equiv x^2\implies \text{ le orbite di $x^1,x^2$ coincidono}$$
+       in quanto $\overline{x}^1$ è traslata temporale di $x^1$
+       
+    \item[b)] Se esistesse $t_0$ t.c. $x'(t_0)=0$ allora l'orbita della soluz. costante e di questa dovrebbero coincidere. VABBUO
+    \end{itemize}
+\end{dimo}
+    
+
+
+\end{document}

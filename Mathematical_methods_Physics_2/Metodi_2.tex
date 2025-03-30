@@ -1,0 +1,2682 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{geometry} %Per impostare i  margini del foglio
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+%\setcounter{secnumdepth}{1} %per subsection non numerate ma nell'indice
+\usepackage[italian]{babel} %Mette in italiano tutte le parole fisse di LaTeX (v. "TITOLO")
+\usepackage[utf8]{inputenc} %Gestisce i caratteri accentati
+\usepackage{comment} %Per  usare \begin{comment}
+\usepackage{amsthm} %per gli ambienti theorem
+\usepackage{amsmath} %cose matematiche
+\usepackage{amssymb} %cose matematiche
+\usepackage{mathrsfs} %per \mathscr
+\usepackage{dsfont} %per \mathds{1}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{units} %per \nicefrac{}{} 
+\usepackage{cancel} %per \cancel{}
+\usepackage{caption} %mettere le descrizioni
+\usepackage{graphicx} %Importare foto
+\usepackage{booktabs}
+%\pagestyle{empty} %per togliere il numero della pagina
+\usepackage{xcolor} %per \color{} e \textcolor{}{}
+\usepackage{empheq} 
+%\usepackage{enumitem} %Insieme  ai vari \renewcommand per fare elenchi coi numeri belli
+\usepackage[shortlabels]{enumitem}
+\usepackage{physics} %Per avere \nabla in grassetto
+\usepackage[most]{tcolorbox} %Box colorati teoremi 
+\usepackage{mdframed}
+\usepackage{framed}
+\usepackage{color,soul} %per evidenziare con il comando highlight \hl
+\usepackage{hyperref} %per URL (con \url{}) e hyperlink
+\usepackage{tikz} %robe  disegnate
+\usepackage{tikz-cd}
+\usetikzlibrary{matrix,shapes}
+\usepackage{color}
+\definecolor{shadecolor}{rgb}{0.902344, 0.902344, 0.902344}
+\usepackage{wasysym} %per \lightning
+\usepackage{eucal}[mathcal]
+\usepackage{pdflscape} %per \begin{landscape}
+\usepackage{yfonts} %per \textfrak
+
+
+
+%DA BARABBA%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{tikz}
+%\usepackage[unicode=true,pdfusetitle,
+% bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+% breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+% {hyperref}
+\usepackage{changepage}
+
+\usepackage{array}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{calc}
+\usepackage{units}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{todonotes}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{wasysym}
+\PassOptionsToPackage{obeyFinal}{todonotes}
+
+\newlist{casenv}{enumerate}{4}
+\setlist[casenv]{leftmargin=*,align=left,widest={iiii}}
+\setlist[casenv,1]{label={{\itshape\ \casename} \arabic*.},ref=\arabic*}
+\setlist[casenv,2]{label={{\itshape\ \casename} \roman*.},ref=\roman*}
+\setlist[casenv,3]{label={{\itshape\ \casename\ \alph*.}},ref=\alph*}
+\setlist[casenv,4]{label={{\itshape\ \casename} \arabic*.},ref=\arabic*}
+
+\providecommand{\exercisename}{Esercizio}
+\theoremstyle{definition}
+\newtheorem*{xca*}{\protect\exercisename}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\DeclareMathOperator*{\rot}{rot}
+%\DeclareMathOperator*{\divergence}{div}
+\DeclareMathOperator*{\mis}{mis}
+\DeclareMathOperator*{\vers}{vers}
+\DeclareMathOperator*{\diag}{diag}
+\DeclareMathOperator*{\ran}{ran}
+\DeclareMathOperator*{\dom}{dom} %dominio
+\DeclareMathOperator*{\gr}{gph} %grafico
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%RINOMINA DI COMANDI
+%\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+%\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+%\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+\newcommand{\bv}{\boldsymbol} %per scrivere i vettori in  grassetto usare \bv
+\newcommand{\cv}[2]{\begin{pmatrix} #1 \\ #2 \end{pmatrix}} %column vector di due dim
+\newcommand{\cvv}[3]{\begin{pmatrix} #1 \\ #2 \\ #3 \end{pmatrix}} %column vector di tre dim
+\newcommand{\myth}{\normalfont \scshape \textcolor{red}} %mio modo custom di mettere teoremi/lemmi/proposizioni
+
+\newcommand{\na}{\mathbb{N}} %numeri naturali
+\newcommand{\za}{\mathbb{Z}} %numeri interi (Zahlen)
+\newcommand{\qu}{\mathbb{Q}} %numeri razionali (quotient)
+\newcommand{\re}{\mathbb{R}} %numeri reali
+\newcommand{\im}{\mathbb{C}} %numeri immaginari
+\newcommand{\id}{\mathbb{I}} %numeri immaginari
+
+\newcommand{\inj}{\hookrightarrow} %injective
+\newcommand{\hookdoubleheadrightarrow}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+\newcommand{\sur}{\twoheadrightarrow} %suriective
+\newcommand{\bij}{\hookdoubleheadrightarrow} %bijective freccia per funz. biettive
+\newcommand{\supp}{\text{supp}} %supporto di una funzione
+\newcommand{\llim}[2]{#2\text{-}\lim_{#1\to\infty}} %limite
+\newcommand{\limm}[2]{\overunderset{#1\to\infty}{#2}{\longrightarrow}} %limite
+
+
+\newcommand{\pr}{\text{I\kern-0.15em P}} %probabilità
+\newcommand{\ex}{\mathbb{E}} %operatore valore atteso/media
+\newcommand{\om}{\Omega} %spazio campionario
+\newcommand{\F}{\mathcal{F}} %%sigma algebra, famiglia degli eventi
+
+\newcommand{\myeq}[1]{\stackrel{\mathclap{\normalfont\mbox{\tiny{#1}}}}{=}} %scrivere soppra all'uguale con \myeq{<cosa voglio scrivere>}
+\newcommand{\mylist}[1]{\textnormal{\textsc{#1}}}
+
+\newcommand{\notimplies}{\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}  %per \notimplies
+\newcommand{\notimpliedby}{\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\impliedby$}}}}  %per \notimpliedby
+
+\newcommand{\hil}{\mathcal{H}} %spazio di HIlbert
+
+
+\newcommand\myfunc[5]{         %per scrivere funzioni con dominio, codominio e dove va un elemento
+  \begingroup
+  \setlength\arraycolsep{0pt}
+  #1\colon\begin{array}[t]{c >{{}}c<{{}} c}
+             #2 & \to & #3 \\ #4 & \mapsto & #5 
+          \end{array}%
+  \endgroup}
+
+  \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+  \node[shape=circle,draw,inner sep=1pt] (char) {#1};}} %per \circled{$$}
+
+\newcommand{\inner}{\langle\cdot{,}\cdot\rangle} %per prodotto scalare (interno) vuoto
+\newcommand{\inn}[2]{\langle #1, #2 \rangle}
+\newcommand{\spann}[1]{\langle #1\rangle}
+\newcommand{\noun}[1]{\textsc{#1}}
+\newcommand{\lyxmathsym}[1]{\ifmmode\begingroup\def\b@ld{bold}
+  \text{\ifx\math@version\b@ld\bfseries\fi#1}\endgroup\else#1\fi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%NUOVI STILI
+\newtheoremstyle{indentdefinition}
+{5mm}                % Space above
+{5mm}                % Space below
+{\addtolength{\leftskip}{0mm}\setlength{\parindent}{0em}}        % Theorem body font % (default is "\upshape")
+{0mm}                % Indent amount
+{\bfseries}       % Theorem head font % (default is \mdseries)
+{:}               % Punctuation after theorem head % default: no punctuation
+{ }               % Space after theorem head
+{\thmname{#1} \thmnumber{#2} \thmnote{\textnormal{(\textcolor{blue}{#3})}}}                % Theorem head spec
+
+\newtheoremstyle{indenttheorem}
+{5mm}                % Space above
+{5mm}                % Space below
+{\addtolength{\leftskip}{10mm}\setlength{\parindent}{0em}}        % Theorem body font % (default is "\upshape")
+{-10mm}                % Indent amount
+{\bfseries\scshape\color{red}}       % Theorem head font % (default is \mdseries)
+{.}               % Punctuation after theorem head % default: no punctuation
+{ }               % Space after theorem head
+{\thmname{#1} \thmnumber{#2} \thmnote{(\textnormal{#3})}}                % Theorem head spec
+
+\newtheoremstyle{myremark}
+{5mm}                % Space above
+{5mm}                % Space below
+{}        % Theorem body font % (default is "\upshape")
+{}                % Indent amount
+{\itshape}       % Theorem head font % (default is \mdseries)
+{}               % Punctuation after theorem head % default: no punctuation
+{ }               % Space after theorem head
+{\thmname{#1} \thmnote{(\textbf{#3})}}                % Theorem head spec
+
+\newtheoremstyle{indentgeneral}
+{5mm}                % Space above
+{5mm}                % Space below
+{\addtolength{\leftskip}{10mm}\setlength{\parindent}{0em}}        % Theorem body font % (default is "\upshape")
+{-10mm}                % Indent amount
+{}       % Theorem head font % (default is \mdseries)
+{}               % Punctuation after theorem head % default: no punctuation
+{3mm}               % Space after theorem head
+{\thmnote{\textbf{#3}}}                % Theorem head spec
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%NUOVI AMBIENTI
+
+\theoremstyle{indentdefinition}
+\newtheorem{defn}{Definizione}[section]
+
+\theoremstyle{indenttheorem}
+\newtheorem{thm}{Teorema}
+\newtheorem{prop}{Proposizione}
+\newtheorem{lem*}{Lemma}
+\newtheorem{cor}{Corollario}
+
+\theoremstyle{myremark}
+\newtheorem*{rem*}{Osservazione}
+\newtheorem{example*}{Esempio}
+\newtheorem{notation*}{Notazione}
+
+\theoremstyle{indentgeneral}
+\newtheorem*{gen}{}
+
+\newenvironment{dimo}{\begin{quote}\textit{\textbf{Dimostrazione.}}}{\end{quote}} %dimostrazione con indentatura
+\newenvironment{lyxlist}[1]
+	{\begin{list}{}
+		{\settowidth{\labelwidth}{#1}
+		 \setlength{\leftmargin}{\labelwidth}
+		 \addtolength{\leftmargin}{\labelsep}
+		 \renewcommand{\makelabel}[1]{##1\hfil}}}
+	{\end{list}}
+
+\newsavebox{\mybox}  %per ambiente \myboxed
+\newenvironment{myboxed} 
+{\noindent\begin{lrbox}{\mybox}\begin{minipage}{\textwidth}}
+{\end{minipage}\end{lrbox}\fbox{\usebox{\mybox}}}
+
+\newenvironment{changemargin}[2]{%
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{#1}%
+\setlength{\rightmargin}{#2}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+}%
+\item[]}{\end{list}}
+
+\title{\textbf{Metodi II}}
+\author{Marco Ambrogio Bergamo}
+\date{Anno 2024-2025}
+
+\begin{document}
+\maketitle
+\tableofcontents{}
+
+\pagebreak
+\part{Operatori su spazi di Hilbert}
+\section{Preliminari}
+\begin{defn}[Distanza]
+    un'applicazione $d: X\times X \to \re$ tale che
+    \begin{enumerate}
+        \item (Non negatività) $d(x,y)\ge 0 \quad \forall x,y\in X$
+        \item (Definita positiva) $d(x,y)=0 \iff x=y$
+        \item (Simmetrica) $d(x,y)=d(y,x) \forall x,y\in X $
+        \item (Disugualianza triangolare) $d(x,y)\le d(x,z)+d(z,y) \quad \forall x,y,z\in X$
+    \end{enumerate}
+\end{defn}
+\begin{defn}[Spazio metrico]
+    La coppia $(X, d)$ dove $X$ è un \underline{insieme} e $d$ è una distanza 
+    \begin{align*}
+        \text{Definito: } d(x,y) & & \overset{\text{Induce}}{\longrightarrow} & &\text{Topologia: } \mathcal{T} \coloneqq (A\subseteq V \mid \forall x\in A \; \exists r>0 \text{ t.c. } \overbrace{\{y\in V\mid d(x,y)<r\}}^{B_r(x)}\subset A)
+\end{align*}
+\end{defn}
+
+\subsection{Sapzi di Banach}
+\begin{defn}[Norma]Sia $V$ un $K$-spazio vettoriale. È un'applicazione $||\cdot||: V \to \re$ tale che
+    \begin{enumerate}
+        \item (Non negatività) $||x||\ge 0 \quad \forall x\in V$
+        \item (Definita positiva) $||x||=0 \iff x=0$
+        \item (Assoluta omogeneità) $||\lambda x||=|\lambda| ||x|| \quad \forall \lambda \in K, x\in V$
+        \item (Disugualianza triangolare) $||x+y||\le ||x||+||y||$
+    \end{enumerate}
+    
+\end{defn}
+
+\begin{defn}[Spazio normato]
+    La coppia $(V, ||\cdot||)$ dove $V$ è \underline{spazio vettoriale} su un campo $K$ ($\re$ o $\im$)  e $||\cdot||$ è una norma. 
+    \begin{align*}
+        \text{Definito: } ||x|| & & \overset{\text{Induce}}{\longrightarrow} & & d(x,y) \coloneqq ||x-y||  & & 
+        &\overset{\text{Induce}}{\longrightarrow} & & \text{Topologia} 
+\end{align*}
+\end{defn}
+
+\begin{example*}[$p$-norme] Sia $p\in[1,\infty)$
+    $$\begin{array}{ll}
+       \text{In }\im^n  &  \norm{v}_p\coloneqq\left(\sum_{i=1}^n\abs{v_i}^p\right)^{\frac{1}{p}}\\
+       \text{In }C_0^\infty(\re;\im)  & \norm{f}_p\coloneqq\left(\int_\re dx\abs{f(x)}^p\right)^{\frac{1}{p}}
+    \end{array}$$
+    vediamo che
+    \begin{enumerate}
+        \item dato dal valore assoluto $\abs{\cdot}$
+        \item come prima
+        \item dato dal fattore $\frac{1}{p}$
+        \item dalla disuguaglianza $\abs{a+b}^p\le \abs{a}^p+\abs{b}^p$
+    \end{enumerate}
+\end{example*}
+
+\begin{defn}[Isometria]
+    Siano $(V,\norm{\cdot}),(W,\norm{\cdot}')$ spazi normati, è $U:V\to W\mid \norm{v}=\norm{U(v)}'\quad\forall v\in V$.\\
+\end{defn}
+
+\begin{defn}[Isomorfismo di spazi normati] \label{defn-iso-spazi-normati}
+    Siano $(V,\norm{\cdot}),(W,\norm{\cdot}')$ spazi normati, è $U:V\bij W\mid \norm{v}=\norm{U(v)}'\quad\forall v\in V$ (biunivoca+isometria)
+\end{defn}
+
+\begin{defn}[Spazio completo]
+    Spazio topologico in cui tutte le successioni di Cauchy convergono ad un elemento dello spazio.
+\end{defn}
+
+\begin{defn}[Spazio di Banach]\label{defn-spazio-di-Banach}
+    È uno spazio normato (vettoriale con norma) \textbf{completo} rispetto alla metrica (indotta dalla norma).
+\end{defn}
+
+\begin{example*}[Spazio delle funzioni limitate (bounded)] $\mathcal{B}(E)$ l'insieme delle funzioni limitate $f: E\to\re$, con $E$ insieme. Definiamo come norma di $f\in\mathcal{B}(E)$ la \textbf{norma uniforme (o sup norm)}:
+$$||f||_{\infty}=\sup_E|f|$$
+Tale spazio \underline{è completo} (DIM) rispetto a questa norma \\
+(Notare che la distanza indotta da tale norma è simile alla lagrangiana di ordine 1, qui abbiamo sup e non max). 
+\end{example*}
+
+\begin{defn}[Sottospazio denso]\label{defn-sottospazio-denso}
+     $A \subset X$ (sp. topologico), $A$ denso se $\overline{A}=X$, ovvero se $A$ interseca ogni aperto non vuoto di $X$. In generale, se $A \subset B \subset X$ (sp. topologico): $A$ è denso in $B$ se $B \subset \overline{A}$
+\end{defn}
+
+\begin{defn}[Completamento a uno spazio di Banach] \label{defn-completamento-Banach}
+    Sia $(V, \norm{\cdot})$ spazio normato, allora lo è $\mathbb{B}(V)$ sapazio di Banach t.c. $V$ è isometrico a un \nameref{defn-sottospazio-denso} di $\mathbb{B}(V)$ tramite $J:V\inj \mathbb{B}(V)$ iniettiva.
+\end{defn}
+
+\begin{thm}[Esistenza e unicità del completamento]
+    $(V, \norm{\cdot})$ spazio normato $\implies\exists\,!\;\mathbb{B}(V)$ \nameref{defn-completamento-Banach} a meno di \nameref{defn-iso-spazi-normati}
+\end{thm}
+
+\subsection{Spazi di Hilbert}
+\begin{defn}[Prodotto interno hermitiano]
+    Un'applicazione $\inner: V\times V \to K$ tale che
+    \begin{enumerate}
+        \item (Non negatività) $\inn{x}{x}\ge 0 \quad \forall x \ne 0 \in V$
+        \item (Definita positiva) $\inn{x}{x}=0 \iff x=0$
+        \item (Linearità nella \textbf{seconda} componente) $\inn{x}{y+b}=\inn{x}{y}+\inn{x}{b}, \quad \inn{x}{\lambda y}=\lambda\inn{x}{y}$
+        
+        \item (Simmetria coniugata) $\inn{x}{y}=\overline{\inn{y}{x}}$
+    \end{enumerate}
+    Dalle ultime due deriva:
+    \begin{enumerate}[resume]
+   \item (Linearità-coniugata nella \textbf{prima} componente) $\inn{x+a}{y}=\inn{x}{y}+\inn{a}{y}, \quad \inn{\lambda x}{y}=\overline{\lambda}\inn{x}{y}$
+\end{enumerate}
+\end{defn}
+
+\begin{rem*}
+    Questa def. è in  ambito fisico (viene comoda poi con notazione di Dirac) In ambito matematico si definisce al contrario, ovvero linearità nella prima e linearità-coniugata nella seconda componente.
+\end{rem*}
+
+\begin{defn}[Spazio prehilbertiano/hermitiano]
+    La coppia $(H, \inner)$ dove $H$ è spazio vettoriale su un campo $K$ ($\re$ o $\im$)  e $\inner$ è prodotto interno hermitiano. 
+    \begin{align*}
+        \text{Definito: } \inn{x}{y}  & & \overset{\text{Induce}}{\longrightarrow} 
+& & ||x|| \coloneqq \sqrt{\inn{x}{x}} & & \overset{\text{Induce}}{\longrightarrow} & & d(x,y) \coloneqq ||x-y||  & & \overset{\text{Induce}}{\longrightarrow} & & \text{Topol.}
+    \end{align*}
+\end{defn}
+
+\begin{thm}[Disuguaglianza di Cauchy-Schwartz]\label{thm-dis-cauchy-schwartz}
+    $(V,S)$ spazio hermitiano, allora vale $$\abs{S(v,w)}^2\le S(v,v)S(w,w)=\norm{v}^2\norm{w}^2\quad\forall v,w\in V$$
+    ovvero $$\abs{S(v,w)}\le \norm{v}\norm{w}$$
+\end{thm}
+
+\begin{proof}P. 8
+\end{proof}
+
+\begin{defn}[Spazio ortogonale]
+    Sia $W\subseteq (V,S)$ spazio hermitiano, allora $W^\perp\coloneqq\{v\in V\mid S(w,v)=0,\;\forall w\in W\}$
+\end{defn}
+
+\begin{prop}[Regola del parallelogramma]
+    $(V,S)$ spazio hermitiano, vale $$\norm{v+w}^2+\norm{v-w}^2=2(\norm{v}^2+\norm{w}^2)$$
+    \hl{è estensione del teo di Pitagora dai triangoli (ipotesi di angolo retto) ai quadrilateri (ipotessi di parallelismo dei lati): somma dei quadrati cotrsuiti sulle diagonali è uguale alla somma dei quadrati costruiti su tutti i lati}
+\end{prop}
+
+
+
+\begin{prop}[Identità di polarizzazione]\label{prop-identità-polarizzazione}
+    $(V,S)$ spazio hermitiano, vale 
+    $$S(v,w)=\frac{1}{4}\left[\norm{v+w}^2-\norm{v-w}^2+i\left(\norm{v-iw}^2-\norm{v+iw}^2\right)\right]$$
+\end{prop}
+
+\begin{thm}[Identità di Parseval - Teo. Pitagora] \label{thm-identità-parseval}
+    Sia $(\hil,(\cdot,\cdot))$ di Hilbert e $\textfrak{b}$ una base di Hilbert. Allora
+    $$\norm{\psi}^2=\sum_{\varphi\in\textfrak{b}}\abs{(\varphi,\psi)}^2$$
+\end{thm}
+
+\begin{defn}[Isometria]
+    Siano $(V,S),(V,S')$ spazi hermitiani, è $U:V\to V'\mid S'(U(v),U(w))=S(v,w)\quad\forall v,w\in V$.
+\end{defn}
+
+\begin{defn}[Operatore unitario] (isomorfismo di spazi hermitiani) \label{defn-operatore-unitario}
+    Siano $(V,S),(V,S')$ spazi hermitiani, è $U:V\bij V'\mid S'(U(v),U(w))=S(v,w)\quad\forall v,w\in V$ (biunivoca+isometria)
+\end{defn}
+
+\begin{defn}[Spazio di Hilbert/hilbertiano]
+    È uno spazio prehilbertiano (vettoriale con prodotto interno) \textbf{completo} rispetto alla metrica (indotta dalla norma indotta dal prodotto interno).
+\end{defn}
+
+\begin{rem*}
+     Delle volte è facile trovare norme /distanze per le quali lo spazio è completo, ma difficile trovare l'espressione di un prodotto interno che induca tale norma.
+\end{rem*}
+
+\begin{defn}[Completamento a uno spazio di Hilbert] \label{defn-completamento-Hilbert}
+    Sia $(V, S)$ spazio hermitiano, allora lo è $\mathbb{H}(V)$ sapazio di HIlbert t.c. $V$ è \textbf{isometrico} a un \nameref{defn-sottospazio-denso} di $\mathbb{H}(V)$ tramite $J:V\inj \mathbb{H}(V)$ iniettiva.
+\end{defn}
+
+\begin{thm}[Esistenza e unicità del completamento]
+    $(V,S)$ spazio hermitiano $\implies\exists\,!\;\mathbb{H}(V)$ \nameref{defn-completamento-Hilbert} a meno di \nameref{defn-operatore-unitario}
+\end{thm}
+
+\subsubsection{Riflessività degli spazi di Hilbert}
+\url{https://en.wikipedia.org/wiki/Reflexive_space}
+\begin{prop}
+    Siano $\hil$ sp. di Hilbert e $K\subseteq\hil$ non vuoto. Valgono
+    \begin{enumerate}
+        \item $K^\perp\coloneqq\{\psi\in\hil\mid (\psi,\phi)=0,\;\forall\phi\in K\}$ è un sottospazio chiuso di $\hil$
+        \item $K^\perp=\spann{K}^\perp=\overline{\spann{K}^\perp}=\overline{\spann{K}}^\perp$
+        \item $K$ chiuso $\implies \hil = K\oplus K^\perp$
+        \item $(K^\perp)^\perp=\overline{K}$
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    Abbiamo 
+    \begin{enumerate}
+        \item Sia $\{\psi_n\}_{n\in\na}$ successione di Cauchy in $K^\perp$ (ovvero $(\psi_n,\phi)=0\;\forall n,\phi\in K$) con limite $\psi$, allora
+        $$\begin{cases}
+            (\cdot,\cdot) \text{ bilineare}&\implies K^\perp\text{ sottospazio vettoriale}\\
+            \hil \text{ completo} &\implies\psi\in \hil\\
+             (\cdot,\cdot) \text{ continuo}&\implies (\psi,\phi)=0\\
+        \end{cases}\implies\psi\in K^\perp \quad\forall\psi \text{ p.to limite di }K^\perp$$
+    \end{enumerate}
+    \item p. 11
+\end{proof}
+
+\begin{cor}
+    $K\subset \hil$ denso in $\hil \iff K^\perp=\{0\}$
+\end{cor}
+
+\begin{proof}
+    Dai punti (ii) e (iv).
+\end{proof}
+
+\begin{defn}[Spazio duale]
+    Sia $V$ un $K$-spazio vettoriale $$V^*\coloneqq \text{hom}(V,K)=\{\varphi:V\to K\text{ lineare}\}$$
+    Quando $V$ ha una topologia (banach, hilbert...) si intende $V^*\coloneqq \text{hom}(V,K)=\{\varphi:V\to K\text{ lineare e continua}\}$.\\
+    È esso stesso uno spazio vettoriale con la usuale somma di funzioni e prodotto per scalare.
+\end{defn}
+
+
+
+\begin{defn}[Spazio duale di un Hilbert]
+    $\hil^*\coloneqq\{\varphi:\hil\to \im\text{ lineare e continua}\}$
+\end{defn}
+
+\begin{prop}
+    $T:X\to Y$ lineare tra spazi normati, allora $\ker T$ chiuso $\iff T$ continuo 
+\end{prop}
+\begin{proof}.
+    \begin{itemize}
+        \item[$\impliedby$)] $\ker T=T^{-1}(0)$ chiuso in quanto preimmagine di un chiuso tramite applicazione continua 
+    \end{itemize}
+\end{proof}
+\begin{myboxed}
+\begin{thm}[rappresentazione di Riesz] \label{thm-Riesz} $(\hil,(\cdot,\cdot))$ spazio di hilbert, allora
+   $$F\in\hil' \implies\exists \,!\; \psi_F\in \hil\mid F(\psi)=(\psi_F,\psi)$$
+   La mappa
+   $$\begin{array}{cccc}
+     D:& \hil^* & \bij & \hil \\
+     & F  & \mapsto & \psi_F 
+   \end{array}$$
+   è biettiva
+\end{thm}
+\end{myboxed}
+\begin{proof}
+    Sia $F\in \hil'$ come in ipotesi, ovvero $F:\hil\to\im$ lineare e continua.
+    \begin{itemize}
+        \item  Abbiamo $$\begin{cases}
+            F \text{ continua }\implies\ker F\text { sottospazio chiuso }\\
+            \text{Teo sopra}\implies \hil=\ker (F)\oplus \ker(F)^\perp
+        \end{cases}$$
+        Se $\ker F=\hil$ scegliamo $\psi_F=0$ e abbiamo finito. Altrimenti 
+        $$\boxed{\dim(\ker(F)^\perp)=1}$$
+        \textbf{Dim}: intuitivamente poiché 
+        $$\hil/\ker F\cong \Im(F)=\im $$
+        ed essendo  $\hil=\ker (F)\oplus \ker(F)^\perp\implies \dim(\hil)=\dim \ker F+\dim\ker(F)^\perp$ e $\dim(\hil/\ker F)=\dim\ker F^\perp$. Rigorosamente:
+        \begin{align*}
+            \begin{cases}
+                \phi\in \ker (F)^\perp \quad \text{fissato}\\
+                \phi_1\in\ker (F)^\perp \quad \text{qualunque}
+            \end{cases}&\implies
+                \phi_1-\frac{F(\phi_1)}{F(\phi)}\phi\begin{array}{l}
+                     \in \ker (F)^\perp \quad \text{in quanto $\ker (F)^\perp$ sottospazio}\\
+                     \in\ker F \quad \text{ per linearità di }F
+                \end{array}\\
+                &\implies \phi_1-\frac{F(\phi_1)}{F(\phi)}\phi=0 \quad \text{poiché }\ker F\cap \ker(F)^\perp =\{0\}\\
+                &\implies \text{span}(\phi)=\ker (F)^\perp  \implies \dim\ker (F)^\perp =1
+        \end{align*}
+        \item Scomponiamo un qualunque vettore di $\hil$:
+        \begin{align*}
+        \begin{cases}
+            \hil=\ker\ F\oplus \ker F^\perp\\
+            \ker (F)^\perp=\text{span}(\phi)\\
+            F \text{ lineare}
+        \end{cases}\implies
+            \begin{cases}
+                \psi=\underset{\in\ker F}{\widetilde{\psi}}+\underset{\in\ker (F)^\perp}{\widetilde{\phi}}\\
+                \widetilde{\phi}=\frac{F(\widetilde{\phi})}{F(\phi)}\phi\\
+                F(\psi)=F(\widetilde{\psi})+ F(\widetilde{\phi})=F(\widetilde{\phi})
+            \end{cases}\implies \psi=\widetilde{\psi}+\frac{F(\psi)}{F(\phi)}\phi
+        \end{align*}
+        \item \textbf{Esistenza:} ora, scelto e fissato un qualunque $\phi\in \ker (F)^\perp$, facciamo un'\textit{ansatz} per la $\psi_F$:
+        $$\psi_F\coloneqq\frac{\overline{F(\phi)}}{\norm{\phi}^2}\phi$$
+       dove al numeratore è il complesso coniugato. Infatti
+       \begin{align*}
+           (\psi_F,\psi)&=\left(\frac{\overline{F(\phi)}}{\norm{\phi}^2}\phi,\; \widetilde{\psi}+\frac{F(\psi)}{F(\phi)}\phi\right) \quad \text{sostituendo con cose sopra}\\
+           &=\frac{\overline{F(\phi)}}{\norm{\phi}^2}\cancel{\left(\phi,\widetilde{\psi} \right)} +\left(\frac{\overline{F(\phi)}}{\norm{\phi}^2}\phi,\;\frac{F(\psi)}{F(\phi)}\phi\right) \quad\text{bilin. e }\phi\perp\widetilde{\psi}\\
+           &=\frac{\cancel{{F(\phi)}}}{\cancel{\norm{\phi}^2}}\frac{F(\psi)}{\cancel{F(\phi)}}\cancel{\left(\phi,\phi\right)}\quad \text{antilinearità nella prima componente} \\
+           &=F(\psi)
+       \end{align*}
+       \item \textbf{Unicità:} Se ce ne fossero due:
+       $$\begin{cases}
+           \psi_F^1\in\hil: F_(\psi)=( \psi_F^1,\psi) \\
+           \psi_F^2\in\hil : F_(\psi)=( \psi_F^2,\psi)\\
+           
+       \end{cases}\implies ( \psi_F^1- \psi_F^2,\psi)=0\quad \forall\psi\in\hil\iff \psi_F^1- \psi_F^2=0\iff \psi_F^1= \psi_F^2$$
+        \item \textbf{Biunivocità di $D$:} quindi la mappa $D:F\mapsto \psi_F$ sopra definito è
+        \begin{itemize}
+            \item \underline{Ben definita}
+            \item \underline{Iniettiva:} infatti $\ker D=\{F\in\hil': F(\psi)=0\quad\forall\psi\in\hil\}=\{\underline{0}\}$ (mappa nulla)
+            \item \underline{Suriettiva:} poiché $\forall\psi'\in\hil$ possiamo definire $F_{\psi'}:\hil\to \im$ t.c. $F_{\psi'}(\psi)\coloneqq(\psi',\psi)$
+        \end{itemize}
+    \end{itemize}
+\end{proof}
+
+\begin{cor}[$\hil\cong (\hil^*)^*$]
+    Ogni spazio di Hilbert è riflessivo, ovvero la mappa ($F\in\hil^*$)
+    $$\begin{array}{cccc}
+     J_F:& \hil & \bij& (\hil^*)^* \\
+     & \psi  & \mapsto & F(\psi) 
+   \end{array}$$
+   è un \nameref{defn-operatore-unitario}, quindi $\hil\cong (\hil^*)^*$
+\end{cor}
+
+\begin{proof}
+    p. 13
+\end{proof}
+
+
+
+\pagebreak
+\section{Operatori lineari limitati}
+Con \textbf{operatori} si intende generalmente le funzioni $X\to Y$ tra spazi vettoriali di funzioni (infinito-dimensionali). Usiamo un termine diverso da funzione poiché agiscono essi stessi su funzioni.
+\begin{defn}[Operatori lineari e lineari continui]
+    Siano $X,Y$ degli \nameref{defn-spazio-di-Banach}, allora indichiamo con 
+    $$\begin{array}{l}
+       \mathcal{L}(X,Y) \coloneqq\{\text{operatori $X\to Y$ lineari}\} \\
+        \mathcal{B}(X,Y)\coloneqq \{\text{operatori $X\to Y$ lineari e continui}\}
+    \end{array}$$
+\end{defn}
+
+\begin{rem*}[Linearità e continuità] Siano $X,Y$ spazi vettoriali normati.
+\begin{enumerate}
+    \item \textbf{$X$ dimensione finita}: $T\in\mathcal{L}(X,Y)\implies$ continuo
+     \item \textbf{$X$ dimensione infinita}: $T\in\mathcal{L}(X,Y)\notimplies$ continuo. 
+\end{enumerate}
+\end{rem*}
+
+\begin{proof}
+    Abbiamo
+    \begin{enumerate}
+        \item Sia $(e_1,\dots,e_n)$ base finita di $X$. Abbiamo $\begin{cases}
+               T \text{ lineare}&\implies T(x)=\sum_{i=1}^nx_iT(e_i)\\
+               \text{base finita}&\implies M\coloneqq \sup_i\{\norm{f(e_i)}\} \text{ ben def.}
+           \end{cases}$ e quindi
+        \begin{align*}
+        \norm{T(x)}&=\norm{\sum_{i=1}^nx_iT(e_i)} && \text{(linearità)}\\
+           &\le \sum_{i=1}^n\abs{x_i}\norm{T(e_i)} &&\text{(disug. triang.)}\\
+           &\le M\sum_{i=1}^n\abs{x_i} &&(M\text{ ben def.)}\\
+           &\le M(C\norm{x}) && \text{(per qualche }C>0)
+        \end{align*}
+        e quindi $T$ è limitato (+lineare) $\iff$ continuo.
+        \item Facili da costruire controesempi in \textbf{spazi non completi} (ma ci sono anche in spazi completi): prendendo una successione di Cauchy senza limite $\{e_i\}$ di vettori l.i. e vediamo che $\frac{\norm{T(e_i)}}{\norm{e_i}}\to\infty$ (\hl{in un certo senso l'operatore lineare non è continuo perché lo spazio ha "buchi"}). Per esempio prendiamo
+        $$\begin{cases}
+            X=(C^\infty([0,1]),\norm{\cdot}_\infty) &\text{ ovvero }\norm{f}=\sup_{x\in[0,1]}\abs{f(x)}\\
+            T\in\mathcal{L}(X,\re)\mid T(f)\coloneqq f'(0) &\text{ derivata calcolata in 0 (lineare)}
+        \end{cases}$$
+        prendiamo allora una successione di Cauchy non convergente in $X$
+        $$\begin{cases}
+            f_n(x)\coloneqq\frac{1}{n}\sin(n^2x)&\overset{\text{unif.}}{\longrightarrow} 0\\
+            T(f_n)=\frac{n^2\cos(n^2\cdot 0)}{n}=n&\longrightarrow +\infty \quad \text{ma }T(0)=0
+        \end{cases}$$
+    \end{enumerate} 
+\end{proof}
+
+\begin{defn}[Spazio duale] Sia $X$ di Banach.
+     $$\begin{array}{ll}
+      \text{\textbf{algebrico}} & X^*\coloneqq\mathcal{L}(X,\im) \\
+       \text{\textbf{topologico/continuo}} & X'\coloneqq\mathcal{B}(X,\im)
+    \end{array}$$
+\end{defn}
+
+\begin{defn}[Norma di un operatore] $\norm{T}\coloneqq\sup_{v\ne0}\frac{\norm{T(v)}}{\norm{v}}$
+\end{defn}
+
+\begin{prop}
+    $\norm{T(v)}\le \norm{T}\norm{v}$
+\end{prop}
+
+\begin{prop}[Norma di un operatore lineare] $\norm{T}=\sup_{v\ne0}\frac{\norm{T(v)}}{\norm{v}}\overset{\text{lin.}}{=}\sup_{v:\norm{v}=1}\norm{T(v)}$
+\end{prop}
+
+\begin{myboxed}
+\begin{thm} Siano $X,Y$ sp. vett. normati e $T\in\mathcal{L}(X,Y)$. Allora $\forall v\in X$
+$$\exists K\in\re: \norm{T(v)}_Y\le K\norm{v}_X\iff \sup_{v\in X\setminus\{0\}}\frac{\norm{T(v)}_Y}{\norm{v}_X}<\infty$$
+\end{thm}
+\end{myboxed}
+
+\begin{proof}.
+\begin{itemize}
+    \item[$\implies$)] allora $\frac{\norm{T(v)}_Y}{ K\norm{v}_X}\le K<\infty$. Prendere il sup del primo termine.
+    \item[$\impliedby$)] prendere $K= \sup_{v\in X\setminus\{0\}}\frac{\norm{T(v)}_Y}{\norm{v}_X}$
+\end{itemize}
+\end{proof}
+
+\begin{defn}[Operatore lineare limitato]  $T\in\mathcal{L}(X,Y)$ sp. normati è limitato se vale una delle due condizioni del teo. sopra, ovvero se $\norm{T}<\infty$
+\end{defn}
+
+\begin{example*}
+    Abbiamo (p. 17)
+    \begin{itemize}
+        \item \textbf{Operatore moltiplicazione:}
+        \item \textbf{Operatore parità:}
+    \end{itemize}
+\end{example*}
+
+\begin{prop}
+    $T$ isometria $\implies$ T limitato
+\end{prop}
+
+\begin{rem*}[Linearità e limitatezza] Siano $X,Y$ spazi vettoriali normati.
+\begin{enumerate}
+    \item \textbf{$X$ dimensione finita}: $T\in\mathcal{L}(X,Y)\implies$ limitato
+     \item \textbf{$X$ dimensione infinita}: $T\in\mathcal{L}(X,Y)\notimplies$ limitato. 
+\end{enumerate}
+dim. come prima
+\end{rem*}
+
+\begin{myboxed}
+    \begin{thm}[Equiv. continuo-limitato per i lineari] \label{thm-equiv-continuo-limitato}
+        Sia  $T\in\mathcal{L}(X,Y)$ sp. normati. Allora sono equivalenti
+        $$T \text{ continuo in 0}\quad \iff \quad T \text{ continuo }\quad \iff \quad T \text{ limitato }$$
+    \end{thm}
+\end{myboxed}
+\begin{proof}p. 15
+    \begin{itemize}
+        \item[$1\implies 2$)] Sia $T$ lineare in 0
+        $$\lim_{v\to v'}T(v)-T(v')\overset{\text{lin}}{=}\lim_{v\to v'}T(v-v')=\lim_{w\to0}T(w)\overset{\text{ip}}{=}0$$
+        con $w\coloneqq v-v'$. Quindi
+        $$\lim_{v\to v'}T(v)=T(v')\iff T\text{ continuo}$$
+        \item[$2\implies 3$)] Fissiamo $v,w\in X$. $T$ continuo $\implies T$ continuo in 0, quindi
+        \begin{align*}
+            \begin{cases}
+                \exists \delta>0: \norm{v}< \delta \land \norm{T(v)}<1\\
+                \text{sia }\delta': 0<\delta'<\delta \\
+                v'\coloneqq \delta'\frac{w}{\norm{w}}\implies\norm{v'}=\delta'<\delta
+            \end{cases}&\implies\norm{T(v')}=\delta'\frac{\norm{T(w)}}{\norm{w}}<1\\
+            &\implies\norm{T(w)}<\frac{\norm{w}}{\delta'}
+        \end{align*}
+        \item[$3\implies 1$)] $T$ limitato $\iff\exists K: \norm{T(v)}\le K\norm{v}\implies\lim_{v\to 0}T(v)=0$
+    \end{itemize}
+\end{proof}
+
+\begin{prop}[Proprietà norma operatoriale]
+    $X,Y$ spazi normati. Allora
+    \begin{enumerate}
+        \item $(\mathcal{B}(X,Y),\norm{\cdot}_{\text{operat.}})$ è spazio vettoriale normato
+        \item $Y$ di Banach $\implies \mathcal{B}(X,Y)$ di Banach
+        \item $\norm{\mathbb{I}}=1$
+        \item $\norm{ST}\le \norm{S}\norm{T}\quad \forall S\in \mathcal{B}(Y,Z),T\in\mathcal{B}(X,Y)$
+    \end{enumerate}
+\end{prop}
+
+\begin{myboxed}
+\begin{thm}[Esistenza e unicità dell'estensione al completamento]\label{thm-esistenza-unicità-estensione-operatori}
+    Sia $X$ normato, $Y$ Banach, $W\subset X$ denso. Allora
+    $$T\in \mathcal{B}(\overset{\subset X}{W},\overset{Banach}{Y})\implies \exists\,!\quad\widetilde{T}\in \mathcal{B}(X,Y)\text{ t.c. } \begin{cases}
+        \widetilde{T}|_W=T\\
+        \norm{\widetilde{T}}=\norm{T}
+    \end{cases}$$
+    ovvero \hl{un operatore lineare continuo/limitato è determinato da cosa fa sui sottoinsiemi densi}.
+\end{thm}
+\end{myboxed}
+\begin{proof}p. 16
+\begin{itemize}
+    \item \textbf{Esistenza:} Abbiamo
+    \begin{align*}
+        \forall x \in X &\implies \exists \{x_n\}_{n\in\na}\subset W: \lim_{n\to\infty}x_n=x && \text{$W$ denso in $X$}\\
+        &\implies \exists K>0: \norm{T(x_n)-T(x_m)}\le K\norm{x_n-x_m} && \text{$T$ limitato}\\
+        &\implies\{T(x_n)\}_{n\in\na} \text{ di Cauchy} && \text{$\{x_n\}$ di Cauchy}\\
+        &\implies \begin{cases}
+            \exists \lim_{n\to\infty} T(x_n)\coloneqq\widetilde{T}x\\
+            \text{tale lim non dipende da } \{x_n\}_n
+        \end{cases} && \text{$Y$ di Banach, $\norm{\cdot}$ continuo}
+    \end{align*}
+    Quindi abbiamo per costruzione
+    $$\begin{cases}
+        \widetilde{T}|_W= T \quad \text{(prendere succ. costante)}\\
+        \widetilde{T} \text{ lineare}\\
+        T\in\mathcal{B}(W,Y)\implies \frac{\norm{T(x_n)}}{\norm{x_n}}\le K \overset{n\to\infty}{\implies}\norm{\widetilde{T}}\le K\implies\widetilde{T}\in\mathcal{B}(X,Y)
+    \end{cases}$$
+    \item \textbf{Unicità:} Supponiamo esista $U$ con le stesse proprietà di $\widetilde{T}$
+    \begin{align*}
+        W\supset\{x_n\}_n\overset{n\to\infty}{\longrightarrow}x\in X &\implies \widetilde{T}(x_n)=T(x_n)=U(x_n) && \text{uguali sulla restrizione}\\
+        &\implies (\widetilde{T}-U)(x_n)=0 \quad \forall n\in\na && \text{e converge a }0\in Y\\
+        &\implies(\widetilde{T}-U)(x)=0 \\
+        &\implies \widetilde{T}=U
+        \end{align*}
+    \item \textbf{Norma:}
+    \begin{itemize}
+        \item \underline{$\norm{\widetilde{T}}\le \norm{T}$}: sia $\{x_n\}_n$ come sopra.
+        $$\norm{\widetilde{T}(x)}=\lim_{n\to\infty}\norm{\widetilde{T}(x_n)}\le \norm{T}\lim_{n\to\infty}\norm{x_n}=\norm{T}\norm{x}\implies\frac{\norm{\widetilde{T}(x)}}{\norm{x}}=\norm{\widetilde{T}}\le \norm{T}$$
+        
+        \item \underline{$\norm{\widetilde{T}}\ge \norm{T}$}:
+        $$\norm{\widetilde{T}}=\sup_{x\in X\setminus\{0\}}\frac{\norm{\widetilde{T}(x)}}{\norm{x}}\ge\sup_{x\in W\setminus\{0\}}\frac{\norm{\widetilde{T}(x)}}{\norm{x}}\overset{\widetilde{T}|_W=T}{=}\norm{T}$$
+    \end{itemize}
+\end{itemize}
+\end{proof}
+
+\begin{rem*}
+    È importante perché l'\textbf{evoluzione nel tempo} di un sistema dinamico (eq. di Schrödinger) e le \textbf{simmetrie continue} (rotazioni, traslazioni ecc) sono descritte tramite operatori unitari su sp. di Hilb. definiti però solo su sottospazi densi.
+\end{rem*}
+
+\subsection{Operatore aggiunto}
+\begin{defn}[Operatore aggiunto/coniugato (Hermitiano)]
+Siano $(\mathcal{H}_1,(\cdot,\cdot)_1)$ e $(\mathcal{H}_2,(\cdot,\cdot)_2)$ spazi di Hilb. e $T\in\mathcal{B}(\mathcal{H}_1,\mathcal{H}_2)$. Allora il suo aggiunto è 
+$$T^*:\mathcal{H}_2\to \mathcal{H}_1\mid (\phi,T\psi)_2=(T^*\phi,\psi)_1 \quad \forall\psi\in\mathcal{H}_2,\psi\in\mathcal{H}_1$$
+\end{defn}
+
+\begin{myboxed}
+\begin{prop}[Esistenza e unicità dell'aggiunto]
+    Siano $(\mathcal{H}_1,(\cdot,\cdot)_1)$ e $(\mathcal{H}_2,(\cdot,\cdot)_2)$ spazi di Hilb. 
+    $$T\in\mathcal{B}(\mathcal{H}_1,\mathcal{H}_2)\implies \exists!\; T^*$$
+\end{prop}
+\end{myboxed}
+
+\begin{proof}
+Alcuni preliminari per l'esistenza, poi esistenza e unicità
+\begin{itemize}
+    \item Dimostriamo che fissato $\phi\in\hil_2$
+    $$f_\phi(\psi)\coloneqq(\phi,T\psi)_2\quad \underline{\in\mathcal{B}(\hil_1,\im)}$$
+    \begin{itemize}
+        \item \underline{Lineare:} dalla bilinearità di $(\cdot,\cdot)$
+        \item \underline{Limitata:} dalla \nameref{thm-dis-cauchy-schwartz}
+        $$\abs{f_\phi(\psi)}=\abs{(\phi,T\psi)_2}\le \norm{\phi}_2\norm{T\psi}_2\overset{T\in\mathcal{B}}{\le}\norm{\phi}_2\norm{T}\norm{\psi}_1\implies\frac{\abs{f_\phi(\psi)}}{\norm{\psi}_1}\le \underbrace{\norm{T}\norm{\phi}_2}_{\text{costante}}\implies f_\phi \in\mathcal{B}(\hil_1,\im)$$
+        \item \underline{Rappresentazione di Riesz:} essendo $f_\phi\in\mathcal{B}(\hil_1,\im)$, tramite il \nameref{thm-Riesz}  
+        $$\exists \Psi_\phi\in\hil_2: \quad f_\phi(\psi)=(\phi,T\psi)_2=(\Psi_\phi.\psi)_1\quad \forall\psi\in\hil$$
+    \end{itemize}
+    \item Abbiamo, grazie alla bilinearità del prod. int.:
+    $$\begin{array}{ccc}
+        \hil_2 &\to & \hil_1'  \\
+         \phi&\mapsto& f_\phi 
+    \end{array}\quad \text{lineare}\implies \begin{array}{ccc}
+        \hil_2 &\to & \hil_1  \\
+         \phi&\mapsto& \Psi_\phi 
+    \end{array}\quad \text{lineare}$$
+    \item \textbf{Esistenza:} definiamolo come 
+    $$T^*(\phi)\coloneqq\Psi_\phi$$
+    Infatti $\forall \psi\in\hil_1$:
+    $$(T^*(\phi),\psi)_1=(\Psi_\phi,\psi)_1=(\phi,T\psi)_2\quad \checkmark$$
+    \item \textbf{Unicità:} supponiamo che ne esista un altro
+    \begin{align*}
+        \exists K\in\mathcal{L}(\hil:1,\hil_2)\mid (K(\phi),\psi)_1=(\phi,T\psi)_2&\implies(K(\phi),\psi)_1=(T^*(\phi,\psi)_1)\\
+        &\implies((K-T^*)(\phi),\psi)_1=0 \\
+        &\overset{\psi=(K-T^*)(\phi)}{\implies}((K-T^*)(\phi),(K-T^*)(\phi))_1=\norm{(K-T^*)(\phi)}_1=0 \\
+        &\implies (K-T^*)(\phi) =0 \quad \forall\phi\\
+        &\implies K=T^*
+    \end{align*}
+\end{itemize}
+\end{proof}
+
+\begin{defn}[Mappa aggiunzione]\label{defn-mappa-aggiunzione} È la mappa
+$$\begin{array}{cccc}
+   *: & \mathcal{B}(\mathcal{H}_1,\mathcal{H}_2) & \to  & \mathcal{B}(\mathcal{H}_2,\mathcal{H}_1) \\
+    & T &\mapsto & T^* 
+\end{array}$$
+\end{defn}
+
+\begin{prop}[Proprietà mappa aggiunzione]\label{thm-prop-mappa-aggiunzione} La \nameref{defn-mappa-aggiunzione} \underline{su $\mathcal{B}(\hil_1,\hil_2)$} è
+\begin{enumerate}
+    \item \textbf{Antilineare/lineare-coniugata}: $\begin{cases}
+        f(x+y)=f(x)+f(y) & \text{(additività)} \\
+        f(sx)=\overline{s}f(x) & \text{(omogeneità coniugata)}
+    \end{cases}$
+    \item \textbf{Involutiva}: $(T^*)^*$
+\end{enumerate}
+\end{prop}
+\begin{proof}
+    p. 21
+\end{proof}
+
+\begin{myboxed}
+\begin{prop}[Proprietà aggiunto]\label{thm-prop-aggiunto}
+    Abbiamo
+    \begin{enumerate}
+        \item $T\in\mathcal{B}(\mathcal{H}_1,\mathcal{H}_2)\implies T^*$ limitato con $\norm{T^*}=\norm{T}$
+        \item $\norm{TT^*}=\norm{T}^2=\norm{T^*T}$
+        \item $(TS)^*=S^*T^*$
+        \item $\begin{cases}
+            \ker(T)=[\ran(T^*)]^\perp\\
+            \ker(T^*)=[\ran(T)]^\perp
+        \end{cases}$
+        \item $T$ biunivoca $\iff T^*$ biunivoca. In questo caso $(T^{-1})^*=(T^*)^{-1}$
+    \end{enumerate}
+\end{prop}
+\end{myboxed}
+
+\begin{proof}
+    Abbiamo
+    \begin{enumerate}
+        \item Applicando la \nameref{thm-dis-cauchy-schwartz}:
+        $$\abs{(T^*\phi,\psi)_1}=\abs{(\phi,T\psi)_2}\le \norm{\phi}_2\norm{T(\psi)}_2\le \norm{\phi}_2\norm{T}\norm{\psi}_1$$
+        scegliendo $\psi=T^*\phi$ otteniamo 
+        $$\norm{T^*\phi}_1^2\le \norm{\phi}_2\norm{T}\norm{T^*\phi}_1\implies\norm{T^*\phi}_1\le \norm{T}\norm{\phi}_2\implies \norm{T^*}\le\norm{T}$$
+        Quindi $T^*\in\mathcal{B}(\hil_2,\hil_1)$. Ora basta scambiare i ruoli di $T$ e $T^*$ per dimostrare che $\norm{T^*}\ge\norm{T}$ e quindi $\norm{T^*}=\norm{T}$
+        \item \todo{}
+        \item 
+        \item  La prima: 
+        $$\psi\in\ker T\iff T\psi=0\quad \forall\phi\in\hil_2\iff 0=(\phi,T\psi)_2=(T^*\phi,\psi)_1\iff\psi\in[\ran(T^*)]^\perp$$
+        \item 
+        
+    \end{enumerate}
+\end{proof}
+
+\subsubsection{Altre proprietà}
+\begin{defn}[Zoologia di operatori (limitati)] Se $T\in\mathcal{L}(\hil,\hil')$:
+\begin{itemize}
+    \item \textbf{Isometrico:} se $(T\psi,T\phi)'=(\psi,\phi)\quad\forall\psi,\phi\in\hil$
+    \item \textbf{Positivo:} se $\hil=\hil'$ (poiché lavoriamo sulla forma quadratica) e $(\psi,T\psi)\ge0\quad\forall\psi\in\hil$.
+\end{itemize}
+    Se $T\in\mathcal{B}(\hil,\hil')$:
+\begin{itemize}
+    \item \textbf{Normale:} se $\hil=\hil'$ e $TT^*=T^*T$ (commuta con l'aggiunto)
+    \item \textbf{Autoaggiunto:} se $\hil=\hil'$ e $T=T^*$ (uguale all'aggiunto), ovvero $(\psi,T\psi)=(T\psi,\psi)\quad\forall\psi\in\hil$
+    \item \textbf{Unitario:} se isometrico + (limitato)  + suriettivo (ovvero è \textbf{isomorfismo di spazi di Hilbert})
+\end{itemize}
+\end{defn}
+
+\begin{prop}
+    Sia $ T\in \mathcal{L}(\mathcal{H},\mathcal{H}')$, abbiamo
+    \begin{align*}
+        \text{ isometrico } \iff \begin{cases}
+            \text{limitato}\\
+            T^*T=\mathbb{I}
+        \end{cases}\\
+       \text{ unitario } \iff \begin{cases}
+            \text{limitato}\\
+            T^*T=\mathbb{I}\\
+            TT^*=\mathbb{I}'
+        \end{cases}\\
+    \end{align*}
+\end{prop}
+
+\begin{defn}[Operatore positivo e ordinamento di operatori]
+$T\in\mathcal{L}(\hil).$ Diciamo 
+\begin{align*}
+    T\ge0 &\iff(\psi,T\psi)\ge0\quad \forall\psi\in\hil \quad \text{(forma quadratica semidefinita positiva)}\\
+    T\ge U &\iff T-U\ge 0 
+\end{align*}
+NB: essendo forma quadratica $T$ deve essere \textbf{endomorfismo}.
+\end{defn}
+
+
+\begin{lem*}[norma con forma quadratica] \label{lem-norma-forma-quadratica} Se $T\in\mathcal{B}(\hil)\text{ autoaggiunto}$ vale
+    Abbiamo
+    $$\boxed{\norm{T}=\sup_{\psi\in\hil\mid\norm{\psi}=1}\{\abs{(\psi,T\psi)}\}}$$
+    In generale $$ T\in\mathcal{L}(\hil) \quad \text{(lineare) t.c. }\begin{cases}
+        (\psi,T\psi)=(T\psi ,\psi) \;\forall\psi\in\hil &  \text{"autoaggiunto"} \\
+        \sup_{\psi\in\hil\mid\norm{\psi}=1}\{\norm{(\psi,T\psi)}\} & \text{finito}
+    \end{cases}\implies T \text{ limitato}$$
+\end{lem*}
+
+\begin{lem*}
+    Se $\hil$ è \textbf{complesso}, $\ge$ definito sopra è un ordine parziale in $\mathcal{L}(\hil)$. Se non è complesso non può esserlo.
+\end{lem*}
+
+\begin{prop}
+    $\hil$ di dimensione finita, allora operatore isometrico $\implies$ unitario
+\end{prop}
+
+\begin{defn}[Autovettore, autovalore]
+    $V$ complesso e $T\in\mathcal{L}(V)$. Se $T(v)=\lambda v$ per $\lambda\in \im,v\in V\setminus\{0\}$ allora $\lambda$ autovalore e $v$ autovettore. $W_\lambda\subseteq V$ span degli autovalori relativi a $\lambda$ è detto autospazio.
+\end{defn}
+
+\begin{myboxed}
+\begin{prop}[Prop. operatori normali]\label{thm-prop-operatori-normali}
+    Sia $T\in\mathcal{B}(\hil)$. Se è \textbf{normale} valgono:
+    \begin{enumerate}
+        \item $\norm{T\psi}=\norm{T^*\psi}\quad \forall\psi\in\hil$ ($T$ e l'aggiunto hanno stessa norma)
+        \item $\begin{cases}
+            \ker(T)=\ker(T^*)\\
+            \overline{\ran(T)}=\overline{\ran(T^*)}
+        \end{cases}$
+        \item $\psi$ è $\lambda$-autovettore di $T^*\iff\psi$ è $\overline{\lambda}$-autovettore di $T^*$
+        \item $\lambda\ne\lambda'$ autovalori $\implies W_\lambda\perp W_{\lambda'}$
+    \end{enumerate}
+\end{prop}
+\end{myboxed}
+
+\begin{proof}
+    Abbiamo
+    \begin{enumerate}
+        \item Se $T$ normale:
+        $$\norm{T\psi}^2=(T\psi,T\psi)=(T^*Tpsi,\psi)=(TT^*\psi,\psi)=(T^*\psi,T^*\psi)=\norm{T^*\psi}^2$$
+        \item Dalle ugualianze sopra si vede che $\psi\in\ker T\iff \psi\in \ker T^*$, quidni $\ker T=\ker T^*$. \\
+        Questo implica da \nameref{thm-prop-aggiunto} che $[\ran(T^*)]^\perp=[\ran(T)]^\perp\iff\overline{\ran(T^*)}=\overline{\ran(T)}$
+        \item Consideriamo l'operatore $(T-\lambda \mathbb{I})$. Abbiamo
+        $$\begin{cases}
+            (T-\lambda \mathbb{I})^*=T^*-\overline{\lambda}\mathbb{I} &\text{\nameref{thm-prop-mappa-aggiunzione} $*$ è antilineare}\\
+            \norm{(T-\lambda \mathbb{I})\psi}=\norm{(T^*-\overline{\lambda}\mathbb{I})\psi} & (T-\lambda \mathbb{I}) \text{ normale se $T$ normale (verificare)}
+        \end{cases}$$
+        quindi $(T-\lambda \mathbb{I})\psi=0\iff(T^*-\overline{\lambda}\mathbb{I})\psi=0 $
+        \item Siano $\lambda\ne\lambda'\in\im$ autovalori di $\psi,\psi'\in\hil$ autovettori. Allora
+        $$\lambda(\psi',\psi)=(\psi',T\psi)=(T^*\psi',\psi)\overset{iii)}{=}(\overline{\lambda'}\psi',\psi)=\overline{\lambda'}(\psi',\psi)\overset{\lambda\ne\lambda'}{\iff}(\psi',\psi)=0$$
+    \end{enumerate}
+\end{proof}
+
+\begin{myboxed}
+\begin{cor}[proprietà varie] \label{cor-proprietà-varie}
+Sia $T\in\mathcal{L}(\hil)$, allora valgono
+\begin{enumerate}
+
+    \item $T\ge0\implies\sigma_p(T)\subset \re^+$
+    \item $T$ limitato e autoaggiunto $\implies \sigma_p(T)\subset \re$
+    \item $T$ isometrico $\implies \abs{\lambda}=1$
+\end{enumerate}
+\end{cor}
+\end{myboxed}
+
+\begin{proof}
+    Sia $\psi\in\hil$ un $\lambda$-autovettore di $T$, con $\lambda\in\im$.
+    \begin{enumerate}
+        \item Allora
+        $$0\le (\psi,T\psi)=\lambda(\psi,\psi)=\lambda\norm{\psi}^2\iff \lambda\in\re^+$$
+        \item Se $T\in\mathcal{B}(\hil)$ e autoaggiunto, da iii) di \nameref{thm-prop-operatori-normali}:
+        $$\lambda(\psi,\psi)=(\psi,T\psi)=(T\psi,\psi)=\overline{\lambda}(\psi,\psi)\iff \lambda=\overline{\lambda}\iff \lambda\in\re$$
+        \item Se $T$ isometrico:
+        $$\abs{\lambda}^2(\psi,\psi)=(T\psi,T\psi)=(\psi,\psi)\overset{\psi\ne0}{\iff}\abs{\lambda}=1 $$
+    \end{enumerate}
+\end{proof}
+
+\begin{prop}[Condizioni sufficienti per essere autoaggiunto]
+    Valgono
+    \begin{enumerate}
+        \item $T\in\mathcal{L}(\hil)\mid (\psi',T\psi)=(T\psi',\psi)\quad\forall\psi,\psi'\in\hil\implies T$ limitato e autoaggiunto
+         \item $T\in\mathcal{B}(\hil)\mid (\psi,T\psi)=(T\psi,\psi)\quad\forall\psi\in\hil\implies T$ autoaggiunto
+         \item \hl{$T\in\mathcal{B}(\hil)\mid T\ge 0\implies T$ autoaggiunto}
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    iii) dalla proprietà del prodotto interno $(a,b)=\overline{(b,a)}$ e dal fatto che $(\psi,T\psi)\in \re$ (essendo $\ge0$):
+    $$(\psi,T\psi)\overset{(\cdot,\cdot)}{=}\overline{(T\psi,\psi)}\overset{\ge0\in\re}{=}(T\psi,\psi)$$
+\end{proof}
+
+
+\subsubsection{Proiettori ortogonali}
+
+\begin{defn}[Proiettore ortogonale]\label{defn-proiettore-ortogonale}
+    $P\in\mathcal{B}(\hil)\mid \begin{cases}
+        P^2=P & \text{(idempotente)}\\
+        P^*=P & \text{(autoaggiunto)}
+    \end{cases}$
+\end{defn}
+
+\begin{myboxed}
+\begin{lem*}
+    $P$ \nameref{defn-proiettore-ortogonale} $\implies P$ positivo ($P\ge 0$)
+\end{lem*}
+\end{myboxed}
+
+\begin{proof}
+    $(\psi,P\psi)=(\psi,P^2\psi)=(P^*\psi,P\psi)=(P\psi,P\psi)=\norm{P\psi}^2\ge0\overset{P\in\mathcal{B}}{\implies}P\ge 0$
+\end{proof}
+
+\begin{myboxed}
+\begin{thm}[proprietà proiettori]\label{thm-proprietà-proiettori}
+    Sia $P\in\mathcal{B}(\hil)$  \nameref{defn-proiettore-ortogonale} e $W\coloneqq P[\hil]$ la proiezione di tutto lo spazio (immagine di $P$). Allora
+    \begin{enumerate}
+        \item $Q\coloneqq \id-P$ è un \nameref{defn-proiettore-ortogonale}.
+        \item $Q(\hil)=W^\perp$ e $\hil = W\oplus W^\perp$
+        \item $\norm{\psi-P(\psi)}=\mid\{\norm{\psi-\psi'}:\psi'\in W\}\quad  \forall\psi\in\hil$
+        \item Sia $e_{i\in I}$ una base di $W$, allora $P(\cdot)=s-\sum_{i\in I}e_i(e_i,\cdot)$
+        \item $\id\ge P$ 
+        \item $P\ne 0\implies \norm{P}=1$
+    \end{enumerate}
+\end{thm}
+\end{myboxed}
+\begin{proof}
+    Abbiamo
+    \begin{enumerate}
+        
+        \item Abbiamo
+        $$\begin{cases}
+            Q^2=(\mathbb{I}-P)^2=\mathbb{I}+P^2-2P=\mathbb{I}-P=Q\\
+            Q^*=(\mathbb{I}-P)^*=\mathbb{I}^*-P^*=\mathbb{I}-P=Q
+        \end{cases}\implies Q\text{ proiett. ortog.}$$
+        \item Abbiamo 
+        \begin{itemize}
+            \item \underline{$Q(\hil)\subseteq W^\perp$:} 
+            \begin{align*}
+                \psi'\in Q(\hil) &\iff \psi'=Q(\widetilde{\psi}) \quad \widetilde{\psi}\in\hil \\
+                &\implies (\psi,\psi')=(\psi,Q\widetilde{\psi})\overset{Q\text{autoagg.}}{=}(Q\psi,\widetilde{\psi})=(\psi-\overbrace{P\psi}^{=\psi},\widetilde{\psi})=0 \quad \forall \psi\in W=\ran P\\
+                &\iff \psi'\in W^\perp
+            \end{align*}
+          
+            \item \underline{$W$ chiuso:} Sia 
+            \begin{align*}
+                \{\psi_n\}_{n\in\na} :  \{P\psi_n\}_{n\in\na} \subset W\text{ di cauchy/converg} &\implies \textcolor{red}{\lim_{n\to\infty}P(\psi_n)}=\Psi\\
+                &\implies P(\lim_{n\to\infty}P(\psi_n))=P(\Psi)\\
+                &\implies  \textcolor{red}{\lim_{n\to\infty}P(\psi_n)}=P(\Psi) \quad \text{poiché $P\in\mathcal{B}(\hil)$ e $P^2=P$}\\
+                &\implies \Psi=P(\Psi)\\
+                &\iff \Psi\in W
+            \end{align*}
+             \item \underline{$W\cap Q(\hil)=\emptyset$:} serve per dire che la decomposizione di $\psi\in\hil$:
+             $$\psi={P(\psi)}+{Q(\psi)}\in W\oplus Q(\hil)$$
+             è unica. Infatti
+             \begin{align*}
+                 \phi\in W\cap Q(\hil)&\implies\begin{cases}
+                     \phi=P\phi \\
+                     \phi = Q\phi
+                 \end{cases}\implies \phi+\phi=\overbrace{(Q+P)}^{=\mathbb{I}}\phi \implies 2\phi=\phi\implies \phi=0
+             \end{align*}
+             \item \underline{$Q(\hil)= W^\perp$:} infatti
+             $$\begin{cases}
+                 W \text{ chiuso}\\
+                 W\cap Q(\hil)=\emptyset
+             \end{cases}\implies \hil =W \oplus \overset{\subseteq W^\perp}{Q(\hil)}\overset{\hil=W\oplus W^\perp}{\implies}Q(\hil)=W^\perp \quad \text{per unicità scomposizione}$$
+        \end{itemize}
+        \item NO
+        \item NO
+        \item $\mathbb{I}\ge P\iff \mathbb{I}-P=Q\ge 0$. Infatti  $\forall\psi\in\hil$
+        $$0\le \norm{Q\psi}^2=(Q\psi,Q\psi)=(\psi,Q^2\psi)=(\psi,Q\psi)\iff Q\ge0$$
+        \item da sopra 
+        $$0\le(\psi,Q\psi)\overset{Q=\mathbb{I}-P}{=}\norm{\psi}^2-(\psi,P\psi)=\norm{\psi}^2-\norm{P\psi}^2{\implies} \frac{\norm{P(\psi)}}{\norm{\psi}}\le 1\iff \norm{P}\le 1$$
+        Se $P\ne 0\implies W\ne \{0\}$ e quindi continiene un vettore di norma unitaria essendo sottospazio. Su tale $\psi: \norm{P\psi}=1\implies \norm{P}=1$
+    \end{enumerate}
+\end{proof}
+
+\begin{myboxed}
+\begin{prop}[ortogonalità dei proiettori]
+    Sia $W\subset \hil$ sottospazio chiuso, siano $\begin{cases}
+        P: \hil\to W\\
+        Q: \hil \to W^\perp
+    \end{cases}$ i \nameref{defn-proiettore-ortogonale} associati $\implies P,Q$ ortogonali
+\end{prop}
+\end{myboxed}
+\begin{proof}
+    p. 29 \todo{}
+\end{proof}
+
+\subsection{Radice di operatori positivi}
+\begin{defn}[radice (positiva) quadrata di un operatore]
+    $B\in\mathcal{B}(\hil)$ è radice quadra di $A\in\mathcal{B}(\hil)$ se $A=B^2$. Inoltre se $B\ge 0$ è chiamato radice positiva, in tal caso scriviamo $B=\sqrt{A}$
+\end{defn}
+
+\begin{thm}[esistenza e unicità della radice]
+    Sia $A\in\mathcal{B}(\hil)$ positivo $\implies \exists\,!\; \sqrt{A}$ tale che
+    \begin{itemize}
+        \item[(a)] commuta con ogni operatore limitato su $\hil$
+         \item[(b)]  $A$ biettiva $\implies \sqrt{A}$ biettiva
+    \end{itemize}
+\end{thm}
+
+\begin{defn}[modulo di un operatore]
+    Sia $A\in\mathcal{B}(\hil)$, il suo modulo è
+    $$\abs{A}\coloneqq\sqrt{A^*A}$$
+    che è limitato, positivo e autoaggiunto
+\end{defn}
+
+\begin{myboxed}
+\begin{cor}[proprietà del modulo]
+    Sia $A\in\mathcal{B}(\hil)$, allora
+        \begin{itemize}
+        \item[(a)] $\ker(\abs{A})=\ker (A)$
+         \item[(b)]  $\overline{\ran(\abs{A})}=(\ker(A))^\perp$
+    \end{itemize}
+\end{cor}
+\end{myboxed}
+\begin{proof}.
+\begin{itemize}
+    \item[a)] per $\psi \in \hil$ vale:
+    \begin{align}\label{eq-modulo}
+        \norm{\abs{A}\psi}^2=(\abs{A}\psi,\abs{A}\psi)\overset{\abs{A}\text{autoagg.}}{=}(\psi,\abs{A}^2\psi)=(\psi,A^*A\psi)=(A\psi,A\psi)=\norm{A\psi}^2
+    \end{align}
+    e quindi $\abs{A}\psi=0\iff A\psi=0$.
+     \item[b)] sappiamo
+     $$\begin{cases}
+         \overline{\ran(\abs{A})}=((\ran(\abs{A}))^\perp)^\perp\\
+         (\ran(\abs{A}))^\perp=\ker(\abs{A}).
+     \end{cases}$$ infatti
+     \begin{align*}
+         \psi\in (\ran(\abs{A}))^\perp &\implies 0=(\psi,\abs{A}\psi')=(\abs{A}\psi,\psi')\quad \forall\psi'\in\hil\\
+         &\implies \psi\in \ker(\abs{A})
+     \end{align*}
+     funziona anche il contrario, quindi $\overline{\ran(\abs{A})}=(\ker(\abs{A}))^\perp$. Unendo con punto uno si ha la tesi.
+\end{itemize}
+\end{proof}
+
+\begin{myboxed}
+\begin{thm}[Decomposizione polare]
+     Sia $A\in\mathcal{B}(\hil)\implies \exists\,!\; P,U\in \mathcal{B}(\hil)$ tali che
+     \begin{align*}
+         A=UP & \qquad\text{ con } & \begin{cases}
+             P\ge 0 & \text{"modulo"}\\
+             U \text{ isometrico su}\ran(P) & \text{"fase"}
+         \end{cases} & \qquad\text{ e } & U|_{\ker(P)}=0
+     \end{align*}
+     Inoltre valgono
+     \begin{enumerate}
+         \item $P=\abs{A}$ e $\ker(U)=\ker(A)=\ker(P)=[\ran(P)]^\perp$
+         \item $A$ biettivo $\implies U=A\abs{A}^{-1}$ (la fase $U$ è come $A$ con modulo rinormalizzato)
+     \end{enumerate}
+\end{thm}
+\end{myboxed}
+\begin{proof}
+.
+\begin{itemize}
+    \item \textbf{Unicità/esistenza}:
+    \begin{itemize}
+        \item[$\boxed{P}$:] dimostriamo che se esiste la decomposizione $\implies P=\sqrt{A^*A}$ che esiste ed è unica. Infatti
+        \begin{align*}
+            A=UP  &\implies A^*=(UP)^*=PU^* &&\text{$P\ge0\implies P$ autoagg.}\\
+            &\implies A^*A=PU^*UP\overset{\spadesuit}{=}P^2
+        \end{align*}
+        dove $\spadesuit: (UP\psi,UP\psi')=(P\psi,P\psi')\implies (\psi,PU^*UP\psi')=(\psi,P^2\psi')$
+        \item[$\boxed{U}$:] \todo{}
+    \end{itemize}
+    \item[(i)]
+    \item[(ii)]
+\end{itemize}
+\end{proof}
+
+\pagebreak
+\section{Operatori compatti}
+Sono generalizzazione di matrici a rango finito.
+\subsection{Operatori compatti su spazi normati}
+\begin{defn}[Insieme relativamente compatto]
+    $W\subseteq X$ relativamente compatto se $\overline{W}$ compatto
+\end{defn}
+
+\begin{rem*}
+    Vale
+    $$\text{relativamente compatto} \begin{array}{c}
+         \overset{\text{sp. metrico}}{\implies}  \\
+         \underset{+\text{completo}}{\impliedby}
+    \end{array}\text{totalmente limitato}$$
+\end{rem*}
+\begin{defn}[Insieme compatto per successioni]
+    $W\subseteq X$ normato è compatto per successioni se ogni successione di elementi di $W$ ammette una sottosuccessione convergente.
+\end{defn}
+
+\begin{prop}
+     $W\subseteq X$ normato, allora compatto per successioni $\implies$ relativamente compatto (se $W$ non completo il limite potrebbe non essere in $W$)
+\end{prop}
+
+\begin{defn}[Operatore compatto]
+    Siano $X,Y$ spazi  normati, lo è $T\in\mathcal{L}(X,Y)$ se vale almeno una
+    \begin{enumerate}
+        \item $\noun{limitato}\mapsto\noun{relatimavemnte compatto}$
+         \item $\noun{succ. converg.}\mapsto\noun{succ. che ammette sottosucc. converg.}$
+    \end{enumerate}
+    Indicati con $\mathcal{B}_\infty(X,Y)$
+\end{defn}
+
+\begin{rem*}
+    Quindi per dei Banach è compatto se $\noun{limitato}\mapsto\noun{totalmente limitato}$
+\end{rem*}
+
+\begin{myboxed}
+    \begin{lem*}[compatto $\implies$ limitato]
+        $X,Y$ normati $\implies \mathcal{B}_\infty(X,Y)\subset\mathcal{B}(X,Y)$ 
+    \end{lem*}
+\end{myboxed}
+\begin{proof}
+    Abbiamo
+    \begin{align*}
+        B_1(0) \text{ palla unitaria in 0} &\implies T(B_1(0)) \text{ rel. compatto}\\
+        &\implies \overline{T(B_1(0)) }\subset \bigcup_{i=1}^NB_r(y_i)\subset B_{R+r}(0) && \text{$R$ massima dist. di $y_i$ da 0}\\
+        &\implies \norm{T(v)}\le R+r \quad \forall v:\norm{v}=1\\
+        &\implies \norm{T}\le r+R
+    \end{align*}
+\end{proof}
+
+\begin{myboxed}
+    \begin{lem*}[di Banach]\label{lem-banach}
+        $X$ spazio normato.
+        $$\{x_i\}_i\subset X \text{ tutti vettori l.i.}\implies \exists\{y_i\}_i\mid \begin{cases}
+            \norm{y_n}=1\quad \forall n\\
+            y_n\in X_n\coloneqq\text{span}_\im(x_1,\dots,x_n)\\
+            d(y_n,X_{n-1})\coloneqq \inf_{x\in X_{n-1}}\norm{x-y_n}>\frac{1}{2}
+        \end{cases} $$
+    \end{lem*}
+\end{myboxed}
+
+\begin{proof}
+    Notiamo che $ d(y_n,X_{n-1})$ esiste in quanto l'inf di un sottoinsieme non vuoto di $\re^+$. Costruiamo tale successione:
+    $$y_1\coloneqq\frac{x_1}{\norm{x_1}}$$
+    poi vediamo che $\begin{cases}
+        x_n\notin X_{n-1}\\
+        d(x_n,X_{n-1})\coloneqq k>0
+    \end{cases}$, scegliamo $$x'\in X_{n-1}\mid k<\norm{x_n-x'}<2k$$
+    Dato che $\begin{cases}
+x'\in X_{n-1}   \\
+k=d(x_n,X_{n-1})=d(x_n-x',X_{n-1})
+    \end{cases}$  definiamo
+    $$y_n\coloneqq\frac{x_n-x'}{\norm{x_n-x'}}$$
+\end{proof}
+
+\begin{myboxed}
+    \begin{thm}[Banach]\label{thm-banach}
+        Sia $X$ normato e $T\in\mathcal{B}_\infty(X)$. Allora
+        \begin{enumerate}
+            \item $\forall\delta>0$ esiste numero finito di $\lambda$-autospazi con $\abs{\lambda}>\delta$
+            \item $\lambda\ne 0$ autoval., $W_\lambda$ relativo autosp. $\implies \dim(W_\lambda)<+\infty$
+            \item $\sigma_p(T)\subset \im$ limitato e numerabile con al più un punto di acc. in 0. Ovvero possono essere ordinati $\abs{\lambda_1}\ge\abs{\lambda_2}\ge\dots\ge 0$
+        \end{enumerate}
+    \end{thm}
+\end{myboxed}
+
+\begin{proof} Basta dimostrare i) e gli altri seguono. \\
+     Sia $\dim X$ infinita (altrimenti ovvio). Dobbiamo dimostrare che
+        $$\forall\delta>0\;\exists \text{  numero finito di $\lambda$-autovettori \underline{l.i.} t.c. }\abs{\lambda}>\delta\quad \forall\lambda$$
+        \begin{itemize}
+            \item  Supponiamo \noun{per assurdo} che sia falsa, ovvero ce ne siano infiniti: chiamiamoli $(x_i)_i$. 
+        $$(x_i)_i\overset{\text{lemma \nameref{lem-banach}}}{\longrightarrow}(y_n)_n$$
+        Sia $(\lambda_i)_i$ la successione di autovalori (anche ripetuti) disposti in \textbf{ordine crescente}, ovvero $\abs{\lambda_i}>\delta \quad \forall i>\overline{i}$, con 
+$Tx_i=\lambda_ix_i$. Quindi
+        \begin{align*}
+            \norm{\frac{y_n}{\lambda_n}}\overset{\norm{y_n}=1}{<}\delta&\implies (y_n/\lambda_n)_n \quad \text{limitata}\\
+            &\overset{T \in\mathcal{B}_\infty}{\implies} (T(y_n/\lambda_n))_n \quad \text{ammette sottosucc. convergente}
+        \end{align*}
+        \item Quello appena detto è assurdo in quanto la successione $(T(y_n/\lambda_n))_n$ è crescente. Infatti: essendo per costruzione $y_n=\sum_{k=1}^n\overset{\in \im}{\beta_k}x_k$
+        $$T\frac{y_n}{\lambda_n}=\sum_{k=1}^n\frac{\lambda_k}{\lambda_n}\beta_kx_k=y_n+z_n \qquad z_n\coloneqq\sum_{k=1}^{n-1}\left(\frac{\lambda_k}{\lambda_n}-1\right)\beta_kx_k\quad\in X_{n-1}$$
+        Quindi, per costruzione col lemma \nameref{lem-banach}:
+        $$\forall p>q\in\na:\quad \norm{T\frac{y_p}{\lambda_p}-T\frac{y_q}{\lambda_q}}=\norm{y_p+z_p-(y_q+z_q)}=\norm{y_p-\underbrace{(y_q+z_q-z_p)}_{\in X_{p-1}}}>\frac{1}{2}$$
+        ovvero è strettamente crescente e quindi non può ammettere sottosuccessione convergente. \lightning
+        \end{itemize}
+\end{proof}
+
+
+\subsection{Operatori normali su spazi di Hilbert}
+\begin{myboxed}
+    \begin{prop}
+        $T\in\mathcal{B}_\infty(\hil)\iff\abs{T}\in\mathcal{B}_\infty(\hil)$
+    \end{prop}
+\end{myboxed}
+\begin{proof} Per il $\implies)$
+    \begin{align*}
+        \{x_n\}_n \text{ limitata } &\overset{T\in\mathcal{B}_\infty(\hil)}{\implies} \exists\; 
+        \{T(x_{n_k})\}_{n_k} \text{ convergente} \\
+        &\implies \{\abs{T}(x_{n_k})\}_{n_k} \text{ convergente} && \text{da \ref{eq-modulo}: } \norm{\abs{T}(x_{n_k})}=\norm{T(x_{n_k})}
+    \end{align*}
+    Per il $\impliedby)$ basta scambiare i ruoli di $T$ e $\abs{T}$
+\end{proof}
+
+\begin{myboxed}
+    \begin{thm}[Hilbert] \label{thm-hilbert}
+        Sia $T\in\mathcal{B}_\infty(\hil)$ autoaggiunto ($T=T^*$). Allora
+        \begin{enumerate}
+            \item $\sigma_p(T)\ne\varnothing \overset{\text{\nameref{cor-proprietà-varie}}}{\implies}\sigma_p(T)\subset\re$
+            \item $\norm{T}=\sup_{\lambda\in\sigma_p(T)}\{\abs{\lambda}\}=\max_{\lambda\in\sigma_p(T)}\{\abs{\lambda}\}$
+            \item $T=0\iff \sigma_p(T)=\{0\}$
+        \end{enumerate}
+    \end{thm}
+\end{myboxed}
+\begin{proof} per prima cosa ogni $\lambda$-autospazio $\hil_\lambda$ con $\lambda\ne 0$ è finito dimensionale in quanto 
+\begin{align*}
+    B_1(0)\subset\hil_\lambda &\implies \lambda^{-1}B_1(0) \text{ limitato}\\
+    &\implies T(\lambda^{-1}B_1(0))=B_1(0) \text{ relativamente compatto}\\
+    &\iff \dim\hil_\lambda<+\infty
+\end{align*}
+    \begin{itemize}
+        \item[i)-ii)]  Dimostriamo che $\sigma_p(T)\ne\varnothing$ trovando come autovalore $\norm{T}$ e vedendo che $\norm{T}=\max_{\lambda\in\sigma_p(T)}\abs{\lambda}$
+        \begin{itemize}
+            \item \underline{$\sup_{\lambda\in\sigma_p(T)}\{\abs{\lambda}\}\le\norm{T}$:}
+            \item \underline{$\norm{T}\in\sigma_p(T) $:}
+        \end{itemize}
+    \end{itemize}
+    \todo{}
+\end{proof}
+
+
+
+\begin{myboxed}
+    \begin{thm}[spettrale per operatori compatti autoaggiunti]
+        Sia $T\in\mathcal{B}_\infty(\hil)$ autoaggiunto ($T=T^*$). Allora
+        \begin{enumerate}
+            \item siano $P_\lambda$ i proiettori sui $\lambda$-autospazi
+            $$T=\textfrak{u-}\sum_{\lambda\in\sigma_p(T)}\lambda P_\lambda$$
+            dove la convergenza è intesa nella topologia uniforme, ovvero qua quella indotta dalla norma operatoriale:
+            $$\norm{T-\sum_{i=0}^n\lambda_iP_{\lambda_i}}\overset{n\to\infty}{\longrightarrow}0$$
+            \item $\hil$ ammette una base di Hilbert/Schauder di autovettori di $T$.
+        \end{enumerate}
+    \end{thm}
+\end{myboxed}
+\begin{proof} (i) Siano 
+$$\begin{array}{l}
+     \text{$\lambda\in\sigma_p(T)\subset\re$ per il \nameref{thm-hilbert}, con }\begin{cases}
+         \hil_\lambda \quad \text{i relativi autospazi}\\
+         P_\lambda:\hil\to\hil_\lambda \quad \text{i proiettori ortogonali}
+     \end{cases}  \\
+     \text{dal \nameref{thm-proprietà-proiettori} abbiamo che }\begin{cases}
+        \hil=\hil_\lambda\oplus\hil_{\lambda}^\perp\\
+        Q_\lambda=\mathbb{I}-P:\hil\to\hil_\lambda^\perp \text{  
+  proiettore ortog. su }\hil_\lambda^\perp
+    \end{cases}
+\end{array}$$
+\begin{itemize}
+    \item \textbf{Preliminari:}
+    \begin{itemize}
+        \item[1)] \underline{Azione di $TP_\lambda$:} Vale 
+        $$TP_\lambda=P_\lambda T=\lambda P_\lambda$$
+        Infatti
+        $$\begin{cases}T\overbrace{(P_\lambda\psi)}^{\in\hil_\lambda}=\lambda(P_\lambda\psi)\implies TP_\lambda=\lambda P_\lambda\\
+            (TP_\lambda)^*\overset{\text{sopra}}{=}(\lambda P_\lambda)^*\overset{\text{autoagg.}}{\iff}P_\lambda T=\overline{\lambda}P_\lambda\overset{\lambda\in\re}{=}\lambda P_\lambda
+        \end{cases}\implies \text{tesi}$$
+        \item[2)] \underline{Commutatori:} Vale
+        $$\begin{cases}
+            [T,P_\lambda]=0 & \text{da sopra}\\
+            [T,Q_\lambda]=0 & \text{ragionando come sopra}\\
+            [P_\lambda, Q_\lambda]=0 & \text{ lo sappiamo}\\
+        \end{cases}$$
+        e quindi vale anche
+        $$P_\lambda(Q_\lambda T)=(Q_\lambda T)P_\lambda \quad \text{ ovvero }\quad [Q_\lambda T,P_\lambda]=0$$
+        \item[3)] \underline{Natura di $Q_\lambda T$:} $Q_\lambda T\in\mathcal{B}_\infty(\hil)$ poiché prodotto di un limitato e un compatto, inoltre è autoaggiunto poiché
+        $$(Q_\lambda T)^*=TQ_\lambda\overset{[T,Q_\lambda]=0}{=}Q_\lambda T$$
+        \item[4)] \underline{Scomposizione di $T$:} dato che $[T,Q_\lambda]=0$  e $TP_\lambda =\lambda P_\lambda $ abbiamo
+        $$\boxed{T=T\mathbb{I}=T(P_\lambda +Q_\lambda )=\lambda P_\lambda +Q_\lambda T}$$
+    \end{itemize}
+    \item \textbf{Costruzione della serie:} 
+    Siano $\hil_i,P_i\dots$ tutte le cose relative all'$i$-esimo autovalore. Grazie a 4) definiamo
+    $$\boxed{T=\lambda_0P_0+T_1\qquad \text{con }T_1\coloneqq Q_0T}$$
+    dove
+    \begin{itemize}
+        \item $T_1\in\mathcal{B}_\infty(\hil)$ e autoaggiunto da 3)  
+        \item $\forall \lambda\in\sigma_p(T_1):\abs{\lambda}\le\abs{\lambda_0}$. Infatti
+        $$\norm{T_1}=\norm{TQ_0}\le \norm{T}\norm{Q_0}\overset{\text{\nameref{thm-proprietà-proiettori}}}{=}\norm{T}$$
+        \item Scegliamo $\lambda_1\in\sigma_p(T_1)$ massimale, ovvero $\abs{\lambda_1}=\norm{T_1}$ e per il punto prec. sarà $\abs{\lambda_1}\le \abs{\lambda_0}$
+        \item Ogni $\lambda_1$-autovettore di $T_1$ è anche  $\lambda_1$-autovettore di $T$. Infatti
+        \begin{align*}
+            \psi_1\in\hil_1[T_1]&\implies T\psi_1=\lambda_0\underbrace{P_0\psi_1}_{=0}+\underbrace{T_1\psi_1}_{=\lambda_1\psi_1}=\lambda_1\psi_1 \quad \text{poiché per \nameref{thm-prop-operatori-normali}: }\psi_1\in\hil_0^\perp
+        \end{align*}
+    \end{itemize}
+Quindi possiamo replicare lo stesso ragionamento su $T_1$: $T_1=\lambda_1P_1+T_2$, ovvero
+$$\boxed{T=\lambda_0P_0+\lambda_1P_1+T_2}$$
+procedendo in questo modo otteniamo una serie:
+$$\boxed{T-\sum_{i=0}^n\lambda_1P_i=T_{n+1}}$$
+dove 
+    $$\abs{\lambda_0}\ge\abs{\lambda_1}\ge\dots\ge0 \qquad \abs{\lambda_i}=\norm{T_i}$$
+    Se $T_{n+1}\equiv 0$ per qualche $n$, allora $\lambda_{n+1}=0$ e il processo si ferma. Altrimenti infinito
+    
+    \item \textbf{Convergenza della serie di autovalori:} dal teorema di \nameref{thm-banach} ci aspettiamo che sia così. Comunque \noun{per assurdo} neghiamo la tesi, ovvero (essendo successione decrescente di valori positivi) 
+    $$\exists\varepsilon>0:\abs{\lambda_n}\ge \varepsilon\quad 
+    \forall n$$
+    Sia allora
+    \begin{align*}
+        \{\psi_i\}: \psi_i\in\hil_i \text{ e } \norm{\psi_i}=1\implies \text{succ. limitata}\overset{T\in\mathcal{B}_\infty(\hil)}{\implies}\exists \text{sottosucc. conv. di } \{T\psi_i\}_i
+    \end{align*}
+    ma è assurdo in quanto $\forall n\ne m$
+    $$\norm{T\psi_n-T\psi_m}^2=\norm{\lambda_n\psi_n-\lambda_m\psi_m}^2\overset{\psi_n\perp\psi_m}{=}\abs{\lambda_n}^2+\abs{\lambda_m}^2\ge 2\varepsilon$$
+    quindi la successione $\{T\psi_i\}_i$ è crescente e quindi non può ammettere sottosuc. conv. \lightning
+    \item \textbf{Convergenza della serie di operatori:} quindi abbiamo
+    $$\begin{cases}
+        T-\sum_{i=0}^n\lambda_1P_i=T_{n+1}\\
+        \abs{\lambda_i}=\norm{T_i}
+    \end{cases}\implies\lim_{n\to\infty}\norm{T-\sum_{i=0}^n\lambda_iP_i}=\lim_{n\to\infty}\norm{T_{n+1}}=\lim_{n\to\infty}\abs{\lambda_{n+1}}=0$$
+    ovvero la serie
+    $$T=\sum_{i=0}^\infty\lambda_iP_i$$
+    converge a $T$ nella topologia uniforme (norma operatoriale)
+    \item \textbf{La serie contiene tutti gli autovalori $\ne0$:} sia $\lambda\ne\lambda_n \quad \forall n$ con $P_\lambda$ il relativo proiettore.
+\begin{align*}
+\lambda\ne\lambda_n &\overset{\text{\nameref{thm-prop-operatori-normali}}}{\implies} \text{autosp. }\perp \\
+&\implies P_\lambda P_n=P_nP_\lambda=0 \\
+&\implies TP_\lambda=\sum_{n=0}^{\infty}\lambda_nP_nP_\lambda=0\\
+&\implies T(\psi_\lambda)=T(P\psi_\lambda)=0 \qquad \psi_\lambda\in\hil_\lambda\\
+&\implies \psi \text{ è 0-autovettore}\\
+&\implies\lambda=0
+\end{align*}
+\end{itemize}
+\end{proof}
+\begin{proof} (ii) Per teorema di \nameref{thm-banach} ogni autospazio $\hil_n$ è di dimensione finita e quindi ammette base ortonormale. Dobbiamo dimostrare che l'unione di tali basi genera $\hil\iff$ l'ortogonale dello span dell'unione è 0.
+$$\psi\in\text{span}(\hil_1,\hil_2,\dots)^\perp\implies\begin{cases}
+    T\psi=\sum_{n=0}^\infty\lambda_nP_n\psi=0\iff \psi\in\ker T\\
+    \text{per coatruzione } \psi\in\hil_0^\perp=\ker(T)^\perp
+\end{cases}\implies\psi=0$$
+    
+\end{proof}
+\subsection{Operatori di Hilbert-Schmidt}
+\begin{defn}[Operatore di Hilbert-Schmidt]
+    $A\in\mathcal{B}_2(\hil)$ se $A\in\mathcal{B}(\hil)$ ed esiste base ortonormale $\{\psi_i\}_i$ di $\hil$ tale che 
+    $$\sum_{i=1}^\infty\norm{A\psi_i}^2<\infty$$
+    Inoltre diamo la struttura di spazio normato $(\mathcal{B}_2(\hil), \norm{\cdot}_2)$ con 
+    $$\norm{A}_2\coloneqq\sqrt{\sum_{i=1}^\infty\norm{A\psi_i}^2}$$
+\end{defn}
+
+\begin{myboxed}
+\begin{thm}[Indipendenza dalla scelta della base]
+    Siano $\{\psi_i\}_i$ e $\{\phi_j\}_j$ due basi di $\hil$. Sia $A\in\mathcal{B}(\hil)$, allora
+    \begin{enumerate}
+        \item $\sum_{i=1}^\infty\norm{A\psi_i}^2<\infty\iff\sum_{i=1}^\infty\norm{A\phi_j}^2<\infty$ e coincidono
+        \item $\sum_{i=1}^\infty\norm{A\psi_i}^2<\infty\iff\sum_{i=1}^\infty\norm{A^*\phi_j}^2<\infty$ e coincidono
+    \end{enumerate}
+\end{thm}
+\end{myboxed}
+\begin{proof}
+.
+\begin{itemize}
+    \item[ii)] Sia $\norm{A}_2^2$ finita. Tramite \nameref{thm-identità-parseval} abbiamo:
+    $$\norm{A}_2^2=\sum_{i=1}^\infty\norm{A(\psi_i)}^2=\sum_{i=1}^\infty\sum_{j=1}^\infty\abs{(A(\psi_i),\phi_j)}^2=\sum_{j=1}^\infty\sum_{i=1}^\infty\abs{(\psi_i, A^*(\phi_j))}^2=\sum_{j=1}^\infty\norm{A^*(\phi_j)}^2=\norm{A^*}_2^2$$
+    abbiamo potuto scambiare le serie perché tutti i termini sono positivi. Da tale catena di ugualianze segue la tesi.
+    \item[i)] conseguenza di ii)
+\end{itemize}
+\end{proof}
+
+\begin{prop}[Proprietà operatori di Hilbert-Schmidt]\label{thm-prop-op-hil-schmidt}
+    $\mathcal{B}_2(\hil)$ è sottospazio di $\mathcal{B}(\hil)$ tale che:
+    \begin{enumerate}
+        \item $\norm{A}_2=\norm{A^*}_2\quad \forall A\in \mathcal{B}_2(\hil)$
+        \item $\begin{cases}
+            \norm{AK}_2\le \norm{K}\norm{A}_2\\
+             \norm{KA}_2\le \norm{K}\norm{A}_2
+        \end{cases}\quad \forall \mathcal{B}_2(\hil), K\in \mathcal{B}(\hil)$
+        \item $\norm{A}\le \norm{A}_2\quad \forall A\in \mathcal{B}_2(\hil)$
+    \end{enumerate}
+\end{prop}
+
+\begin{thm}[Op. di Hilbert-Schmidt sono spazio di Hilbert] \label{thm-B2-spazio-hilbert}
+    Sia $\{\psi_i\}_i$ base ortonormale di $\hil$. Allora $(\mathcal{B}_2(\hil),(\cdot,\cdot)_2)$ è uno spazio di Hilbert, con 
+$$(\cdot,\cdot)_2:\mathcal{B}_2(\hil)\times\mathcal{B}_2(\hil)\to\im\qquad (A,B)_2\coloneqq\sum_{i=1}^\infty(A\psi_i,B\psi_i)$$
+    che quindi è un prodotto scalare su $\mathcal{B}_2(\hil)$ e induce la norma $\norm{A}_2^2=(A,A)_2$
+\end{thm}
+
+\begin{prop}
+    Vale
+    $$\norm{A}_{\textcolor{red}{2}}^2=\sum_{\lambda\in\text{sing}(A)}m_\lambda\lambda^{\textcolor{red}{2}}$$
+    con $\text{sing}(A)=\sigma_p(\abs{A})$ e $m_\lambda$ la molteplicità di $\lambda\in\sigma_p(\abs{A})$
+\end{prop}
+
+\subsection{Operatori classe traccia}
+\begin{prop}
+    Sono equivalenti
+
+\begin{enumerate}
+    \item $\exists$ b.o.c $\{\psi_i\}_i$ t.c. $\sum_{i=1}^\infty(\psi_i,\abs{A}\psi_i)<\infty$
+    \item $\sqrt{\abs{A}}\in\mathcal{B}_2(\hil)$
+    \item $A\in\mathcal{B}_\infty(\hil)$ e $\sum_{\lambda\in\text{sing}(A)}m_\lambda\lambda<\infty$
+\end{enumerate}
+\end{prop}
+
+\begin{defn}[Operatore di classe traccia]
+    Sia $A\in\mathcal{B}(\hil)$. Allora $A\in \mathcal{B}_1(\hil)\overset{\text{def.}}{\iff}\sqrt{\abs{A}}\in\mathcal{B}_2(\hil)$. Definiamo
+    $$\norm{A}_{\textcolor{red}{1}}\coloneqq\norm{\sqrt{\abs{A}}}_2^2=\sum_{\lambda\in\text{sing}(A)}m_\lambda\lambda^{\textcolor{red}{1}}$$
+    Si dimostra che è di Banach rispetto a tale norma.
+\end{defn}
+
+\begin{cor}
+    Vale
+    $$\overset{\text{Banach}}{\mathcal{B}_1(\hil)}\subset\overset{\text{Hilbert}}{\mathcal{B}_2(\hil)}\subset\mathcal{B}_\infty(\hil)\subset\mathcal{B}(\hil)$$
+\end{cor}
+
+\begin{prop}[Proprietà operatori classe traccia] \label{thm-prop-op-classe-traccia}
+    Valgono:
+    \begin{enumerate}
+        \item $A\in\mathcal{B}_1(\hil)\implies A=\overset{\in\mathcal{B}_2(\hil)}{B}\overset{\in\mathcal{B}_2(\hil)}{C}$ e $B,C\in\mathcal{B}_2(\hil)\implies BC\in \mathcal{B}_1(\hil)$\\
+        Inoltre $\norm{BC}_1\le \norm{B}_2\norm{C}_2$
+        \item $\mathcal{B}_1(\hil)$ è un sottospazio di $\mathcal{B}(\hil)$ e un suo ideale, ovvero $\forall A\in \mathcal{B}_1(\hil),K\in\mathcal{B}(\hil): \quad KA,AK\in\mathcal{B}_1(\hil)$ e 
+        $$\norm{KA}_1\le \norm{K}\norm{A}_1 \quad \text{e} \quad \norm{AK}_1\le \norm{K}\norm{A}_1$$
+        \item $\norm{\cdot}_1$ è una norma su $\mathcal{B}_1(\hil)$ e tale spazio è di Banach.
+    \end{enumerate}
+\end{prop}
+
+\begin{defn}[Traccia]
+Sia $\{\psi_i\}_i$ una b.o.c, allora è la mappa
+$$\text{Tr}:\mathcal{B}_1(\hil)\to \im\qquad \text{Tr}(A)=\sum_{i=1}^\infty(\psi_i,A\psi_i)$$
+\end{defn}
+
+\begin{myboxed}
+\begin{prop}[Proprietà mappa traccia] Valgono:
+\begin{enumerate}
+    \item L'immagine di Tr non dipende dalla base
+    \item $\forall B,C\in\mathcal{B}_2(\hil):\quad \text{Tr}(BC)=(B^*,C)_2$
+    \item $A\in\mathcal{B}_1(\hil) \implies \abs{A}\in\mathcal{B}_1(\hil)$ e 
+    $$\norm{A}_1=\text{Tr}(\abs{A})$$
+    \item È lineare: $\forall A,B\in\mathcal{B}_1(\hil),\quad \alpha,\beta\in \im:\qquad\text{Tr}(\alpha A+\beta B)=\alpha\text{Tr}(A)+\beta\text{Tr} (B)$
+    \item Commuta con l'aggiunto: $\text{Tr}(A^*)=\overline{\text{Tr}(A)}$
+    \item È ciclica: $\forall A\in \mathcal{B}_1(\hil),K\in \mathcal{B}(\hil): \qquad \text{Tr}(AK)=\text{Tr}(KA)$
+\end{enumerate}
+\end{prop}
+\end{myboxed}
+\begin{proof}
+.
+\begin{enumerate}
+    \item da ii) dato che  il prodotto hermitiano non dipende dalla base.
+    \item Per \nameref{thm-prop-op-classe-traccia} posso scrivere $A\in\mathcal{B}_1(\hil)$ come $A=BC$ con $B,C\in\mathcal{B}_2(\hil)$. Allora, essendo $\{\psi_i\}_i$ una b.o.c.,
+    $$(B^*,C)_2\overset{def}{=}\sum_{i=1}^\infty(B^*\psi_i,C\psi_i)=\sum_{i=1}^\infty(\psi_i,BC\psi_i)=\sum_{i=1}^\infty(\psi_i,A\psi_i)\overset{def}{=}\text{Tr}(A)$$
+    \item Dato che $\abs{(\abs{A})}=\abs{A}\implies$ dalla def di $\norm{\cdot}_1$ che $\norm{A}_1=\norm{\abs{A}}_1$ finita in quando $A \in\mathcal{B}_1(\hil)$. Sia $\{\psi_{\lambda,i}\}$ b.o.c. di $\abs{A}$ con moleplicità $i$, allora
+    $$\text{Tr}(\abs{A})\overset{def}{=}\sum_{\lambda\in\text{sing}(A)}\sum_{i=1}^{m_\lambda}(\psi_{\lambda,i},\abs{A}\psi_{\lambda,i})=\sum_{\lambda\in\text{sing}(A)}\sum_{i=1}^{m_\lambda}\lambda=\sum_{\lambda\in\text{sing}(A)}\lambda m_\lambda=\norm{A}_1$$
+    \item dalla bilinearità del prodotto hermitiano
+    \item dall'antilinearità del prodotto hermitiano
+    \item Dimostriamo prima che la tesi vale per $A,K\in\mathcal{B}_2(\hil)$. Punto ii) vale
+    $$\text{Tr}(AK)=(A^*,K)_2\qquad\text{Tr}(KA)=(K^*,A)_2$$
+    quindi, essendo $(\mathcal{B}_2(\hil),(\cdot,\cdot)_2)$ di hilb. per \nameref{thm-B2-spazio-hilbert}, vale l'\nameref{prop-identità-polarizzazione}:
+    $$4(A^*,K)_2=\norm{A^*+K}_2^2+\norm{A^*-K}_2^2-i\norm{A^*+iK}_2^2+i\norm{A^*-iK}_2^2$$
+    inoltre da \nameref{thm-prop-op-hil-schmidt} vale $\forall C\in\mathcal{B}_2(\hil):\quad \norm{C^*}=\norm{C}$ e usando la linearità della mappa aggiunzione la riscriviamo come
+    $$4(A^*,K)_2=\norm{A+K^*}_2^2+\norm{A-K^*}_2^2-i\norm{K^*+iA}_2^2+i\norm{K^*-iA}_2^2=4(K^*,A)_2$$
+    ovvero
+    $$(A^*,K)_2=(K^*,A)_2\iff \text{Tr}(AK)=\text{Tr}(KA)\quad \forall A,K\in\mathcal{B}_2(\hil)$$
+    Sia ora $A\in \mathcal{B}_1(\hil),K\in \mathcal{B}(\hil)$. Per \nameref{thm-prop-op-classe-traccia} $A=BC$ con $B,C\in\mathcal{B}_2(\hil)$, quindi essendo $\mathcal{B}_2(\hil)$ un ideale di $\mathcal{B}(\hil)$ (DA VERIFICARE)
+    $$\text{Tr}(AK)=\text{Tr}(\underset{\in\mathcal{B}_2}{C}\underbrace{DK}_{\in\mathcal{B}_2})=\text{Tr}(DKC)=\text{Tr}(KCD)=\text{Tr}(KA)$$
+\end{enumerate}
+\end{proof}
+
+\pagebreak
+\section{Operatori lineari non limitati}
+
+\begin{defn}[Dominio]
+Sia $X$ spazio vettoriale e $$T:\text{Dom}(T)\to X$$ con $\text{Dom}(T)\subset X$ il \textbf{dominio massimale} (ovvero dominio nel classico senso):
+$$\text{Dom}(T)\coloneqq\{x\in X\mid \exists x'\in X: Tx=x'\}= T^{-1}(X)$$
+Tale dominio delle  volte è God-given, quindi lavoreremo con suoi sottoinsiemi. In particolare lavoreremo con
+$$T:\dom(T)\to X$$
+dove $\dom(T)\subseteq \text{Dom}(T)\subset X$ sottospazio vett. di $X$ è detto \textbf{dominio}. Si dice \textbf{dominio massimale} se $\dom(T)= \text{Dom}(T)$
+\end{defn}
+\begin{rem*}
+    \textbf{Rango} e \textbf{kernel} sono nelle definizioni standard prendendo come dominio $\dom(T)$
+\end{rem*}
+
+\begin{defn}[Grafico]
+$\gr(T)\coloneqq\{(x,x')\in\dom(T)\oplus X\mid x'=Tx\}\subset X\oplus X$
+\end{defn}
+
+\begin{defn}[Estensione]
+    $T'$ è estensione di $T$ se $$\gr(T)\subset \gr(T')\iff \begin{cases}
+        \dom(T)\subset\dom(T')\\
+        T'|_{\dom(T)}\equiv T
+    \end{cases}$$
+\end{defn}
+
+\begin{defn}[Operatore chiuso/chiudibile e chiusura]
+Sia $T:\dom(T)\to X$ lineare. 
+\begin{itemize}
+    \item $T$ è \textbf{chiuso} se $\gr(T)$ chiuso in $(X\oplus X,\norm{\cdot}_{X\oplus X})$
+    \item $T$ è \textbf{chiudibile} se $\exists\;\overline{T}\mid\gr(\overline{T})=\overline{\gr(T)}$ (detto \textbf{chiusura di $T$})
+\end{itemize}
+\end{defn}
+
+\begin{prop}[Caratterizzazione chiusura] \label{thm-caratt-chiusura}
+    $X$ normato, $T:\dom(T)\subset X\to X$. Allora
+$$T \text{ chiuso }\quad \iff\qquad \left[\forall\{x_n\}_{n}\subset\dom(T)\mid\begin{cases}
+    x_n\overset{n\to\infty}{\longrightarrow}x\in X\\
+    Tx_n\overset{n\to\infty}{\longrightarrow}y\in X
+\end{cases}\implies\begin{cases}
+    x\in\dom(T)\\
+    Tx=y
+\end{cases}\right]$$
+\end{prop}
+
+\begin{myboxed}
+    \begin{prop}[Caratterizzazione chiudibilità]
+        Sia $A:\dom(A)\subset X\to X$. Allora sono equivalenti
+        \begin{enumerate}
+            \item $A$ è chiudibile
+            \item $\overline{\gr(A)}$ non contiene punti della forma $(0,\overset{\ne0}{z})$ (ovvero $T(0)=0$ nella chiusura)
+            \item $A$ ammette estensione chiusa
+        \end{enumerate}
+    \end{prop}
+\end{myboxed}
+
+\begin{proof}
+    .
+    \begin{itemize}
+        \item[i)$\iff$ii)] Facciamo $\neg\iff\neg$
+        \begin{align*}
+        A \text{ non chiudibile }&\iff \exists\;\{x_n\}_n,\,\{x'_n\}_n\mid \begin{cases}
+            \lim_{n\to\infty}x_n=\lim_{n\to\infty}x_n'=x\\
+            \lim_{n\to\infty}T(x_n)=y\ne\lim_{n\to\infty}T(x_n')=y'
+        \end{cases} & \text{ovvero non è continuo}\\
+        &\iff \text{la succ. }\{\widetilde{x}_n\}_n\coloneqq x_n-x_n':\begin{cases}
+            \lim_{n\to\infty}\widetilde{x}_n=x-x=0\\
+            \lim_{n\to\infty}T(\widetilde{x}_n)=y-y'=z\ne 0
+        \end{cases} & \text{per linearità traslo in 0}\\
+        &\iff (0,\overset{\ne0}{z})\in\overline{\gr(A)}
+        \end{align*}
+        Sostanzialmente mi dice che non è chiudibile $\iff$ non continuo, infatti pensare a funzione con salto finito $\re\to\re$, se chiudo il grafico non è più una funzione perché nel punto di salto ho due immagini, quindi non è chiudibile. Qui lavoriamo con operatori lineari quindi equivale ad avere il punto di salto dove voglio, in particolare in 0.
+        \item[i)$\iff$iii)] $\implies)$ Se $A$ chiudibile $\implies \overline{A}$ è un'estensione chiusa.
+        \\$\impliedby)$ $A$ ammette estensione chiusa $B\implies \gr(A)\subseteq \gr(B)\not\ni (0,z)$ per ii) essendo $B$ chiuso $\implies (0,z)\notin\overline{\gr(A)}\iff A$ chiudibile
+    \end{itemize}
+\end{proof}
+
+\begin{lem*}
+    $X,Y$ di Banach, $T\in\mathcal{B}(X,Y)$ e $A:\dom(A)\to Y$ op. lineari. $$\begin{cases}
+        A \text{ chiudibile}\\
+        \ran(T)\subset\gr(A)
+    \end{cases}\implies AT \in \mathcal{B}(X,Y)$$
+\end{lem*}
+
+\begin{defn}[Somma diretta di spazi di Hilbert] $\hil\oplus\hil'$ è spazio di Hilbert con $$((x,x'),(y,y'))_{\hil\oplus\hil'}\coloneqq(x,y)_{\hil}+(x',y')_{\hil'}\quad \forall \;x,y\in\hil,\;x',y'\in\hil'$$
+    che induce la topologia prodotto.
+\end{defn}
+
+\subsection{Operatore aggiunto Hermitiano}
+
+\begin{defn}[Aggiunto Hermitiano]
+    Sia $T:\dom(T)\subseteq\hil\to \hil$ denso. L'aggiunto è
+    $$T^*:\dom(T^*)\subseteq \hil\to\hil \mid\begin{cases}
+        \dom(T^*)= \{\phi\in\hil\mid\exists\Psi_\phi\in\hil: (\phi,T\psi)=(\Psi_\phi,\psi)\quad \forall\psi\in\dom(T)\}\\
+        \ran(T^*)=\{T^*(\phi)=\Psi_\phi\in\hil\quad\forall\phi\in\dom(T^*)\}
+    \end{cases}$$
+\end{defn}
+
+\begin{rem*}
+    \hl{È chiamato aggiunto \textit{Hermitiano} poiché è definito attraverso il prodotto Hermitiano  (dato che lavoriamo in spazi di Hilbert) e non tramite la più generale definizione tra gli spazi duali.}
+    \end{rem*}
+
+\begin{prop}[Aggiunto scambia le inclusioni] Siano $T,T'$ densamente definiti:
+\begin{enumerate}
+    \item (Scambio di inclusioni) $T\subset T'\implies T^*\supset (T')^*$ \hl{ovvero più un operatore "è piccolo" più fare l'aggiunto ne aumenta il dominio}
+    \item (aggiunto del prodotto) $(TT')^*\supseteq (T')^*T^*$
+\end{enumerate}
+\end{prop}
+
+
+
+\begin{myboxed}
+    \begin{thm}[aggiunto e chiudibilità]\label{thm-aggiunto-chiudibilità}
+        $T$ densamente definito su $\hil$. Allora
+        \begin{enumerate}
+            \item \underline{$T^*$ è chiuso}  e $\gr(T^*)=[\tau(\gr(T))]^\perp$ dove
+            $$\begin{array}{cccc}
+                \tau: & \hil\oplus\hil & \to & \hil\oplus\hil \\
+                 & (\phi,\psi) &\mapsto & (-\psi, \phi)
+            \end{array}$$
+            \item $T$ chiudibile $\iff \dom(T^*)$ denso. In questo caso
+            $$T\subseteq \boxed{\overline{T}=(T^*)^*}$$
+        \end{enumerate}
+    \end{thm}
+\end{myboxed}
+
+\begin{proof}
+    \todo{}
+\end{proof}
+
+\begin{cor}[Ker/Range aggiunto]\label{cor-ker-range-aggiunto}
+    Sia $T:\dom(T)\to \hil$ denso. Allora
+    \begin{enumerate}
+        \item $\begin{cases}
+            \ker(T^*)=[\ran(T)]^\perp\\
+             \ker(T)\subseteq[\ran(T^*)]^\perp & \text{= se $T^*$ denso}
+        \end{cases}$
+        \item $T$ chiuso $\implies \hil\oplus\hil=\tau[\gr(T)]\oplus\gr(T^*)$ somma ortogonale
+        \item Vale $$\forall\lambda\in\im:\begin{cases}
+            \ker(T^*-\overline{\lambda}\mathbb{I})=[\ran(T-\lambda\mathbb{I})]^\perp\\
+            \ker(T-\lambda\mathbb{I})\subseteq[\ran(T^*-\overline{\lambda}\mathbb{I})]^\perp
+        \end{cases}$$
+    \end{enumerate}
+\end{cor}
+
+\pagebreak{}
+\subsection{Zoologia di operatori (operatori autoaggiunti \& co.)}
+Il problema è che non si può usare teo. \nameref{thm-Riesz}. In generale l'assegnazione $\dom(T^*)\to\hil:\phi\mapsto\Psi_\phi$ non è unica a meno che $\dom(T)$ sia denso in $\hil$. Per questo lavoreremo praticamente sempre con domini densi.
+\begin{defn}[Zoologia di operatori]
+     Sia $T:\dom(T)\subseteq\hil\to \hil$. Allora $T$ è:
+     \begin{itemize}
+         \item \textbf{Hermitiano:} se $(\phi,T\psi)=(T\phi,\psi)\quad \forall\phi,\psi\in\dom(T)$ \hl{l'aggiunto non è unico se il dominio non è denso, quindi non è ben def.}
+         \item \textbf{simmetrico:} se $\begin{cases}
+             \dom(T) \text{ denso}\\
+             T\text{ Hermitiano}
+         \end{cases}\iff \begin{cases}
+             \dom(T) \text{ denso}\\
+             T\subseteq T^*
+         \end{cases}$
+         \item \textbf{essenzialm. (quasi) autoag.:} se $ \begin{cases}
+             \dom(T) \text{ denso}\\
+             T^*\text{ autoaggiunto}
+         \end{cases}\iff\begin{cases}
+             \dom(T) \text{ denso}\\
+             \dom(T^*) \text{ denso}\\
+             T^*=T^{**}
+         \end{cases}\overset{prop}{\iff}\begin{cases}
+             \dom(T) \text{ denso}\\
+             T\text{ chiudibile}\\
+             \overline{T}=T^*\iff \overline{T} \text{ autoag.}
+         \end{cases}$
+         \item \textbf{autoaggiunto:} se $\begin{cases}
+             \dom(T)=\dom(T^*)\\
+             T\text{ simmetrico}
+         \end{cases}\iff\begin{cases}
+             \dom(T) \text{ denso}\\
+             T=T^*
+         \end{cases}$
+         
+         \item \textbf{normale:} se $T^*T=TT^*$ (definiti sui domini standard)
+     \end{itemize}
+\end{defn}
+
+\begin{thm}[Hellinger-Toeplitz]
+    Sia $T:\dom(T)\subseteq\hil\to \hil$. Allora
+    $$\begin{cases}
+        \dom(T)=\hil\\
+        T \text{ Hermitiano}
+    \end{cases}\implies T\in\mathcal{B}(\hil) \text{ e autoaggiunto}$$
+\end{thm}
+
+\begin{rem*}
+    Quindi un operatore Hermitiano illimitato è per forza definito non su tutto $\hil$
+\end{rem*}
+
+\begin{myboxed}
+    \begin{prop}[Alcune proprietà]
+        Sia $T:\dom(T)\subseteq\hil\to \hil$. Allora
+        \begin{enumerate}
+            \item se $\dom(T),\dom(T^*),\dom(T^{**})$ sono tutti densi allora $$T^*=(\overline{T})^*=\overline{T^*}=T^{***}$$
+            \item $T$ essenzialmente autoaggiunto $\iff\overline{T}$ autoaggiunto (unito ad  (i) vuol dire ess. autoag. $\iff \overline{T}=T^*$)\\
+            \item $T$ autoaggiunto $\implies$ \textbf{massimalmente simmetrico} (non ammette estensione propria ad un operatore simmetrico)
+            \item $T$ essenzialmente autoaggiunto $\implies\exists\,!$ estensione autoaggiunta, che è $\overline{T}$ e vale $\overline{T}=T^*$
+        \end{enumerate}
+    \end{prop}
+\end{myboxed}
+
+\begin{proof}
+    \todo{}
+\end{proof}
+
+\begin{myboxed}
+\begin{thm}[Proprietà operatori simmetrici]
+    Sia $T$ simmetrico. Allora sono equivalenti:
+    \begin{enumerate}
+        \item $T$ autoaggiunto
+        \item $\begin{cases}
+            T \text{ chiuso}\\
+            \ker(T^*\pm i\mathbb{I})=\{0\} \quad \text{(ovvero $\pm i\notin\sigma_p(T)$ NON sono autovalori)}
+        \end{cases}$
+        \item $\ran(T^*\pm i\mathbb{I})=\hil$
+    \end{enumerate}
+\end{thm}
+\end{myboxed}
+
+\begin{proof}
+    .
+    \begin{itemize}
+        \item[$1\implies 2$)] \underline{$T$ chiuso:} $T$ autoaggiunto $\overset{def}{\iff}\begin{cases}
+            \dom(T) \text{ denso} \overset{\text{\nameref{thm-aggiunto-chiudibilità}}}{\implies} T^* \text{chiuso} \overset{T=T^*}{\implies} T \text{ chiuso}\\
+            T=T^*
+        \end{cases}$  \\
+        \underline{$\pm i\notin\sigma_p(T)$:} sia 
+        \begin{align*}
+            \psi\in\ker(T^*\pm i\mathbb{I}) &\iff  (T^*\pm i\mathbb{I})\psi=0\\
+            &\iff T^*\psi\overset{T^*=T}{=}T\psi =\mp i\psi \\
+            &\implies \mp i(\psi,\psi)=(\psi,\mp i\psi)=(\psi,T\psi)=(T\psi,\psi)=(\mp i\psi,\psi)=\pm i(\psi,\psi) & \text{con antilin./linearità}\\
+            &\implies (\psi,\psi)=0 \\
+            &\iff \psi=0
+        \end{align*}
+        \item[$2\implies 3$)] \underline{$\ran(T^*\pm i\mathbb{I})$ denso:} Da COROLLARIO 5.16.1 del Bracchi sappiamo che 
+        $$\ker(T^*-\overline{\lambda}\mathbb{I})=[\ran(T-\lambda\mathbb{I})]^\perp$$
+        quindi nel nostro caso $$\{0\}\overset{ip}{=}\ker(T^*\pm i\mathbb{I})=[\ran(T\mp i\mathbb{I})]^\perp\iff \ran(T^*\pm i\mathbb{I}) \text{ denso}$$
+        \\ \underline{$\ran(T^*\pm i\mathbb{I})$ chiuso:} essendo il range denso, abbiamo che $$\forall\varphi\in\hil\quad\exists\{\psi_n\}_n\subset\dom(T)\mid (T\pm i\mathbb{I})\psi_n\overset{n\to\infty}{\longrightarrow}\varphi\in \hil$$
+        e il range è chiuso se $$\begin{cases}
+            \psi_n\overset{n\to\infty}{\longrightarrow}\psi\in\dom(T)\\
+            T\psi=\varphi 
+        \end{cases}\quad (\spadesuit)$$
+        Infatti
+        \begin{align*}
+            \begin{cases}
+            \norm{(T\pm i\mathbb{I})\psi_n}^2=\norm{T\psi_n\pm i\psi_n}^2=\norm{T\psi_n}^2+\norm{\psi_n}^2+\underbrace{2\text{Re}(T\psi_n,\pm i\psi_n)}_{=2\text{Re}\pm i(T\psi_n,\psi_n)=0}\ge \norm{\psi_n}^2 \\
+                (T\pm i\mathbb{I})\psi_n \text{ di Cauchy}
+            \end{cases}&\implies \{\psi_n\}_n \text{ di Cauchy}\\
+            &\overset{\hil}{\implies} \text{convergente}
+        \end{align*}
+        Essendo per ipotesi $T$ chiuso $\implies (T\pm i\mathbb{I})$ chiuso, e quindi per \nameref{thm-caratt-chiusura} (essendo $\{\psi_n\}_n$ e $\{(T\pm i \mathbb{I})\psi_n\}_n$ convergenti in $\hil$) vale $(\spadesuit)$.
+        
+        \item[$3\implies 1$)] \todo{}
+    \end{itemize}
+\end{proof}
+
+\begin{thm}[Caratterizzazione essenzialmente autoaggiunti]
+    Sia $T$ \underline{simmetrico}. Allora sono equivalenti
+    \begin{enumerate}
+        \item $T$ è essenzialmente autoaggiunto
+        \item $\ker(T^*\pm i\mathbb{I})=\{0\}$ ovvero $\pm i \notin \sigma_p(T^*)$ ($\pm i$ NON AUTOVALORE di $T^*$)
+        \item $\overline{\ran(T\pm i\mathbb{I})}=\hil$ (denso)
+    \end{enumerate}
+\end{thm}
+
+\subsection{Indici di difetto (criteri di autoaggiunzione per op. simmetrici)}
+Definiamo
+$$T_\pm\coloneqq T\pm i \mathbb{I}\qquad T^*_\pm\coloneqq T^*\pm i \mathbb{I}$$
+\begin{defn}[Trasformata di Cayley]
+    La mappa 
+    $$\begin{array}{ccc}
+       \re & \to & \mathbb{S}^1\setminus\{1\}\subset\im   \\
+         x&\mapsto & \frac{x-i}{x+i} 
+    \end{array}$$
+    ci porta alla definizione di trasformata di Cayley di $T$ operatore su $\hil$:
+    $$V(T): \ran(T_+)\to\ran T_-\qquad V(T)\coloneqq (T-i\mathbb{I})(T+i\mathbb{I})^{-1}$$
+\end{defn}
+
+\begin{myboxed}
+    \begin{prop}[$V(T)$ isometria]\label{prop-trasformata-isometria}
+        Sia $T:\dom(T)\subset\hil\to \hil$ \underline{simmetrico}, allora
+        \begin{enumerate}
+            \item $T+i\mathbb{I}$ iniettivo
+            \item $V(T)$ ben definita
+            \item $V(T)$ è isometria e $\ran(V)=\ran(T-i\mathbb{I})$
+        \end{enumerate}
+    \end{prop}
+\end{myboxed}
+
+\begin{proof}
+    \todo{}
+\end{proof}
+
+\begin{myboxed}
+    \begin{prop}
+        Sia $T:\dom(T)\subset\hil\to \hil$. Se $V(B)$ è ben definita  allora
+        \begin{enumerate}
+            \item $\mathbb{I}-V$ iniettivo
+            \item $\ran(\mathbb{I}-V)=\dom(T)$
+            \item (\textbf{inversa}) $T=i(\mathbb{I}+V)(\mathbb{I}-V)^{-1}$ \hl{ovvero non perdo informazioni}
+        \end{enumerate}
+    \end{prop}
+\end{myboxed}
+
+\begin{proof}
+Vediamo che $V$ è ben definita su 
+$$\dom(V)=\{\psi\in\hil\mid\psi\in\ran(T_+)\}$$
+$\forall\psi\in\dom(V)$ chiamiamo $\phi\coloneqq (T_+)^{-1}\psi$. Allora $V\psi=T_-\phi$ e  da cui
+$$\begin{cases}
+    (\mathbb{I}+V)\psi=T_-\phi+\mathbb{I}\psi=(T-i\mathbb{I})\phi+(T+i\mathbb{I})\phi=2T\phi\\
+    (\mathbb{I}-V)\psi=2i\phi
+\end{cases}$$
+\begin{enumerate}
+    \item Allora $\psi\in\ker(\mathbb{I}-V)\implies\phi=0\overset{\psi=T_+\phi}{\implies}\psi=0$
+    \item Dato che $\phi\in\dom(T)$ e $\ran(\mathbb{I}-V)=\dom(T)$
+    \item unendo le uguaglianze sopra arriviamo alla tesi.
+\end{enumerate}
+\end{proof}
+
+\begin{myboxed}
+    \begin{thm}[Unitarietà di $V(T)$]\label{thm-unitarietà-trasformata-cayley}
+        Sia $T:\dom(T)\subset\hil\to \hil$. Allora
+        \begin{enumerate}
+            \item $T$ simmetrico $\implies[\text{autoaggiunto}\iff V(T) \text{ unitario su }\hil]$
+            \item $\begin{cases}
+                V:\hil\to\hil & \text{unitario}\\
+                \mathbb{I}-V & \text{iniettivo}
+            \end{cases}\implies \text{ è la trasf. di Cayley di un operatore autoaggiunto}$
+        \end{enumerate}
+    \end{thm}
+\end{myboxed}
+
+\begin{proof}\todo{}
+\end{proof}
+
+\begin{defn}[Indici di difetto] Sia $T:\dom(T)\subset\hil\to \hil$ \underline{simmetrico}. Allora
+$$\begin{array}{ll}
+\text{\textbf{spazi di difetto}} & N_\pm(T)\coloneqq \ker(T^*_\pm) \qquad \text{(i $\pm i$-autospazi dell'aggiunto)} \\
+    \text{\textbf{indici di difetto}} & d_\pm(T)\coloneqq \dim(\ker(T^*_\pm)) 
+\end{array}$$
+    
+\end{defn}
+
+\begin{myboxed}
+    \begin{thm}[Von Neumann]
+        Sia $T:\dom(T)\subset\hil\to \hil$ \underline{simmetrico}. Allora
+        \begin{enumerate}
+            \item $T$ ammette estensioni autoaggiunte $\iff d_+(T)=d_-(T)$
+            
+            \item  $d_+(T)=d_-(T)\implies$ c'è corrispondenza biunivoca tra $$[\text{estensioni autoaggiunte di } T]\quad\longleftrightarrow\quad [\text{isometrie }N_-(T)\to N_+(T)]$$
+            \item $T$ è essenzialmente autoaggiunto $\iff d_+m(T)=d_-(T)=0$ (ovvero $T$ ammette estens. autoagg. unica)
+        \end{enumerate}
+        \hl{permette di contare quante estensioni autoaggiunte ci sono di un operatore simmetrico}
+    \end{thm}
+\end{myboxed}
+
+\begin{proof} (i) 
+\begin{itemize}
+    \item[$\implies$)] 
+    
+    Per ipotesi $\exists S:T\subset S=S^*$. Allora per \nameref{thm-unitarietà-trasformata-cayley} $V(S):\hil\to\hil$ unitario e quindi:
+    \begin{align*}
+        V(T)[\dom(V(T))]&\subseteq \ran(V(T)) && \text{def. di dom/ran}\\
+        \implies V(T)[\ran(T_+)]&\subseteq \ran(T_-)  && \text{vedi dom/ran della trasf.}\\
+         \implies V(S)[\ran(T_+)]&\subseteq \ran(T_-)  &&  T\subset S\implies T\pm i\mathbb{I}\subset S\pm i\mathbb{I}\implies V(T)\subset V(S)\\
+          \implies V(S)[\ran(T_+)]^\perp&= \ran(T_-)^\perp  && \text{per proprietà degli ortog.}\\
+           \implies V(S)[\ran(T_+)^\perp]&= \ran(T_-)^\perp  && V(S)[\ran(T_+)^\perp]= [V(S)[\ran(T_+)]]^\perp \text{ in quanto isometria+isomorf.}\\
+           \implies V(S)[\ker(T^*_-)]&= \ker(T^*_+)  && \text{ per \nameref{cor-ker-range-aggiunto} con $\lambda=\pm i$}\\
+           \implies V(S)[N_-]&=N_+ \\
+           \implies d_-&=d_+ &&\text{essendo $V(S)$ isomorfismo}
+    \end{align*}
+    \item[$\impliedby$)] Abbiamo
+    \begin{itemize}
+        \item Prima parte:\begin{itemize}
+        \item dal \nameref{cor-ker-range-aggiunto} scegliendo in iii) $\pm i$ abbiamo
+        $$\hil=\overline{\ran(T_+)}\oplus N_-=\overline{\ran(T_-)}\oplus N_+ \qquad \text{somma ortogonale}$$
+        in quanto i due spazi sono ortogonali
+        \item Essendo $T$ simmetrico, da \nameref{prop-trasformata-isometria} e da \nameref{thm-esistenza-unicità-estensione-operatori}
+        $$V(T) \text{ isometria} \implies\exists \widetilde{T(V)}:\overline{\ran(T_+)}\to\overline{\ran(T_-)}\quad \text{estensione \textbf{unitaria} (su dominio e immagine)}$$
+        \item Dall'ipotesi
+        $$d_+(T)=d_-(T)\implies\exists U_0:N_-\to N_+\quad \text{\textbf{unitario}}$$
+    \end{itemize}
+    Allora possiamo definire
+    $$\boxed{\begin{array}{cccccc}
+        U: & \hil = & \overline{\ran(T_+)}  \oplus  N_- & \to & \overline{\ran(T_-)}  \oplus  N_+ &=\hil\\
+         & \psi= & \phi + \psi_0 & \mapsto & \widetilde{V(T)}\phi+ U_0\psi_0 &
+    \end{array}}$$
+    ovvero $U=\widetilde{V(T)}+ U_0$, che è \textbf{unitario} su $\hil$ in quanto somma di unitari che  agiscono su spazi ortogonali che generano $\hil$.
+    \item Abbiamo che $\mathbb{I}-U$ è  iniettivo in quanto, dato  $\chi=\chi_1+\chi_0\in \overline{\ran(T_+)}  \oplus  N_-$:
+    \begin{align*}
+        \chi\in\ker(\mathbb{I}-U)&\implies (\mathbb{I}-U)\chi=0\\
+        &\implies U\chi=\chi\\
+        &\iff \widetilde{V(T)}\chi_1+ U_0\chi_0=\chi_1+\chi_0\\
+        &\iff \begin{cases}
+            \widetilde{V(T)}\chi_1=\chi_1\\
+            U_0\chi_0=\chi_0
+        \end{cases} \qquad \text{ poiché agiscono su spazi ortogonali}\\
+        &\implies \begin{cases}
+            \chi_1=0 & V-\mathbb{I}\text{ iniett.}\\
+            \chi_0\in N_+\cap N_-=\{0\} & \text{per dominio e range di }U_0
+        \end{cases}
+    \end{align*}
+    E quindi:
+    $$\begin{cases}
+        U:\hil\to \hil & \text{unitario}\\
+        \mathbb{I}-U & \text{iniettivo }
+    \end{cases}\overset{\text{\nameref{thm-unitarietà-trasformata-cayley}}}{\implies} U\text{ è la trasformata di $T_{U_0}$ autoaggiunto}$$
+    \item Essendo per costruzione che $V(T)\subset U\implies T\subset T_{U_0}$, ovvero $T_{U_0}$ è un'estensione autoaggiunta di $T$ e per ogni diverso operatore unitario (su dominio e range) $U_0$ corrisponde una diversa estensione autoaggiunta.
+    \end{itemize}
+    
+\end{itemize}
+\end{proof}
+
+\begin{proof} (ii) Abbiamo già dimostrato nell'ultimo passaggio che per ogni diverso operatore unitario c'è una diversa estensione. Per il contrario: 
+\begin{itemize}
+    \item $T\subset S=S^*$
+    \item $V(T)\subset V(S)$ con $V(T)$ unitario su $\overline{\ran(T_+)}\to\overline{\ran(T_-)}$ e $V(S)$ unitario su $\hil$
+    \item $\hil=\overline{\ran(T_+)}\oplus N_-=\overline{\ran(T_-)}\oplus N_+$
+\end{itemize}
+allora deve essere sul primo fattore della somma diretta
+$$V(S)|_{\overline{\ran(T_+)}}\equiv V(T)$$
+mentre  sul secondo essendo $V(S)$ unitario deve corrispondere a un operatore unitario $N_-\to N_+$. Inoltre se $S'$ fosse una seconda estensione autoaggiunta di $T\implies
+ V(S)$ sarebbe diversa da $V(S')$ solo per l'operatore unitario tra gli spazi di  difetto.
+\end{proof}
+
+\begin{cor}[Costruzione esplicita delle estensioni autoaggiunte]
+    Dato un operatore simmetrico t.c. $d_+(T)=d_-(T)$ si può costruire per ogni isometria $U:N_-\to N_+$ un'estensione autoaggiunta come segue:
+    $$\begin{array}{cccl}
+         T_U:&\dom(T_U)&\to&\hil  \\
+         & \psi &\mapsto & \overline{T}\widetilde{\psi}+i(\mathbb{I}\textcolor{blue}{-}U)\psi_-
+    \end{array}$$
+    con 
+    $$\dom(T_U)\coloneqq\left\{\psi\in\hil\mid\exists!\;\begin{cases}
+            \widetilde{\psi}\in\dom(\overline{T})\\
+            \psi_-\in N_{\textcolor{red}{-}}
+        \end{cases}: \psi=\widetilde{\psi}+(\mathbb{I}\textcolor{blue}{+}U)\psi_-)\right\}=\dom(\overline{T})\oplus(\mathbb{I}\textcolor{blue}{+}U)N_{\textcolor{red}{-}}$$
+        i segni in \textcolor{blue}{blu} possono essere scambiati mentre quelli in \textcolor{red}{rosso} vanno cambiati se si sceglie $U:N_+\to N_-$\\
+        
+        
+        
+        Riscritto:
+         $$\begin{array}{cccl}
+         T_U:&\dom(T_U)&\to&\hil  \\
+         & \psi &\mapsto & \overline{T}\widetilde{\psi}+i\psi_--iU\psi_-
+    \end{array}$$
+    con 
+    $$\dom(T_U)\coloneqq\left\{\psi\in\hil\mid\exists!\;\begin{cases}
+            \widetilde{\psi}\in\dom(\overline{T})\\
+            \psi_-\in N_{\textcolor{red}{-}}
+        \end{cases}: \psi=\widetilde{\psi}+\psi_-+U\psi_-\right\}=\dom(\overline{T})\oplus N_-\oplus N_+$$
+        poiché
+        \begin{align*}
+            T\psi&=T(\widetilde{\psi}+\psi_-+U\psi_-)\\
+            &=\overline{T}\widetilde{\psi}+T^*\psi_-+T^*(U\psi) && \text{essendo }T=T^*\\
+            &=\overline{T}\widetilde{\psi}+i\psi_--i(U\psi) && \text{essendo }\begin{cases}
+                \psi_-\in N_-= E_{+i}[T^*]\\ U\psi_-\in N_+=E_{-i}[T^*]
+            \end{cases}\\
+            &= \overline{T}\widetilde{\psi}+i(\mathbb{I}-U)\psi_-
+        \end{align*}
+        
+\end{cor}
+
+
+\pagebreak
+\section{Teoria spettrale}
+\begin{defn}[Operatore shiftato]Sia $X$ sp. vettoriale normato e $A:D(A)\subseteq X\to X$ un operatore. Allora è $$A_\lambda\coloneqq A-\lambda \id:D(A)\to X\qquad \text{con } \lambda\in\im$$ 
+    
+\end{defn}
+\begin{defn}[Insieme risolvente]
+Sia $X$ sp. vettoriale normato e $A:D(A)\subseteq X\to X$ un operatore e $A_\lambda$ il suo operatore shiftato. L'insieme risolvente è
+$$\rho(\im)\coloneqq\{\lambda\in\im\mid\begin{cases}
+    \overline{\ran(A_\lambda)}=X & \text{("suriettivo")}\\
+    \ker(A_\lambda)=\{0\} & \text{(iniettivo)}\\
+    (A_\lambda)^{-1}:\ran(A_\lambda)\to X & \text{limitato}\\
+\end{cases}\}$$
+\end{defn}
+
+\begin{rem*}[limitatezza dell'inversa]
+    La terza richiesta nel caso finito dimensionale non serve (tutti gli operatori lineari sono limitati). La metto perché voglio che l'inversa sia un operatore "bello".
+    \end{rem*}
+
+\begin{defn}[Operatore risolvente]
+    Nelle ipotesi di prima è definito come
+    $$R_\lambda(A)\coloneqq (A_\lambda)^{-1}:\ran(A_\lambda)\to D(A)\quad \text{con }\lambda\in\rho(A)$$
+\end{defn}
+
+\begin{defn}[Spettro di un operatore]
+    Nelle ipotesi di prima è 
+    $$\sigma(A)\coloneqq\im\setminus\rho(A)$$
+    ovvero lo spettro è tutto ciò che \textbf{non è} l'insieme risolvente. Esso è diviso in tre unioni \textbf{disgiunte}:
+    \begin{itemize}
+        \item[$\cancel{2})$] \textbf{Spettro puntuale} (non iniettivo): $\sigma_p(A)\coloneqq\{\lambda\in \im\mid \ker(A_\lambda)\ne\{0\}\}$
+        \item[$\cancel{3})$] \textbf{Spettro continuo} (non limitato): $\sigma_c(A)\coloneqq\{\lambda\in\im\mid\begin{cases}
+    \overline{\ran(A_\lambda)}=X & \text{("suriettivo")}\\
+    \ker(A_\lambda)=\{0\} & \text{(iniettivo)}\\
+    (A_\lambda)^{-1}:\ran(A_\lambda)\to X & \text{non limitato}\\
+\end{cases}\}$
+        \item[$\cancel{1})$]\textbf{Spettro residuo} (non suriettivo): $\sigma_r(A)\coloneqq\{\lambda\in \im\mid \begin{cases}
+    \overline{\ran(A_\lambda)}\ne X & \text{(non "suriettivo")}\\
+    \ker(A_\lambda)=\{0\} & \text{(iniettivo)}\\
+\end{cases}\}$
+    \end{itemize}
+\end{defn}
+
+\begin{rem*}[Autovalori e spettro]
+    $\sigma_p=\{\text{autovalori}\}$
+\end{rem*}
+
+\begin{rem*}[Spettro di operatore autoaggiunto su $\hil$]
+    $X=\hil$ e $A$ autoaggiunto (esiste base di autovettori) $\implies \sigma_r(A)=\varnothing$
+\end{rem*}
+
+\begin{thm}
+    Sia $\hil$ di Hilbert.
+    
+    \begin{enumerate}
+    \item se $T\in\mathcal{B}(\hil)$ è \textbf{normale}:
+        \begin{enumerate}
+            \item $\sigma_r(T)=\sigma_r(T^*)=\{0\}$
+            \item $\sigma_p(T^*)=\overline{\sigma_p(T)}$
+            \item $\sigma_c(T^*)=\overline{\sigma_c(T)}$
+             \item i suoi autospazi con diversi autovalori sono ortogonali e formano una base per $\hil$
+        \end{enumerate}
+        \item se $T\in\mathcal{B}(\hil)$ è \textbf{unitario}:
+        \begin{enumerate}
+            \item $\sigma(T)\subset\mathbb{S}^1\subset\im$ non vuoto e compatto
+            \item $\sigma_r(T)=\{0\}$
+        \end{enumerate}
+        
+        \item se $T:\dom(T)\subset\hil\to\hil$ è \textbf{autoaggiunto}:
+        \begin{enumerate}
+            \item $\sigma(T)\subset\re$
+            \item $\sigma_r=\{0\}$
+            \item i suoi autospazi con diversi autovalori sono ortogonali
+            
+        \end{enumerate}
+    \end{enumerate}
+\end{thm}
+
+
+
+\pagebreak
+\part{Distribuzioni}
+\subsubsection{Preliminari}
+\begin{defn}[Spazio duale] Sia $X$ un insieme.
+     $$\begin{array}{lll}
+      \text{\textbf{algebrico}} & X^*\coloneqq\mathcal{L}(X,\im) & \text{funzioni lineari} \\
+       \text{\textbf{topologico/continuo}} & X'\coloneqq\mathcal{C}(X,\im) & \text{funzioni lineari e continue} \\
+       \text{\textbf{forte}} & X'_d\coloneqq(X',\mathcal{T}_{\text{unif}}) & \text{con topol. di converg. unif. sui limitati}
+    \end{array}$$
+    se $X$ normato allora $X'_d$ coincide con la norma-topologia usuale
+\end{defn}
+\section{Test funzioni}
+\begin{defn}[Multi-indice]
+di dimensione $n\in\na_1$ è una $n$-tupla $\bv{\alpha}=(\alpha_1,\dots,\alpha_d)\in \na_0^n$. Definiamo $\abs{\alpha}=\alpha_1+\dots+\alpha_d$
+\end{defn}
+\begin{defn}[Derivate multiple con multi-indice] Sia $\bv{x}=\cvv{x_1}{\vdots}{x_n}\in\re^n$ e $\alpha$ un $n$-multi-indice, allora
+$$\partial^\alpha\coloneqq\frac{\partial^{\alpha_1}\cdots\partial^{\alpha_n}}{\partial x_1^{\alpha_1}\cdots\partial x_n^{\alpha_n}}\qquad\qquad \bv{x}^{\bv{\alpha}}\coloneqq x_1^{\alpha_1}\cdots x_n^{\alpha_n}$$
+\end{defn}
+
+\begin{defn}[Supporto di una funzione]
+    Sia $f:\re^n\to\im$, allora $\text{supp}(f)\coloneqq\overline{\{x\in\re^n\mid f(x)\ne0\}}$
+\end{defn}
+\begin{defn}[Spazio delle test funzioni]
+    È $\mathcal{D}\coloneqq(C_c^\infty(\Omega),\mathcal{D-}\lim)$, con $$f=\llim{n}{\mathcal{D}}f_n\iff\exists K\Subset \Omega\mid 
+    \begin{cases}
+        \supp(f_n)\subseteq K\\
+        \forall\bv{\alpha}:\norm{\partial^{\bv{\alpha}}f_n-\partial^{\bv{\alpha}}f}_{C^0(\Omega)}\limm{n}{\im}0
+    \end{cases}$$
+\end{defn}
+
+\section{Distribuzioni}
+
+\begin{myboxed}
+    \begin{prop}
+        Il pairing
+        $$\begin{array}{cccc}
+           (\cdot,\cdot):& C^\infty(\re^n)\times C^\infty_c(\re^n) &\to & \re  \\
+             & (\phi,f) & \to & \int_{\re^n}\phi(x) f(x)d^nx
+        \end{array}$$
+        è \textbf{separante}, ovvero
+        $$\phi,\phi'\in C^\infty(\re^n)\mid (\phi,f)=(\phi',f)\quad \forall f\in C_0^\infty(\re^n)\quad\implies\phi=\phi'$$
+    \end{prop}
+\end{myboxed}
+    \begin{proof}
+    La tesi è $(\phi-\phi',f)=0\quad \forall f\in C_c^\infty(\re^n)\quad\implies\phi=\phi'$. Se per assurdo:
+        \begin{align*}
+            \phi\ne\phi' \text{ in }x\in\re^n 
+            &\overset{\text{lisce}}{\implies} \text{differiscono in un intorno $\Omega$ di $x$}\\
+            &\overset{\noun{wlog}}{\implies}\phi-\phi>0 \text{ in }\Omega\\
+            &\implies f\in  C_0^\infty(\Omega) \implies \int_{\re^n}(\phi-\phi')(x)f(x)d^nx>\inf_{x\in\Omega}((\phi-\phi')f)\text{Vol}(\Omega)>0\quad \text{\lightning}
+        \end{align*}
+    \end{proof}
+
+    \begin{defn}[Spazio delle distribuzioni] È $\mathcal{D}'(\Omega)$ ovvero l'insieme dei funzionali $\mathcal{D}\to\im$ \textbf{continui (per successioni)} rispetto al $\mathcal{D-}\lim$, ovvero
+    $$u\in\mathcal{D}^*(\Omega) \text{ continuo rispetto al }\mathcal{D-}\lim\iff\left[ f_n\limm{n}{\mathcal{D}}f\implies u(f_n)\limm{n}{\im}u(f)\qquad\forall f\in\mathcal{D}(\Omega)\right] $$
+        Essendo la convergenza in $\mathcal{D}$ molto forte, sono "poche" le successioni che convergono lì e quindi per la continuità di $u\in\mathcal{D}'$ devo fare "pochi check". Quindi è facile che $u\in\mathcal{D}^*$ sia anche $\in\mathcal{D}'$
+    \end{defn}
+
+    \begin{myboxed}
+        \begin{thm}[Caratterizzazione delle distribuzioni]\label{thm-caratterizzazione_distribuzioni} Sia
+            $u\in\mathcal{D}^*(\Omega)$, allora $$u\in\mathcal{D}'(\Omega) \iff\forall K\Subset \Omega\;\exists c_K\in\re^+,k\in\na_0:\boxed{\abs{u(f)}\le c_K\norm{f}_{C^k(K)}}\quad \forall f\in\mathcal{D}(\Omega)\mid\supp(f)\subseteq K$$
+        \end{thm}
+    \end{myboxed}
+
+    \begin{proof}
+            Ricordiamo che $\norm{f}_{C^k(K)}=\sum_{\abs{\alpha}\le k}\sup\abs{\partial^\alpha f}$
+            \begin{itemize}
+                \item[$\impliedby)$] Essendo $u\in\mathcal{D}^*$ lineare basta verificare che sia continua in 0. Facile verificare che se vale la disuguaglianza boxata:
+                $$f_n\limm{n}{\mathcal{D}}0\implies u(f_n)\limm{n}{\im}0=u(0)$$
+                \item[$\implies)$] \textbf{per assurdo} non vale la disuguaglianza boxata. Ovvero
+                $$\exists K\Subset \Omega,f\in\mathcal{D}(\Omega)\mid\supp(f)\subseteq K\quad \text{t.c. }\quad\forall k\in\na_0:\frac{\abs{u(f)}}{\norm{f}_{C^k(K)}}\quad \text{ illimitato} $$
+ovvero $\forall N\in \na_0$ possiamo trovare $f_N\in\mathcal{D}(\Omega)\mid \supp(f_N)\subseteq K$ tale che
+$$\boxed{\abs{u(f_N)}\ge N\norm{f_N}_{C^N(K)}}\qquad (\star)$$
+Definiamo
+$$g_N(x)\coloneqq\frac{1}{N} \frac{f_N(x)}{\norm{f_N}_{C^N(K)}}$$
+Abbiamo per costruzione $\supp(g_N)\subseteq K$ e $g_N\in \mathcal{D}(\Omega)$, inoltre 
+$$\begin{cases}
+    \abs{\partial^\beta g_N}\overset{\text{lin}}{=}\frac{1}{N} \frac{\abs{\partial^\beta f_N(x)}}{\norm{f_N}_{C^N(K)}}\le \frac{1}{N} \quad \abs{\beta}\le N\\
+    \abs{u(g_N)}=\abs{u\left(\frac{1}{N} \frac{f_N}{\norm{f_N}_{C^N(K)}}\right)}\overset{\text{lin}}{=}\abs{\frac{1}{N} \frac{1}{\norm{f_N}_{C^N(K)}}u(f_N)}\overset{(\star)}{\ge} \abs{\frac{N\norm{f_N}_{C^N(K)}}{N\norm{f_N}_{C^N(K)}}}=1
+\end{cases}\implies \begin{cases}
+    \lim_{n\to\infty} g_N(x)=0\\
+    \abs{u(g_N)}\ge 1
+\end{cases} \text{\lightning}$$    
+\end{itemize}
+\end{proof}
+
+\begin{defn}[Convergenza distribuzionale (debole)] Dotiamo $\mathcal{D}'$ di una topologia tramite una nozione di convergenza: sia $\{u_n\}_n\subset\mathcal{D}'(\Omega)$, allora
+ $$u=\llim{n}{\mathcal{D}'}u_n\in \mathcal{D}'\iff \left[u_n(f)\limm{n}{\im}u(f)\quad\forall f\in \mathcal{D}(\Omega)\right]\qquad  \text{($\sim$"puntuale") }$$
+ detta debole poiché qualsiasi successione di funzioni che converge nelle  usuali topologie converge anche qua, il contrario no (qui "converge quasi tutto")
+\end{defn}
+
+\begin{thm}[$(\mathcal{D}',\mathcal{D'-}\lim)$ è completo]
+    Sia $\{u_n\}_n\subset\mathcal{D}'(\Omega)$ tale che
+    $$\left[\im\text{-}\lim_{n\to\infty}u_n(f) \quad \exists\text{ finito }\forall f\in\mathcal{D}(f)\right]\implies u\in\mathcal{D}'(\Omega)$$
+    dove $u$ è definito "puntualmente": $$u(f)\coloneqq \im\text{-}\lim_{n\to\infty}u_n(f) \quad \forall f\in\mathcal{D}$$
+\end{thm}
+
+\begin{defn}[Supporto di una distribuzione]
+    Sia $u\in\mathcal{D}'(\Omega)$ con $\Omega\subseteq\re^n$. Allora 
+    $$\supp(u)\coloneqq\Omega\setminus\{x\in\Omega\mid \exists B_x\subset\re^n\text{ con }x\in B_x: \; u|_{B_x}=0\}$$
+\end{defn}
+
+
+
+\begin{defn}[Derivata distribuzionale (debole)]
+    Sia $u\in\mathcal{D}'(\Omega)$. La sua derivata lungo la direzione $j$ è $\partial_ju\in\mathcal{D}'(\Omega)$ definita come 
+    $$\partial_ju(f)=-u(\partial_j f)\quad \forall f\in\mathcal{D}(\Omega)$$
+    e quindi in generale
+    $$\partial^\alpha u(f)=(-1)^\abs{\alpha}u(\partial^\alpha f)\quad \forall f\in\mathcal{D}(\Omega)$$
+\end{defn}
+
+\begin{rem*}
+    Tale definizione è coerente con le distribuzioni generate da funzioni $C^\infty((a,b))$ con $(a,b)\subseteq\re$, infatti
+    $$\partial_x\underbrace{\phi}(f)=\int_a^b\partial_x\phi(x)f(x)dx\overset{\text{per parti}}{=}\cancel{\phi(x)f(x)\bigg|_{a}^b}-\int_a^b\phi(x)\partial_xf(x)dx=-\underbrace{\phi}(\partial_x f)$$
+\end{rem*}
+
+\begin{myboxed}
+\begin{prop}[Convergenza delle derivate] Sia 
+    Sia $\{u_n\}_n\subset\mathcal{D}'(\Omega)$ convergente con $u=\llim{n}{\mathcal{D}'}u_n$. Allora $$\llim{n}{\mathcal{D}'}\partial^\alpha u_n=\partial^\alpha u  \in \mathcal{D}'(\Omega)$$
+    ovvero se converge una successione di distribuzioni convergono anche le successioni di qualsiasi derivata
+\end{prop}
+\end{myboxed}
+
+\begin{proof}
+    Per dimostrare la convergenza in $\mathcal{D}'$ basta dimostrare la convergenza "puntuale", ovvero che converge la valutazione in una test funzione fissata, per ogni test funzione. Vale infatti
+    $$\partial^\alpha u_n(f)\overset{def}{=}(-1)^\abs{\alpha}u_n(\partial^\alpha f)\quad\limm{n}{\im}\quad(-1)^\abs{\alpha}u(\partial^\alpha f)\qquad \forall f\in\mathcal{D}(\Omega)$$
+    dove abbiamo usato l'ipotesi che $u=\llim{n}{\mathcal{D}'}u_n$. Quindi è verificata la def. di convergenza in $\mathcal{D}'$
+\end{proof}
+
+
+\begin{myboxed}
+    \begin{thm}[Esistenza della primitiva distribuzionale]
+        Ogni $v\in \mathcal{D}'(\re)$ ammette primitiva $w\in\mathcal{D}'(\re)$, ovvero
+        $$v\in\mathcal{D}'(\re)\implies\exists w\in\mathcal{D}'(\re): v=\partial_xw$$
+        Ossia, dato $v\in\mathcal{D}'(\re)$ \underline{esiste} sempre \underline{soluzione distribuzionale} $w\in\mathcal{D}'(\re)$ dell'equazione differenziale
+        $$\partial_x w=v$$
+        Inoltre, se $\widetilde{w}\in\mathcal{D}'(\re)$ è un'altra primitiva, allora essa differisce da $w$ di una costante (i.e. una distribuzione generata da una funzione costante)
+    \end{thm}
+\end{myboxed}
+
+\begin{proof}
+    .
+    \begin{itemize}
+        \item \underline{Esistenza:} dimostriamola costruendo esplicitamente la soluzione $w$. 
+        \begin{itemize}
+            \item  Sappiamo già parzialmente come di deve comportare $w$: infatti dall'equazione differenziale discende che $\forall f\in \mathcal{D}(\re)$:
+        $$ v=\partial_xw\implies \forall f\in \mathcal{D}(\re):\quad v(f)=\partial_xw(f)\overset{def}{=}-w(\partial_x f)\implies \boxed{w(\partial_xf)\coloneqq-v(f)}$$
+        ovvero \hl{$w$ è ben definito su $\ran(\partial_x)$} dove tale operatore è considerato sulle test funzioni:
+        $$\mathcal{D}(\re)\overset{\partial_x}{\longrightarrow}\mathcal{D}(\re)\overset{\int_\re dx}{\longrightarrow}\im$$
+        \item Dimostriamo che (operatori definiti sulle test funzioni)
+        $$\boxed{\ran(\partial_x)=\ker(\int_\re dx)}$$
+        \begin{itemize}
+            \item[\underline{$\subseteq$})] Sia $\phi\in \mathcal{D}(\re)$, allora
+            \begin{align*}
+                \phi\in\ran(\partial_x)&\implies\exists\psi\in \mathcal{D}(\re): \phi=\partial_x\psi\\
+                &\implies \int_\re\phi dx=\int_\re\partial_x\psi=\psi\bigg|_{-\infty}^{+\infty}\overset{\psi\in \mathcal{D}(\re)}{=}0\\
+                &\implies \phi\in\ker(\int_\re dx)
+            \end{align*}
+            \item[\underline{$\supseteq$})]  Sia $\phi\in \mathcal{D}(\re)$, allora
+            \begin{align*}
+                \phi\in\ker(\int_\re dx)&\implies\begin{cases}
+                    \int_\re\phi dx=0\\
+                    \phi(x)=\partial_x\psi(x)dx \text{ con }\psi(x)\coloneqq\int_{-\infty}^x\phi(y)dy \quad \text{per teo fond. calcolo int.}
+                \end{cases}\\
+                &\implies\begin{cases}
+                    \psi \text{ a supp. compatto poiché lo è $\phi$ e $\int_\re\phi dx=0$}\\
+                    \psi \in C^\infty(\re)\text{ NON SO penso perché lo è $\phi$}
+                \end{cases}\\
+                &\implies\phi\in\ran(\partial_x)
+            \end{align*}
+        \end{itemize}
+        \item Dimostriamo che, fissata una qualunque $\rho\in\mathcal{D}(\re)$ tale che $1(\rho)=\int_\re\rho(x)dx=1$ (normalizzata), vale
+        $$\boxed{\mathcal{D}(\re)=\ran(\partial_x)\oplus\text{span}_\im\rho}$$
+        Infatti
+        \begin{align*}
+            \forall f\in\mathcal{D}(\re)&\implies f=\underbrace{(f\textcolor{red}{-1(f)\rho})}_{\in\ker(\int_\re dx)=\ran(\partial_x)}\underbrace{\textcolor{red}{+1(f)\rho}}_{\in\text{span}_\im\rho}\quad\in \ran(\partial_x)\oplus\text{span}_\im\rho
+        \end{align*}
+        dove $1(f)=\int_\re f$ e per il primo addendo:
+        $$\int_\re\bigg(f(x)-1(f)\rho(x)\bigg)dx=\int_\re f-\overbrace{1(f)}^{=\int_\re f}\underbrace{\int_\re\rho}_{=1}=0\implies(f-1(f)\rho)\in\ker(\int_\re dx)=\ran(\partial_x)\implies (\star)$$
+        Col discorso appena fatto abbiamo dimostrato che $\mathcal{D}(\re)\subseteq\ran(\partial_x)\oplus\text{span}_\im\rho $. Per l'inclusione opposta BOH pensarci. 
+        \item Dal punto precedente
+        $$(\star)\implies \exists F_\rho\in\mathcal{D}(\re):\quad \boxed{\partial_x F_\rho=f-1(f)\rho}$$
+        \item \textbf{\textit{(solo per completezza)}} possiamo definire la proiezione alla prima componente
+        $$\begin{array}{ccccc}
+           \pi_{\rho,1}: & \mathcal{D}(\re)=& \ran(\partial_x)\oplus\text{span}_\im\rho & \to &\ran(\partial_x)  \\
+             & f= & (f-1(f)\rho)+1(f)\rho & \mapsto &(f-1(f)\rho)
+        \end{array}$$
+        e la primitiva sulla prima componente
+        $$F_\rho(x)\coloneqq I(\pi_{\rho,1}(f))(x)\coloneqq \int_{-\infty}^x \pi_{\rho,1}(f)(y)dy$$
+         \item Quindi \hl{possiamo estendere $w$ a tutto $\mathcal{D}(\re)$}:
+         $$w(f)=w[\underbrace{(f-1(f)\rho)}_{=\partial_x F_\rho}+1(f)\rho]\overset{lin}{=}w(\partial_x F_\rho)+1(f)\underbrace{w(\rho)}_{\coloneqq C\in\im\text{ arbitr.}}=\boxed{-v(F_\rho)+C(f)}$$
+        dove l'arbitrarietà di $C$ discende da quella di $\rho$. Ovvero
+         $$\boxed{w\coloneqq -v(I(\pi_{\rho,1}(f)))+c \qquad \text{ con }c\in \im \text{ arbitrario}}$$
+         è sempre soluzione.
+        \end{itemize}
+       
+        \item \underline{Soluzione è distribuzione:} essendo $w\in\mathcal{D}^*(\re)$ dobbiamo verificare che sia continuo rispetto al $\mathcal{D}'-\lim$, e basta verificarlo in 0 (essendo lineare), ovvero dobbiamo dimostrare che data $(f_n)_n\subset\mathcal{D}(\re)$ vale
+        $$(f_n)_n \limm{n}{\mathcal{D}}0\implies w(f_n)\limm{n}{\im}0$$
+        dall'ipotesi di convergenza sia $K\Subset\re$ il compatto che contiente $\supp(f_n)\quad \forall n$ 
+        \begin{itemize}
+            \item Dimostriamo che 
+            $$\boxed{I_{f_n}\coloneqq 1(f)=\int_\re f(x)dx\limm{n}{\im}0}$$
+            Infatti
+            $$\abs{I_{f_n}}=\abs{\int_\re f_n(x)dx}\le \int_\re\abs{f_n(x)}dx\le m(K)\cdot \sup_K\abs{f_n}=m(K)\norm{f_n}_{C^0(\re)}\limm{n}{\im}0 $$
+            ($m(K)$ è la misura di $K$) usando la convergenza in $\mathcal{D}$ di $f_n$
+            \item Sia $F_n^\rho\coloneqq f_n-I_{f_n}\rho$. Notando che $(F_n^\rho)_n\subset\mathcal{D}(\re)$ dimostriamo che
+            $$\boxed{(F_n^\rho)_n\limm{n}{\mathcal{D}}0}$$
+            Infatti $\supp(F_n^\rho)\subseteq K'\coloneqq K\cup \supp(\rho)\Subset\re\quad \forall n$ e 
+            $$\norm{\partial_x^jF_n^\rho}_{C^0(\re)}\le\norm{\partial_x^jf_n}_{C^0(\re)}+\abs{I_{f_n}}\norm{\partial_x^j\rho}_{C^0(\re)}\limm{n}{\im}0$$
+            avendo usato la convergenza a 0 di $f_n$ e il punto precedente (oltre al fatto che $\rho$ non dipende da $n$)
+        \end{itemize}
+        Possiamo quindi concludere
+        $$w(f_n)=-v(F_n^\rho)+I_{f_n}w(\rho)\limm{n}{\im}0$$
+        avendo usato i due punti precedenti e il fatto che $v\in\mathcal{D}'(\re)$, ovvero è continuo per successioni.
+    \end{itemize}
+\end{proof}
+
+\section{Distribuzioni a supporto compatto}
+
+\begin{defn}[Spazio delle test funzioni per distr. a supp. comp.] È $\mathcal{E}(\Omega)\coloneqq(C^{\infty},\mathcal{E}\text{-}\lim)$ con $$f=\llim{n}{\mathcal{E}}f_n\iff \forall\bv{\alpha},K\Subset \Omega:\norm{\partial^{\bv{\alpha}}f_n-\partial^{\bv{\alpha}}f}_{C^0(K)}\limm{n}{\im}0$$
+\end{defn}
+
+\begin{defn}[Spazio delle distribuzioni] È $\mathcal{E}'(\Omega)$ ovvero l'insieme dei funzionali $\mathcal{E}\to\im$ \textbf{continui (per successioni)} rispetto al $\mathcal{E-}\lim$, ovvero
+    $$u\in\mathcal{E}^*(\Omega) \text{ continuo rispetto al }\mathcal{E-}\lim\iff\left[ f_n\limm{n}{\mathcal{E}}f\implies u(f_n)\limm{n}{\im}u(f)\qquad\forall f\in\mathcal{E}(\Omega)\right] $$
+    \end{defn}
+\begin{myboxed}
+        \begin{thm}[Caratterizzazione delle distribuzioni] Sia
+            $u\in\mathcal{E}^*(\Omega)$, allora $$u\in\mathcal{E}'(\Omega) \iff \exists K\Subset \Omega, c_K\in\re^+,k\in\na_0:  \boxed{\abs{u(f)}\le c_K\norm{f}_{C^k(K)}}\quad \forall f\in\mathcal{E}(\Omega)$$
+        \end{thm}
+    \end{myboxed}
+    \begin{proof}
+        Analoga a quella di \nameref{thm-caratterizzazione_distribuzioni}
+    \end{proof}
+
+\begin{myboxed}
+    \begin{prop}[Estensione a funzioni lisce]
+        Sia $\Omega\subseteq\re^n$. Allora
+       $$u\in\mathcal{D}'(\Omega)\mid \supp(u) \text{ compatto } \implies \exists\;!\;\widetilde{u}\in\mathcal{E}'(\re^n): \widetilde{u}(f)=u(f)\quad \forall f\in \mathcal{D}(\Omega)$$
+    \end{prop}
+\end{myboxed}
+\begin{proof}
+    .
+    \begin{itemize}
+        \item \underline{Esistenza:} data $u\in \mathcal{D}'(\Omega)$ con $\supp(u)$ compatto, sia $\rho\in C^\infty_c(\Omega)\mid\rho|_{\supp(u)=1}$, allora definiamo l'estensione come 
+        $$\widetilde{u}:C^\infty(\Omega)\to \im \qquad \boxed{\widetilde{u}(\phi)\coloneqq u(\rho\phi)}$$
+        allora
+        \begin{align*}
+            u(\rho\phi) \text{ distribuzione} &\iff\abs{u(\rho\phi)}\le c_K\sum_{\abs{\alpha}\le k}\sup\abs{\partial^\alpha \rho\phi} && \forall K\Subset \Omega, \exists c_K,N\\
+            &\iff\abs{u(\phi)}\le c_K\sum_{\abs{\alpha}\le k}\sup_{\supp(u)}\abs{\partial^\alpha \phi} && \exists K=\supp(u), \exists c_K,N \quad (\spadesuit)\\
+            &\iff \widetilde{u} \text{ distribuzione}
+        \end{align*}
+        in $(\spadesuit)$ abbiamo scambiato derivata e integrale grazie alla regola di Leibnitz.
+        \item \underline{Unicità:} sia $\sigma\in C_c^\infty$ con $\sigma\ne\rho$ ma $\sigma|_{\supp(u)}=\rho|_{\supp(u)}=1$. Allora
+        $$u(\rho\phi)-u(\sigma\phi)=u((\rho-\sigma)\phi)\overset{\star}{=}0 \quad \forall \phi\in C^\infty\implies u(\rho\phi)=u(\rho\sigma)$$
+        dove in $\star$ poiché $\supp(u)\cap \sup((\rho-\sigma)\phi)=\emptyset$. 
+    \end{itemize}
+\end{proof}
+
+\begin{myboxed}
+\begin{thm}[Espansione di Taylor, stima del resto, derivata del prodotto]
+    Sia $\phi\in C^\infty(\Omega), x_0\in \Omega$, allora $\forall N\in \na_0\quad \exists r>0$ con $B_r(x_0)\coloneqq B_r\subseteq\Omega$ tale che, $\forall h\in B_r(0)$ vale
+    \begin{enumerate}
+        \item[(I)] \textbf{Espansione di Taylor in $B_r(x_0)$:}
+        $$\phi(x_0+h)=\sum_{\abs{\alpha}\le N}\frac{\partial^\alpha\phi(x_0)}{\alpha!}h^\alpha+R_{N+1,x_0}[\phi](h)$$
+        \item[(II)] \textbf{Resto di Lagrange} in $x_0$ è
+        $$R_{N+1,x_0}[\phi](h)=\sum_{\abs{\eta}\le N+1}\frac{\partial^\eta\phi(x_0+th)}{\eta!}h^\eta\qquad \text{per qualche }t\in (0,1)$$
+        \item[(III)] \textbf{Stima delle derivate del resto:} per  $\abs{\beta}\le N+1$
+        $$\abs{\partial^\beta R_{(N+1),x_0}[\phi](h)}\le \abs{h}^{N+1-\abs{\beta}}\cdot\sum_{\abs{\eta}=N+1-\abs{\beta}}\frac{\sup_{\abs{\xi}\le\abs{h}}\abs{\partial^\eta\phi(x_0+\xi)}}{\eta!}$$
+        \item[(IV)] (non c'entra) \textbf{Derivata del prodotto:}
+        $$\partial^\alpha(\chi\psi)\coloneqq\sum_{\abs{\beta}+\abs{\gamma}=\abs{\alpha}}\frac{\alpha!}{\beta!\gamma!}\partial^\beta\chi\cdot\partial^\gamma\psi$$
+    \end{enumerate}
+\end{thm}
+\end{myboxed}
+
+\begin{myboxed}
+    \begin{thm}[Caratterizzazione distr. a supporto su un punto] Sia $u_0\in \mathcal{D}'(\re^n)\mid \supp(u)=\{0\}$. Allora esistono $N\in \na_0,\alpha$ multi-indice e $c_\alpha\in\im$ tali che
+    $$u_0=\sum_{\abs{\alpha\le N}}c_\alpha\partial^\alpha\delta_0$$     
+    \end{thm}
+\end{myboxed}
+
+\begin{proof} Premettiamo un Lemma.
+    \begin{shaded}
+        \begin{lem*}
+            Sia $u\in\mathcal{D}'(\re^n)\mid\supp(u)=\{0\}$, allora se $\exists N\in\na_0$ tale che
+            $$\partial^\alpha f(0)=0\quad \forall\abs{\alpha}\le N\implies u(f)=0$$
+        \end{lem*}
+        \begin{proof} Definiamo $h\in C^\infty_c$ tale che
+        $$h(x)\coloneqq\begin{cases}
+            1 & \abs{x}<\frac{1}{2}\\
+            0 & \abs{x}>1\\
+            C^\infty & \text{altrimenti}
+        \end{cases}\qquad h_\epsilon(x)\coloneqq h\left(\frac{x}{\epsilon}\right)\quad \epsilon\in (0,1)$$
+            Vediamo che $h_\epsilon\in C_c^\infty\implies fh_\epsilon\in \mathcal{D}$ e inoltre
+            $$(f-fh_\epsilon)|_{B_\epsilon(0)}=0\overset{\supp(u)=\{0\}}{\implies}u(f-fh_\epsilon)\overset{lin}{=}u(f)-u(fh_\epsilon)=0\implies \boxed{u(f)=u(fh_\epsilon)}$$
+            (ovvero $u$ non fa distinzione tra $f$ e $fh_\epsilon$). Consideriamo l'espansione di Taylor (I) di $f$ in $B_\epsilon(0)$ (con $h$ di (I)  $=x$):
+            $$f(x)=\underbrace{\cancel{\sum_{\abs{\alpha}\le N}\frac{\partial^\alpha f(0)}{\alpha!}x^\alpha}}_{=0 \text{ per ip.}}+R_{N+1,0}[f](x)\qquad \text{in }B_\epsilon(0)\qquad \text{(V)}$$
+            Allora
+            \begin{align*}
+                \sup_{B_\epsilon}\abs{\partial^\alpha(fh_\epsilon)}&=\sup_{B_\epsilon}\abs{\sum_{\abs{\beta}+\abs{\gamma}=\abs{\alpha}}\frac{\alpha!}{\beta!\gamma!}(\partial^\beta f)\cdot(\epsilon^{-\abs{\gamma}}\partial^\gamma h)}&& \text{da (IV) e }\partial^\gamma h_\epsilon=\epsilon^{-\abs{\gamma}}\partial^\gamma h\\
+                &\le\sum_{\abs{\beta}+\abs{\gamma}=\abs{\alpha}}\epsilon^{-\abs{\gamma}}\frac{\alpha!}{\beta!\gamma!}\boxed{\sup_{B_\epsilon}\abs{{\partial^\beta f}}}\cdot\sup_{B_\epsilon}\abs{\partial^\gamma h}\\
+                &\le   \sum_{\abs{\beta}+\abs{\gamma}=\abs{\alpha}}\epsilon^{-\abs{\gamma}}\frac{\alpha!}{\beta!\gamma!}\boxed{\abs{\epsilon}^{N+1-\abs{\beta}}\cdot\sum_{\abs{\eta}=N+1-\abs{\beta}}\frac{\sup_{\abs{\xi}\le\epsilon}\abs{\partial^\eta f(\xi)}}{\eta!}}\cdot\sup_{B_\epsilon}\abs{\partial^\gamma h} && \text{da (V) e (III) con sup e $h=$max$=r=\epsilon$}\\
+                &\le \alpha!\epsilon^{N+1-(\abs{\beta}+\abs{\gamma})}\underbrace{\sum_{\beta,\gamma,\eta}\frac{1}{\beta!\gamma!\eta!}\sup_{B_1}\abs{\partial^\gamma h}\sup_{B_1}\abs{\partial^\eta g}}_{\coloneqq \Gamma_N}\\
+                &\le\alpha!\epsilon^{N+1-\abs{\alpha}} \cdot\Gamma_N && \text{con $\Gamma_N$ cost. e poiché }\abs{\beta}+\abs{\gamma}=\abs{\alpha}
+            \end{align*}
+            e quindi
+            \begin{align*}
+                \abs{u(f)}&=\abs{u(fh_\epsilon})\\
+                &\le C\sum_{\abs{\alpha}\le N}\sup_{B_\epsilon}\abs{\partial^\alpha(fh_\epsilon)} && \text{essendo distrib. e con $K\coloneqq \overline{B_1(0)}$}\\
+                &\le c\Gamma_N\sum_{\abs{\alpha}\le N}\alpha!\epsilon^{N+1-\abs{\alpha}} && \text{per sopra}\\
+                &\le c\Gamma_N\max_{\abs{\alpha}\le N}(\alpha!)\sum_{\abs{\alpha}\le N}\epsilon^{N+1-\abs{\alpha}}\\
+                &=0 && \text{per l'arbitrarietà di }\epsilon\in(0,1)
+            \end{align*}
+        \end{proof}
+    \end{shaded}
+    \noindent Premesso il lemma, data $f\in\mathcal{\re^n}$, da (I) possiamo fare\textbf{ espansione di Taylor in $B_r(0)$} e per linearità
+    $$u(f)=\sum_{\abs{\alpha}\le N}\frac{\partial^\alpha f(0)}{\alpha!}u(x^\alpha)+\cancel{u(R_{N+1,0}[f](x))}$$
+    dove il primo termine è ben definito poiché $u\in \mathcal{E}'$, e il secondo termine è zero poiché la funzione $R_{N+1,0}[f](x)$ soddisfa il precedente lemma, infatti per la (III) calcolata in 0: $$\partial^\beta R_{N+1,0}[f](0)=0\quad \forall \abs{\beta}\le N+1$$
+    Allora ponendo $b_\alpha\coloneqq u(x^\alpha)$ abbiamo
+    $$u(f)=\sum_{\abs{\alpha}\le N}\frac{b_\alpha}{\alpha!}\delta(\partial^\alpha f)=\sum_{\abs{\alpha}\le N}\overset{\coloneqq c_\alpha}{\boxed{\frac{b_\alpha}{\alpha!}(-1)^{\abs{\alpha}}}}(\partial^\alpha\delta)(f)$$
+\end{proof}
+\section{Prodotto tensore}
+\begin{defn}[Prodotto tensore di funzioni lisce e distribuioni generate] Siano $\phi\in C^\infty(\re^n)$ e $\chi\in  C^\infty(\re^n)$. Allora
+\begin{itemize}
+    \item \textbf{Prodotto tensore di funzioni lisce:}
+    $$\phi\otimes\chi(x,y)\coloneqq \phi(x)\cdot\chi(y)$$
+    \item \textbf{Distrib. generata dal prod. tensore di funzioni su tensori puri:}
+    $$\underbrace{\phi\otimes\chi}(h\otimes f)=\int_{\re^n\times\re^m}d^nxd^my\; \bigg[\phi(x)\chi(y)\bigg]\bigg[h(x)f(y)\bigg]=\underbrace{\phi}(h)\cdot \underbrace{\chi}(f)$$
+    \item \textbf{Distrib. generata dal prod. tensore di funzioni in generale:}
+    $$\underbrace{\phi\otimes\chi}(g)=\int_{\re^n\times\re^m}d^nxd^my\; \bigg[\phi(x)\chi(y)\bigg]\bigg[g(x,y)\bigg]=\underbrace{\phi}\bigg(\underbrace{\chi}(g)\bigg)$$
+    \end{itemize}
+    
+\end{defn}
+
+    \begin{myboxed}
+        \begin{thm}[Valutazione parziale]\label{thm-valutazione-parziale} Siano $\Omega_x\subseteq \re^n$ e $\Omega_y\subseteq \re^m$. Siano $u\in \mathcal{D}'(\Omega_x)$ e $\phi\in C^\infty(\re^n\times\re^m)$ tale che 
+        $$\forall \overline{y}\in \Omega_y\quad \exists B_\delta(\overline{y})\mid \supp(\phi_y(x))\subset K_{\overline{y}}\text{ compatto }\forall y\in B_\delta(\overline{y})$$
+        \hl{ovvero $\phi$ è a supp. compatto solo lungo le $x$}. Allora $$y\mapsto u(\phi_y)\in C^\infty(\Omega_y)\qquad\text{ e }\qquad \partial^\alpha_yu(\phi_y)=u\bigg(x\mapsto\big(\partial^\alpha_y\phi(x,y)\big)|_y\bigg)(y)$$
+            è equivalente allo scambio di derivata e integrale.
+        \end{thm}
+    \end{myboxed}
+\begin{proof}
+    Definiamo 
+    $$\Upsilon(y)\coloneqq u(\phi_y(x))$$
+    \begin{itemize}
+        \item \underline{$\Upsilon\in C^0(\Omega_y)$:} per $a\in B_\delta(0)$ definiamo $$\phi_a(x,\overline{y})\coloneqq\phi(x,\overline{y}+a)-\phi(x,\overline{y})$$
+        e allora per linearità
+        \todo{p. 90}
+        \item \underline{$\Upsilon\in C^1(\Omega_y)$:}
+        \item \underline{$\Upsilon\in C^\infty(\Omega_y)$:}
+    \end{itemize}
+\end{proof}
+\begin{cor}[corollario valutazione parziale] \label{cor-valutazione-parziale}
+    Siano $\Omega_x\subseteq \re^n$ e $\Omega_y\subseteq \re^m$. Siano $u\in \mathcal{D}'(\Omega_x)$ e $g\in \mathcal{D}(\Omega_x\times\Omega_y)$, \hl{ovvero $g$ è a supp. compatto lungo sia $x$ che $y$}. Allora
+    $$u(g_y)\in C_c^\infty(\Omega_y)$$
+\end{cor}
+
+\begin{myboxed}
+    \begin{thm}[Prodotto tensore di distribuzioni]\label{thm-prodotto-tensore-distribuzioni}
+        Siano $\Omega_x\subseteq \re^n$ e $\Omega_y\subseteq \re^m$. Siano $u\in \mathcal{D}'(\Omega_x)$ e $v\in \mathcal{D}'(\Omega_y)$ allora
+        $$\exists!\; u\otimes v\in \mathcal{D}'(\Omega_x\times \Omega_y)\mid \boxed{u\otimes v(f\otimes h)=u(f)\cdot v(h)}\quad \forall f\in \mathcal{D}(\Omega_x),h\in \mathcal{D}(\Omega_y)$$
+    \end{thm}
+\end{myboxed}
+\begin{proof}.
+\begin{itemize}
+    \item \underline{Esistenza (ansatz):} Dal \nameref{cor-valutazione-parziale}, data \hl{$g\in \mathcal{D}(\Omega_x\times\Omega_y)$}$\implies $\hl{$u(g_y)\in\mathcal{D}(\Omega_y)$} e quindi è naturale definire
+    $$\boxed{u\otimes v(g)\coloneqq v(u(g_y))}\qquad\forall g\in \mathcal{D}(\Omega_x\times\Omega_y)$$
+    sicuramente questa definizione implica quella del teorema.
+    \item \underline{Esistenza (verifica che ansatz è distribuzione):} dobbiamo verificare \nameref{thm-caratterizzazione_distribuzioni}. Sia $K$ il supporto compatto di $g$ e $K_x,K_y$ le proiezioni. Basta applicare \nameref{thm-caratterizzazione_distribuzioni} su $v$, poi \nameref{thm-valutazione-parziale} per la derivata e di nuovo \nameref{thm-caratterizzazione_distribuzioni} su $u$.
+    \begin{align*}
+        v(u(g_y)) &\le C_{K_y}\sum_{\abs{\beta}\le N}\sup_{y\in K_y}\abs{\partial^\beta u(g_y)} && v \text{ distribuzione}\\
+         &= C_{K_y}\sum_{\abs{\beta}\le N}\sup\abs{u(\partial_y^\beta g_y)} && \text{ \nameref{thm-valutazione-parziale}}\\
+         &\le C_{K_y}\sum_{\abs{\beta}\le N}\sup\abs{C_{K_x}\sum_{\abs{\alpha}\le M}\sup_{x\in K_x}\abs{(\partial^\alpha_x\partial^\beta_yg)(x,y))}} && u\text{ distribuzione}\\
+         &\le C\sum_{\abs{\gamma}\le N+M}\sup_{K}\abs{(\partial^\gamma g(x,y))}
+    \end{align*}
+    OK
+    \item \underline{Unicità:} sappiamo che $\mathcal{D}(\Omega_x)\otimes\mathcal{D}(\Omega_y)$ denso in $\mathcal{D}(\Omega_x\times \Omega_y)$. Da un esercizio sappiamo che
+    $$u(f)=0 \quad \forall f\in X\text{ denso in }\Omega\implies u\equiv0$$
+    allora dalla linearità delle distribuzioni e solito giochetto differenza abbiamo la tesi.
+\end{itemize}
+    
+\end{proof}
+
+\begin{myboxed}
+    \begin{prop}[Proprietà prodotto tensore]
+        Solito setting di questa parte. Valgono 
+        \begin{enumerate}
+            \item $u\otimes v=v\otimes u$
+            \item Se $\alpha$ e $\beta$ sono multi-indici relativi  rispettivamente a $\Omega_x$ e $\Omega_y$, allora
+            $$\partial^\alpha_x\circ\partial^\beta_y(u\otimes v)=\partial^\alpha_xu\otimes\partial^\beta_yv$$
+            \item Il prodotto tensore è \textbf{separatamente bilineare e continuo} su $\mathcal{D'}(\Omega_x)\otimes\mathcal{D'}(\Omega_y)$
+            \item $\supp(u\otimes v)=\supp(u)\times \supp(v)$
+        \end{enumerate}
+    \end{prop}
+\end{myboxed}
+\begin{proof}
+    .
+    \begin{itemize}
+        \item[i)] Dalla completa simmetria di $u,v$ in \nameref{thm-prodotto-tensore-distribuzioni} allora tutto vale se vengono scambiati e l'unicità dice che sono uguali.
+        \item[ii)-iii)] Conseguenza di i) e def. derivata distribuzionale.
+    \end{itemize}
+\end{proof}
+
+\section{Convoluzione}
+\begin{myboxed}
+    \begin{thm}[Continuità convoluzione]\label{thm-continuità-convoluzione}
+        Valgono
+        \begin{enumerate}
+            \item Sia $u\in\mathcal{E}'(\re^n)$ e $\{v_j\}_{j\in\na}\subset  \mathcal{D}'(\re^n)$ tale che $\{v_j\}_{j}\limm{j}{\mathcal{D}'} v\in \mathcal{D}'(\re^n)$. Allora
+            $$\llim{j}{\mathcal{D}'}u*v_j=u*v$$
+            \item La stessa cosa vale se $u\in\mathcal{D}'(\re^n)$ e $\supp(v_j)\subset K$ compatto $\forall j$.
+        \end{enumerate}
+    \end{thm}
+\end{myboxed}
+
+\begin{proof}Per (i) basta vedere che
+$$\lim_{j\to\infty}u*v_j(f)\overset{def}{=}\lim_{j\to\infty}v_j\bigg(u(f(x+y))\bigg)=v\bigg(u(f(x+y))\bigg)$$
+dove abbiamo usato l'ipotesi di convergenza  $\{v_j\}_{j}\limm{j}{\mathcal{D}'}v$. Per (ii) analogo
+    
+\end{proof}
+
+
+\begin{myboxed}
+    \begin{thm}[Mollificazione]\label{thm-mollificazione} Sia $u\in\mathcal{D}'(\re^n)$ e $\rho\in C_c^\infty(\re^n)\subset\mathcal{E}'(\re^n)$. Allora
+    $$\rho*u\in C^\infty(\re^n)$$
+    nel senso che $\rho*u$ è una distribuzione generata da una funzione liscia, detta \textbf{regolarizzazione} di $u$. \hl{Cioè la convoluzione tra una qualunque distribuzione e una funzione $C_c^\infty$ è una funzione liscia}
+    \end{thm}
+\end{myboxed}
+\begin{proof}
+    \todo{}
+\end{proof}
+
+\begin{lem*}[Regolarizzazione]\label{lem-regolarizzazione}
+    Sia $\rho\in C_c^\infty(\re^d)$ tale che $\int_{\re^d}\rho=1$. Allora
+    $$\rho_n\coloneqq n^d\rho(nx)\implies \llim{n}{\mathcal{D}'}\underbrace{\rho_n}=\delta_0$$
+\end{lem*}
+\begin{proof}
+    fare il limite valutato in $f$, poi  cambio variabile $y=nx$ e tiro dentro il limite.
+\end{proof}
+
+\begin{myboxed}
+    \begin{thm}
+        $C_c^\infty(\re^n)$ è denso in $\mathcal{D}'(\re^n)$
+    \end{thm}
+\end{myboxed}
+
+\begin{proof}
+    Indichiamo con $\rho_n$ la distrib. generata dal $\rho_n$ del \nameref{lem-regolarizzazione}. 
+    \begin{itemize}
+        \item \underline{$C^\infty$ denso in $\mathcal{D}'$:} ogni $u\in\mathcal{D}'(\re^d)$ può essere approssimata arbitrariamente bene da una successione di funzioni lisce $\rho_n*u$ (so che tale distribuzione è generata da una funzione liscia da \nameref{thm-mollificazione}), infatti per \nameref{thm-continuità-convoluzione} e \nameref{lem-regolarizzazione}:
+        $$\llim{n}{\mathcal{D}'}(u*\rho_n)=u*\bigg(\llim{n}{\mathcal{D}'}\rho_n\bigg)=u*\delta=u$$
+         \item \underline{$C_c^\infty$ denso in $\mathcal{D}'$:} dobbiamo rendere il loro supporto compatto. Definiamo
+         $$\begin{cases}
+             \sigma\in C_c^\infty(\re^d)\mid  \sigma|_{B_1(0)}\equiv 1 & \text{funzione adiabatica di cut-off}\\
+             \sigma_n(x)\coloneqq \sigma \left(\frac{x}{n}\right)&\text{si allarga con }n\to \infty\\
+             u_n\coloneqq\sigma_n\cdot(u*\rho_n) & \text{approx. sempre migliori (funioni lisce) di $u$ "cutoffate"}
+         \end{cases}$$
+         Per $f\in \mathcal{D}(\re^d)$ abbiamo
+         \begin{align*}
+             u_n(f)&=\sigma_n\cdot(u*\rho_n)(f)\\
+             &=u*\rho_n(\sigma_nf)\\
+             &=u*\rho_n(f)&& \text{per $n\ge \overline{n}$ suff. grande $\sigma_n\equiv 1$ su tutto $\supp(f)$}\\
+             &=u*\delta(f)=u(f)&& \text{per }n\to\infty
+         \end{align*}
+         Ho quindi dimostrato che $\forall u\in \mathcal{D}'$ posso trovare una successione $u_n\coloneqq\sigma_n\cdot(u*\rho_n)$ di funzioni lisce (lo so da \nameref{thm-mollificazione}) a supporto compatto (per come l'ho definita grazie alla funzione di cut-off) tale che il $\mathcal{D}'$-lim è $u$. 
+    \end{itemize}
+\end{proof}
+
+\subsection{Soluzioni fondamentali}
+\begin{defn}
+    Se $P$ è operatore lineare, $E$ è soluzione fondamentale per $P$ se 
+    $$PE=\delta$$
+\end{defn}
+\begin{myboxed}
+\begin{prop}
+    Abbiamo
+    \begin{itemize}
+        \item Posso scrivere ogni operatore differenziale $P=\sum_{\abs{\alpha}\le m}c_\alpha\partial^\alpha$ come convoluzione con $P\delta$:
+        $$Pu=\delta*Pu=P\delta*u$$
+        \item Soluzione particolare di un'equazione differenziale lineare $Pu=v$: essa è $E*v$ con $E$ soluzione fondamentale, infatti
+        
+        $$P(E*v)=P\delta*(E*v)=(P\delta*E)*v=(KE)\star v=\delta*v=v$$
+    \end{itemize}
+\end{prop}
+\end{myboxed}
+
+\section{Trasformata di Fourier}
+the Fourier transform interchanges smoothness conditions with rate conditions on vanishing at infinity\\
+\begin{myboxed}
+    \begin{thm}[Esistenza e proprietà trasformata in $L^1$] Sia $\phi\in L^1(\re^n)$. Allora la sua trasformata esiste, è continua e limitata ($\in L^\infty$) con massimo 
+    $$\abs{\widehat{\phi}}\le \norm{\phi}_{L^1}$$
+        \hl{(ci sta, perché la sto integrando contro una funzione di modulo 1)}. Inoltre  se  $\phi,\psi\in L^1(\re^n)$ valgono
+        \begin{enumerate}
+            \item 
+            $$\int_{\re^n}\phi(x)\widehat{\psi}(x)=\int_{\re^n}\widehat{\phi}(x)\psi(x)$$
+            ovvero distribuzionalmente
+            $$\widehat{\phi}(\psi)=\phi(\widehat{\psi})$$
+            \item $\phi*\psi$ esiste $\forall^\infty x\in\re^n$ e $\phi*\psi\in L^1(\re^n)$
+            \item $\widehat{\phi*\psi}=\widetilde{\phi}\cdot\widehat{\psi}$
+        \end{enumerate}
+    \end{thm}
+\end{myboxed}
+\begin{proof}
+    La trasformata è continua per il teorema di convergenza dominata. È limitata con disug. classiche
+    $$\abs{\widehat{\phi}(k)}=\abs{\int\phi e^{ixk}}\le \int\abs{\phi e^{ixk}}=\int\phi=\norm{\phi}_{L^1}$$
+    \begin{enumerate}
+        \item è integrale a variabili separate, quindi è prodotto degli integrali. Applicare def. trasformata e usare commutatività del prodotto degli integrali
+        \item Il seguente integrale esiste
+        $$\int_{\re^n\times\re^n}\abs{\phi(x)\psi(y-x)}\le \norm{\phi}_{L^1}\norm{\psi}_{L^2}$$
+        quindi la funzione integranda è misurabile e posso calcolare l'integrale con Fubini.
+        \item applicando definizioni, scambiando integrali e con cambio di variabile $y-x\coloneqq y'$ e vedendo $e^{ik\cdot y}=e^{iky'}e^{ikx}$
+    \end{enumerate}
+\end{proof}
+
+\section{Distribuzioni temperate}
+
+\pagebreak
+\part{Esempi}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|c|c}
+         \textbf{Oggetto}&  \textbf{Esempi}& \textbf{Controesempi}\\ \hline
+        \textbf{Operatori lineari/continui} & operatore moltiplicazione su $L^2(a,b)$ &operatore moltiplicazione su $L^2(\re)$ \\
+        & operatore parità (è unitario/rotazione) & \shortstack{operatore derivazione su $C^1[0,1]$ \\ (vedi succ. $f_n=\sin(2\pi nx)$ in $\norm{\cdot}_\infty$)} \\\hline
+        \textbf{Operatori compatti} & \shortstack{Integrale (contro una fun.) in $C([0,1],\re)$ \\
+        $ (Tf)(x)=\int_{0}^{x}f(t)g(t)dt\quad g\in C([0,1,]\re)$}& \\
+         &  & \\
+    \end{tabular}
+
+    
+
+\end{table}
+
+\pagebreak
+\part{Recap}
+\section{Distribuzioni}
+
+\begin{landscape}
+\subsection{Insiemi di operatori}
+\subsection{Insiemi di funzioni scalari}
+Sia $\Omega\subseteq\re^n$ aperto, $f:\Omega\to \im$ funzione. Qui trattiamo gli insiemi di tali funzioni, indicati con \textit{[simbolo]}$(\Omega)\coloneqq\{f:\Omega\to\im\mid \text{\textit{[proprietà]}}\}$. Tutti gli insiemi di funzioni seguenti hanno la struttura di \textbf{spazio vettoriale} tramite le usuali operazioni di somma e prodotto per scalare. 
+\begin{itemize}
+    \item a.e. = quasi ovunque (\textit{almost everywhere})
+    \item $\forall^\infty$ per quasi-ogni (insiemi di misura nulla)
+\end{itemize}
+
+\subsubsection{Spazi}
+\begin{adjustwidth}{}{-0cm}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|l|}\hline
+         Simbolo&  Nome&  Definizione&  Topologia& Tipo&Proprietà\\ \hline\hline
+ $L^p(\Omega,\mu)$& Sp. di Lebesgue& \shortstack{$p\in[1,+\infty)$, $f$ integ. con $p$-norma finita\\
+ $L^p\approx L^p/\sim$ classi delle $f$ uguali a.e.}& $\norm{f}_p\coloneqq\left(\int _{\Omega}|f|^{p}\;\mathrm {d} \mu \right)^{1/p}$ & Banach& \shortstack{
+      Dis. Holder \\
+      Dis. Minkowski \\
+      $L^p\overset{p>q}{\inj} L^q$ (incl. continua)}\\ \hline 
+ $L^2(\Omega)$& Quadrato sommabili& come sopra, $p=2$ & $(f,g)\coloneqq\left(\int _{\Omega}\abs{f}\abs{g}\;\mathrm {d} \mu \right)^{1/2}$ & Hilbert&\\ \hline 
+ $L^\infty$& & & \shortstack{$\norm{f}_\infty\coloneqq\inf\{C\ge0\mid\abs{f(x)}\le C\forall^\infty x\in\Omega\}$\\
+ $\approx\sup\{\abs{f(x)}:x\in\Omega\}$}& \shortstack{Banach.\\non sep.}&\\ \hline
+  $L_{\text{loc}}^1$& Local. integ. & & & &\\\hline
+ $W^{k,p}$& Spazio di Sobolev& \shortstack{$\subset  L^p$ con deriv. 
+ deboli fino a $k$ in $L^p$\\$\hil^k\coloneqq W^{k,2}$}& & &\\\hline \hline
+ $l^p$& Succ.  $p$-sommabili& come $L^p$ su sp. di misura $(\na,\mathscr{P}(\na),\#)$& & &$(l^p)^*\cong l^{p'}$ (exp. coniug)\\ \hline 
+ $l^\infty$& & & $\norm{x}_{l^p}\coloneqq\lim_{p\to\infty}\norm{x}_{l^p}=\sup_{n\in\na}\abs{x_n}$& \shortstack{Banach\\non rifl.\\non sep.}&Strong dual space di $l^1$\\\hline  
+ $C$& convergenza& Succ. $l^\infty$ converg.& & &\\ \hline 
+ $C_0$& & Succ. converg. a 0& & &Chiuso in $l^\infty$\\\hline
+ $C_{00}$& & Succ. definitivamente 0& & &\shortstack{$\overline{C_{00}}=C_0$ in $l^\infty$\\denso in $l^p$ }\\\hline\hline
+ $C^0$& Continue& $f$ continue& $\norm{f}_{C^0}\coloneqq\norm{f}_\infty=\sup\{\abs{f(x)}:x\in\Omega\}$& &\\\hline
+ $C^k$& Diff. di classe $k$& continue con $k$ derivate continue& $\norm{f}_{C^k(\Omega)}\coloneqq\sum_{\abs{\bv{\alpha}}\le k}\norm{\partial^{\bv{\alpha}}f}_{C^0}(\Omega)$& &\\ \hline 
+ $C^\infty$& Lisce& & & &\\\hline
+ $C^\omega$& Analitiche& & & &\\\hline\hline
+ $C_c^0$& Cont. supp.comp.& & & &denso in $L^p$ se $p\in[0,+\infty)$\\\hline
+ $C_c^k$& & $C_c^k\coloneqq\{f\in C^k(\Omega)\mid \supp(f)\Subset\Omega\}$& & &\\\hline
+ $C_c^\infty(\Omega)$& Lisce supp.comp.& $C_c^\infty(\Omega)\coloneqq\bigcap_{k\ge0}C_c^k(\Omega)$& & &\\\hline
+ $C_0^k$& & svaniscono sul bordo& & &\\\hline\hline
+ $\mathcal{D}(\Omega)$&Test funzioni & $(C_c^{\infty},\mathcal{D}\text{-}\lim)$ & \shortstack{$f=\llim{n}{\mathcal{D}}f_n$ se \\ $\exists K\Subset \Omega\mid \supp(f_n)\subseteq K$ \\$\forall\bv{\alpha}:\norm{\partial^{\bv{\alpha}}f_n-\partial^{\bv{\alpha}}f}_{C^0(\Omega)}\limm{n}{\im}0$} & &\shortstack{$\mathcal{D}(\Omega)\inj\mathcal{E}(\Omega)$\\$\overline{\mathcal{D}(\Omega)}=\mathcal{E}(\Omega)$}\\ \hline 
+ $\mathcal{E}(\Omega)$& Test fun, per supp.comp.& $(C^{\infty},\mathcal{E}\text{-}\lim)$& \shortstack{$f=\llim{n}{\mathcal{E}}f_n$ se:\\ $\forall\bv{\alpha},K\Subset \Omega:\norm{\partial^{\bv{\alpha}}f_n-\partial^{\bv{\alpha}}f}_{C^0(K)}\limm{n}{\im}0$}& & \\ \hline 
+ $\mathcal{S}(\re^n)$& Sp. di Schwartz/rapida decres.& $(C^\infty(\re^n),\norm{\phi}_{\alpha,\beta}<+\infty\;\forall\bv{\alpha},\bv{\beta})$& \shortstack{$\norm{\phi}_{\alpha,\beta}\coloneqq\norm{x^{\bv{\alpha}}\partial^{\bv{\beta}}\phi(x)}_{C^0(\re^n)}$\\ (seminorma) \\
+ Conv. indotta: $f=\llim{n}{\mathcal{S}}f_n\iff$\\ $\forall\bv{\alpha},\bv{\beta}:\norm{f_n-f}_{\bv{\alpha},\bv{\beta}}\limm{n}{\im}0$} & &\\ \hline
+    \end{tabular}
+\end{table}
+\end{adjustwidth}
+
+
+\subsubsection{Spazi duali}
+\begin{adjustwidth}{}{-1cm}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|l|}\hline
+         Simbolo&  Nome&  Definizione& "Topologia"& Proprietà\\ \hline
+ $\mathcal{D}'(\Omega)$& Distribuzioni& \shortstack{Duale continuo di $\mathcal{D}(\Omega)$:\\
+ $f_n\limm{n}{\mathcal{D}}f\implies u(f_n)\limm{n}{\im}u(f)$}& \shortstack{Converg. (debole/distrib.):\\ $u=\llim{n}{\mathcal{D}'}u_n$ se \\$u_n(f)\limm{n}{\im}u(f)\quad\forall f\in \mathcal{D}(\Omega)$ \\($\sim$"puntuale")}&\shortstack{Caratteriz.: $u\in\mathcal{D}^*(\Omega)$, allora $u\in\mathcal{D}'(\Omega) \iff\forall K\Subset \Omega\;\exists c_K\in\re^+,k\in\na_0:$ \\ $ \abs{u(f)}\le c_K\norm{f}_{C^k(K)}\quad \forall f\in\mathcal{D}(\Omega)\mid\supp(f)\subseteq K$ } \\\hline
+ $\mathcal{E}'$& Distr. a supporto comp.& \shortstack{Duale continuo di $\mathcal{E}(\Omega)$: \\
+ $f_n\limm{n}{\mathcal{E}}f\implies u(f_n)\limm{n}{\im}u(f)$}& & \shortstack{Caratteriz.: $u\in\mathcal{E}^*(\Omega)$, allora $u\in\mathcal{E}'(\Omega) \iff\exists K\Subset \Omega, c_K\in\re^+,k\in\na_0:$ \\ $ \abs{u(f)}\le c_K\norm{f}_{C^k(K)}\quad \forall f\in\mathcal{E}(\Omega)$ \\ \\ $\mathcal{E}'(\Omega)\inj\mathcal{D}'(\Omega)$\\$\overline{\mathcal{E}'(\Omega)}=\mathcal{D}'(\Omega)$}\\\hline
+ $\mathcal{S}'$& Distr. temperate& \shortstack{Duale continuo di $\mathcal{S}(\re^n)$: \\
+ $f_n\limm{n}{\mathcal{S}}f\implies u(f_n)\limm{n}{\im}u(f)$}& & \shortstack{Caratteriz.: $u\in\mathcal{S}^*(\Omega)$, allora $u\in\mathcal{S}'(\Omega) \iff\forall f\in\mathcal{S}(\re^d)\;\exists c\in\re^+,k\in\na_0:$ \\ $ \abs{u(f)}\le c\norm{\phi}_{\alpha,\beta}\quad \abs{\alpha},\abs{\beta}\le k$ }\\\hline
+    \end{tabular}
+\end{table}
+\end{adjustwidth}
+\end{landscape}
+
+
+
+
+
+\end{document}
+

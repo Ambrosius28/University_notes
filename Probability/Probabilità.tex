@@ -1,0 +1,1446 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[italian]{babel} %Mette in italiano tutte le parole fisse di LaTeX (v. "TITOLO")
+\usepackage[utf8]{inputenc} %Gestisce i caratteri accentati
+\usepackage{comment} %Per  usare \begin{comment}
+\usepackage{amsmath} %cose matematiche
+\usepackage{amssymb} %cose matematiche
+\usepackage{mathrsfs} %per \mathscr
+\usepackage{dsfont} %per \mathds{1}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{units} %per \nicefrac{}{} 
+\usepackage{cancel} %per \cancel{}
+\usepackage{caption} %mettere le descrizioni
+\usepackage{graphicx} %Importare foto
+\usepackage{booktabs}
+\usepackage{geometry} %Per impostare i  margini del foglio
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+%\pagestyle{empty} %per togliere il numero della pagina
+\usepackage{xcolor} 
+\usepackage{empheq} 
+\usepackage{amsthm} 
+%\usepackage{enumitem} %Insieme  ai vari \renewcommand per fare elenchi coi numeri belli
+\usepackage[shortlabels]{enumitem}
+\usepackage{physics} %Per avere \nabla in grassetto
+\usepackage[most]{tcolorbox} %Box colorati teoremi
+\usepackage{mdframed}
+\usepackage{framed}
+\usepackage{color,soul} %per evidenziare con il comando highlight \hl
+\usepackage{hyperref} %per URL (con \url{}) e hyperlink
+
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+\newcommand{\bvec}{\textbf} %per scrivere i vettori in  grassetto usare \bvec
+\newcommand{\myth}{\normalfont \scshape \textcolor{red}} %mio modo custom di mettere teoremi/lemmi/proposizioni
+\newcommand{\ssubset}{\subseteq}
+
+\newcommand{\re}{\mathbb{R}} %numeri reali
+\newcommand{\pr}{\text{I\kern-0.15em P}} %probabilità
+\newcommand{\ex}{\mathbb{E}} %operatore valore atteso/media
+\newcommand{\om}{\Omega} %spazio campionario
+\newcommand{\F}{\mathcal{F}} %%sigma algebra, famiglia degli eventi
+\newcommand{\myeq}[1]{\stackrel{\mathclap{\normalfont\mbox{\tiny{#1}}}}{=}} %scrivere soppra all'uguale con \myeq{<cosa voglio scrivere>}
+
+\newtheorem*{defin}{Definizione}
+\newtheorem*{cor}{Corollario}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{theorem}{Teorema}
+\newtheorem*{prop}{Proposizione}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Osservazione}
+
+\theoremstyle{definition}
+\newenvironment{myproof}[1][\proofname]{%
+  \begin{proof}[#1]$ $\\ \nobreak\ignorespaces
+}{%
+  \end{proof}
+}
+
+\makeatletter                          %pper avere titolo del teorema 
+\def\th@plain{%
+  \thm@notefont{}% same as heading font
+  \itshape % body font
+}
+\def\th@definition{%
+  \thm@notefont{}% same as heading font
+  \normalfont % body font
+}
+\makeatother
+
+\newmdenv[
+  topline=false,
+  bottomline=false,
+  rightline=false,
+]{siderule}
+
+\tcolorboxenvironment{theorem}{
+enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+\tcolorboxenvironment{prop}{
+enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+\tcolorboxenvironment{lem}{
+enhanced jigsaw,colframe=black,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+\newenvironment{dimo}{\begin{quote}\textbf{Dimostrazione.}}{\end{quote}} %dimostrazione con indentatura
+
+
+
+%\tcolorboxenvironment{eq}{
+%enhanced jigsaw,colframe=orange,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{defin}{
+%enhanced jigsaw,colframe=cyan,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+%\tcolorboxenvironment{prop}{
+%enhanced jigsaw,colframe=yellow,interior hidden, breakable,before skip=10pt,after skip=10pt }
+
+
+\title{Probabilità}
+\author{Marco Ambrogio Bergamo}
+\date{Anno 2023-2024}
+
+\begin{document}
+\maketitle
+
+
+
+\part{Teoria della misura}
+\begin{description}
+    \item[Algebra] Sia  $E$ un insieme e $\mathcal{A}\subset \mathcal{P}(E)$ una famiglia di sottoinsiemi.  $\mathcal{A}$ è un'algebra se è chiusa rispetto al complementare, unioni \textbf{finite} e intersezioni \textbf{finite}. \\
+    Per dimostrare che è  un'algebra verificare le 3 prop.:
+      \begin{enumerate}
+        \item $\emptyset \in \mathcal{A}$ oppure $E \in \mathcal{A}$
+        \item $A,B\in \mathcal{A} \implies A \cup B \in \mathcal{A}$
+        \item $A\in \mathcal{A} \implies A^C \in \mathcal{A}$ 
+    \end{enumerate}
+    \item[$\sigma$-algebra] Sia  $E$ un insieme e $\mathcal{S}\subset \mathcal{P}(E)$ (famiglia delle parti).  $\mathcal{S}$ è una $\sigma$-algebra se è chiuso rispetto al complementare, unioni \textbf{infinite numerabili} e intersezioni \textbf{infinite numerabili}.
+    \item[Spazio misurabile] È la coppia $(E, \mathcal{S})$ dove $\mathcal{S}$ è una $\sigma$-algebra su $E$.
+    \item[$\sigma$-algebra generata da $\mathcal{C}$] Si indica con $\sigma(\mathcal{C})$ ed è la più piccola $\sigma$-algebra contenente  $\mathcal{C}$, ovvero l'intersezione di tutte le $\sigma$-algebra contenenti $\mathcal{C}$.
+    \item[$\sigma$-algebra di Borel] Si indica con $\mathcal{B}(\mathbb{R}^n)$ ed è la  $\sigma$-algebra generata dalla famiglia degli aperti di $\mathbb{R}^n$, ovvero dalla topologia. È quindi  $\sigma(\mathcal{T})$.
+    \item[Classe monotona] È una famiglia $\mathcal{M}\subset \mathcal{P}(E)$ tale che:
+    \begin{itemize}
+        \item[(M1)] $E\in \mathcal{M}$
+        \item[(M2)]  $A,B\in \mathcal{M}$ e $A\subset B \implies B\setminus A \in \mathcal{M}$
+        \item[(M3)] è stabile per limite crescente, ovvero $(A_n)_n$ successione di insiemi crescenti  contenuti in $\mathcal{M} \implies A=\bigcup A_n \subset \mathcal{M}$
+    \end{itemize}
+    \item[\myth{Teorema delle classi monotone}] Sia $\mathcal{A}$ una famiglia di insiemi stabile per \textbf{intersezioni finite} e sia $\mathcal{M}$ una classe monotona contenente $\mathcal{C}$. Allora $\sigma (\mathcal{C})\subset \mathcal{M}$.
+    \item[Funzione misurabile] Un'applicazione $f: (E_1, \mathcal{S}_1) \to (E_2, \mathcal{S}_2)$ tra spazi misurabili si dice misurabile se  $\forall A \in \mathcal{S}_2  \implies f^{-1}(A) \in \mathcal{S}_1$. \\
+    In realtà basta verificare questa proprietà $\forall A \subset \mathcal{C} \mid \sigma (\mathcal{C})= \mathcal{S}$, quindi nel caso $\mathcal{S}_2$ sia su uno sp. topologico, basta verificare la proprietà sugli aperti di $E_2$.
+
+    \item[\myth{Lemma}] Perché una funzione $f: (E, \mathcal{S}) \to \mathbb{R}$ sia misurabile, basta che $f^{-1}((-\infty,a])\in\mathcal{S}$ per ogni $a\in\mathbb{R}$. \\
+    MOLTO IMPORTANTE per def. di variabile aleatoria.
+
+    \item[Misura] Una misura su $(E, \mathcal{S})$, sp. misurabile, è un'applicazione $\mu : \mathcal{S} \to \overline{\mathbb{R}^+}$ tale che:
+    \begin{enumerate}
+        \item $\mu (\emptyset)=0$
+        \item per ogni successione  $(A_n)_n$ di insiemi a due a due disgiunti vale: $\mu (\cup_{n\ge 1} A_n)=\sum\mu(A_n)$
+   \end{enumerate}
+   \begin{description}
+       \item[finita] se  $\mu  (E) < +\infty$ 
+       \item[$\sigma$-finita]
+       \item[\hl{di probabilità}] se  $\mu  (E)=1$
+   \end{description}
+   \item[Spazio di misura] È la tripla $(E, \mathcal{S}, \mu)$ 
+    
+\end{description}
+
+\newpage
+
+\part{Eventi e loro probabilità}
+\section*{Definizioni}
+\begin{description}
+    \item[Spazio campionario]$\Omega=$ Insieme dei casi elementari di un esperimento
+    \begin{description}
+        \item[Casi elementari] $\omega \in \Omega$
+        \item[Eventi] $A\ssubset\Omega$ (appartengono alla $\sigma$-algebra)
+    \end{description}
+    \item[Famiglia di eventi] Si indica con $\mathcal{F}$ ed è una $\sigma$-algebra su $\Omega$, ovvero:
+    \begin{enumerate}
+        \item $\emptyset \in \mathcal{F}$
+        \item $A_1,A_2...\in \mathcal{F} \implies \bigcup_{i=1}^\infty A_i \in \mathcal{F}$
+        \item $A\in \mathcal{F} \implies A^C \in \mathcal{F}$ 
+    \end{enumerate}
+    È quindi la famiglia di sottoinsiemi di $\Omega$, che sono i possibili "eventi composti". 
+
+\item[Probabilità]  Dato un insieme $\Omega$ e un'algebra di parti $\mathcal{A}$ (NON una $\sigma$-algebra), la probabilità è una funzione $\pr:\mathcal{A}\to [0,1]$ tale che
+    \begin{itemize}
+        \item[(P1)] $\mathbb{P}(\Omega)=1$
+        \item[(P2)] $\forall E_1,E_2\in \mathcal{A} \mid E_1\cap E_2 = \emptyset\implies \mathbb{P}(E_2\cup E_2)=\pr(E_1)+\pr(E_2)$
+    \end{itemize}
+    
+    \item[Misura di probabilità] Come probabilità \textbf{ma con $\pmb{\sigma}$-additività}. $\mathbb{P}$ su $(\Omega, \mathcal{F})$ con $\mathcal{F}$ una $\sigma$-algebra è  una funzione $\mathbb{P}: \mathcal{F} \to [0, 1]$ tale che:
+    \begin{itemize}
+        \item[(P1)] $\mathbb{P}(\emptyset)=0, \quad \mathbb{P}(\Omega)=1$
+        \item[(P2)] $A_1,A_2...\in \mathcal{F}$ \textbf{disgiunti}, ovvero $A_i \cap A_j =0 \quad \forall i,j$ $\implies \mathbb{P}(\cup_{i=1}^\infty A_i)=\sum_{i=1}^\infty \mathbb{P}(A_i)$
+    \end{itemize}
+    
+    
+    \item[\myth{Teorema (di continuità della misura di prob.)}] Vale:
+    \begin{itemize}
+        \item Se $A_1 \ssubset A_2 \ssubset A_3 \ssubset \dotsm$  e $A\coloneqq\cup_{i=1}^\infty A_i=\lim_{i \to \infty}A_i \implies \pr(A)=\lim_{i \to \infty}\pr (A_i)$
+        \item Se $B_1 \supseteq B_2 \supseteq B_3 \supseteq \dotsm$  e $B\coloneqq\cap_{i=1}^\infty B_i=\lim_{i \to \infty}B_i \implies \pr(B)=\lim_{i \to \infty}\pr (B_i)$
+    \end{itemize}
+   
+    \item[Probabilità condizionata] Se $\pr(B)\ne 0$ allora la probabilità che avvenga $A$ sapendo che è avvenuto $B$ è \[\pr(A\mid B)= \frac{\pr(A \cap B)}{\pr(B)}\] Quindi più la probabilità che avvenga $B$ è grande, più quella che poi avvenga $A$ è piccola, a parità di intersezione. Arriviamo a questo risultato da due necessità: logicamente la probabilità di $A$ dato $B$ deve essere proporzionale alla loro intersezione, in secondo luogo $\pr (\om \mid B)$  deve fare 1, quindi scaliamo l'intersezione per $1/\pr (B)$ essendo $\om \cap B=B$.
+   
+    \item[\myth{Teorema (delle prob. totali / della partizione per le prob.)}] $\forall A,B \mid 0<\pr(B)<1 :$ \[ \pr(A)=\pr(A\mid B)\pr(B)+\pr(A\mid B^C)\pr(B^C)\]
+    In generale, se $B_1,\dots,B_n$ una partizione di $\om \mid \pr(B_i)>0$ allora: \[ \pr(A)=\sum_{i=1}^n \pr(A\mid B_i)\pr(B_i)\]
+   
+    \item[\myth{Teorema (di Bayes)}] $\pr(A \mid B)=\frac{\pr(B \mid A)\pr(A)}{\pr(B)}, \quad$ con $\pr(B),\pr(A)>0$
+
+    \item[Eventi indipendenti] Per una coppia di eventi vale: $A$ e $B$ sono indipendenti se $\pr(A\mid B)=\pr(A)$, ovvero se \[\pr(A\cap B)=\pr(A)\pr(B)\]
+    Per una famiglia di eventi ci sono due tipi di indipendenza:
+      \begin{itemize}
+        \item \textbf{indipendenza a coppie:} Una famiglia $\{A_i:i\in I\}$ lo è se $\pr(A_i\cap A_j)=\pr(A_i)\pr(A_j)$ per ogni $i \ne j$. \\
+    Ciò non implica che la famiglia è indipendente.
+        \item \textbf{(mutua) indipendenza:}  In generale, una famiglia $\{A_i:i\in I\}$ è indipendente se
+    \[\pr(\bigcap_{i\in J}A_i)=\prod_{i \in J}\pr(A_i)\]
+    per ogni sottoinsieme finito $J$ di $I$, ovvero per tutte le $i$-uple di indici, dove $2\le i\le \# I$
+    \end{itemize}
+   
+
+
+    \item[Indipendenza condizionata] $A$ e $B$ sono indipendenti dato $C$ (con $\pr(C)>0$) se \\
+    $\pr(A\cap B \mid C)=\pr(A\mid C)\cdot \pr(B \mid C)$
+
+    \item[Spazio di prob. completo] $(\om, \mathcal{F}, \pr)$ lo è se ogni sottoinsieme di ogni evento nullo ($A\in \mathcal{F} \mid \pr(A)=0)$ è a sua volta un evento ($\in \mathcal{F})$. \\
+    Ogni spazio non completo può essere completato: se $\mathcal{N}$ è la famiglia di tutti  i sottoinsiemi degli eventi ($\in \mathcal{F}$) nulli, allora $\mathcal{G}=\sigma(\mathcal{F}\cup\mathcal{N})$ è la più piccola $\sigma$-algebra che contiene le due famiglie. $(\om, \mathcal{G}, \pr)$ è il \textbf{completamento} di $(\om, \mathcal{F}, \pr)$.
+
+    \item[Spazio prodotto] Abbiamo due (o più) esperimenti con rispettivi spazi di prob. $(\om_1, \mathcal{F}_1, \pr_1)$ e $(\om_2, \mathcal{F}_2, \pr_2)$. Consideriamo il nuovo spazio di probabilità sul nuovo esperimento che consiste nel fare la coppia (disgiunta) di esperimenti. Esso è $(\om_1 \times \om_2, \mathcal{G}, \pr_{12})$ dove:
+    \begin{itemize}
+        \item Spazio degli eventi: è il prodotto cartesiano $\om_1 \times \om_2$, ovvero le 2-uple di eventi elementari.
+        \item $\sigma$-algebra: $\mathcal{G}=\sigma(\mathcal{F}_1 \times \mathcal{F}_2)$ (in generale il prodotto da solo non è una $\sigma$-algebra). Quindi contiene sicuramente gli insiemi del tipo $\{A_1 \times A_2 \mid A_1 \in \mathcal{F}_1, A_2\in\mathcal{F}_2\}$
+        \item Misura di probabilità: $\pr_{12}: \mathcal{F}_1 \times \mathcal{F}_2 \to [0,1] \quad \mid \quad \pr_{12}(A_1 \times A_2)=\pr_1(A_1)\pr_2(A_2)$
+    \end{itemize}
+\end{description}
+
+
+
+\section*{Teoremi}
+\subsection{Probabilità del complementare}
+$$\pr (E^C)=1-\pr(E)$$
+\begin{dimo}
+    $1=\pr(\Omega)=\pr(E\cup E^C)\overset{\star}{=}\pr(E)+\pr(E^C) \implies$ tesi \\
+    $\star=$ essendo $E\cap E^C=0$, per secondo assioma della def. di prob.
+\end{dimo}
+
+\subsection{Decomposizione della probabilità di un evento}
+$$\pr(E_1)=\pr(E_1\setminus E_2)+\pr(E_1\cap E_2)$$
+
+\begin{dimo}
+    $$
+    \begin{cases}
+        (E_1\setminus E_2)\cap (E_1 \cap E_2) = \emptyset\\
+        (E_1\setminus E_2) \cup (E_1\cap E_2) = E_1
+    \end{cases}
+    \overset{def.prob}{\implies} \pr(E_1)= \pr((E_1\setminus E_2)\cup (E_1\cap E_2))= \pr(E_1\setminus E_2) + \pr(E_1\cap E_2)
+ $$
+ $\implies$ tesi
+\end{dimo}
+
+\subsection{Monotonia della prob.}
+$$E_2\subseteq E_1 \implies \pr(E_1) \le \pr(E_2)$$
+
+\begin{dimo}
+    \begin{itemize}
+        \item applicare decompos. delle prob. a questi due eventi: $\pr(E_1)=\pr(E_1\setminus E_2) + \pr(\overbrace{E_1\cap E_2}^{=E_2})$
+        \item La prob. è sempre positiva
+    \end{itemize}
+    $\implies$ tesi
+\end{dimo}
+
+\subsection{Estensione del secondo assioma}
+Se $A_i \cap A_j =0 \quad \forall i,j$, allora
+$$\mathbb{P}(\cup_{i=1}^n A_i)=\sum_{i=1}^n \mathbb{P}(A_i)$$
+\begin{dimo}
+    \begin{itemize}
+        \item Per induzione: prima $n=2$, poi $n \implies n+1$
+        \item Definire $A$ l'unione da 1 a $n$ e B l'evento $n+1$-esimo e usare prima il secondo assioma per $A$ e $B$, poi ip. induttiva.
+    \end{itemize}
+\end{dimo}
+
+\subsection{Probabilità dell'unione qualsiasi}
+$$\pr(A \cup B) = \pr (A)+\pr(B) -\pr(A\cap B)$$
+
+\begin{dimo}
+    \begin{itemize}
+        \item $A\setminus B, B\setminus A,A\cap B$ sono a due a due disgiunti, quindi la prob di $A\cup B$ è la somma delle tre prob.
+        \item sostituire la prob. della differenza con decomposizione della prob. e si ottiene il risultato
+    \end{itemize}
+\end{dimo}
+
+\subsection{Disuguaglianza di Boole}
+$$\mathbb{P}(\cup_{i=1}^n A_i)\le\sum_{i=1}^n \mathbb{P}(A_i)$$
+\begin{dimo}
+    Per induzione, procedere come in estensione del secondo assioma
+\end{dimo}
+
+\subsection{Principio di inclusione-esclusione}
+  \[\pr (\bigcup_{i=1}^n E_i) = \sum_i \pr(E_i)-\sum_{i<j}\pr(E_i\cap E_j)+\sum_{i<j<k}\pr(E_i\cap E_j \cap E_k)-\dotsm+(-1)^{n+1}\pr (E_1\cap E_2 \cap \dotsm \cap E_n)\]
+
+  \begin{dimo}
+         \begin{itemize}
+        \item Per induzione: prima $n=2$, poi $n \implies n+1$
+        \item Definire $A$ l'unione da 1 a $n$ e B l'evento $n+1$-esimo
+        \item \textcolor{blue}{$\pr(\cup_{i=1}^{n+1})=\pr(A\cup B) = \pr (A)+\underbrace{\pr(B)}_{(1)} -\pr(A\cap B)$} 
+        \item Applicare passo induttivo a $\pr(A)$:
+          \[\pr (A) = \underbrace{\sum_{i=1}^n \pr(E_i)}_{(1)}\underbrace{-\sum_{1\le i<j\le n}\pr(E_i\cap E_j)}_{(2)}\underbrace{+\sum_{1\le i<j<k\le n}\pr(E_i\cap E_j \cap E_k)}_{(3)}-\dotsm+(-1)^{n+1}\pr (\cap_{i=1}^n E_i)\]
+
+        \item Osservare che $A\cap B =\cup_{i=1}^{n}(\overbrace{E_i\cap E_{n+1}}^{\coloneqq F_i})$ per prop. distributiva
+        \item Applicare di nuovo passo induttivo a $A\cap B =\cup_{i=1}^{n}(F_i)$:
+         \[\pr (A\cap B) = \underbrace{\sum_{i=1}^n \pr(F_i)}_{(2)}\underbrace{-\sum_{1\le i<j\le n}\pr(F_i\cap F_j)}_{(3)}+\sum_{1\le i<j<k\le n}\pr(F_i\cap F_j \cap F_k)-\dotsm+\underbrace{(-1)^{n+1}\pr (\cap_{i=1}^n F_i)}_{\cdot (-1) = (-1)^{n+2}\pr(\cap_{i=1}^{n+1}E_i)}\]
+         \item Mettere tutto in quella \textcolor{blue}{blu}, sommando $(1)$ con  $(1)$, sottraendo  $(2)$ con  $(2)$ ... l'addendo $j$-esimo della prima meno l'addendo $(j-1)$-esimo della seconda (diventano uguali alla tesi ma con $n+1$) e ricordando come cambia segno l'ultimo addendo della seconda, ottengo la tesi con $n+1$
+    \end{itemize}
+  \end{dimo}
+
+  
+\subsection*{Formula delle probabilità totali (prima versione)}
+
+$\left\{ B_{1},B_{2},\ldots,B_{n}\right\} \text{ partizione }\Longrightarrow P\left(E\right)=\sum_{i=1}^{n}P\left(E\cap B_{i}\right)$
+
+\begin{dimo}
+    Notare che $E=\cup_{i=1}^n(E\cap B_i)$ e che tutti questi eventi sono a due a due disgiunti. Tesi segue dall'estensione del secondo assioma.
+\end{dimo}
+
+\subsection*{Formula di Bayes (versione semplice)}
+
+$P\left(A|B\right)=\frac{P\left(B|A\right)\cdot P\left(A\right)}{P\left(B\right)}$
+
+\begin{dimo}
+    Basta applicare la def. di prob condizionale e poi al numeratore scriverla al contrario per $B\cap A$
+\end{dimo}
+
+\subsection*{Formula delle probabilità totali (seconda versione)}
+
+$\left\{ B_{1},B_{2},\ldots,B_{n}\right\} \text{ partizione }\Longrightarrow P\left(E\right)=\sum_{i=1}^{n}P\left(E|B_{i}\right)\cdot P\left(B_{i}\right)$
+
+\begin{dimo}
+    Basta applicare la prima versione e poi la def. girata di prob. condizionata
+\end{dimo}
+
+\subsection*{Formula di Bayes (versione estesa)}
+
+$\left\{ B_{1},B_{2},\ldots,B_{n}\right\} \text{ partizione }\Longrightarrow P\left(B_{i}|E\right)=\frac{P\left(E|B_{i}\right)\cdot P\left(B_{i}\right)}{\sum_{k=1}^{n}P\left(E|B_{k}\right)\cdot P\left(B_{k}\right)}$
+
+\begin{dimo}
+    Applicare Bayes a $P(B_i\mid E)$ e formula prob. totali a $P(E)$
+\end{dimo}
+
+\subsection*{Caratterizzazione dell\textquoteright indipendenza mediante condizionamento}
+
+$P\left(A|B\right)=P\left(A\right)$
+
+\begin{dimo}
+    Applicare def. di prob. condizionata e di eventi indip.
+\end{dimo}
+
+\subsection*{Conseguenza dell'indipendenza tra due eventi}
+$E_1,E_2$ indipendenti $\implies E_1^C,E_2$ indipendenti (e tutte le altre combinazioni di complementare o non).
+
+\begin{dimo}
+    $\pr( E_1^C\cap E_2)=\pr(E_2\setminus E_1)=\pr(E_2)-\pr(E_1\cap E_2)\overset{indip}{=}\pr(E_2)(1-\pr(E_!))=\pr(E_2)\pr(E_1^C) \implies $ tesi
+\end{dimo}
+
+\subsection*{Conseguenza della mutua indipendenza tra una famiglia di eventi}
+Se $E_1, \dots,E_n\in\mathcal{A}$ eventi mutualmente indipendenti $\implies$ lo sono anche
+\begin{enumerate}
+    \item $E_1^{\alpha_1}, \dots,E_n^{\alpha_n} \quad \forall \alpha_i \in \{0,1\}$ che rappresentano niente (1) o complementare (0)
+    \item $F_1,\dots,F_k$ con $F_j=\cap_{i \in I_j}E_i$ dove $I_1 \dots I_k$ è una partizione di $\{1,\dots,n\}$
+    \item $G_1,\dots,G_k$ con $F_j=\cup_{i \in I_j}E_i$ dove $I_1 \dots I_k$ è una partizione di $\{1,\dots,n\}$
+\end{enumerate}
+
+\begin{dimo}
+    \begin{enumerate}
+        \item Per induzione sul numero dei complementari. \\
+        $k=1$: pongo $\alpha_n=0$ e tutti gli altri =1. Fisso $I\subseteq \{1\dots n\} =\{i_1 \dots i_k,n\}$ (se non contenesse $n$ nulla da dim), faccio $$\pr(\underbrace{E_{i_1}\cap \dots \cap E_{i_k}}_{\coloneqq B}\cap E_n^C)=\pr(B\cap E^C)$$
+        ed è analogo al caso di due eventi visto sopra. Ciò vale per ogni scelta di $I$, quindi tesi. \\
+        $k \implies k+1:$ vogliamo dimostrare $E_1^C \dots E_k^C,E_{k+1}\dots E_n$ mutual. indip. $\implies E_1^C \dots E_k^C,E_{k+1}^C\dots E_n$ mutual. indip. per ogni scelta di $I\subseteq \{1\dots n\}$. Non è restrittivo metterci nel caso $I= \{1\dots n\}$, quindi:
+        $$\pr(E_1^C\cap\dots\cap E_{k+1}^C\cap E_{k+2}\cap\dots\cap E_n)=\pr(B\cap E_{k+1}^C)$$
+        avendo rinominato tutto con $B$. Seguiamo i passaggi di prima (=sottrazione degli eventi ecc) e applichiamo ipotesi induttiva.
+        \item facile, l'intersez. degli $F_j$ è l'intersezione di tutti gli $E_i$ ma intersecati a gruppetti.
+        \item Dimostrazione in un caso particolare: $k=2$ e $G_1=\cup_{i=1}^{n-1}E_i, \quad G_2=E_n$. Devo dim. che $P(G_1\cap G_2)$ è il prodotto delle prob. Scrivere primo membro mettendo tutto nell'unione, poi applicare principio di inclusione-esclusione ...
+    \end{enumerate}
+\end{dimo}
+
+\pagebreak
+\part{Modelli probabilistici}
+\section{Probabilità su un insieme finito}
+\begin{description}
+    \item[Spazio degli eventi] $\#\Omega=N<+\infty$
+    \item[Algebra] $\mathcal{A}=\mathscr{P}(\Omega)$
+    \item[Simplesso N-1 dimensionale] $\Delta_{N-1}$ vettore di $N$ dimensioni che ha per componenti le probabilità degli $N$ casi elementari $\omega_i$. Ha un grado di libertà in meno ($N-1$ gradi di libertà) poiché c'è il vincolo che la somma delle componenti deve essere =1, quindi l'ultimo termine è determinato dai primi $N-1$.
+    \item[\myth{Teorema}] Eiste corrispondenza biunivoca tra le probabilità su $\Omega$ e i punti di $\Delta_{N-1}$ 
+\end{description}
+
+\subsection{Modello uniforme}
+\begin{description}
+    \item[Definizione]
+    \item[\myth{Oss.}]  $P(E)=\frac{\#E}{\#\Omega}$
+    \item[Entropia] 
+\end{description}
+
+\subsection{Modello ipergeometrico}
+Urna con $N$ palline, di cui $B$ bianche e $R$ rosse ($B+R=N$)
+\subsubsection*{\hl{Approccio statico}}
+\begin{itemize}
+    \item estrazione in blocco di $n\le N$ palline (senza reimmissione)
+    \item \textbf{numero} tutte le palline da 1 a $N$ (le rendo tutte distinte) e dopo l'estrazione non mi interessa dell'ordine, quindi assumo di ordinarle in ordine crescente, ottenendo un vettore dell'estrazione.
+\end{itemize}
+\begin{description}
+    \item[Spazio degli eventi] $\Omega=\{(i_1 \dots i_n) \in \{1 \dots N\}^n \mid i_1<i_2<\dots<i_n\}$. $\#\Omega=\binom{N}{n}$
+    \item[Algebra] $\mathcal{A}=\mathscr{P}(\Omega)$
+    \item[Probabilità] scegliamo una prob. uniforme su $\Omega \implies P(\omega)=\frac{1}{\#\Omega}=\frac{1}{\binom{N}{n}}$ 
+    \item[Evento di interesse] $E_b =$ "nella $n$-upla di palline estratte ce ne sono esattamente $b$ bianche e $r=n-b$ rosse"
+\end{description}
+Troviamo che:
+$$P(E_b)=\frac{\#E_b}{\#\Omega}= \frac{\binom{B}{b}\binom{R}{r}}{\binom{N}{n}}$$
+\begin{dimo}
+    Devo dimostrare che i due numeratori hanno stessa cardinalità. In due passaggi:
+    \begin{enumerate}
+        \item $E_b \overset{biuniv.}{\longleftrightarrow} S(B,b)\times S(R,r)$ dove $S(N,n)$ sono tutti i sottoinsiemi di $\{1\dots N\}$ contenenti $n$ oggetti. Lo faccio costruendo una funzione biunivoca tra i due insiemi.
+        \item uso principio fondamentale dell calcolo combinatorio: $\#(A\times B)=\#A\cdot\#B$
+    \end{enumerate}
+\end{dimo}
+
+
+\subsubsection*{\hl{Approccio dinamico}} 
+\begin{itemize}
+    \item palline \textbf{non numerate}
+    \item ne estraggo una ad una senza reimmissione, ogni volta scrivendo 1 se bianca, 0 se rossa.
+\end{itemize}
+\begin{description}
+    \item[Spazio degli eventi] $\Omega=\{0,1\}^n=\{(x_1,\dots,x_n) \mid x_i\in \{0,1\}\}$. $\#\Omega=2^n$
+    \item[Algebra] $\mathcal{A}=\mathscr{P}(\Omega)$
+    \item[Evento considerati] $A_i=$ "esce palla bianca all'$i$-esima estrazione" $=\{\omega = (x_1,\dots,x_n)\in \Omega \mid x_i=1\}$
+    \item[Probabilità] deve soddisfare:
+    \begin{enumerate}
+        \item $P(A_1)=\frac{B}{N}$
+        \item $P(A_{k+1} \mid A_1^{\alpha_1}\cap\dots\cap A_k^{\alpha_k})= \frac{B-s_k}{N-k} $ dove $s_k=\sum_{i=1}^k\alpha_i=$ numero di bianche estratte delle $k$ estrazioni precedenti.
+    \end{enumerate}
+    \item[Evento di interesse] $E_b =$ "nella $n$-upla di palline estratte ce ne sono esattamente $b$ bianche e $r=n-b$ rosse" 
+    $$=\bigcup_{(\alpha_1 \dots \alpha_n)\mid\sum\alpha_i=b}A_1^{\alpha_1}\cap\dots\cap A_k^{\alpha_k}$$
+    Il numero di vettori di $\alpha_i$ che soddisfano tale somma è $\binom{n}{b}$ in quanto contengono solo 0 e 1.
+\end{description}
+Troviamo che la prob. è la stessa
+\begin{dimo}
+    \begin{enumerate}
+        \item Ricostruire $E_b$ in termini degli $A_i$. Per induzione sul numero $n$ di estrazioni.
+        \item notare che l'unione è di eventi disgiunti.
+    \end{enumerate}
+\end{dimo}
+
+\section{Modello di Bernoulli}
+Vederlo come l'ipergeometrico dinamico, ma con mutua idipendenza degli $A_i$ (senza reimmissione).
+\begin{description}
+    \item[Spazio degli eventi] $\Omega=\{0,1\}^n=\{(x_1,\dots,x_n) \mid x_i\in \{0,1\}\}$. $\#\Omega=2^n$
+    \item[Algebra] $\mathcal{A}=\mathscr{P}(\Omega)$
+    \item[Evento considerati] $A_i=$ "esce palla bianca all'$i$-esima estrazione" $=\{\omega = (x_1,\dots,x_n)\in \Omega \mid x_i=1\}$
+    \item[Probabilità] pongo $p\coloneqq \frac{B}{N}\in(0,1)$ e la prob. è caratterizzata da una delle prossime:
+    \begin{itemize}
+        \item $p=P(A_1)=P(A_{k+1} \mid A_1^{\alpha_1}\cap\dots\cap A_k^{\alpha_k}) \quad \forall k,\alpha_i$
+        \item $P(A_i)=p \quad \forall i$ e $A_i$ sono mutualmente indip.
+    \end{itemize}
+    \begin{dimo}
+        (dell'equivalenza)
+    \end{dimo}
+    \item[Evento di interesse] $E_b =$ "nella $n$-upla di palline estratte ce ne sono esattamente $b$ bianche e $r=n-b$ rosse" 
+    $$=\bigcup_{(\alpha_1 \dots \alpha_n)\mid\sum\alpha_i=b}A_1^{\alpha_1}\cap\dots\cap A_k^{\alpha_k}$$
+    \end{description}
+    Si trova che:
+    $$\pr(E_b)=\binom{n}{b}p^b(1-p)^{n-b}$$
+    \begin{dimo}
+        Scrivere $E_b$ in termini di $A_i$, notare che è unione disgiunta, usare indipendenza e ricordare che  il numero di vettori di $\alpha_i$ che soddisfano tale somma (=b) è $\binom{n}{b}$ in quanto contengono solo 0 e 1.
+    \end{dimo}
+
+
+\section{Probabilità su insieme discreto infinito (costruzione Bernoulli infinito)}
+Consideriamo una successione infinita di esperimenti di Bernoulli, ovvero solo due esiti: \textbf{successo (=1) e insuccesso (=0)}. 
+\vspace{\baselineskip}
+\begin{description}
+    \item[Spazio di probabilità] $\Omega=\{0,1\}^\infty=\{\omega=(x_1,x_2,\dots) \mid x_i\in\{0,1\} \, \forall i\in\mathbb{N}\}$ \\
+    Insieme di tutte le successioni di 0 e 1. $\Omega$ ha cardinalità \textbf{infinita non numerabile}.
+    \item[Eventi] $A_k=$ "successo alla $k$-esima prova" $=\{\omega \in \Omega \mid x_k=1\}$ \\
+    Insieme delle successioni il cui $k$-esimo elemento è 1
+\end{description}
+
+\vspace{\baselineskip}
+
+Vogliamo costruire su $\Omega$:
+\begin{itemize}
+    \item un'\textbf{algebra} $\mathcal{A}$ che contenga tutti gli $A_k$
+    \item una \textbf{probabilità} $\pr: \mathcal{A} \to [0,1]$ che sia come nello schema di Bernoulli finito, ovvero che ci sia distribuzione uniforme sugli $A_k$ e che tali eventi siano tutti mutualmente indipendenti.
+\end{itemize}
+$\implies$ algebra dei cilindri
+
+
+\subsection*{Algebra dei cilindri}
+\begin{itemize}
+\item $n$-cilindro di base $B^{(n)}$: $C_{n}(B^{(n)})\coloneqq\{ \omega=(x_{1},x_{2},\dots)\in\Omega\,|\,(x_{1},\dots,x_{n})\in B^{(n)}\} $
+con $B^{(n)}\in\mathscr{P}(\{ 0,1\} ^{n})$, $n\in\mathbb{N}$ \\
+Se $B^{(n)} \in \{0,1\}^n$, ovvero se la base è un solo vettore, il cilindro sono le successioni di zeri e uno con le prime $n$ coordinate fisse ed uguali, ovvero tolgo $n$ gradi di libertà ("cilindro base"). Se invece la base appartiene alle parti di $\{0,1\}^n$ abbiamo che la base è un insieme di vettori, quindi il cilindro è un insieme di "cilindri base". \\
+\hl{Pensare un cilindro come a un array/tabella di successioni}, con infinite righe (ogni colonna ha i primi $n$ termini uguali) e al più $2^n$ colonne, che è la cardinalità massima di $\{0,1\}^n$, ovvero se la base è tutto  $\{0,1\}^n$ (ovvero tutti i vettori possibili di $n$ dimensioni di 0 e 1).
+\item Algebra degli $n$-cilindri: $\mathscr{C}_{n}\coloneqq\{ C_{n}(B^{(n)})\,|\,B^{(n)}\in\mathscr{P}(\{ 0,1\} ^{n})\} $,
+da cui $\mathscr{C}_{1}\subset\mathscr{C}_{2}\subset\dots$
+
+\begin{dimo}
+    ($\mathscr{C}_{n}$ è un'algebra) Per dire che è un'algebra devo verificare le 3 proprietà:
+    \begin{itemize}
+        \item $\Omega\in\mathscr{C}$ sì, infatti $\Omega=C_n(\{0,1\}^n)$, ovvero l'insieme di tutte le successioni con i primi $n$ termini fissati, ma per tutti i possibili vettori di $n$ termini (è un cilindro poiché $\{0,1\}^n \in \mathscr{P}(\{0,1\}^n$)
+        \item complementare: $(C_n(B^{(n)}))^C=C_n((B^{(n)})^C)$ ma anche questo è un cilindro poiché $(B^{(n)})^C \in \mathscr{P}(\{0,1\}^n)$
+        \item unione: come sopra
+    \end{itemize}
+    Per vedere che $\mathscr C_n \subset \mathscr C_{n+1} $ osservare che $C_n(B^{(n)}) = C_{n+1}(B^{(n)}\times \{0,1\})$
+\end{dimo}
+
+\item Algebra dei cilindri: $\mathscr{C}\coloneqq\bigcup_{n=1}^\infty\mathscr{C}_{n}$
+
+\begin{dimo}
+   ($\mathscr{C}$ è un'algebra) Classico ragionamento per dimostrare algebre di unioni infinite di algebre, ovvero che se un elemento sta in $\mathscr{C} \implies $ sta in un qualche $\mathscr{C}_n$ per def di $\mathscr{C}$.
+\end{dimo}
+
+\begin{dimo}
+    ($\mathscr{C}$ non è una $\sigma$-algebra) Basta mostrare che, se $A_k=\{\omega =(x_1,x_2,\dots) \in \Omega \mid x_k=1\}$, allora $\cap_{k=1}^\infty A_k=(1,1,\dots)\notin \mathscr{C}$ in quanto ogni cilindro è un numero infinito di successioni (vedi rappresentazione in array/tabella dei cilindri, che ha sempre infinite righe) e questa è una sola successione.
+\end{dimo}
+
+\end{itemize}
+
+
+\subsection*{Probabilità (Daniell - Kolmogorov)}
+
+Volgiamo assegnare valori numerici alle prob. $\pr(C_n(B^{(n)}))$ per ogni $n\in\mathbb{N}$ e per ogni $B^{(n)} \in \mathscr{P}(\{0,1\}^n)$: ricorriamo allo schema di Bernoulli finito (binomiale) con una \textbf{successione di spazi di prob.} $(\{ 0,1\} ^{n},\mathscr{P}(\{ 0,1\} ^{n}),\pi_{n})$. Dobbiamo "incollare"  questa successione.
+
+\paragraph{Probabilità} Poniamo 
+$$P(C_{n}(B^{(n)}))\coloneqq\pi_{n}(B^{(n)})$$
+ovvero la probabilità del cilindro è la probabilità di Bernoulli finito (binomiale) della base. È ben definita (ovvero ogni cilintro ha una sola probabilità), con $(\{ 0,1\} ^{n},\mathscr{P}(\{ 0,1\} ^{n}),\pi_{n})$ spazio di probabilità di Bernoulli finito. \\
+Dobbiamo dimostrarlo perché ci sono cilindri con scrittura diversa che però sono uguli, per opportune basi: ad esempio se la base del primo cilindro è un solo vettore di dimensione $n$, posso scriverlo anche con una base di più dimensioni (quindi meno gradi di libertà), ma di più vettori (perché la base si prende nelle parti di $\{0,1\}^m$. Per esempio, se $m=n+1$ ciò accade con: 
+\begin{itemize}
+    \item $B_1^{(n)} \in \{0,1\}^n$ fissata
+    \item $B_2^{(n+1)} = B_1^{(n)} \times \{0,1\} \in \mathscr{P}(\{0,1\}^{n+1})$
+\end{itemize}
+
+
+\begin{dimo}
+    (Buona definizione) Vogliamo dimostrare che $$C_n(B_1^{(n)}) = C_m(B_2^{(m)}) \implies \pi_n(B_1^{(n)})=\pi_m(B_2^{(m)})$$
+    La dimostriamo nel caso in cui
+    \begin{itemize}
+    \item $B^{(n)} =\{(x_1,\dots ,x_m)\} \in \mathscr{P}(\{0,1\}^n) \mid \sum_{i=1}^n=z$ fissato 
+    \item $B^{(m)} = B^{(n)} \times \{0,1\}^{m-n} \in \mathscr{P}(\{0,1\}^{m})$
+\end{itemize}
+Procedo nel seguente modo:
+\begin{enumerate}
+    \item scrivo $B^{(m)}$ come unione di successioni $\{(x_1,\dots , x_n,y_1, \dots, y_{m-n}$)\} al variare di $(y_1,\dots , y_{m-n} \in \{0,1\}^{m-n}$, che sono tutte disgiunte
+    \item procedo con trovare la prob. $\pi_m(B^{(m)})$ che, essendo disgiunti, è la sommatoria delle prob. al variare della stessa roba.
+    \item scompongo la sommatoria in due sommatorie, una in cui il vettore delle $y$ ha somma $r$ e l'altra per $r$ che va da 0 a $m-n$.
+    \item riscrivo $\pi_m(\{(x_1,\dots , x_n,y_1, \dots, y_{m-n})\})$ come prob. di avere quella esatta stringa
+    \item faccio in modo di tirar fuori dalla sommatoria $p^k(1-p)^{n-k}$ (aggiungo e sottraggo $n$ a un esponente)
+    \item noto che ciò che rimane nella sommatoria fa 1 (somma di tutte le prob. di una binomiale) e quindi mi rimane solo  $p^k(1-p)^{n-k}$ che è $\pi_n(B^{(n)})$
+\end{enumerate}
+\end{dimo}
+
+\begin{dimo}
+    (Che è una probabilità) Per $\pr(\Omega)=\pr(C_n(\{0,1\}^n))=\pi_n(\{0,1\}^n)=1$.\\
+    Per l'unione di eventi disgiunti notare che l'unione di due cilindri disgiunti è il cilindro che ha per base l'unione delle basi disgiunte, quindi tutto segue.
+\end{dimo}
+
+\subsection*{Distribuzioni speciali (geometrica e binomiale negativa)}
+Volgiamo trovare le probabilità (ovvero le distribuzioni) dei seguenti eventi particolari:
+\begin{itemize}
+    \item $E_k$= "il \textbf{primo} successo si verifica alla prova $k$-esima"
+    \item $E_{n,k}=$ "l'\textbf{$n$-esimo} successo si verifica alla prova $k$-esima"
+\end{itemize}
+Vedi costruzioni di relativi modelli.
+
+\section{Misura di probabilità su un insieme discreto infinito (estensione di Bernoulli infinito)}
+Abbiamo visto che $\mathscr{C}$ non è una $\sigma$-algebra. Allora, ponendo $\mathscr{F}=\sigma(\mathscr{C})$ la $\sigma$-algebra generata da $\mathscr{C}$, ci chiediamo se si possa estendere la $P$ di prima a una $\overline{P}$ che gode della $\sigma$-additività.
+
+\paragraph*{Estensione di probabilità} $\overline{P}: \mathscr{F}\to[0,1]$ è un'estensione di $P$ se $\overline{P}(E)=P(E)$ per ogni $E \in \mathscr{C}$
+
+\begin{theorem}[di Caratheodory]
+
+$P:\mathcal{A}\to[0,1]$ probabilità, esiste unica
+$\overline{P}:\mathcal{F}=\sigma(\mathcal{A})\to[0,1]$
+estensione di $P\iff P$ continua nell'insieme vuoto,
+ovvero $\forall E_{1}\supseteq E_{2}\supseteq\dots$ con $\bigcap_{i=1}^{\infty}E_{i}=\emptyset$
+si ha $\lim_{n\to\infty}P(E_{n})=0$. \\
+Inoltre, tale estensione è unica.
+\end{theorem}
+
+Quindi tutto il punto sta nel vedere se la prob. di Daniel-Kolmogorov è continua nell'insieme vuoto. Il teorema segue immediatamente dal seguente lemma:
+
+\begin{lem}
+    $\{E_n\}_{n\ge1}$ è una succ. di eventi in $\mathscr{C}$ (algebra dei cilindri) tali che $E_{1}\supseteq E_{2}\supseteq\dots$ e $\cap_{i=1}^\infty=\emptyset \implies E_n=\emptyset \; \forall n\ge\overline{n}$, per qualche $\overline{n}\in\mathbb{N}$. 
+\end{lem}
+
+\begin{dimo}
+    Tosta
+\end{dimo}
+
+
+\section{Probabilità su un insieme continuo (costruzione)}
+Modello continuo ci serve quando abbiamo un esperimento che coinvolge una grandezza continua, come lunghezza/peso/tempo...
+\begin{itemize}
+    \item \textbf{Spazio degli eventi}: $\Omega$ è un segmento $(a,b)$, oppure una semiretta $[0,+\infty)$ o tutto $\re$
+    \item \textbf{Algebra:} non possiamo usare le parti di $\Omega$ perché contiene i punti, e non vogliamo definire una probabilità sui singoli punti. Usiamo \textbf{algebra dei segmenti}:
+    $$\mathscr{L}\coloneqq\{\cup_{i=1}^n S_i \mid n\in \mathbb{N}_0, \text{ $S_i$ sono segmenti inclusi in 
+ $\Omega$}\}$$
+ dove se $n=0$ abbiamo l'insieme vuoto e i segmenti possono essere aperti/chiusi/semiaperti/semichiusi e in cui ogni estremo può essere anche $\pm\infty$ 
+
+\begin{dimo}
+    (Che $\mathscr{L}$ è un'algebra di parti) Per $\Omega \in \mathscr{L}$ basta prendere $n=1$ e $S_1=\Omega$. Poi verificare \textbf{l'intersezione} di due eventi (e sottointendere che per induzione possiamo estendere a più eventi). Scrivere $E_1 = \cup_{i=1}^n S_i^{(1)}$ ed $E_2 = \cup_{j=1}^m S_j^{(2)}$, allora l'intersezione è la doppia unione delle intersezioni di segmenti, che sono a loro volta segmenti. Per $E^C$ è il complementare di un'unione, quindi usare legge de Morgan (ricordando che il complementare di un intervallo è al più un'unione di 2 segmenti=semirette). 
+\end{dimo}
+
+\begin{dimo}
+    ($\mathscr{L}$ NON è una $\sigma$-algebra) Basta mostrare un controesempio: per esempio, l'unione infinita di \textbf{sementi disgiunti essenzialmente} (intersezione delle due chiusure è vuota) non può essere scritta come unione finita di altri segmenti, quindi questa unione infinita non sta in $\mathscr{L}$.
+\end{dimo}
+
+\item \textbf{Probabilità:} fissiamo una densità di probabilità (vedi def. dopo) $f:\Omega \to \re$. Allora definiamo la probabilità di un evento
+$$P(E)\coloneqq\sum_{i=1}^n\int_{S_i}f(x)dx \quad \text{se} \quad
+\begin{cases}
+    E=\cup_{i=1}^nS_i \\
+    S_i\cap S_j=\emptyset \quad \forall i\ne j
+\end{cases}
+$$
+Nonostante l'unione di segmenti si può scrivere in più modi, tale definizione è \textbf{ben posta} (la prob. di due scritture diverse della stessa unione è uguale) ed \textbf{una probabilità}.
+
+\begin{dimo}
+    ($P$ è ben posta) \\
+    Dobbiamo dimostrare che $E= \cup_{i=1}^n S_i^{(1)}= \cup_{j=1}^m S_j^{(2)}$ dove $S_i^{(1)}$ sono tutti disgiunti come pure gli $S_j^{(2)} \implies$ gli ultimi due membri hanno la stessa $P$. Impostare nel seguente modo:
+    $$S_i^{(1)}=S_i^{(1)}\cap E=S_i^{(1)}\cap (\sqcup_{j=1}^m S_j^{(2)})=\bigsqcup_{j=1}^m(S_i^{(1)}\cap S_j^{(2)})$$
+    Ora la $P(E)$ è la sommatoria degli integrali sugli $S_i^{(1)}$, che posso quindi scrivere come sopra e quindi uso additività degli integrali per ottenere doppia sommatoria su $i$ e $j$. Scambio le sommatorie per avere all'interno quella in $i$, riuso additività dell'int. togliendo la sommatoria in $i$ e integrando su $\cup_i (S_i^{(1)}\cap S_j^{(2)}) = S_j^{(2)}$, che è la tesi. 
+\end{dimo}
+
+\begin{dimo}
+    ($P$ è una probabilità) \\
+    Per $P(\Omega)=\int_\Omega f(x)dx=1$ per def. di densità. \\
+    Per il secondo assioma devo verificare che l'unione disgiunta di due eventi è la somma delle prob. Ma i due eventi sono a loro volta unione disgiunta di segmenti, quindi l'unione degli eventi è l'unione disgiunta di tutti questi segmenti: $E_1\sqcup E_2=\bigsqcup_{k=1}^{m+n}T_k$ rinominando i vari segmenti. Ora trovo $P(E_1\sqcup E_2)=$ sommatoria degli int. sui $T_k$, uso prop. degli integrali per arrivare a $P(E_1)+P(E_2)$.
+\end{dimo}
+
+\end{itemize}
+
+\section{Misura di prob. su un insieme continuo (estendibilità del modello continuo)}
+Analogo a ciò fatto per Bernoulli infinito. Notare che la $\sigma$-algebra generata da $\mathscr{L}$ coincide con quella di Borel generata dagli aperti.
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\part{Variabili aleatorie}
+Fissiamo uno spazio di probabilità $(\Omega, \mathcal{F}, \pr)$ dove $\mathcal{F}$ è una $\sigma$-algebra e $\pr:\mathcal{F}\to[0,1]$ è una \underline{misura} di probabilità.
+\begin{description}
+    \item[Variabile aleatoria] È una \hl{funzione} $X: \om \to \mathbb{R}$ misurabile. Abbiamo due condizioni equivalenti di misurabilità:
+    \begin{itemize}
+        \item $X^{-1}((-\infty,x]) \in \mathcal{F}$ per ogni $x\in\mathbb{R}$.
+        \item $X^{-1}(B)\in \mathcal{F} \quad \forall B\in\mathcal{B}(\re)$, che è la $\sigma$-algebra di Borel (quella generata dagli aperti di $\re$).
+    \end{itemize}
+    NB: ha come dominio $\Omega$, non $\F$. Quindi ha come input i casi elementari $\omega$, non gli eventi $A$. \\
+    NB: è una \textbf{funzione}, quindi ogni $\omega$ ha una e una sola immagine (valore in $\re$). Per questo le \hl{preimmagini di due numeri diversi sono sempre due insiemi disgiunti} (se non lo fossero, tali insiemi avrebbero intersezione non nulla, quindi ci sarebbe un $\omega$ che vi appartiene, ovvero che avrebbe come immagine entrambi i numeri, andando contro l'ipotesi di funzione)
+\item[Funzione di ripartizione (cumulative distribution f.)] di una variabile aleatoria $X$ è la funzione \[F:\mathbb{R}\to[0,1] \quad \mid \quad  F(x)=\pr(X^{-1}(-\infty, x])=\pr(X\le x)\]
+Tale probabilità è sempre definita grazie alla condizione di misurabilità di $X$.
+
+
+\item[Funzione di ripartizione discreta] $F:\re\to[0,1]$ è discreta se, per un \textbf{insieme finito o numerabile} $I$ esistono:
+\begin{itemize}
+    \item $D\subset\re=\{x_i\}_{i\in I}$ collezione di punti 
+    \item $\{p_i\}_{i\in I}$ collezione di numeri in $(0,1] \mid \sum_{i\in I}p_i=1$
+\end{itemize}
+ed $F$ è della forma:
+$$F(z)=\sum_{i\in I|x_i\le z}p_i \quad \quad \forall z\in\re$$
+
+\item[Funzione di ripartizione assolutamente continua] $F:\re\to[0,1]$ si dice assolutamente continua
+\begin{itemize}
+    \item su $[a,b]$ se $\forall \varepsilon>0 \quad \exists\delta>0 \mid \forall E\subset[a,b]$ rappresentabile come unione disgiunta finita di segmenti, $E=\sqcup_{i=1}^n(\alpha_i, \beta_i)$ si ha 
+    $$\sum_{i=1}^n(\beta_i -\alpha_i)\le \delta \implies \sum_{i=1}^n[F(\beta_i)-F(\alpha_i)] \le \varepsilon$$
+    \item su $\re$ se lo è su  $[a,b] \quad\forall a<b \in \re$
+\end{itemize}
+
+\item[Funzione di ripartizione continua singolare] $F:\re\to[0,1]$ si dice continua singolare se valgono tutte:
+\begin{itemize}
+    \item $F\in C^0(\re)$ (continua in ogni punto)
+    \item derivabile quasi ovunque (l'insieme $D^C\subset \re$ dei punti di non der. ha misura nulla)
+    \item $F'(z)=0 \quad \forall z\in D$
+\end{itemize}
+Come fa tale funzione ad essere monotona non decrescente (per essere f. di rip) essendo costante (derivata nulla) su quasi tutti i punti? Vuol dire che cresce su un \textbf{insieme frattale}, invisibile alla misura lineare. Esempio: \textbf{scala di Cantor / del diavolo}, dove si vede proprio il concetto di frattale.
+
+
+\end{description}
+
+\section*{Teoremi}
+\subsection*{Equivalenza tra condizioni di misurabilità}
+$X^{-1}((-\infty,x]) \in \mathcal{F} \quad \forall x\in\mathbb{R} \iff X^{-1}(B)\in \mathcal{F} \quad \forall B\in\mathcal{B}(\re)$
+
+
+\begin{dimo}
+\begin{itemize}
+\item $\Leftarrow$) ovvio, poiché $(-\infty,x]\in\mathcal{B}(\re)$, poiché è un chiuso e tale algebra ha i chiusi.
+\item $\Rightarrow$) Osservo inanzitutto che $\mathcal{B}\left(\mathbb{R}\right)=\sigma\left\{ \left(-\infty,z\right]\,|\,z\in\mathbb{R}\right\} $.
+Prendo poi $\mathcal{C}\coloneqq\left\{ C\subseteq\mathbb{R}\,|\,X^{-1}\left(C\right)\in\mathcal{F}\right\} $,
+noto che $\left(-\infty,z\right]\in\mathcal{C}$ (per ipotesi) e che $\mathcal{C}$
+è $\sigma$-algebra poiché:
+\[
+\begin{array}{ll}
+X^{-1}\left(\mathbb{R}\right)\in\mathcal{F} & \Longrightarrow\;\Omega\in\mathcal{F}\\
+X^{-1}\left(C\right)\in\mathcal{F} & \Longrightarrow\;X^{-1}\left(C^{C}\right)=X^{-1}\left(C\right)^{C}\in\mathcal{F} \quad \text{preimm. commuta con compl.}\\
+X^{-1}\left(C_{i}\right)\in\mathcal{F} & \Longrightarrow\;X^{-1}\left(\bigcup_{i=1}^{+\infty}C_{i}\right)=\bigcup_{i=1}^{+\infty}X^{-1}\left(C_{i}\right)\in\mathcal{F}  \quad \text{preimm. commuta con unione.}
+\end{array}
+\]
+quindi, essendo che 
+\begin{itemize}
+    \item $\mathcal{B}(\re)$ è la più piccola $\sigma$-algebra che contiene $(-\infty,x]$ 
+    \item $(-\infty,x] \subset \mathcal{C}$
+    \item $\mathcal{C}$ è una $\sigma$-algebra
+\end{itemize}
+$\implies \mathcal{B}\left(\mathbb{R}\right)\subseteq\mathcal{C}$, dove $\mathcal{C}$ è l'insieme di tutti gli insiemi la cui preimmagine sta in $\mathcal{F} \implies$ tesi
+\end{itemize}
+\end{dimo}
+
+
+
+\subsection*{Lemma continuità dal basso/alto}
+Dal basso (successione crescente di eventi):
+$$E_{1}\subseteq E_{2}\subseteq\dots\;\Longrightarrow\;\lim_{n\rightarrow+\infty}P\left(E_{n}\right)=P\left(\bigcup_{i=1}^{+\infty}E_{i}\right)$$
+Dall'alto (successione descrescente di eventi):
+$$E_{1}\supseteq E_{2}\supseteq\dots\;\Longrightarrow\;\lim_{n\rightarrow+\infty}P\left(E_{n}\right)=P\left(\bigcap_{i=1}^{+\infty}E_{i}\right)$$
+
+\begin{dimo}
+\begin{itemize}
+\item dal basso: Prendo $F_{1}\coloneqq E_{1},\,F_{n}\coloneqq E_{n}\setminus E_{n-1}$,
+osservo che $F_{i}\cap F_{j}=\emptyset$ per $i<j$. Per induzione
+dimostro che $E_{n}=\bigsqcup_{i=1}^{n}F_{i}$ (prima con $n=1$, poi con $n\implies n+1$), quindi applicando la
+$\sigma$-additività
+\[
+P\left(\bigcup_{i=1}^{+\infty}E_{i}\right)=P\left(\bigsqcup_{i=1}^{+\infty}F_{i}\right)=\sum_{i=1}^{+\infty}P\left(F_{i}\right)=\lim_{n\rightarrow+\infty}\sum_{i=1}^{n}P\left(F_{i}\right)=\lim_{n\rightarrow+\infty}P\left(\bigsqcup_{i=1}^{n}F_{i}\right)=\lim_{n\rightarrow+\infty}P\left(E_{n}\right)
+\]
+\item dall'alto: considero $G_{i}=E_{i}^{c}$, e diventa dal basso (ovvero dall'insieme 1 tolgo buchi sempre più piccoli, quindi l'insieme n ingrandisce).
+\end{itemize}
+\end{dimo}
+
+\subsection*{Prorpietà f. di ripartizione} 
+$F$ è una f. di ripartizione, allora valgono:
+    \begin{enumerate}[(a)]
+        \item $x \le y \implies F(x)\le F(y)$ (è monotona non decrescente)
+        \item $\lim_{h\to x^+}F(x+h) = F(x)$ ($F$ è continua da destra)
+        \item $\lim_{x\to-\infty}F(x)=0, \quad \lim_{x\to\infty}F(x)=1$
+    \end{enumerate}
+
+\begin{dimo}
+\begin{itemize}
+    \item[(a)] $x\le y \implies E_1=\{X\le x\} \subseteq E_2=\{X\le y\}$ (ragionamento facile) e quindi, per \textbf{monotonia della prob.} $F(x)=\pr(E_1)\le \pr(E_2)=F(y)$, ovvero la tesi.
+    \item[(b)] Essendo $F$ monotona, la tesi è equivalente a 
+    $$\lim_{n\to +\infty}F(z+\frac{1}{n})=F(z)$$
+    ovvero ridurre $h$ che (varia nel continuo) ad una successione (che varia nel discreto). \\
+    Notare che la tesi originale implica sempre quetsa, ma il viceversa necessita della monotonia (vedi un seno che in $z$ ha frequenza che aumenta come $1/n$, quindi possiamo costruire una successione che sta sempre sulle creste e tende ad un limite diverso da quello se variassimo nel continuo).  \\
+    Definiamo $E_n\coloneqq\{X\le z+1/n\}$, per (a) vediamo che $E_1\supseteq E_2\supseteq \dots$ quindi applichiamo \textbf{continuità dall'alto}:
+    $$\lim_{n\to +\infty}F(z+\frac{1}{n})=\lim_{n\to+\infty}\pr(E_n)=\pr(\cap_{i=1}^{+\infty}E_i)$$
+    Ora dobbiamo dimostrare che $\{X\le z\}=(\cap_{i=1}^{+\infty}E_i)$:
+    \begin{itemize}
+      \item[$\subseteq$)] Tale relazione vale per ogni $E_i$, e quindi anche per l'intersezione.
+        \item[$\supseteq$)] Dobbiamo vedere che se preso un $\omega$ nell'intersezione., allora $X(\omega)\le z$. Infatti $X(\omega)\le z+1/i \quad \forall i\in \mathbb{N}$, allora basta fare il limite ad ambo i membri e arrivare alla tesi. 
+    \end{itemize}
+    \item[(c)] (come (b)) Sempre per la monotonia le due tei sono equivalenti a:
+    $$\lim_{n\to +\infty}F(-n)=0 \quad \quad \text{e} \quad \quad \lim_{n\to +\infty}F(n)=1$$
+    \begin{enumerate}
+        \item  Definiamo $E_n\coloneqq\{X\le -n\}$, per (a) vediamo che $E_1\supseteq E_2\supseteq \dots$ quindi applichiamo \textbf{continuità dall'alto}:
+        $$\lim_{n\to +\infty}F(-n)=\lim_{n\to+\infty}\pr(E_n)=\pr(\cap_{i=1}^{+\infty}E_i)=\pr(\emptyset)=0$$
+        \item   Definiamo $E_n\coloneqq\{X\le n\}$, per (a) vediamo che $E_1\subseteq E_2\subseteq \dots$ quindi applichiamo \textbf{continuità dal basso}:
+        $$\lim_{n\to +\infty}F(n)=\lim_{n\to+\infty}\pr(E_n)=\pr(\cup_{i=1}^{+\infty}E_i)=\pr(\Omega)=1$$
+    \end{enumerate}
+\end{itemize}
+\end{dimo}
+
+\subsection*{Formule probabilità di una v.a. dalla CDF}
+\begin{enumerate}
+    \item $\pr(X\in(a,b])=F(b)-F(a)$
+    \item $\pr(X\in(a,b))=\lim_{z\to b^-}F(z)-F(a)$
+    \item $\pr(X\in[a,b])=F(b)-\lim_{z\to a^-}F(z)$
+    \item $\pr(X\in[a,b))=\lim_{z\to b^-}F(z)-\lim_{w\to a^-}F(w)$
+    \item $\pr(X= a)=F(a)-\lim_{z\to a^-}F(z)$
+\end{enumerate}
+\begin{dimo}
+    \begin{enumerate}
+        \item $(a,b]=\overbrace{(-\infty,b]}^{=E}\setminus\overbrace{(-\infty, a]}^{=F}$, con $F\subset E \implies\pr(X\in(a,b])=\pr(E\setminus F)=\pr(E)-\pr(F)=F(b)-F(a)$
+        \item scrivere $(a,b)=\cup_{n=1}^{+\infty}(a,b-1/n]$, poi usare continuità dal basso, usare 1) e poi monotonia di $F$ per togliere $1/n$
+        \item Scrivere $[a,b]=  \cap_{n=1}^{+\infty}(a-1/n,b]$, procedere come prima usando continuità dall'alto.
+        \item Scrivere $[a,b)=\{a\}\sqcup(a,b)$, procedere come sopra usando 2) e 5)
+        \item Porre $b=a$ in 3)
+    \end{enumerate}
+\end{dimo}
+
+\subsection*{Teorema di Rappresentazione di Skorokhod}
+Monotonia non decrescente, continuità da destra e $\lim_{z\rightarrow-\infty}F\left(z\right)=0,\,\lim_{z\rightarrow+\infty}F\left(z\right)=1$
+caratterizzano le funzioni di ripartizione. \\
+In particolare, se una funzione $F$ ha tali caratteristiche, esiste sempre una v.a. di cui $F$ è la funzione ri ripartizione.
+
+\begin{dimo}
+    Prendo $\Omega=\left[0,1\right],\,\mathcal{F}=\mathcal{B}\left(\left[0,1\right]\right)$,
+densità di probabilità uniforme $f\left(x\right)=1,\,\forall x\in\left[0,1\right]$
+ed estensione della probabilità sull'algebra dei segmenti in $[0,1]$ a una misura su $\mathcal{F}$ (si può fare ed è unica per teorema). Definisco
+$X\left(\omega\right)\coloneqq\inf\left\{ x\in\mathbb{R}\,|\,F\left(x\right)\geq\omega\right\} $,
+e dimostro che $\left\{ X(\omega)\leq z\right\} =\left[0,F\left(z\right)\right]$, ovvero
+$$X(\omega)\le z \iff \omega \le F(z)$$
+(visualizzare tutto ciò nel plot della f. di ripartizione con $\omega$ preso tra 0 e 1 sull'asse delle y e $X(\omega)$ sull'asse delle x) 
+$$\dots$$
+Una volta dimostrato $\implies F_X(z)=P(\{X\le z\})=P([0,F(z)])=F(z)$, ovvero la tesi.
+\end{dimo}
+
+\subsection*{Proprietà aggiuntive delle funzioni di ripartizione}
+\begin{itemize}
+    \item Discontinuità solo di tipo salto
+    \item Finitezza o numerabilità dei punti
+di discontinuità
+\item Derivabilità in quasi ogni punto
+\end{itemize}
+
+
+\subsection*{Lipschitzianità $\Rightarrow$ Assoluta continuità}
+
+\subsection*{Condizione sufficiente di assoluta continuità (Lebesgue)}
+
+Sia $f:\mathbb{R}\rightarrow\mathbb{R}$ densità di probabilità, se
+$$\forall z\in\mathbb{R}:\quad F\left(z\right)=\int_{-\infty}^{z}f\left(x\right)dx=\lim_{M\rightarrow+\infty}\int_{-M}^{z}f\left(x\right)dx$$
+allora $F$ assolutamente continua. Quindi $C^{1}\left(\mathbb{R}\right)\Rightarrow$
+assolutamente continua per il teorema fondamentale del calcolo.
+
+\subsection*{Derivabilità quasi ovunque delle funzioni assolutamente continue}
+
+$F$ funzione di ripartizione assolutamente continua, allora $\exists f:\mathbb{R}\rightarrow\mathbb{R}$
+densità di probabilità tale che $F\left(x\right)=\int_{-\infty}^{x}f\left(x\right)dx$,
+e $F^{\prime}\left(x\right)=f\left(x\right)\;\text{q.o. }\forall x\in\mathbb{R}$
+
+\subsection*{Teorema di decomposizione di Lebesgue}
+
+Ogni $F:\mathbb{R}\rightarrow\left[0,1\right]$ funzione di ripartizione
+è scrivibile come combinazione convessa di $F_{\text{d}},F_{\text{ac}},F_{\text{cs}}$
+funzioni di ripartizione rispettivamente discreta, assolutamente continua
+e continua singolare
+
+
+
+
+
+
+
+\pagebreak
+\part{Speranza matematica (integrale di Riemann-Stieltjes)}
+Definziamo la speranza matematica / valore atteso di $X$ a seconda del codominio di $X$
+
+\begin{description}
+    \item[Codominio finito] $Im(X)=\{x_1,\dots,x_n\}$, con $x_1,\dots,x_n$ numeri distinti, si pone:
+    $$\ex[X]\coloneqq\sum_{i=1}^nx_ip_i$$
+    dove $p_i\coloneqq\pr[X^{-1}(x_i)]$. (dim. che vale anche per numeri uguali)
+    \item[Somma di Riemann-Stieltjes] relativa alla f. di rip. $F$ e alla suddivisione data dai punti $0=x_0<x_1<x_2<\dots<x_n$:
+    $$S_n(F;\Delta_n)\coloneqq \sum_{i=1}^{n-1}x_i(F(x_{i+1})-F(x_i))+x_n(1-F(x_n))$$
+    dove $\Delta_n=\{x_i\}_{i=0,1,\dots,n}$
+    \item[Codominio incluso in $[0,+\infty)$] allora poniamo
+    $$\ex[X]\coloneqq \lim_{n\to\infty}S_n(F;\Delta_n) \overset{TEO}{=}\int_0^{+\infty}[1-F(x)]dx$$
+    Ciò estende la prima definizione (la prima è un caso particolare di quetsa)
+    \item[Codominio qualunque] Definiamo:
+    \begin{itemize}
+        \item $X_+(\omega)\coloneqq\max\{X(\omega),0$
+        \item $X_-(\omega)\coloneqq\max\{-X(\omega),0$
+    \end{itemize}
+    Se:
+    \begin{itemize}
+        \item $\ex[X_+]<+\infty$ (ben definita) $\overset{Teo}{\iff}\int_0^{+\infty}[1-F_+(x)]dx=\int_0^{+\infty}[1-F(x)]dx < +\infty$
+        \item $\ex[X_-]<+\infty$ (ben definita) $\overset{Disp.}{\iff}\int_0^{+\infty}[F(-x)]dx < +\infty$
+    \end{itemize}
+    allora poniamo
+    $$\ex[X]\coloneqq \ex[X_+]-\ex[X_-]\overset{disp.}{=}\int_0^{+\infty}[1-F(x)]dx-\int_{-\infty}^0F(x)dx$$
+
+    \item[\myth{Prop.}] se $F_{ac}$ è assolutamente continua con densità $f:\re\to\re$ allora:
+    $$\ex[X_{ac}]=\int_{-\infty}^{+\infty}xf(x)dx$$
+    \item[\myth{Prop.}] Se $X$ ha codominio numerabile e vale $\sum_{i=1}^{+\infty}|x_i|p_i<+\infty$ allora:
+    $$\ex[X]=\sum_{i=1}^{+\infty}x_ip_i$$
+    \item[\myth{Prop. (valore atteso di funzioni di v.a.)}] Se $g:\re\to\re$
+    \begin{itemize}
+        \item \textbf{codominio finito:} $\ex[g(X)]=\sum_{i=1}^ng(x_i)p_i$
+        \begin{dimo}
+            Scrivere $g(X)=\sum_{i=1}^ng(x_i)\mathds{1}_{\{X=x_i\}}$ e o usare linearità oppure per def. di valore atteso discreto (non cambiano le prob. degli eventi).
+        \end{dimo}
+        \item \textbf{codominio numerabile:} $\ex[g(X)]=\sum_{i=1}^{+\infty}g(x_i)p_i$ se assolutamente convergente
+        \item \textbf{v.a. assolutamente continua:}  $\ex(X)=\int_{-\infty}^{+\infty}xf(x)dx$ se assolutamente convergente.
+        \begin{dimo}
+            Dimostrare nel caso in cui $f$ ha supporto su $[a,b]$ e $g$ è un diffeomorfismo $C^1$ con inversa $C^1$) su tale intervallo.
+        \end{dimo}
+    \end{itemize}
+\end{description}
+
+\section*{Teoremi}
+\subsection*{Proprietà della speranza matematica}
+
+\begin{align*}
+ & \text{Linearità} &  & \mathbb{E}\left[aX+bY\right]=a\mathbb{E}\left[X\right]+b\mathbb{E}\left[Y\right]\quad\left(\begin{smallmatrix}X,Y\in L^{1}\left(\Omega\right)\end{smallmatrix}\right) &  & \text{Normalizzazione} &  & \mathbb{E}\left[1\right]=1\\
+ & \text{Positività} &  & X\geq0\quad\Longrightarrow\quad\mathbb{E}\left[X\right]\geq0 &  & \text{Jensen} &  & \left|\mathbb{E}\left[X\right]\right|\leq\mathbb{E}\left[\left|X\right|\right]\quad\left(\begin{smallmatrix}\begin{array}{c}
+\underset{\text{per \ensuremath{\varphi} convessa}}{\left|\cdot\right|\rightarrow\ensuremath{\varphi}}\end{array}\end{smallmatrix}\right)\\
+ & \text{Monotonia} &  & X\leq Y\quad\Longrightarrow\quad\mathbb{E}\left[X\right]\leq\mathbb{E}\left[Y\right] &  & \text{Beppo Levi} &  & \underset{\left(X_{n}\geq0\right)}{X_{n}\overset{n\rightarrow\infty}{\longrightarrow}X}\quad\Longrightarrow\quad\mathbb{E}\left[X_{n}\right]\overset{n\rightarrow\infty}{\longrightarrow}\mathbb{E}\left[X\right]
+\end{align*}
+
+
+\subsection*{Costruzione della speranza matematica per $X$ con codominio $\subseteq\left[0,+\infty\right)$}
+
+$\mathbb{E}\left[X\right]=\int_{0}^{+\infty}\left[1-F\left(x\right)\right]dx$
+oppure $\mathbb{E}\left[X\right]=\sup_{0\leq Z\leq X}\mathbb{E}\left[Z\right]$
+con $Z$ v.a. discreta
+
+\begin{dimo}
+Prendo $\left[0,+\infty\right)=\left\{ 0\right\} \cup\left(0,x_{1}\right]\cup\dots\cup\left(x_{n-1},x_{n}\right]\cup\left(x_{n},+\infty\right)$,
+e prendo variabile discreta $X^{\left(d\right)}$che approssima per
+difetto $X$, da cui definisco la somma di
+\[
+S_{n}\left(F;\Delta_{n}\right)\coloneqq\mathbb{E}\left[X^{\left(d\right)}\right]=\sum_{i=1}^{n-1}x_{i}\left(F\left(x_{i+1}\right)-F\left(x_{i}\right)\right)+x_{n}\left(1-F\left(x_{n}\right)\right)
+\]
+
+Considerando ora $\left\{ \Delta_{n}\right\} _{n\geq1}$ con $\Delta_{n}=\{x_{i}^{\left(n\right)}\}_{i=0,1,\dots,k_{n}}$tale
+che $\Delta_{n}\subset\Delta_{n+1}$, $\left\Vert \Delta_{n}\right\Vert \overset{n\rightarrow\infty}{\longrightarrow}0$,
+$x_{k_{n}}^{\left(n\right)}\overset{n\rightarrow\infty}{\longrightarrow}+\infty$,
+allora se converge l'integrale $\int_{0}^{+\infty}$ si ha che 
+\[
+\mathbb{E}\left[X\right]\coloneqq\lim_{n\rightarrow+\infty}S_{n}\left(F;\Delta_{n}\right)=\int_{0}^{+\infty}\left[1-F\left(x\right)\right]dx
+\]
+
+Questo perchè la successione $S_{n}\left(F;\Delta_{n}\right)$ è monotona
+non decrescente e per la formula di Abel si ha 
+\begin{align*}
+S_{n}\left(F;\Delta_{n}\right)=\sum_{i=1}^{n}\left(x_{i}-x_{i-1}\right)\left(1-F\left(x_{i}\right)\right)\leq\int_{0}^{x_{n}}\left[1-F\left(x\right)\right]dx\leq\int_{0}^{+\infty}\left[1-F\left(x\right)\right]dx
+\end{align*}
+\end{dimo}
+
+
+\subsection*{Calcolo della speranza matematica per una v.a. assolutamente continua}
+
+$\int_{0}^{+\infty}\left[1-F_{\text{ac}}\left(x\right)\right]dx-\int_{-\infty}^{0}F_{\text{ac}}\left(x\right)dx=\int_{-\infty}^{+\infty}xf\left(x\right)dx$ 
+
+\subparagraph*{Dimostrazione}
+
+\begin{align*}
+\int_{0}^{M}\left[1-F_{\text{ac}}\left(x\right)\right]dx & =\int_{0}^{M}\left[\int_{x}^{+\infty}f\left(y\right)dy\right]dx=\int_{0}^{M}\left[\lim_{T\rightarrow+\infty}\int_{x}^{M+T}f\left(y\right)dy\right]dx=\lim_{T\rightarrow+\infty}\int_{0}^{M}\left[\int_{x}^{M+T}f\left(y\right)dy\right]dx\\
+\int_{0}^{M}\left[\int_{x}^{M+T}f\left(y\right)dy\right]dx & =\int_{0}^{M}f\left(y\right)\left[\int_{0}^{y}dx\right]dy+\int_{M}^{M+T}f\left(y\right)\left[\int_{0}^{M}dx\right]dy=\int_{0}^{M}yf\left(y\right)dy+M\int_{M}^{M+T}f\left(y\right)dy\\
+\int_{0}^{M}\left[1-F_{\text{ac}}\left(x\right)\right]dx & =\int_{0}^{M}yf\left(y\right)dy+M\left[1-F_{\text{ac}}\left(M\right)\right]dy\;\overset{M\rightarrow+\infty}{\longrightarrow}\;\int_{0}^{+\infty}yf\left(y\right)dy
+\end{align*}
+
+\subsection*{Valore atteso della funzione di una v.a.}
+
+\subsection*{Disuguaglianza di Cauchy - Schwartz}
+
+Dati $X,Y\in L^{2}$, allora $XY\in L^{1}$ e $\left|\mathbb{E}\left[XY\right]\right|\leq\left(\mathbb{E}\left[X^{2}\right]\right)^{\nicefrac{1}{2}}\left(\mathbb{E}\left[Y^{2}\right]\right)^{\nicefrac{1}{2}}$,
+e in particolare $L^{2}\subset L^{1}$ e $\left(\mathbb{E}\left[X\right]\right)\leq\mathbb{E}\left[X^{2}\right]$
+
+\subparagraph*{Dimostrazione}
+
+$XY\in L^{1}$ in quanto $\left|XY\right|\leq\frac{X^{2}}{2}+\frac{Y^{2}}{2}$,
+e con $Y=1$ ho $\left|X\right|\leq\frac{X^{2}}{2}+\frac{1}{2}\,\Rightarrow\,L^{2}\subset L^{1}$
+. Per dimostrare la disuguaglianza scrivo
+\begin{align*}
+\mathbb{E}\left[xX+Y\right]^{2} & =x^{2}\mathbb{E}\left[X^{2}\right]+2x\mathbb{E}\left[XY\right]+\mathbb{E}\left[Y^{2}\right]\boldsymbol{\geq0} & \nicefrac{\Delta}{4} & =\mathbb{E}\left[XY\right]^{2}-\mathbb{E}\left[X^{2}\right]\mathbb{E}\left[Y^{2}\right]\boldsymbol{\leq0}
+\end{align*}
+
+\subsection*{Disuguaglianza di Markov}
+
+Siano $X:\Omega\longrightarrow\mathbb{R}$ v.a. e $a\geq0$, allora
+$\mathbb{P}\left(\left|X\right|>a\right)\leq\frac{\mathbb{E}\left[\left|X\right|\right]}{a}$
+
+\subparagraph*{Dimostrazione}
+
+Preso $A\coloneqq\left\{ \omega\in\Omega|\left|X\left(\omega\right)\right|>a\right\} $,
+ho $\left|X\right|\geq a\cdot\boldsymbol{1}_{A}$, dunque
+\[
+\mathbb{E}\left[\left|X\right|\right]\geq\mathbb{E}\left[a\cdot\boldsymbol{1}_{A}\right]=a\mathbb{E}\left[\boldsymbol{1}_{A}\right]=a\mathbb{P}\left(A\right)=a\mathbb{P}\left(\left|X\right|>a\right)
+\]
+
+
+\subsection*{Disuguaglianza di Chebychev}
+
+Siano $X:\Omega\longrightarrow\mathbb{R}$ v.a. e $a\geq0$, allora
+$\mathbb{P}\left(\left|X\right|>a\right)\leq\frac{\mathbb{E}\left[X^{2}\right]}{a^{2}}$
+(equivalentemente $\mathbb{P}\left(\left|X-\mathbb{E}\left[X\right]\right|>a\right)\leq\frac{\text{Var}\left(X\right)}{a^{2}}$)
+
+\subparagraph*{Dimostrazione}
+
+Ho che $X^{2}\geq a^{2}\cdot\boldsymbol{1}_{\left\{ \left|X\right|>A\right\} }$,
+dunque $\mathbb{E}\left[\left|X\right|^{2}\right]\geq\mathbb{E}\left[a^{2}\cdot\boldsymbol{1}_{A}\right]=a^{2}\mathbb{P}\left(\left|X\right|>a\right)$
+
+
+
+
+\pagebreak
+\part{Vettori aleatori}
+\begin{description}
+    \item[Vettore aleatorio] Dato uno spazio di probabilità $(\Omega,\mathscr{F},\pr)$ un vettore aleatorio è una funzione $(X,Y): \Omega \to \re^2$ misurabile. Come condizione di misurabilità sono equivalenti:
+    \begin{itemize}
+        \item $X,Y$ sono v.a. (misurabili)
+        \item $(X,Y)$ soddisfa misurabilità congiunta, ovvero $\forall B\in\mathcal{B}(\re^2)$ (ovvero la più piccola $\sigma$-algebra generata dai rettangoli aperti di $\re^2$) : $(X,Y)^{-1}(B)\in \mathscr{F}$
+    \end{itemize}
+    \item[Funzione di ripartizione congiunta] di $X$ e $Y$ è $F_{X,Y}(x,y)=\pr[X\le x, Y\le y]$
+    \item[\myth{Prop.}] Per la funzione di rip. congiunta valgono:
+    \begin{enumerate}
+        \item Quasi monotona
+        \item Continua da destra
+        \item Limite per le due variabili all'inf. è 1, limite per una fissa e l'altra a meno inf. è 0.
+    \end{enumerate}
+    \item[Funzioni di ripartizione marginali] Sono:
+    \begin{itemize} 
+        \item $F_X(x)=\pr[X\le x]= \lim_{y\to+\infty}F_{X,Y}(x,y)$
+        \item $F_Y(y)=\pr[Y\le y]= \lim_{x\to+\infty}F_{X,Y}(x,y)$
+    \end{itemize}
+    \item[Fdr dicreta]
+    \item[Fdr assolutamente continua]
+    \item[\myth{Prop.}] $X,Y$ indipendenti $\implies \ex[XY]=\ex[X]\ex[Y]$
+    \begin{dimo}
+        \begin{itemize}
+            \item \textbf{codominio finito:} scrivere variabili come sommatorie di funz. indicatrici, su valori distinti di $X$ o $Y$. Fare valore atteso del prodotto, usare linearità e il prodotto di due funz. indicatrici è la funz. indicatrie dell'intersezione.
+            \item \textbf{codominio positivo:} prendere successioni $X_n,Y_n$ con cod. finito che tendono a $X,Y$. Per continuità del valore atteso, esso è il limite dei valori attesi, che possiamo calcolare poiché in codominio finito.
+            \item \textbf{in generale:} scrivere le v.a. come $X=X_+-X_-$ ecc. Fare il val atteso proprio del prodotto delle due differenze, usare linearità e poi il fatto che sono tutte a codominio positivo.
+        \end{itemize}
+    \end{dimo}
+\end{description}
+
+
+
+
+
+
+
+\pagebreak
+\part{Variabili aleatorie discrete}
+\begin{description}
+
+\item[Variabile aleatoria discreta] Se ha come immagine un sottoinsieme numerabile $\{x_1,x_2,\dots\}\subset\mathbb{R}$
+
+\item[Funzione di probabilità di massa (probability mass f.)] di una variabile aleatoria discreta $X$ è la funzione \[f:\mathbb{R}\to[0,1] \quad \mid \quad  f(x)=\pr(X= x)\]
+\item[\myth{Lemma (caratterizzazione f. di prob. di massa)}] $f: \re \to [0,1]$ è una funzione di prob. di una v.a. discreta se e solo se:
+    \begin{enumerate}[(a)]
+        \item L'insieme $\{x\in\re\mid f(x)\ne 0\}$ è numerabile
+        \item $\sum_i f(x_i)=1$ dove $x\in \{x\in\re\mid f(x)\ne 0\}$
+    \end{enumerate}
+
+\item[\myth{Oss.}] Funzione di ripartizione e funzione di probabilità sono legate dalle seguenti:
+\begin{description}
+    \item[CDF data PMF] $F(x)=\sum_{i\mid x_i\le x}f(x_i)$
+    \item[PMF data CDF] $f(x)=F(x)-\lim_{y\uparrow x}F(y)$
+\end{description}
+\item[\myth{Lemma}] La funzione di probabilità  soddisfa:
+\begin{enumerate}[(a)]
+    \item L'insieme $\{x\mid f(x) \ne 0\}$ è numerabile
+    \item $\sum_{i}f(x_i)=1$ dove $x_1,x_2\dots$ sono le $x\mid f(x) \ne 0$
+\end{enumerate}
+\item[V.a. \hl{indipendenti}] $X$ e $Y$ sono indipendenti se gli eventi $\{X=x\}=X^{-1}(x)\in\mathcal{F}$ e $\{Y=y\}=Y^{-1}(y)\in\mathcal{F}$ sono indipendenti per ogni $x,y$.
+
+\item[\myth{Teorema}] $X$ e $Y$ indipendenti, $g,h:\mathbb{R}\to\mathbb{R} \implies g(X)$ e $h(Y)$ sono indipendenti.
+
+\item[Famiglia di v.a.d. indipendenti]  $\{X_i \mid i\in I\}$ sono indipendenti se gli eventi  $\{X_i=x_i\}$ sono indipendenti per tutte le possibili scelte degli insiemi  $\{x_i\mid i\in I\}$. Ovvero $\{X_i \mid i\in I\}$ è una famiglia indipendente se e solo se:
+$$\pr(X_i=x_i \forall i\in J)=\prod_{i\in J}\pr(X_i=x_i)$$
+
+\item[Valore atteso/media (expectet value/expectation/mean)] di una variabile aleatoria con PMF $f$ è: $$\mathbb{E}(X)\coloneqq\sum_{x\mid f(X)>0}xf(x) \quad \text{se è assolutamente convergente}$$
+È una media pesata rispetto alle probabilità dei vari valori di $X$. Se $f$ fosse una densità di massa allora $\mathbb{E}(X)$ sarebbe il centro di massa.
+
+\item[\myth{Lemma (formula cambio di variabile)}] Se $g: \mathbb{R}\to\mathbb{R}$ allora: $\mathbb{E}(g(X))=\sum_xg(x)f(x)$ 
+
+\item[Momento] $k\in\mathbb{N}_0$, il $k$-momento di $X$ è: $m_k=\mathbb{E}(X^k)$
+\begin{description}
+    \item[$m_0=1$] (Massa, normalizzata)
+    \item[$m_1=\ex(X)$] \textbf{valore atteso} (centro di massa). Misura il valore medio che assume $X$. Indicata con $\mu$
+    \item[$m_2$] (Momento d'inerzia rispetto all'asse $x=0$, infatti è la media pesata rispetto alle prob. delle distanze al quadrato da $x=0$)
+\end{description}
+\item[Momento centrale] $k\in\mathbb{N}_0$, il $k$-momento centrale di $X$ è: $\sigma_k=\mathbb{E}((X-m_1)^k)$. \\
+I concetti sono identici a prima solo che ci siamo spostati nel sistema di riferimento del centro di massa (ovvero della media, attraverso la traslazione $X-\ex X$)
+\begin{description}
+    \item[$\sigma_0$] $=1$
+    \item[$\sigma_1$] $=0$ (coordinata del centro di massa nel sist. di rif. del c.m.)
+    \item[$\sigma_2$] $=\mathbb{E}((X-\mathbb{E}X)^2)$ \textbf{varianza}. Misura quanta tendenza ha $X$ ad assumere valori diversi da quello medio. Indicata con var($X$). È il momento d'inerzia rispetto all'asse $x=\mu$
+\end{description}
+\item[Deviazione standard] $\sigma=\sqrt{var(X)}=\sqrt{\sigma_2}$. È una normalizzazione della varianza.
+
+\item[\myth{Lemma}] i momenti centrali $\{\sigma_i\}$ possono essere scritti in termini di momenti $\{m_i\}$.  Ad esempio $$\sigma_2=m_2-m_1^2=\mathbb{E}(X^2)-(\mathbb{E}X)^2$$ Per dimostrarlo basta applicare la def. di $\sigma_2$ e usare la formula di cambio variabile.
+
+\item[\myth{Teorema}] L'operatore $\mathbb{E}$ ha le seguenti proprietà:
+\begin{enumerate}[(a)]
+    \item $X\ge0 \implies \mathbb{E}(X)\ge0$
+    \item $a,b\in\mathbb{R}$ allora $\mathbb{E}(aX+bY)=a\mathbb{E}(X)+b\mathbb{E}(Y)$ (è un \textbf{operatore lineare})
+    \item La variabile aleatoria 1 (ha sempre 1 come immagine) ha $\mathbb{E}(1)=1$
+\end{enumerate}
+NB: tutta la teoria della probabilità può essere riformulata partendo da qua, ovvero ponendo queste proprietà come assiomi e quindi definendo la misura di probabilità in funzione della media ovvero: $\pr(A)\coloneqq\mathbb{E}(I_A)$.
+\item[\myth{Lemma}] $X$ e $Y$ indipendenti $\implies \mathbb{E}(XY)=\mathbb{E}(X)\mathbb{E}(Y)$. Il viceversa non è vero in generale.
+
+\item[V.a.d. \hl{non correlate} (uncorrelated)] Se  $\mathbb{E}(XY)=\mathbb{E}(X)\mathbb{E}(Y)$ \\
+Quindi variabili indipendenti $\implies$ non correlate, ma non viceversa
+
+\item[\myth{Teorema}] $X$ e $Y$ due variabili aleatorie. Allora:
+\begin{enumerate}[(a)]
+    \item $var(aX)=a^2var(X)$ (\textbf{non linearità} dell'operatore var)
+    \item se $X$ e $Y$ non correlate $\implies var(X+Y)=var(X)+var(Y)$
+\end{enumerate}
+Dim: usare var in funzione di $\mathbb{E}$ e poi la linearità di $\mathbb{E}$.
+
+\end{description}
+
+
+
+\section*{Vettori aleatori e condizionamenti (caso discreto)}
+\begin{description}
+\item[Vettori aleatori] Siano $X$ e $Y$ due variabili aleatorie sullo stesso spazio di probabilità. Allora il vettore aleatorio è: $\bvec{X}=[X,Y]: \om \to \mathbb{R}^2$ 
+
+\item[Funzione di ripartizione congiunta (Joint CDF)] di $X$ e $Y$ è $$F:\re^2\to[0,1] \quad \mid  \quad F(x,y)=\pr(X\le x \wedge Y\le y)$$
+Denominata con $F_{X,Y}$
+
+\item[Funzione di probabilità congiunta (Joint PMF)] di $X$ e $Y$ è 
+\begin{align*}
+    f:\re^2\to[0,1] \quad \mid  \quad f(x,y)&=\pr(X= x \wedge Y= y) \\
+&=\pr(\bvec{X}=(x,y))
+\end{align*}
+Denominata con $f_{X,Y}$ \\
+NB: è una \textbf{funzione}, ovvero le preimmagini di due punti del piano distinti sono distinte. Infatti se così  non fosse ci sarebbe un $\omega \in \overbrace{(X^{-1}_1 \cap Y^{-1}_1)}^{\text{preim. primo punto}}\cap \overbrace{(X^{-1}_2 \cap Y^{-1}_2)}^{\text{preim. secondo punto}}$, ma ciò implica che appartiene anche all'intersezione $X^{-1}_1 \cap X^{-1}_2$, andando contro l'ipotesi che $X$ (e $Y$) siano funzioni.
+
+\item[\myth{Lemma}]  $X$ e $Y$ sono \hl{indipendenti} $\iff f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)$ per ogni $x,y\in\re$ \\
+Più in generale sono indipendenti $\iff f_{X,Y}(x,y)$ può essere fattorizzato come prodotto $g(x)h(y)$ di due funzioni, una solo in $x$ e l'altra solo in $y$
+
+\item[\myth{Lemma}] $\ex(g(X,Y))=\sum_{x,y}g(x,y)f_{X,Y}(x,y)$
+
+\item[Covarianza] di $X$ e $Y$ è:
+$$cov(X,Y)\coloneqq\ex[(X-\ex X)(Y-\ex Y)]$$
+Il concetto di covarianza generalizza quello di varianza, in quanto $cov(X,X)=var(X)$.\\
+Espandendo la def e usando la linearità di $\ex$ otteniamo:
+$$cov(X,Y)= \ex(XY)-\ex(X)\ex(Y)$$
+
+\item[Coefficiente di correlazione] di $X$ e $Y$ è:
+$$\rho(X,Y)=\frac{cov(X,Y)}{\sqrt{var(X)var(Y)}}$$
+È una normalizzazione della covarianza, in modo che $\rho$ assuma valori in $[-1,1]$
+
+\item[\myth{Oss.}] $X$ e $Y$ sono non correlate $\iff cov(X,Y)=0$
+\item[\myth{Lemma}] $|\rho(X,Y)|\le 1$,  con uguale $\iff \exists a,b,c \in \re \mid \pr(aX+bY=c)=1$ \\
+Si dimostra con la dis. di Cauchy-Schwarz.
+\item[\myth{Teorema (disugualianza di Cauchy-Shwarz)}] $\{\ex(XY)\}^2\le\ex(X^2)\ex(Y^2)$ con uguale $\iff \exists a,b\in \re$ con almeno uno $\ne 0 \mid \pr(aX=bY)=1$
+\item[\myth{Oss.}] $\rho = +1 (-1)\iff Y$ cresce (decresce) \textbf{linearmente} quando $X$ cresce. 
+
+\item[Funzione di ripartizione condizionata] di  $Y$ dato $X$ è $F_{Y|X}(y \mid x)
+\coloneqq \pr(Y\le y \mid X=x)$  per  ogni $x\mid\pr(X=x)>0$
+
+\item[Funzione di probabilità condizionata] di  $Y$ dato $X$ è $f_{Y|X}(y \mid x)
+\coloneqq \pr(Y= y \mid X=x)$ per  ogni $x\mid\pr(X=x)>0$. \\
+Usando la def. di prob. condizionata si può anche scrivere come $f_{Y|X}=f_{X,Y}/f_X$
+
+\item[\myth{Oss.}] $X$ e $Y$ sono indipendenti $\iff f_{Y|X}=f_Y$
+
+\item[Valore atteso condizionato] di  $Y$ dato $X$ è $\psi(x)\coloneqq\ex(Y\mid X=x)=\sum_y yf_{Y|X}(y\mid x)$ al variare di $x$.\\
+Non è un numero, ma funzione di $X$, quindi una variabile aleatoria a sua volta.
+
+\item[\myth{Teorema}] $\ex(\psi(X))=\ex(\ex(Y\mid X))=\ex(Y)$ \\
+Da ciò segue una nuova espressione per il valore atteso (analogo alla formula della prob. totale):
+$$\ex(Y)=\sum_x \ex(Y\mid X=x)\pr(X=x)$$
+Più in generale: $\ex[\psi(X)g(X)]=\ex[Yg(X)]$
+
+\item[\myth{Teorema (convoluzione)}] $\pr(X+Y=z)=\sum_x f_{X,Y}(x, z-x)=\sum_x \pr(X=x \wedge Y=z-x)$ \\
+Se $X$ e $Y$ sono indipendenti, allora $$\pr(X+Y=z)=f_{X+Y}(z)=\sum_x f_X(x)f_Y(z-x)=\sum_y f_X(z-y)f_Y(y)$$
+Gli ultimi due membri sono detti \textbf{convoluzione  discreta} di $f_X$ e $f_Y$
+
+\end{description}
+
+\pagebreak
+
+\part{Variabili aleatorie continue}
+\begin{description}
+\item[Variabile aleatoria continua] Se la sua funzione di ripartizione può essere espressa come integrale, ovvero nella forma:
+\[F(x)=\int_{-\infty}^{x}f(u)du \quad x\in\mathbb{R}\]
+dove $f(u)$ è una funzione integrabile, $f: \mathbb{R}\to[0,\infty)$, chiamata funzione di densità di  probabilità (prob. density f.)
+
+\item[Funzione di densità di probabilità (pr. density f.)] $f: \Omega = \re \to \re$ è una densità di probabilità se soddifa:
+\begin{itemize}
+    \item[i)] $f(x)\ge0$ per ogni $x\in\Omega$
+    \item[ii)] $f$ è integrabile secondo Riemann su ogni segmento limitato $S\subseteq \Omega$, in senso proprio ($f$ limitata) o in senso improprio ($f$ illimitata).
+    \item[iii)] $\int_\Omega f(x)dx=1$ 
+\end{itemize}
+Quando $f$ è illimitata, per esempio su $[a,b)$ limitato, si dice che è integrabile se è finito il limite $\lim_{k\to+\infty}\int_S f_k(x)dx$ dove $f_k(x)\coloneqq min\{f(x),b-\frac{1}{k}\}$. Se il segmento è illimitato, è integrabile se è finito il limite per un estremo o entrambi che tendono a $\pm\infty$
+
+
+\item[Funzione di ripartizione]
+\item[\myth{Oss.}] Probabilità su un insieme $B\subset \re$: $\int_B f(x)dx$
+\item[Valore atteso] $\ex(X)=\int_{-\infty}^{+\infty}xf(x)dx$
+\item[\myth{Teorema (cambio variabile)}] $\ex(g(X))=\int_{-\infty}^{+\infty}g(x)f_X(x)dx$
+\item[\myth{Lemma}] Se $X$ ha p.d.f. $f(x)=0$ se $x=0$, allora $\ex(X)=\int_0^{+\infty}[1-F(x)]dx$ 
+\end{description}
+
+\section*{Vettori aleatori continui}
+\begin{description}
+    \item[Densità marginale] $$f_X(x)=\int_{-\infty}^{+\infty}f(x,y)dy $$
+    $$
+    f_Y(y)=\int_{-\infty}^{+\infty}f(x,y)dx $$ 
+
+\item[\myth{Valore atteso}] Se $g: \re^2\to\re$ allora:
+$$\ex(g(X,Y))=\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}g(x,y)f(x,y)dxdy$$ \\
+(vedi caso in cui siano indip)
+
+\item[\myth{Cambio variabile di densità congiunta}] densità(funz-cambiovariabile) per det(jacobiano) del cambio 
+
+\item[Somma di var.]  Vedi caso discreto e usa integrale da -inf a +inf
+\end{description}
+
+\section*{Variabili aleatorie miste (discrete+continue)}
+Sono v.a. che hanno una parte continua (ovvero per quei valori la CDF è continua ed c'è il concetto di densità di prob.) e parte discreta (ovvero esiste un singolo valore la cui rpob. è $\ne 0$, e in quel punto si ha concetto di prob. di massa e la CDF ha un salto). 
+\vspace{2mm}
+
+Esempio: \url{https://www.probabilitycourse.com/chapter4/4_3_1_mixed.php}
+\vspace{2mm}
+
+Se derivo le parti continue della CDF (quindi saltando i punti di discontinuità) esse non saranno una PDF perché l'integrale non vale 1, ma vale uno se ci sommiamo la sommatoria delle probabilità dei punti in cui è discreta.
+La CDF di ogni v.a. mista può essere scritta come \textbf{somma di una parte continua e una discontinua}.
+
+
+\pagebreak
+\part{Funzioni generatrici e caratteristiche}
+\section*{Funzione generatrice delle probabilità}
+\begin{description}
+\item[Ordinary generating function (OGF)] di una successione $a_n$ è: $$G(a_n,x)=\sum_{n=0}^\infty a_nx^n$$
+È la serie di potenze con coefficienti i termini della successione.
+    \item[Funzione generatrice delle probabilità] Definita per una v.a. $X$ discreta \underline{a valori in $\mathbb{N}_0$} (\textbf{discreta positiva}) è 
+    \begin{align*}
+    G(z) &= \ex[z^X] \quad \quad \text{per $z\in \re$ in cui converge} \\
+    &= \sum_{n=0}^{\infty}z^nf(n)
+    \end{align*} 
+  È la OGF della successione $\{f(n)\}_n$ delle probabilità di massa. È una \textbf{serie di potenze}, che quindi converge sicuramente per  $z \in (-1,1)$, ma inoltre per $z=1$ converge in quanto la sommatoria (delle probabilità) vale 1, quindi converge anche per $-1 \implies$ \textbf{definita almeno in} $\pmb{-1 \le z \le 1}$. Il raggio di convergenza può essere anche maggiore, per esempio nel caso in cui $X$ assume un numero finito di valori.
+
+\item[\myth{Oss.}] Le funzioni  generatrici caratterizzano la PMF, ovvero \\
+\begin{equation*}
+    \text{$X,Y$ hanno la stessa PMF $\iff$ hanno la stessa funzione caratteristica}
+\end{equation*}
+\begin{dimo}
+$\Rightarrow$) ovvio \\
+$\Leftarrow$) vedi teoria serie di potenze. Con la  seguente formula posso ricavare il coefficiente $n$-esimo della serie:
+$$f(n)=\frac{1}{n!}\frac{d^nG_X}{dx^n}(0)$$
+Calcolare la derivata $n$-esima serve per rimuovere tutti i termini a sinistra della serie (minori di $n$), calcolarla in zero  serve per rimuovere tutti i termini a destra (maggiori di $n$).
+\end{dimo}
+
+\item[\myth{Prop.}] Se $X,Y$ sono indipendenti, allora $G_{X+Y}(z)=G_X(z)G_Y(z)$ 
+
+\begin{dimo}
+    $$G_{X+Y}(z) \myeq{def} \ex[z^{X+Y}] = \ex[z^Xz^Y] \overset{\star}{=} \ex[z^X]\ex[z^Y] \myeq{def} G_X(z)G_Y(z)$$
+
+  $\star =$ per teo. funzioni di v.a.  indip sono indip, e per lemma indip $\implies$ scorrelate
+\end{dimo}
+
+\item[\myth{Prop. (momenti dalla funz generatrice)}] Se il raggio di convegenza è $>1$ (devo poter fare la derivata in 1):
+\begin{enumerate}[(a)]
+    \item $\ex[X]= G'_X(1)$
+    \item Var($X) = \ex[X^2]- \ex[X]^2=  G''_X(1) +G'_X(1) - G'_X(1)^2 $
+\end{enumerate}
+
+\begin{dimo}
+Basta calcolare le derivate prima e seconda di $G_X(z)$ e poi in 1, derivata prima in 1 è esattamente il valore atteso, combinando la prima e seconda  trovo la varianza.
+\end{dimo}
+
+\end{description}
+
+\section*{Funzione generatrice dei momenti}
+\begin{description}
+   \item[Exponential generating function (EGF)] di una successione $a_n$ è: $$EG(a_n,x)=\sum_{n=0}^\infty \frac{a_n}{n!}x^n$$
+\end{description}
+
+
+
+
+
+
+\part{Convergenza di Successioni di Variabili Aleatorie e principali Teoremi
+Limite del Calcolo delle Probabilità}
+
+\section*{Definizioni}
+
+\paragraph*{Convergenze di variabili aleatorie }
+
+\begin{align*}
+ & \text{Quasi certa} &  & X_{n}\overset{\text{q.c.}}{\longrightarrow}X &  & P\left(\lim_{n\rightarrow+\infty}X_{n}\left(\omega\right)=X\left(\omega\right)\right)=1\\
+ & \text{In media di ordine \ensuremath{p\geq1}} &  & X_{n}\overset{L^{p}}{\longrightarrow}X &  & \lim_{n\rightarrow+\infty}\mathbb{E}\left[\left|X_{n}-X\right|^{p}\right]=0 &  & \mathbb{E}\left|X\right|^{p},\mathbb{E}\left|X_{n}\right|^{p}<+\infty\quad\forall n\\
+ & \text{In probabilità} &  & X_{n}\overset{P}{\longrightarrow}X &  & \lim_{n\rightarrow+\infty}P\left(\left|X_{n}-X\right|>\varepsilon\right)=0 &  & \forall\varepsilon>0\\
+ & \text{In distribuzione / In legge} &  & X_{n}\overset{\text{d}}{\longrightarrow}X &  & F_{X_{n}}\left(x\right)\overset{n\rightarrow+\infty}{\longrightarrow}F_{X}\left(x\right) &  & \text{punt. }\forall x\;|\;F\left(x\right)\text{ continua}
+\end{align*}
+
+
+\paragraph*{Successioni di variabili aleatorie indipendenti identicamente distribuite
+(i.i.d.)}
+
+\section*{Teoremi}
+
+\subsection*{Implicazioni tra convergenze}
+
+\[
+\begin{array}{ccccc}
+\overset{q>p}{\overbrace{X_{n}\overset{L^{q}}{\longrightarrow}X}} & \;\Longrightarrow\; & X_{n}\overset{L^{p}}{\longrightarrow}X\\
+ &  & \Downarrow\\
+X_{n}\overset{\text{q.c.}}{\longrightarrow}X & \;\Longrightarrow\; & X_{n}\overset{P}{\longrightarrow}X & \;\Longrightarrow\; & X_{n}\overset{d}{\longrightarrow}X
+\end{array}
+\]
+
+
+\subparagraph*{Dimostrazione}
+\begin{itemize}
+\item $X_{n}\overset{L^{p}}{\longrightarrow}X\;\Longrightarrow\;X_{n}\overset{P}{\longrightarrow}X$:
+per la disuguaglianza di Markov, $P\left(\left|X_{n}-X\right|>\varepsilon\right)\leq\frac{\mathbb{E}\left|X_{n}-X\right|}{\varepsilon}\longrightarrow0$
+\item $X_{n}\overset{P}{\longrightarrow}X\;\Longrightarrow\;X_{n}\overset{d}{\longrightarrow}X$:
+prendo $F_{n}\left(x\right)=P\left(X_{n}\leq x\right)$ e $F\left(x\right)=P\left(X\leq x\right)$.
+Se riesco a dimostrare per un certo $\alpha_{n}^{\varepsilon}\overset{n\rightarrow+\infty}{\longrightarrow}0$
+vale
+\[
+F\left(x-\varepsilon\right)-\alpha_{n}^{\varepsilon}\leq F_{n}\left(x\right)\leq F\left(x+\varepsilon\right)+\alpha_{n}^{\varepsilon}
+\]
+ho dimostrato, in quanto
+\begin{align*}
+\liminf_{n\rightarrow+\infty}\left[F\left(x-\varepsilon\right)-\alpha_{n}^{\varepsilon}\right]\leq\liminf_{n\rightarrow+\infty}F_{n}\left(x\right)\leq\limsup_{n\rightarrow+\infty}F_{n}\left(x\right)\leq\limsup_{n\rightarrow+\infty}\left[F\left(x+\varepsilon\right)+\alpha_{n}^{\varepsilon}\right]\\
+F\left(x-\varepsilon\right)\leq\liminf_{n\rightarrow+\infty}F_{n}\left(x\right)\leq\limsup_{n\rightarrow+\infty}F_{n}\left(x\right)\leq F\left(x+\varepsilon\right)\text{, che per \ensuremath{x} di continuità è la tesi}
+\end{align*}
+Per la stima dall'alto ho
+\[
+F_{n}\left(x\right)=P\left(X_{n}\leq x\right)=\underset{\left(\boldsymbol{1}\right)}{\underbrace{P\left(X_{n}\leq x,X\leq x+\varepsilon\right)}}+\underset{\left(\boldsymbol{2}\right)}{\underbrace{P\left(X_{n}\leq x,X>x+\varepsilon\right)}}\leq\underset{\left(\boldsymbol{1}\right)}{\underbrace{F\left(x+\varepsilon\right)}}+\underset{\left(\boldsymbol{2}\right)}{\underbrace{\overset{\alpha_{n}^{\varepsilon}}{\overbrace{P\left(\left|X_{n}-X\right|>\varepsilon\right)}}}}
+\]
+analogamente per quella dal basso.
+\item $X_{n}\overset{\text{q.c.}}{\longrightarrow}X\;\Longrightarrow\;X_{n}\overset{P}{\longrightarrow}X$:
+\end{itemize}
+
+\subparagraph*{Lemma}
+\begin{enumerate}
+\item $X_{n}\overset{\text{q.c.}}{\longrightarrow}X\;\Longleftrightarrow\;\forall\varepsilon>0\;\lim_{m\rightarrow+\infty}P\left(\bigcup_{n\geq m}\left\{ \left|X_{n}-X\right|>\varepsilon\right\} \right)=0$
+\item $\sum_{n}P\left(\left|X_{n}-X\right|>\varepsilon\right)<+\infty\;\Longrightarrow\;X_{n}\overset{\text{q.c.}}{\longrightarrow}X$
+\end{enumerate}
+
+\subsection*{Teorema Centrale del Limite}
+
+Sia data una successione $\left\{ Y_{n}\right\} _{n\geq1}$ di v.a.
+i.i.d definite su $\left(\Omega,\mathscr{F},\overline{P}\right)$,
+tali per cui
+\begin{enumerate}
+\item $\mathbb{E}\left[Y_{1}^{2}\right]<+\infty$ ($\mathbb{E}\left[Y_{n}^{2}\right]<+\infty\;\forall n$)
+\item $\sigma^{2}\coloneqq\text{Var}\left(Y_{1}\right)>0$ (equivalente
+a $\sigma^{2}\coloneqq\text{Var}\left(Y_{n}\right)>0\quad\forall n\in\mathbb{N}$).
+\end{enumerate}
+Allora, posto
+\[
+X_{n}\coloneqq\frac{\left(\sum_{i=1}^{n}Y_{i}\right)-n\mu}{\sqrt{n\sigma^{2}}}\qquad\text{con \ensuremath{\mu\coloneqq\mathbb{E}\left[Y_{1}\right]}}
+\]
+
+si ha $X_{n}\overset{d}{\longrightarrow}X$, dove $X$ è una qualunque
+v.a. su $\left(\Omega,\mathscr{F},\overline{P}\right)$ con distribuzione
+Gaussiana standard.
+
+\subparagraph*{Dimostrazione}
+
+Condizione più restrittiva: richiediamo che $\exists z_{*}\,|\,M_{Y_{1}}\left(t\right)\coloneqq\mathbb{E}\left[e^{tY_{1}}\right]<+\infty\,\forall z\in\left(0,z_{*}\right)$
+\begin{itemize}
+\item Sia $\overline{Y_{n}}\coloneqq Y_{n}-\mu$, si deduce che
+\begin{align*}
+M_{X_{n}}\left(z\right) & =\mathbb{E}\left[\exp\left\{ \frac{z}{\sqrt{n\sigma^{2}}}\sum_{i=1}^{n}\overline{Y_{i}}\right\} \right]=\mathbb{E}\left[\prod_{i=1}^{n}\exp\left\{ \frac{z}{\sqrt{n\sigma^{2}}}\overline{Y_{i}}\right\} \right]=\prod_{i=1}^{n}\mathbb{E}\left[\exp\left\{ \frac{z}{\sqrt{n\sigma^{2}}}\overline{Y_{i}}\right\} \right]=\\
+ & =\prod_{i=i}^{n}M_{\overline{Y_{i}}}\left(\frac{z}{\sqrt{n\sigma^{2}}}\right)=\left(M_{\overline{Y_{1}}}\left(\frac{z}{\sqrt{n\sigma^{2}}}\right)\right)^{n}\\
+M_{\overline{Y_{i}}}\left(\frac{z}{\sqrt{n\sigma^{2}}}\right)= & \mathbb{E}\left[\exp\left\{ \frac{z\left(Y_{i}-\mu\right)}{\sqrt{n\sigma^{2}}}\right\} \right]=e^{-z\mu}M_{Y_{1}}\left(\frac{z}{\sqrt{n\sigma^{2}}}\right)\qquad\begin{array}{l}
+\forall z>0\;\exists n_{0}\,|\,\forall n\geq n_{0}\quad\frac{z}{\sqrt{n\sigma^{2}}}\leq z_{*}\\
+\text{quindi definitivamente ben definita}
+\end{array}
+\end{align*}
+\item Osservo che 
+\[
+M_{X}\left(t\right)=\int_{-\infty}^{+\infty}\frac{1}{\sqrt{2\pi}}e^{-\frac{x^{2}}{2}+xz}dx=e^{\nicefrac{z^{2}}{2}}\int_{-\infty}^{+\infty}\frac{1}{\sqrt{2\pi}}e^{\nicefrac{-\left(x-z\right)^{2}}{2}}dx=e^{\nicefrac{z^{2}}{2}}
+\]
+\item Siccome $M_{\overline{Y_{i}}}<+\infty$ in $\left(0,z_{*}\right)$
+allora $M_{\overline{Y_{i}}}\in C^{k}\left(-z_{*},z_{*}\right)$,
+e per Taylor ho
+\begin{align*}
+M_{\overline{Y_{1}}}\left(z\right) & =M_{\overline{Y_{1}}}\left(0\right)+zM_{\overline{Y_{1}}}^{\prime}\left(0\right)+\frac{z^{2}}{2}M_{\overline{Y_{1}}}^{\prime\prime}\left(0\right)+o\left(\left|z\right|^{3}\right)=\\
+ & =\underset{1}{\underbrace{M_{\overline{Y_{1}}}\left(0\right)}}+z\underset{0}{\underbrace{\mathbb{E}\left[\overline{Y_{1}}\right]}}+\frac{z^{2}}{2}\underset{\sigma^{2}}{\underbrace{\mathbb{E}\left[\overline{Y_{1}}^{2}\right]}}+o\left(\left|z\right|^{3}\right)=1+\frac{z^{2}}{2}\sigma^{2}+o\left(\left|z\right|^{3}\right)\\
+M_{X_{n}}\left(z\right) & =\left(1+\frac{z^{2}}{2n\cancel{\sigma^{2}}}\cancel{\sigma^{2}}+o\left(\frac{\left|z\right|^{3}}{n^{\nicefrac{3}{2}}\sigma^{3}}\right)\right)^{n}\overset{n\rightarrow+\infty}{\longrightarrow}e^{\nicefrac{z^{2}}{2}}=M_{X}\left(t\right)
+\end{align*}
+\item La tesi deriva da $\lim_{n\rightarrow+\infty}M_{X_{n}}\left(t\right)=M_{X}\left(t\right)$
+e dal teorema di Curtiss
+\end{itemize}
+
+\subsection*{Legge Debole dei Grandi Numeri}
+
+Sia data una successione $\left\{ Y_{n}\right\} _{n\geq1}$ di v.a.
+i.i.d definite su $\left(\Omega,\mathscr{F},\overline{P}\right)$,
+tali per cui $\mathbb{E}\left[Y_{1}^{2}\right]<+\infty$ ($\mathbb{E}\left[Y_{n}^{2}\right]<+\infty\;\forall n$)
+
+Allora, posto $X_{n}\coloneqq\frac{1}{n}\sum_{i=1}^{n}Y_{i}$ si ha
+$X_{n}\overset{L^{2}}{\longrightarrow\mu}$, con $\mu\coloneqq\mathbb{E}\left[Y_{1}\right]$,
+ovvero $\mathbb{E}\left[\left(X_{n}-\mu\right)^{2}\right]\overset{n\rightarrow+\infty}{\longrightarrow}0$
+
+\subparagraph*{Dimostrazione}
+
+Per linearità si ha 
+\[
+\mathbb{E}\left[X_{n}\right]=\mathbb{E}\left[\frac{1}{n}\sum_{i=1}^{n}Y_{i}\right]=\frac{1}{n}\sum_{i=1}^{n}\mathbb{E}\left[Y_{i}\right]=\frac{1}{n}n\mu=\mu
+\]
+quindi ho che 
+\[
+\mathbb{E}\left[\left(X_{n}-\mu\right)^{2}\right]=\mathbb{E}\left[\left(X_{n}-\mathbb{E}\left[X_{n}\right]\right)^{2}\right]=\text{Var}\left(X_{n}\right)
+\]
+dunque la tesi deriva da
+\[
+\text{Var}\left(X_{n}\right)=\text{Var}\left(\frac{1}{n}\sum_{i=1}^{n}Y_{i}\right)=\frac{1}{n^{2}}\sum_{i=1}^{n}\text{Var}\left(Y_{i}\right)=\frac{\bcancel{n}\cdot\sigma^{2}}{n^{\bcancel{2}}}\overset{n\rightarrow+\infty}{\longrightarrow}0
+\]
+
+
+\subsection*{Legge Forte dei Grandi Numeri}
+
+Sia data una successione $\left\{ Y_{n}\right\} _{n\geq1}$ di v.a.
+i.i.d definite su $\left(\Omega,\mathscr{F},\overline{P}\right)$,
+tali per cui $\mathbb{E}\left[Y_{1}^{4}\right]<+\infty$ ($\mathbb{E}\left[Y_{n}^{4}\right]<+\infty\;\forall n$)
+{[}basta in realtà $\mathbb{E}\left[\left|Y_{1}\right|\right]<+\infty$
+(Kolmogorov){]}
+
+Allora, posto $X_{n}\coloneqq\frac{1}{n}\sum_{i=1}^{n}Y_{i}$ si ha
+$X_{n}\overset{\text{q.c.}}{\longrightarrow\mu}$, con $\mu\coloneqq\mathbb{E}\left[Y_{1}\right]$
+
+\subparagraph*{Dimostrazione}
+
+Dimostro usando 2. del lemma, $\sum_{n=1}^{+\infty}P\left(\left|X_{n}-X\right|>\varepsilon\right)<+\infty$,
+per Markov $P\left(\left|X_{n}-X\right|>\varepsilon\right)\leq\frac{\mathbb{E}\left[\left(X_{n}-X\right)^{4}\right]}{\varepsilon^{4}}$,
+da cui prendendo $\overline{Y_{n}}\coloneqq Y_{n}-\mu$
+\[
+\mathbb{E}\left[\left(X_{n}-X\right)^{4}\right]=\frac{1}{n^{4}}\mathbb{E}\left[\left(\sum_{i=1}^{n}\overline{Y_{i}}\right)^{4}\right]=\frac{1}{n^{4}}\sum_{\begin{array}{c}
+\left(r_{1},\dots,r_{n}\right)\in\mathbb{N}_{0}^{n}\\
+r_{1}+\dots+r_{n}=4
+\end{array}}\frac{4!}{r_{1}!\dots r_{n}!}\mathbb{E}\left[\overline{Y_{1}}^{r_{1}}\cdot\dots\cdot\overline{Y_{n}}^{r_{n}}\right]
+\]
+Osserviamo che $\mathbb{E}\left[\overline{Y_{1}}^{r_{1}}\cdot\dots\cdot\overline{Y_{n}}^{r_{n}}\right]=\mathbb{E}\left[\overline{Y_{1}}^{r_{1}}\right]\cdot\dots\cdot\mathbb{E}\left[\overline{Y_{n}}^{r_{n}}\right]$
+e che $\mathbb{E}\left[\overline{Y_{i}}\right]=0$. Gli $r_{i}$ si
+possono partizionare in vari modi, ma se si ha $r_{i}=1$, si annulla.
+Rimangono solo le partizioni (A) $r_{i}=4,\,r_{\text{restanti}}=0$
+e (D) $r_{i}=2,\,r_{j\neq i}=2,\,r_{\text{restanti}}=0$
+\begin{align*}
+\sum_{A} & =\frac{1}{n^{4}}\sum_{i=1}^{n}\frac{\bcancel{4!}}{\bcancel{4!}}\mathbb{E}\left[\overline{Y_{i}}^{4}\right]=\frac{1}{n^{3}}\mathbb{E}\left[\overline{Y_{1}}^{4}\right]=O\left(\frac{1}{n^{3}}\right)\\
+\sum_{D} & =\frac{1}{n^{4}}\sum_{i\neq j}\frac{4!}{2!\cdot2!}\mathbb{E}\left[\overline{Y_{i}}^{2}\right]\mathbb{E}\left[\overline{Y_{j}}^{2}\right]=\frac{1}{n^{4}}\binom{n}{2}\frac{4!}{2!\cdot2!}\left(\mathbb{E}\left[\overline{Y_{i}}^{2}\right]\right)^{2}=O\left(\frac{1}{n^{2}}\right)
+\end{align*}
+
+Quindi
+\[
+P\left(\left|X_{n}-\mu\right|>\varepsilon\right)\leq\frac{\mathbb{E}\left[\left(X_{n}-\mu\right)^{4}\right]}{\varepsilon^{4}}\leq\frac{O\left(\nicefrac{1}{n^{2}}\right)}{\varepsilon^{4}}<+\infty\quad\Longrightarrow\quad\sum_{n=1}^{+\infty}P\left(\left|X_{n}-X\right|>\varepsilon\right)<+\infty\quad\Longrightarrow\quad X_{n}\overset{\text{q.c.}}{\longrightarrow}\mu
+\]
+
+
+
+
+
+
+
+
+
+\part{Controesempi}
+\begin{description}
+    \item[Paradosso dei prigionieri]
+    \item[Problema di Monty Hall] 
+\end{description}
+\part{Esercizi}
+
+Figata: \url{https://stats.libretexts.org/Bookshelves/Probability_Theory/Probability_Mathematical_Statistics_and_Stochastic_Processes_(Siegrist)/04%3A_Expected_Value/4.11%3A_Vector_Spaces_of_Random_Variables}
+
+\end{document}

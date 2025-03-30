@@ -1,0 +1,634 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{geometry} %Per impostare i  margini del foglio
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+%\setcounter{secnumdepth}{1} %per subsection non numerate ma nell'indice
+\usepackage[italian]{babel} %Mette in italiano tutte le parole fisse di LaTeX (v. "TITOLO")
+\usepackage[utf8]{inputenc} %Gestisce i caratteri accentati
+\usepackage{comment} %Per  usare \begin{comment}
+\usepackage{amsthm} %per gli ambienti theorem
+\usepackage{amsmath} %cose matematiche
+\usepackage{amssymb} %cose matematiche
+\usepackage{mathrsfs} %per \mathscr
+\usepackage{dsfont} %per \mathds{1}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{units} %per \nicefrac{}{} 
+\usepackage{cancel} %per \cancel{}
+\usepackage{caption} %mettere le descrizioni
+\usepackage{graphicx} %Importare foto
+\usepackage{booktabs}
+%\pagestyle{empty} %per togliere il numero della pagina
+\usepackage{xcolor} %per \color{} e \textcolor{}{}
+\usepackage{empheq} 
+%\usepackage{enumitem} %Insieme  ai vari \renewcommand per fare elenchi coi numeri belli
+\usepackage[shortlabels]{enumitem}
+\usepackage{physics} %Per avere \nabla in grassetto
+\usepackage[most]{tcolorbox} %Box colorati teoremi 
+\usepackage{mdframed}
+\usepackage{framed}
+\usepackage{color,soul} %per evidenziare con il comando highlight \hl
+\usepackage{hyperref} %per URL (con \url{}) e hyperlink
+\usepackage{tikz} %robe  disegnate
+\usepackage{tikz-cd}
+\usetikzlibrary{matrix,shapes}
+\usepackage{color}
+\definecolor{shadecolor}{rgb}{0.902344, 0.902344, 0.902344}
+\usepackage{wasysym} %per \lightning
+\usepackage{eucal}[mathcal]
+\usepackage{pdflscape} %per \begin{landscape}
+\usepackage{yfonts} %per \textfrak
+\usepackage{tabularx} %per
+
+
+
+%DA BARABBA%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{tikz}
+%\usepackage[unicode=true,pdfusetitle,
+% bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+% breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+% {hyperref}
+\usepackage{changepage}
+
+\usepackage{array}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{calc}
+\usepackage{units}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{todonotes}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{wasysym}
+\PassOptionsToPackage{obeyFinal}{todonotes}
+
+\newlist{casenv}{enumerate}{4}
+\setlist[casenv]{leftmargin=*,align=left,widest={iiii}}
+\setlist[casenv,1]{label={{\itshape\ \casename} \arabic*.},ref=\arabic*}
+\setlist[casenv,2]{label={{\itshape\ \casename} \roman*.},ref=\roman*}
+\setlist[casenv,3]{label={{\itshape\ \casename\ \alph*.}},ref=\alph*}
+\setlist[casenv,4]{label={{\itshape\ \casename} \arabic*.},ref=\arabic*}
+
+\providecommand{\exercisename}{Esercizio}
+\theoremstyle{definition}
+\newtheorem*{xca*}{\protect\exercisename}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\DeclareMathOperator*{\rot}{rot}
+%\DeclareMathOperator*{\divergence}{div}
+\DeclareMathOperator*{\mis}{mis}
+\DeclareMathOperator*{\vers}{vers}
+\DeclareMathOperator*{\diag}{diag}
+\DeclareMathOperator*{\ran}{ran}
+\DeclareMathOperator*{\dom}{dom} %dominio
+\DeclareMathOperator*{\gr}{gph} %grafico
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%RINOMINA DI COMANDI
+%\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+%\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+%\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+\newcommand{\bv}{\boldsymbol} %per scrivere i vettori in  grassetto usare \bv
+\newcommand{\cv}[2]{\begin{pmatrix} #1 \\ #2 \end{pmatrix}} %column vector di due dim
+\newcommand{\cvv}[3]{\begin{pmatrix} #1 \\ #2 \\ #3 \end{pmatrix}} %column vector di tre dim
+\newcommand{\myth}{\normalfont \scshape \textcolor{red}} %mio modo custom di mettere teoremi/lemmi/proposizioni
+
+\newcommand{\na}{\mathbb{N}} %numeri naturali
+\newcommand{\za}{\mathbb{Z}} %numeri interi (Zahlen)
+\newcommand{\qu}{\mathbb{Q}} %numeri razionali (quotient)
+\newcommand{\re}{\mathbb{R}} %numeri reali
+\newcommand{\im}{\mathbb{C}} %numeri immaginari
+\newcommand{\id}{\mathbb{I}} %numeri immaginari
+
+\newcommand{\inj}{\hookrightarrow} %injective
+\newcommand{\hookdoubleheadrightarrow}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+\newcommand{\sur}{\twoheadrightarrow} %suriective
+\newcommand{\bij}{\hookdoubleheadrightarrow} %bijective freccia per funz. biettive
+\newcommand{\supp}{\text{supp}} %supporto di una funzione
+\newcommand{\llim}[2]{#2\text{-}\lim_{#1\to\infty}} %limite
+\newcommand{\limm}[2]{\overunderset{#1\to\infty}{#2}{\longrightarrow}} %limite
+
+
+\newcommand{\pr}{\text{I\kern-0.15em P}} %probabilità
+\newcommand{\ex}{\mathbb{E}} %operatore valore atteso/media
+\newcommand{\om}{\Omega} %spazio campionario
+\newcommand{\F}{\mathcal{F}} %%sigma algebra, famiglia degli eventi
+
+\newcommand{\myeq}[1]{\stackrel{\mathclap{\normalfont\mbox{\tiny{#1}}}}{=}} %scrivere soppra all'uguale con \myeq{<cosa voglio scrivere>}
+\newcommand{\mylist}[1]{\textnormal{\textsc{#1}}}
+
+\newcommand{\notimplies}{\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}  %per \notimplies
+\newcommand{\notimpliedby}{\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\impliedby$}}}}  %per \notimpliedby
+
+\newcommand{\hil}{\mathcal{H}} %spazio di HIlbert
+
+
+\newcommand\myfunc[5]{         %per scrivere funzioni con dominio, codominio e dove va un elemento
+  \begingroup
+  \setlength\arraycolsep{0pt}
+  #1\colon\begin{array}[t]{c >{{}}c<{{}} c}
+             #2 & \to & #3 \\ #4 & \mapsto & #5 
+          \end{array}%
+  \endgroup}
+
+  \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+  \node[shape=circle,draw,inner sep=1pt] (char) {#1};}} %per \circled{$$}
+
+\newcommand{\inner}{\langle\cdot{,}\cdot\rangle} %per prodotto scalare (interno) vuoto
+\newcommand{\inn}[2]{\langle #1, #2 \rangle}
+\newcommand{\spann}[1]{\langle #1\rangle}
+\newcommand{\noun}[1]{\textsc{#1}}
+\newcommand{\lyxmathsym}[1]{\ifmmode\begingroup\def\b@ld{bold}
+  \text{\ifx\math@version\b@ld\bfseries\fi#1}\endgroup\else#1\fi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%NUOVI STILI
+\newtheoremstyle{indentdefinition}
+{5mm}                % Space above
+{5mm}                % Space below
+{\addtolength{\leftskip}{0mm}\setlength{\parindent}{0em}}        % Theorem body font % (default is "\upshape")
+{0mm}                % Indent amount
+{\bfseries}       % Theorem head font % (default is \mdseries)
+{:}               % Punctuation after theorem head % default: no punctuation
+{ }               % Space after theorem head
+{\thmname{#1} \thmnumber{#2} \thmnote{\textnormal{(\textcolor{blue}{#3})}}}                % Theorem head spec
+
+\newtheoremstyle{indenttheorem}
+{5mm}                % Space above
+{5mm}                % Space below
+{\addtolength{\leftskip}{10mm}\setlength{\parindent}{0em}}        % Theorem body font % (default is "\upshape")
+{-10mm}                % Indent amount
+{\bfseries\scshape\color{red}}       % Theorem head font % (default is \mdseries)
+{.}               % Punctuation after theorem head % default: no punctuation
+{ }               % Space after theorem head
+{\thmname{#1} \thmnumber{#2} \thmnote{(\textnormal{#3})}}                % Theorem head spec
+
+\newtheoremstyle{myremark}
+{5mm}                % Space above
+{5mm}                % Space below
+{}        % Theorem body font % (default is "\upshape")
+{}                % Indent amount
+{\itshape}       % Theorem head font % (default is \mdseries)
+{}               % Punctuation after theorem head % default: no punctuation
+{ }               % Space after theorem head
+{\thmname{#1} \thmnote{(\textbf{#3})}}                % Theorem head spec
+
+\newtheoremstyle{indentgeneral}
+{5mm}                % Space above
+{5mm}                % Space below
+{\addtolength{\leftskip}{10mm}\setlength{\parindent}{0em}}        % Theorem body font % (default is "\upshape")
+{-10mm}                % Indent amount
+{}       % Theorem head font % (default is \mdseries)
+{}               % Punctuation after theorem head % default: no punctuation
+{3mm}               % Space after theorem head
+{\thmnote{\textbf{#3}}}                % Theorem head spec
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%NUOVI AMBIENTI
+
+\theoremstyle{indentdefinition}
+\newtheorem{defn}{Definizione}[section]
+
+\theoremstyle{indenttheorem}
+\newtheorem{thm}{Teorema}
+\newtheorem{prop}{Proposizione}
+\newtheorem{lem*}{Lemma}
+\newtheorem{cor}{Corollario}
+
+\theoremstyle{myremark}
+\newtheorem*{rem*}{Osservazione}
+\newtheorem{example*}{Esempio}
+\newtheorem{notation*}{Notazione}
+
+\theoremstyle{indentgeneral}
+\newtheorem*{gen}{}
+
+\newenvironment{dimo}{\begin{quote}\textit{\textbf{Dimostrazione.}}}{\end{quote}} %dimostrazione con indentatura
+\newenvironment{lyxlist}[1]
+	{\begin{list}{}
+		{\settowidth{\labelwidth}{#1}
+		 \setlength{\leftmargin}{\labelwidth}
+		 \addtolength{\leftmargin}{\labelsep}
+		 \renewcommand{\makelabel}[1]{##1\hfil}}}
+	{\end{list}}
+
+\newsavebox{\mybox}  %per ambiente \myboxed
+\newenvironment{myboxed} 
+{\noindent\begin{lrbox}{\mybox}\begin{minipage}{\textwidth}}
+{\end{minipage}\end{lrbox}\fbox{\usebox{\mybox}}}
+
+\newenvironment{changemargin}[2]{%
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{#1}%
+\setlength{\rightmargin}{#2}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+}%
+\item[]}{\end{list}}
+
+\title{\textbf{Cheatsheet MQ}}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{itemize}
+    \item \textbf{Operatori notevoli:}
+    \begin{align*}
+    \begin{array}{lll}
+        \text{Posizione:}&X\psi\coloneqq x\psi & \bv{X}\psi=\bv{x}\psi  \\
+       &X^2\psi=x^2\psi  & \bv{X}^2\psi=\norm{\bv{x}}^2\psi \\ \\
+       \text{Momento:}&P\psi\coloneqq-i\hbar\partial_x\psi & \bv{P}\psi=-i\hbar\grad \psi\\
+      & P^2=-\hbar^2\partial^2_x\psi & \bv{P}^2=-\hbar^2\Delta \psi
+    \end{array}
+\end{align*}
+\end{itemize}
+
+\part{Sistemi fisici notevoli}
+\section{Oscillatore armonico}
+\begin{itemize}
+    \item \textbf{Monodimensionale:} 
+    \begin{align*}
+    \boxed{H=\frac{P^2}{2m}+\frac{1}{2}m\omega^2X^2}
+\end{align*}
+che ha $$H\left\{\begin{array}{lll}
+       \text{autovalori:} & E_n=\hbar\omega\left(n+\frac{1}{2}\right) & n\in \na_0\\
+    \text{autovettori:} & \ket{n}=\left(\frac{\kappa^2}{\pi}\right)^{\frac{1}{4}}\frac{1}{\sqrt{2^nn!}}H_n(\kappa x)e^{-\frac{1}{2}\kappa^2x^2} & \kappa\coloneqq\sqrt{\frac{m\omega}{\hbar}},\; H_n(x)=(-1)^ne^{x^2}\left(\frac{d}{dx}\right)^ne^{-x^2}\\
+    \end{array}
+    \right.$$
+    Definiamo
+    \begin{align*}
+        \left\{\begin{array}{ll}
+       a\coloneqq\sqrt{\frac{m\omega}{2\hbar}}X+i\frac{1}{\sqrt{2m\hbar\omega}}P & \text{distruzione}\\
+       a^\dagger=\sqrt{\frac{m\omega}{2\hbar}}X-i\frac{1}{\sqrt{2m\hbar\omega}}P & \text{creazione}\\
+       \left[a,a^\dagger\right]=\mathbb{I}  
+    \end{array}
+    \right.\quad \implies\left\{\begin{array}{lll}
+       a\ket{n}=\sqrt{n}\ket{n-1}\\
+       a^\dagger\ket{n}=\sqrt{n+1}\ket{n+1}\\
+       \boxed{a^\dagger a\ket{n}=n\ket{n}}
+    \end{array}
+    \right. \qquad \boxed{H=\hbar\omega\left(a^\dagger a+\frac{1}{2}\right)}
+    \end{align*}
+    \item \textbf{Bidimensionale:}
+    $$\boxed{H=H_x+H_y}=\sum_{i=1}^2\hbar\omega_i\left(a_i^\dagger a_i+\frac{1}{2}\right)$$
+    con i relativi $P_x,X,\omega_x,a_x^\dagger a_x$ e analoghi su $y$, dove gli $a_i$ soddisfano
+    $$\left[a_i,a_j^\dagger\right] =\delta_{ij}\qquad  \left[a_i,a_j\right] =0$$
+    Autovalori sono della forma $\ket{n_x}\otimes\ket{n_y}=\ket{n_x,n_y}$, NB rimane una b.o.c. Quindi ha autovalori
+    $$E_n=\hbar \omega(n_x+n_y+1)\qquad n_x+n_y\in  \na_0$$
+\end{itemize}
+
+
+\section{Particella libera}
+$$H=\underbrace{\frac{P^2}{2m}}_{\text{operatore cinetico}}=-\hbar^2\Delta$$
+\section{Potenziale centrale}
+$$\boxed{H=\frac{P^2}{2m}+V(R)}\qquad R\coloneqq \norm{X}=\sqrt{X_1^2+X_2^2+X_3^2}$$
+Si dimostra che tale hamiltoniana soddisfa la condizione iff per la simmetria per rotazioni del sistema, ovvero
+$$\text{sistema simmetrico per rotazioni}\iff \left[L_i,H\right]=0\quad \forall i\in \{1,2,3\}$$
+\section{Buca di potenziale infinita} 
+$$H=\frac{P^2}{2m}$$
+Problema agli autovalori
+$$\begin{cases}
+    H\psi=E\psi\\
+    \psi|_\partial=0 & \text{condizione al bordo}
+\end{cases}$$
+Allora abbiamo:
+$$\begin{array}{clll}
+     (-\frac{a}{2},\frac{a}{2}) &  \text{Autovalori:} & E_n=\frac{\hbar^2\pi^2}{2ma^2}n^2 & n\in\na_1 \\
+   & \text{Autovettori:} & \ket{\psi_n}=\sqrt{\frac{2}{a}}\overset{\sin}{\cos}(\frac{n\pi x}{a}) & n \overset{\text{ pari}}{\text{ dispari}}\in \na_1\\
+    (0,a) &   \text{Autovalori:} & \text{uguali} &\\
+   & \text{Autovettori:} & \ket{\psi_n}=\sqrt{\frac{2}{a}}\sin(\frac{n\pi x}{a}) & n \in \na_1\\
+\end{array}$$
+
+\pagebreak
+\part{Tecniche}
+\begin{itemize}
+    \item Per scrivere un operatore come matrice in una base $\{\psi_n\}_n$, gli elementi di matrice sono
+    $$H_{ij}=\bra{\psi_i}H\ket{\psi_j}$$
+    \item Se ho Hamiltoniana di due particelle per esempio $H=\bv{J}=\bv{J_1}+J_2$ ho che $U(t)=e^{-i/\hbar\cdot (J_2+J_2)t}$ e vale in generale
+    $$[A,B]=0\implies e^{A+B}=e^Ae^B$$
+\end{itemize}
+\section{Calcolo delle probabilità}
+\begin{itemize}
+\item \textbf{Regola di Born:} dato un operatore $A$, $a\in\sigma(A)$ e $\Pi_{S_a}$ il proiettore su $S_a=$ $a$-autospazio di $A$, abbiamo
+$$\boxed{P(A=a\mid \psi)=\bra{\psi}\Pi_{S_a}\ket{\psi}}=\sum_{i}^{dim(S_a)}\abs{\bra{\psi}\ket{\psi_{a,i}}}^2=\sum_{i}^{dim(S_a)}\abs{\bra{\psi_{a,i}}\ket{\psi}}^2$$
+Se $a$ è non degenere allora $\Pi_a=\ket{\psi_a}\bra{\psi_a}$ e la regola assume la forma più semplice
+$$P(A=a\mid \psi)=\bra{\psi}\ket{\psi_a}\bra{\psi_a}\ket{\psi}=\abs{\bra{\psi_a}\ket{\psi}}^2$$
+Se invece vogliamo calcolare la probabilità che la misura cada in $\mathcal{X}\subseteq \sigma(A)$, basta definire
+$$\Pi_\mathcal{X}\coloneqq\sum_{a\in \mathcal{X}}\Pi_a$$
+e metterlo nella regola di Born, ovvero è la somma delle probabilità singole.
+    \item \textbf{Probabilità di transire da uno stato a un altro:} al tempo $t$ con stato target $\overline{\psi}$
+    $$P_t(\psi(t)=\overline{\psi})=\abs{\bra{\overline{\psi}}\ket{\psi(t)}}^2\qquad \psi(t)=U(t)\psi(0)$$
+    Più rigorosamente, questa è una semplice applicazione della regola di Borni definendo l'\textbf{operatore target $T$}:
+    $$T\coloneqq \Pi_{\overline{\psi}}=\ket{\overline{\psi}}\bra{\overline{\psi}}$$
+    che è già diagonalizzato e ha autovalori $0,1$. Quindi noi vogliamo calcolare
+    $$P(T=1\mid \psi(t))\overset{\text{Born}}{=}\bra{\psi(t)}T\ket{\psi(t)}=\bra{\psi(t)}\ket{\overline{\psi}}\bra{\overline{\psi}}\ket{\psi(t)}=\abs{\bra{\overline{\psi}}\ket{\psi(t)}}^2$$
+    \item \textbf{Valori medi:} il valore atteso/medio di $A$ nello stato $\psi$ è
+    $$\boxed{\langle A\rangle_\psi=\bra{\psi}A\ket{\psi}}$$
+\end{itemize}
+\section{Evoluzione temporale (tempo-indipendente)}
+\begin{itemize}
+    \item Mettersi sempre nella base degli autostati di $H$
+    \item \textbf{Equazione di Schrodinger:}
+    $$\boxed{\frac{d}{dt}\ket{\psi(t)}=-\frac{i}{\hbar}H\ket{\psi(t)}}$$
+    che ha come soluzione
+    $$\ket{\psi(t)}=\exp\bigg\{-\frac{i}{\hbar}H \cdot (t-t_0)\bigg\}\ket{\psi(t_0)}\coloneqq U(t-t_0)\ket{\psi(t_0)}$$
+    e quindi se abbiamo lo spettro di $H$ puramente discreto:
+    $$U(t-t_0)=\sum_{n=1}^{\sigma_p(H)}e^{-\frac{i}{\hbar}E_n\cdot(t-t_0)}\Pi_n$$
+\end{itemize}
+\section{Momento angolare}
+\textit{a.m.} = angular momentum\\
+\textit{q.n.} = quantum  number
+\begin{table}[H] 
+    \centering
+    \begin{tabularx}{\textwidth}{|c|c|X|X|X|X|}\hline  
+           Cosa riguarda &\textbf{Numero quantico}&\textbf{Nome} (in generale)&  \textbf{In generale} ($J$)&  \textbf{Orbitale} ($L$)& \textbf{Spinoriale} ($S$)\\ \hline  
+           $J^2$&$j$&\textit{Total a.m. q.n}.&  Autov.: $\hbar j(j+1)$&  $l\in \na$ (variabile): \textit{azimuthal q.n}.& $s\in \na/2$ (fissato): \textit{spin q.n.}\\ \hline  
+           $J_3$&$m$&\textit{Total a.m. projection q.n}.&  Autov.: $\hbar m$&  $m\in \{-l,\dots,+l\}$: \textit{magnetic q.n.}& $m\in \{-s,\dots,+s\}$: \textit{spin projection q.n.}\\ \hline 
+    \end{tabularx}
+ 
+\end{table}
+
+\begin{itemize}
+    \item \textbf{In generale:}
+    $$\boxed{\bv{J}=(J_1,J_2,J_3)}\text{ momento angolare}\iff \left[J_a,J_b\right]=i\hbar\sum_{c=1}^3\varepsilon_{a,b,c}J_c\quad \forall a,b,c\in\{1,2,3\}$$
+    Da ciò segue che 
+    $$\bv{J}^2\coloneqq \bv{J}\cdot\bv{J}=\sum_{a=1}^3J_a^2\implies\left[J^2,J_a\right]=0\quad\forall a\in \{1,2,3\}$$
+    Allora, dicendo $\alpha$ la degenerazione abbiamo la seguente \textbf{diagonalizzazione simultanea di $J_3$ e $J^2$}:
+    $$\begin{cases}
+        J_3 \coloneqq \text{comp. lungo z di }\bv{J}\\
+        J^2\coloneqq\bv{J}\cdot\bv{J}\\
+        J_\pm\coloneqq J_1\pm i J_2
+    \end{cases}\quad \implies \left\{\begin{array}{ccl}
+        J_3\ket{j,m,\alpha}=&\hbar m &\cdot \ket{j,m,\alpha} \\
+         J^2\ket{j,m,\alpha}=&\hbar^2 j(j+1) &\cdot \ket{j,m,\alpha} \\ 
+         J_\pm\ket{j,m,\alpha}=& \hbar\sqrt{j(j+1)-m(m\pm 1)} &\cdot \ket{j,m\pm 1,\alpha} \\ 
+    \end{array}\right.$$
+    
+    dove
+    $$\begin{array}{clcrc}
+        j  &\in\na/2  &\text{tale che } &\hbar^2 j(j+1)&\in \sigma_p(J^2) \\
+          m  &\in \{-j,-j+1,\dots,j-1,j\} &\text{tale che } &\hbar m&\in \sigma_p(J_3)
+    \end{array}$$
+    ovvero, se stiamo lavorando con spazio di Hilbert $\hil$, allora a $j$ fissato lavoreremo nel sottospazio
+    $$\hil_j=\im^{2j+1}$$
+    (nel caso di spin $\sigma_p(S^2)=\{1\}$ a meno di costanti, quindi lo spazio risultante totale è solo $\im^{2j+1}$)
+    \item \textbf{Operatori scaletta:} sono utili quando mi chiedono cose da calcolare su $J_x$ o $J_z$, infatti posso esprimerli in funzione di $J_\pm$ (che so come agiscono sugli autovettori) tramite
+    $$J_1=\text{Re}(J_+)=\frac{J_++J_-}{2}\qquad J_2=\text{Im}(J_+)=\frac{J_+-J_-}{2i}$$
+    Inoltre \hl{quando applico un operatore scaletta che mi farebbe andare fuori scala (oltre $\pm l$) allora pongo a 0 il risultato}
+    \item \textbf{Orbitale:} in $L^2(\re^3)$
+    $$\boxed{\bv{L}\coloneqq\bv{X}\wedge \bv{ P}} \quad\text{ovvero}\quad (L_1,L_2,L_3)= L_i=\sum_{j,k=1}^3\varepsilon_{ijk}X_jP_k$$
+    Esplicitamente
+    $$\text{coord. cartesiane} \begin{cases}
+        L_1=X_2P_3-X_3P_2\\
+        L_2=X_3P_1-X_1P_3\\
+        L_3=X_1P_2-X_2P_1\\
+    \end{cases}\quad \text{coord. sferiche} \begin{cases}
+        L_1=i\hbar\big(\sin(\phi)\partial_\theta+\cos(\phi)\cot(\theta)\partial_\phi\big)\\
+        L_2=i\hbar\big(-\cos(\phi)\partial_\theta+\sin(\phi)\cot(\theta)\partial_\phi\big)\\
+        \boxed{L_3=-i\hbar \partial_\phi}\\
+    \end{cases}$$
+    $$L^2=X^2P^2-(\bv{X}\cdot\bv{P})^2+i\hbar (\bv{X}\cdot\bv{P})$$
+    Valgono le seguenti \textbf{relazioni di commutazione:} $\forall \bv{A}\in\{\bv{X},\bv{P},\bv{L}\}$
+    $$\begin{array}{rl l l}
+         \left[L_i,A_j\right]&=i\hbar\sum_{i,j}^3\varepsilon_{ijk}A_k & \forall i,j,k\in\{1,2,3\}&\implies\boxed{ \left[L_i,A_i\right]=0}\quad \forall i\\
+          \left[L_i,\bv{A}_1\cdot \bv{A}_2\right]&=0 & \forall\bv{A}_1, \bv{A}_2\in\{\bv{X},\bv{P},\bv{L}\}&\implies \boxed{\left[L_i,\bv{A}^2\right]=0}\quad \forall \bv{A}\\
+          \left[L_i,H\right] &=0 & \text{se a simmetria sfeirca}
+    \end{array}$$
+    Considerando $l\coloneqq j$ per convenzione, abbiamo:
+    \begin{itemize}
+        \item Non ci sono ulteriori degenerazioni $\alpha$, quindi consideriamo gli autovettori $\ket{l,m}$
+        \item $l\in \na$ (e non $\in \na/2$)
+        \item Considerando $$L^2(\re^3,d^3\bv{x})\cong L^2(\re_+,r^2dr)\otimes \underbrace{L^2(S^2,d\Omega)}_{L^2([0,\pi],\sin\theta d\theta)\otimes L^2([0,2\pi],d\phi)}$$
+        Allora vale
+$$L_i=\mathbb{I}_r\otimes\widetilde{L_i}\qquad L^2=\mathbb{I}_r\otimes\widetilde{L}^2$$
+        e quindi possiamo considerare gli autovettori di $L_3$ solo in funzione di $\phi,\theta$ (ovvero autovettori di $\widetilde{L_3}$), che sono le \textbf{armoniche sferiche} (tutte \underline{ortonormali} tra loro):
+        $$\ket{l,m}\coloneqq Y_{\ell }^{m}(\theta ,\phi )=\underbrace{(-1)^{m}{\sqrt {{\frac {(2\ell +1)}{4\pi }}{\frac {(\ell -m)!}{(\ell +m)!}}}}}_{\text{per normalizzare}}\cdot P_l^{m}(\cos {\theta })\cdot e^{im\phi }$$
+        con $P_l^{m}(x)$ i polinomi associati di Legendre (p. 140). Nel caso di una particella vincolata a muoversi su $S^1\subset \re^2$ si riducono a 
+        $$\psi_n(\theta)=\frac{1}{\sqrt{2}}e^{in\theta}\quad n\in \na$$
+    \end{itemize}
+    \item \textbf{Spin $1/2$:} in $\mathbb{C}^2$
+    $$\boxed{\bv{S}\coloneqq\frac{\hbar}{2}\bv{\sigma}} \quad\text{ovvero}\quad (S_x,S_y,S_z)= \frac{\hbar}{2}(\sigma_x,\sigma_y,\sigma_z)$$
+    
+    con 
+    $$\sigma_x\coloneqq\begin{pmatrix}
+        0 & 1 \\ 1 & 0 
+    \end{pmatrix}\qquad \sigma_x\coloneqq\begin{pmatrix}
+        0 & -i \\ i & 0 
+    \end{pmatrix}\qquad \sigma_x\coloneqq\begin{pmatrix}
+        1 & 0 \\ 0 & -1 
+    \end{pmatrix}$$
+    e definiamo
+    $$\begin{array}{lll}
+        \text{direzione }\pm z & \ket{\uparrow}\coloneqq\cv{1}{0} &  1\text{-autovettore di $\sigma_z$ (di $\boxed{S_z\text{ e }S^2}$)} \\
+         & \ket{\downarrow}\coloneqq\cv{0}{1} &  -1\text{-autovettore di $\sigma_z$ (di $\boxed{S_z\text{ e }S^2}$)} \\ 
+         \text{direzione }\pm x & \ket{\pm}\coloneqq\frac{1}{\sqrt{2}}(\ket{\uparrow}\pm \ket{\downarrow}) &  \pm1\text{-autovettore di $\sigma_x$ (di $S_x$)} \\
+         \text{direzione }\pm y & \ket{\pm i}\coloneqq\frac{1}{\sqrt{2}}(\ket{\uparrow}\pm i\ket{\downarrow}) &  \pm1\text{-autovettore di $\sigma_y$ (di $S_y$)} 
+    \end{array}$$
+    \item \textbf{Spin $1$:} in $\mathbb{C}^3$
+    
+\end{itemize}
+
+\section{Composizione di momenti angolari}
+Abbiamo sistema composto 
+$$\hil=\hil_1\otimes\hil_2$$
+con operatori
+$$ \text{m.a. singoli}\left\{\begin{array}{ll}
+    J_{1i} = \widetilde{J_{1i}}\otimes\id_2 & \forall i\in\{1,2,3\} \\
+      J_{2i} = \id_2\otimes\widetilde{J_{2i}} & \forall i\in\{1,2,3\}  \\ 
+      
+\end{array}\right.\qquad \text{m.a. totale}\left\{\begin{array}{ll}
+      \boxed{\bv{J} \coloneqq \bv{J}_1+\bv{J}_2}= \widetilde{\bv{J}_1}\otimes\id_2+ \id_1+\widetilde{\bv{J}_2}& \\
+      J_i=J_{1i}+J_{2i} & \forall i\in\{1,2,3\}\\
+      \bv{J}^2=\dots=\bv{J}_1^2+\bv{J}_2^2+2\bv{J}_1\cdot\bv{J}_2\\
+     \boxed{ \bv{J}_1\cdot\bv{J}_2}=\frac{1}{2}(\bv{J}^2-\bv{J}_1^2-\bv{J}_2^2)\\
+      \bv{J}_\pm 
+\coloneqq J_x\pm iJ_y=\dots=J_{1\pm}+J_{2\pm}\end{array}\right.$$
+Molto spesso abbiamo che $\left[J_{1i},H\right]\ne0$, $\left[J_{2j},H\right]\ne0$ ma $\left[J_{i},H\right]=0$ e quindi è più comodo lavorare con $\bv{J}=\bv{J}_1+\bv{J}_2$. Allora faccio un cambio di base:
+$$\ket{j_1,m_1}\otimes\ket{j_2,m_2}=\underbrace{\ket{j_1,m_1;j_2,m_2}}_{\text{comuni a }(J_{1}^2,J_{1z},J_{2}^2,J_{2z})}\quad \mapsto \quad\underbrace{\ket{\textcolor{gray}{j_1,j_2};j,m,\alpha}}_{\text{comuni a }(J^2,J_{z},J_{1}^2,J_{2}^2)}\quad \text{con }\begin{cases}
+    j\coloneqq\abs{j_1\pm j_2}\in\{\abs{j_1-j_2},\dots, j_1+j_2\}\\
+    m\coloneqq m_1+m_2\in\{-j,\dots, j\}
+\end{cases}$$
+NOTA: le due quaterne di operatori \textbf{non commutano tra loro} (ovvero hanno autospazi diversi):
+$$(J_{1}^2,\boxed{J_{1z}},J_{2}^2,J_{2z})\qquad \longleftrightarrow\qquad(\boxed{J^2},J_{z},J_{1}^2,J_{2}^2) $$
+(NB non omettere $j_1,j_2$ quando sono entrambi non fissati, poiché lo stesso $j$ si può raggiungere con combinazioni diverse di $\abs{j_1 \pm j_2}$) e gli autovalori sono quelli naturali:
+$$\begin{array}{ccc}
+    J_i^2 & \text{agisce normalmente su } &  j_i \\
+     J_{i,z} & \text{agisce normalmente su } & m_i \\
+     J^2 & \text{agisce normalmente su } &  j \\
+     J_{z} & \text{agisce normalmente su } & m \\
+     J_{\pm} & \text{agisce normalmente su } & j,m \\
+\end{array}$$
+Il cambio di base si calcola trammite i coefficienti di Clebsh-Gordan $C(j,m;m_1,m_2)$:
+$$\ket{\textcolor{gray}{j_1,j_2};j,m,\alpha}=\sum_{m_1=-j_1}^{j_1}\sum_{m_2=-j_2}^{j_2} C(j,m;m_1,m_2)\cdot \ket{j_1,m_1;j_2,m_2}$$
+
+\begin{itemize}
+    \item \textbf{Due particelle con spin $1/2$:} $\hil=\im^2\otimes\im^2\cong \im^4$
+    \begin{align*}
+       \ket{\textcolor{gray}{\nicefrac{1}{2},\nicefrac{1}{2}};\;s,m} &\left\{\begin{array}{lll}
+           \ket{1\;1} &=\ket{\uparrow\uparrow}  & \text{Tripletto (\textbf{simmetrico rispetto allo scambio})}\\
+             \ket{1\;0} &=\frac{1}{\sqrt{2}}(\ket{\uparrow\downarrow}+\ket{\downarrow\uparrow})  \\
+              \ket{1\;-1} &=\ket{\downarrow\downarrow}  \\
+              \ket{0\;0} &=\frac{1}{\sqrt{2}}(\ket{\uparrow\downarrow}-\ket{\downarrow\uparrow})  & \text{Singoletto (\textbf{antisimmetrico  rispetto allo scambio})}\\
+        \end{array}\right.\\
+        \ket{\textcolor{gray}{\nicefrac{1}{2}},m_1;\textcolor{gray}{\nicefrac{1}{2}},m_2}& \left\{\begin{array}{ll}
+           \ket{\uparrow\uparrow} &=\ket{1\; 1} \\
+             \ket{\uparrow\downarrow} &=\frac{1}{\sqrt{2}}(\ket{1\; 0}+\ket{0\;0})  \\
+              \ket{\downarrow\uparrow} &=\frac{1}{\sqrt{2}}(\ket{1\; 0}-\ket{0\;0})   \\
+              \ket{\downarrow\downarrow} &= \ket{1\; -1} \\
+        \end{array}\right.
+    \end{align*}
+    Quando abbiamo stati misti tipo $\ket{+\,\uparrow}$ basta fare
+    $$\ket{+\,\uparrow}=\ket{+}\otimes\ket{\uparrow}=\frac{1}{\sqrt{2}}(\ket{\uparrow}+\ket{\downarrow})\otimes\ket{\uparrow}=\frac{1}{\sqrt{2}}(\ket{\uparrow\uparrow}+\ket{\downarrow\uparrow})$$
+    \item\textbf{Una particella con momento orbitale e spinoriale ($1/2$):} abbiamo
+    $$\hil=\underbrace{L^2(S^2,d\Omega)}_{L^2([0,\pi],\sin\theta d\theta)\otimes L^2([0,2\pi],d\phi)}\otimes \;\im^2$$
+    Tutte le volte che voglio considerare le osservabili
+    $$\begin{array}{l}
+         \boxed{\bv{J} \coloneqq \bv{L}+\bv{S}}  \\
+         J^2 \\
+         \bv{L}\cdot \bv{S}
+    \end{array}$$
+    oppure \textbf{l'hamiltoniana accoppia due momenti angolari tra loro (e quindi $S_i,L_i$ non sono  costanti del moto)}, faccio solito cambio base
+    $$\ket{l,m_l}\otimes\ket{\textcolor{gray}{\nicefrac{1}{2}},m_s}=\underbrace{\ket{l,m_l;\textcolor{gray}{\nicefrac{1}{2}},m_s}}_{\text{comuni a }(L^2,L_z,S^2,S_z)}\quad \mapsto \quad\underbrace{\ket{\textcolor{gray}{l,\nicefrac{1}{2}};j,m_j}}_{\text{comuni a }(J^2,J_{z},L^2,S^2)}\quad \text{con }\begin{cases} l\in \na\\
+    m_l\in \{-l,\dots,l\}\\
+    m_s\in\{-\nicefrac{1}{2},\nicefrac{1}{2}\}\\
+    j=\abs{l-\nicefrac{1}{2}},\dots, l+\nicefrac{1}{2}\\
+    m_j\coloneqq m_l+m_s\in\{-j,\dots, j\}
+\end{cases}$$
+\end{itemize}
+
+
+\section{Teoria delle perturbazioni}
+
+    $$\boxed{H(\lambda)=H_0+\lambda H_1}\quad \lambda\in [0,1]$$
+    dove
+    $$\begin{cases}
+        H_0 & \text{hamiltoniana di cui conosco lo spettro  (operatore autoaggiunto)}\\
+        H_1 & \text{perturbazione (operatore autoaggiunto)}
+    \end{cases}$$
+    e ponendo per ipotesi che autovalori e autovettori di $H(\lambda)$ siano funzioni analitiche in $\lambda=0$, ovvero
+    $$H(\lambda)\begin{cases}
+        E_n(\lambda)=E_n^{(0)}+\lambda E_n^{(1)}+\lambda^2E_n^{(2)}+\dots & \in C^\omega([0,1])\\
+        \ket{\psi_n(\lambda)}=\underbrace{\ket{\psi_n^{(0)}}}_{\in S_n}+\lambda \underbrace{\ket{\psi_n^{(1)}}}_{\in S_n^\perp}+\lambda^2\underbrace{\ket{\psi_n^{(2)}}}_{\in S_n^\perp}+\dots & \in C^\omega([0,1])\\
+    \end{cases}$$
+    Allora ponendo:
+    $$H_0\left\{\begin{array}{lll}
+       \text{autovalori:} & E_n & n\in \na\\
+    \text{autovettori:} & \ket{\psi_{n,k}} & k\in\{1,\dots,N\coloneqq\dim(S_n)\}\\
+    \text{autospazi:} & S_n & =\text{span}_k\{\ket{\psi_{n,k}}\}\\
+    \text{proiettori:} & \Pi_n & =\sum_{k=1}^N\ket{\psi_{n,k}}\bra{\psi_{n,k}}\\
+    \text{proiettori$^\perp$:} & Q_n & =\id-\Pi_n
+    \end{array}
+    \right.
+    $$
+    Allora in generale vale sempre:
+    $$\boxed{\begin{array}{ll}
+        
+        E_n^{(0)}&= E_n\\
+        E_n^{(j)}&=\bra{\psi_n^{(0)}}H_1\ket{\psi_n^{(j-1)}}
+   
+    \end{array}}$$
+    \begin{itemize}
+    \item \textbf{Livello $E_n$ non degenere ($\dim S_n=1$):} 
+    $$ \begin{cases}
+        E_n^{(0)}=E_0\\
+        E_n^{(1)}=\bra{\psi_n^{(0)}}H_1\ket{\psi_n^{(0)}}\\
+        E_n^{(2)}=\sum_{m\ne n}\frac{\abs{\bra{\psi_n^{(0)}}H_1\ket{\psi_m^{(0)}}}^2}{E_n^{(0)}-E_m^{(0)}}
+    \end{cases}\quad \begin{cases}
+        \ket{\psi_n^{(0)}}=\ket{\psi_n}\\
+        \ket{\psi_n^{(1)}}=\sum_{m\ne n}\frac{\bra{\psi_m^{(0)}}H_1\ket{\psi_n^{(0)}}}{E_n^{(0)}-E_m^{(0)}}\ket{\psi_m^{(0)}}\\
+        \ket{\psi_n^{(2)}}=?
+    \end{cases}$$
+    \item \textbf{Livello $E_n$ degenere ($\dim S_n=N>1$):}
+     $$\begin{cases}
+        E_n^{(0)}=E_n\\
+        E_{n,h}^{(1)}=\bra{\psi_{n,h}^{(0)}}H_1\ket{\psi_{n,h}^{(0)}}
+    \end{cases}\quad \begin{cases}
+        \ket{\psi_{n,h}^{(0)}}=\sum_{k=1}^N\underbrace{\bra{\psi_{n,k}}\ket{\psi^{(0)}_{n,h}}}_{\coloneqq c_{n,k,h}}\ket{\psi_{n,k}}\quad h=1,\dots,N\\
+        \ket{\psi_{n,h}^{(1)}}=\sum_{m\ne n,\;\ket{\psi_m^{(0)}}\notin S_n^{\text{deg.}}}\frac{\bra{\psi_m^{(0)}}H_1\ket{\psi_{n,h}^{(0)}}}{E_n^{(0)}-E_m^{(0)}}\ket{\psi_m^{(0)}}\\
+    \end{cases}$$
+    Per trovare $E_{n,h}^{(1)}$ e $\ket{\psi_n^{(0)}}$ devo 
+    \begin{enumerate}
+        \item[$\circled{1}$] Restringere $H_1$ a $S_n$ e mettere l'applicazione bilineare $H_1$ nella base $\{\ket{\psi_{n,k}}:k=1,\dots,N\}$, ovvero 
+        \begin{align*}
+        \Pi_{S_n}H_1\Pi_{S_n}&=\left(\sum_k\ket{\psi_{n,k}}\bra{\psi_{n,k}}\right)H_1\left(\sum_k\ket{\psi_{n,k}}\bra{\psi_{n,k}}\right)\\
+        &=\boxed{\bigg(\bra{\psi_{n,i}}H_1\ket{\psi_{n,j}}\bigg)_{ij}}\\
+        &\coloneqq W && \text{(matrice)}
+        \end{align*}
+        \item[$\circled{2}$] Trovo gli $N$ autovalori di $W\longrightarrow$ sono gli $E_{n,h}^{(1)}$  (supponendo di aver già tolto la degenerazione)
+        \item[$\circled{3}$] Trovo gli $N$ autovettori di $W\longrightarrow$ le cui componenti sono i $c_{n,k,h}$.
+        Essendo nella base  $\{\ket{\psi_{n,k}}:k=1,\dots,N\}$, allora scrivo tali autovettori nella base standard, ovvero combino linearmente la base per le $N$ componenti $c_{n,k,h}$ di tali vettori. Poi NORMALIZZO:
+        $$1=\bra{\psi^{(0)}_{n,h}}\ket{\psi^{(0)}_{n,h}}=\dots$$
+        Ciò che ottengo è il $\ket{\psi^{(0)}_{n,h}}$ finale.
+    \end{enumerate}
+    Quindi l'espansione al primo ordine in $\lambda$ di $E_n(\lambda),\ket{\psi_n(\lambda)}$ degenere non sarà più unica, ma splittata in $N$ espansioni diverse, al variare di $h$ (supponendo di aver tolto la degenerazione al primo ordine):
+    $$E_n(\lambda):\begin{cases}
+        E_{n,1}(\lambda)&=E_n^{(0)}+\lambda E_{n,1}^{(1)}+o(\lambda)\\
+        &\vdots\\
+        E_{n,h}(\lambda)&=E_n^{(0)}+\lambda E_{n,h}^{(1)}+o(\lambda)\\
+        &\vdots\\
+        E_{n,N}(\lambda)&=E_n^{(0)}+\lambda E_{n,N}^{(1)}+o(\lambda)\\
+    \end{cases}\qquad \ket{\psi_{n}(\lambda)}:\begin{cases}
+       \ket{\psi_{n,1}(\lambda)}&=\ket{\psi_{n}^{(0)}}+\lambda \ket{\psi_{n,1}^{(1)}}+o(\lambda)\\
+        &\vdots\\
+        \ket{\psi_{n,h}(\lambda)}&=\ket{\psi_{n}^{(0)}}+\lambda \ket{\psi_{n,h}^{(1)}}+o(\lambda)\\
+        &\vdots\\
+        \ket{\psi_{n,N}(\lambda)}&=\ket{\psi_{n}^{(0)}}+\lambda \ket{\psi_{n,N}^{(1)}}+o(\lambda)\\
+    \end{cases}\qquad$$
+\end{itemize}
+
+\section{Due particelle indistinguibili}
+Sia $\hil=\hil_1\otimes\hil_2$ spazi di due particelle, $E$ l'operatore di scambio: 
+$$E(\ket{\psi_1}\otimes\ket{\psi_2})=\ket{\psi_2}\otimes\ket{\psi_1}$$
+ed $\sigma(E)=\{\pm 1\}$ con i relativi autospazi $\hil_\pm$ 
+$$\hil=\hil_1\otimes\hil_2\cong \boxed{\hil_+\oplus\hil_-}$$ 
+Abbiamo che 
+$$\boxed{\text{particelle indistinguibili}\iff  \ket{\psi_1}\otimes\ket{\psi_2}\in\hil_\pm}$$
+\begin{align*}
+    \begin{array}{llcc}
+         \in\hil_- &  \ket{\psi_1}\otimes\ket{\psi_2}  \text{ totalmente antisimmetrici} & \longrightarrow & \text{\textbf{fermioni (spin semi-intero)}}  \\
+         \in\hil_+ & \ket{\psi_1}\otimes\ket{\psi_2}  \text{ totalmente simmetrici} & \longrightarrow & \text{\textbf{bosoni (spin intero)}}  
+    \end{array}
+\end{align*}
+
+\begin{itemize}
+    \item \textbf{Hamiltoniane spaziali:} $\hil=L^2(\re)\otimes L^2(\re)\cong L^2(\re^2)$, allora
+    $$E\ket{\psi(x,y)}=\ket{\psi(y,x)}$$
+    \item \textbf{Hamiltoniane spaziali+spinoriali:} raggruppo tutto in parte spaziale $  \otimes$ parte spinoriale: $$\hil=\bigg(L^2(\re^3)\otimes\im^{2s_1+1}\bigg)\otimes\bigg(L^2(\re^3)\otimes\im^{2s_2+1}\bigg)=\underbrace{\bigg(L^2(\re^3)\otimes L^2(\re^3)\bigg)}_{\ket{\phi}}\otimes \underbrace{\bigg(\im^{2s_1+1}\otimes \im^{2s_2+1}\bigg)}_{\ket{\chi}} $$
+    e ho
+    $$\ket{\psi}=\ket{\phi}\otimes\ket{\chi}\begin{cases}
+        \text{se fermioni} \begin{cases}
+            \ket{\psi} \text{ simm. e }\ket{\chi} \text{ asimm.}\\
+            \ket{\psi} \text{ asimm. e }\ket{\chi} \text{ simm.}
+        \end{cases} \\
+        \text{se bosoni}\begin{cases}
+            \ket{\psi},\ket{\chi} \text{ simm.}\\
+            \ket{\psi},\ket{\chi} \text{ asimm.}
+        \end{cases}
+    \end{cases}$$
+    \item \textbf{Determinare la simmetria della parte di spin:} si ha $s_{tot}\in\{\abs{s_1-s_2},\dots,s_1+s_2\}$ e si ha, per qualunque $m$
+    $$\begin{array}{ll}
+        s_{max} & \text{sym. (\textbf{sempre})}  \\
+        s_{max}-1 & \text{a-sym.} \\
+        s_{max}-2 & \text{sym.} \\
+        \vdots\\
+        s_{min}
+    \end{array}$$
+    si continua alternando.
+\end{itemize}
+
+\end{document}

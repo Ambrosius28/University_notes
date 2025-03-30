@@ -1,0 +1,2350 @@
+%% LyX 2.3.7 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\usepackage{color,soul} %per evidenziare con il comando highlight \hl
+\usepackage{array}
+\usepackage{float}
+\usepackage{units}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{wasysym}
+\usepackage{xcolor}
+\newcommand{\myth}{\textnormal{\textsc{}} \scshape \textcolor{red}}
+\makeatletter
+\usepackage{hyperref} %per URL (con \url{}) e hyperlink
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\newcommand{\lyxmathsym}[1]{\ifmmode\begingroup\def\b@ld{bold}
+  \text{\ifx\math@version\b@ld\bfseries\fi#1}\endgroup\else#1\fi}
+
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\@ifundefined{date}{}{\date{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{tikz}
+\usetikzlibrary{matrix,shapes}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+\title{\textbf{Algebra 1}}
+\maketitle
+\tableofcontents
+
+\part{Aritmetica}
+
+\section*{Definizioni}
+
+\paragraph*{Insiemi dei numeri $\mathbb{N}\subseteq\mathbb{Z}\subseteq\mathbb{Q}\subseteq\mathbb{R}\subseteq\mathbb{C}$}
+
+\paragraph*{Operazioni di somma $+\colon\left(a,b\right)\protect\mapsto a+b$
+e prodotto $\times\colon\left(a,b\right)\protect\mapsto a\times b=a\cdot b=ab$
+e proprietà}
+
+\[
+\begin{array}{lllll}
+\text{\textbf{Somma:}} & \text{associatività,} & \text{commutatività,} & \text{elemento neutro,} & \text{inverso additivo (opposto),}\\
+\text{\textbf{Prodotto:}} & \text{associatività,} & \text{commutatività,} & \text{elemento neutro,} & \text{inverso (moltiplicativo),}
+\end{array}\;\text{distributività.}
+\]
+
+
+\paragraph*{Principio di buon ordinamento}
+
+\paragraph*{Divisibilità $a\mid b$ e Insieme dei multipli $a\mathbb{Z}\protect\coloneqq\left\{ an\colon n\in\mathbb{Z}\right\} $}
+
+\paragraph*{Massimo comun divisore}
+
+$\text{mcd}\left(a,b\right)\coloneqq\begin{cases}
+\max D\left(a,b\right) & \text{se }\left(a,b\right)\neq\left(0,0\right)\\
+0 & \text{se }\left(a,b\right)=\left(0,0\right)
+\end{cases},\quad D\left(a,b\right)\coloneqq\left\{ n\in\mathbb{Z}\colon n\mid a,n\mid b\right\} $
+
+\paragraph*{Numeri coprimi}
+
+$\text{mcd}\left(a,b\right)=1$
+
+\paragraph*{Minimo comune multiplo}
+
+$\text{mcm}\left(a,b\right)\coloneqq\begin{cases}
+\min\left\{ n>0\colon a\mid n,b\mid n\right\}  & \text{se }a\neq0\text{ e }b\neq0\\
+0 & \text{se }a=0\text{ o }b=0
+\end{cases}$
+
+\paragraph*{Numero primo}
+
+\paragraph*{Algoritmo di Euclide}
+
+\paragraph*{Equazioni diofantee lineari $ax+by=c$}
+
+\[
+\begin{array}{ll}
+\text{\textbf{Soluzione particolare:}} & \left(x_{0},y_{0}\right)\qquad\left(\text{per es. }\left(m\frac{c}{d},n\frac{c}{d}\right)\right)\\
+\text{\textbf{Soluzione generica:}} & \left(x,y\right)=\left(x_{0}+\frac{bk}{d},y_{0}-\frac{ak}{d}\right)
+\end{array}\;\text{con }d=\text{mcd}\left(a,b\right)=am+bn
+\]
+
+
+\paragraph*{Congruenze modulari $a\equiv b\mod n\;\protect\Longleftrightarrow\;n\mid\left(a-b\right)$,
+Classi di congruenza $\overline{a},\,\left[a\right],\,\left[a\right]_{n}=a+n\mathbb{Z}$
+e Insieme quoziente $\mathbb{Z}/n\mathbb{Z}$}
+
+\paragraph*{Soluzioni di congruenze polinomiali e Sistemi di congruenze}
+
+\section*{Teoremi}
+
+\subsection*{Divisione con resto}
+
+Dati $a,b\in\mathbb{Z}$ con $b\neq0$ $\Longrightarrow$ $\exists!\,q,r\in\mathbb{Z}$
+tali che $a=b\cdot q+r$ e $0\leq r<\left|b\right|$
+
+\subparagraph*{Dimostrazione}
+
+Se vale per $\left(a,b\right)$ vale anche per $\left(a,-b\right)$
+dato che $a=b\cdot q+r\Rightarrow a=\left(-b\right)\cdot\left(-q\right)+r$,
+quindi WLOG $b>0$. 
+\begin{itemize}
+\item \textbf{Esistenza:} Sia $A=\left\{ n\in\mathbb{N}\mid\exists\,c\in\mathbb{Z}\text{ tale che }n=a-bc\right\} \subseteq\mathbb{N}$,
+ho $A\neq\emptyset$ (prendo $c=-\left|a\right|$), $A$ ha un minimo
+$r$ (principio di buon ordinamento) e tale che $r=a-qb\geq0$, se
+per assurdo $r\geq b$ ho $r-b\in A$, quindi $0\leq r<b$ 
+\item \textbf{Unicità:} Se per assurdo esistessero $\left(q,r\right)$ e
+$\left(q',r'\right)$ avrei $r-r'=\left(q-q'\right)b$ e $b\mid\left(r-r'\right)\Rightarrow\left|b\right|\leq\left|r-r'\right|$,
+ma $-b<-r'\leq r-r'\leq r<b$, $\lyxmathsym{\lightning}$. Quindi
+$0=r-r'=\left(q-q'\right)b\Longrightarrow q=q'$
+\end{itemize}
+
+\subsection*{\hl{Formula di Bezout}}
+
+$\forall\,a,b\in\mathbb{Z}\Longrightarrow a\mathbb{Z}+b\mathbb{Z}=\overset{d}{\overbrace{\text{mcd}\left(a,b\right)}}\mathbb{Z}$,
+in particolare se $\left(a,b\right)\neq\left(0,0\right)$, $d$ è
+il minimo intero positivo che si può scrivere come $an+bm$ per $m,n\in\mathbb{Z}$.
+
+\subparagraph*{Dimostrazione}
+
+Sia $\left(a,b\right)\neq\left(0,0\right)$ (per $=$ banale), sia
+$d'=\min\left\{ c\in a\mathbb{Z}+b\mathbb{Z}\mid c>0\right\} $ che
+esiste perchè $\left|a\right|>0$ oppure $\left|b\right|>0$ . Dimostro
+ora che $a\mathbb{Z}+b\mathbb{Z}=d\mathbb{Z}$
+\begin{itemize}
+\item $\subseteq$: ho che $an+bm=\left(kd\right)n+\left(ld\right)m=d\left(kn+lm\right)\in d\mathbb{Z}$
+\item $\supseteq$: basta dimostrare che $d\in a\mathbb{Z}+b\mathbb{Z}$,
+ma dimostro direttamente che $d'=d$: 
+\begin{itemize}
+\item Ho che $d\leq d'$, siccome $d\mid d'$ in quanto $d'\in a\mathbb{Z}+b\mathbb{Z}\subseteq d\mathbb{Z}$
+\item Ho che $d'\mid c\quad\forall\,c\in a\mathbb{Z}+b\mathbb{Z}$, siccome
+preso $c=qd'+r$ con $0\leq r<d'$ ho che
+\[
+r=c-qd'=am+bn-q\left(am'+bn'\right)=a\left(m-qm'\right)+b\left(n-qn'\right)\in a\mathbb{Z}+b\mathbb{Z}
+\]
+ ed essendo $d'$ minimo positivo di $a\mathbb{Z}+b\mathbb{Z}$, ho
+che $r=0$, da cui $d'\mid c$, dunque $d'\mid a$ e $d'\mid b$ e
+quindi $d\geq d'$
+\end{itemize}
+\end{itemize}
+
+\subsubsection*{Corollario}
+
+$\forall\,a,b\in\mathbb{Z},\quad d=\text{mcd}\left(a,b\right)\quad\Longleftrightarrow\quad\begin{array}{ll}
+\text{(1)} & \text{\ensuremath{d\mid a}\text{ e }\ensuremath{d\mid b}}\\
+\text{(2)} & \text{se \ensuremath{c\mid a}\text{ e }\ensuremath{c\mid b} allora \ensuremath{c\mid d}}
+\end{array}$
+
+\subsection*{\hl{Minimo comune multiplo }}
+
+$\forall\,a,b\in\mathbb{Z}\Longrightarrow a\mathbb{Z}\cap b\mathbb{Z}=\overset{m}{\overbrace{\text{mcm}\left(a,b\right)}}\mathbb{Z}$
+
+\subparagraph*{Dimostrazione}
+
+Per $a=0\lor b=0$ banale. Altrimenti
+\begin{itemize}
+\item $\supseteq$: se $c\in m\mathbb{Z}$, allora $a\mid c$ (siccome $a\mid m$
+e $m\mid c$), qundi $c\in a\mathbb{Z}$, analogamente per $b\mathbb{Z}$
+e dunque $c\in a\mathbb{Z}\cap b\mathbb{Z}$.
+\item $\subseteq$: se $c\in a\mathbb{Z}\cap b\mathbb{Z}$ ho che $\exists\,q,r\in\mathbb{Z}$
+tali che $c=m\cdot q+r$ con $0\leq r<m$, da cui $a|r=c-m\cdot q$
+(siccome $a|c$ e $a|m$), analogamente per $b$, quindi per forza
+$r=0$ siccome $m$ minimo comune multiplo e $r<0$ 
+\end{itemize}
+
+\subsubsection*{Corollario}
+
+$\forall\,a,b\in\mathbb{Z},\quad m=\text{mcm}\left(a,b\right)\quad\Longleftrightarrow\quad\begin{array}{ll}
+\text{(1)} & \text{\ensuremath{a\mid m}\text{ e }\ensuremath{b\mid m}}\\
+\text{(2)} & \text{se \ensuremath{a\mid c}\text{ e }\ensuremath{b\mid c} allora \ensuremath{m\mid c}}
+\end{array}$
+
+\subsection*{Teorema fondamentale dell'aritmetica}
+
+$\forall\,n\in\mathbb{Z},n>1\quad\exists\,p_{1},...,p_{k}\text{ primi}\colon n=\prod_{i}p_{i}$
+e inoltre se $q_{1},...,q_{l}\text{ primi}\colon n=\prod_{i}q_{i}\Longrightarrow\exists\,\sigma\text{ permutazione}\colon\;q_{i}\overset{\sigma}{\rightarrow}p_{\sigma\left(i\right)}$
+
+\subparagraph*{Dimostrazione}
+\begin{itemize}
+\item \textbf{Esistenza:} $X=\left\{ n>1\mid n\text{ non è prodotto di primi}\right\} $,
+per assurdo $X\neq\emptyset$ e quindi ammette un minimo $n$. $n$
+non è primo, ma esistono $1<a,b<n$ tali che $a\cdot b=n$, ma $n$
+è minimo, quindi $a,b\notin X$, e $a\cdot b$ si può scrivere come
+prodotto di primi, $\lyxmathsym{\lightning}$.
+\item \textbf{Unicità:} Analogamente a prima, prendo per assurdo il più
+piccolo $n=\prod_{i}p_{i}=\prod_{i}q_{i}$ con fattorizzazioni diverse,
+ho che $q_{l}\mid n=p_{1}\cdot...\cdot p_{k}\Rightarrow\exists\,i\text{ tale che }q_{l}\mid p_{i}$,
+ma $p_{i}$ primo quindi $q_{l}=p_{i}$. Prendo $n'=\frac{n'}{p_{k}}=\frac{n'}{q_{l}}$,
+ma $n'<n$ non avrà fattorizzazioni distinte, $\lyxmathsym{\lightning}$.
+\end{itemize}
+
+\subsection*{Soluzioni di sistema di congruenze }
+
+$\begin{cases}
+x\equiv a\mod m\\
+x\equiv b\mod n
+\end{cases}$ ha soluzione se e solo se $\text{mcd}\left(m,n\right)\mid\left(b-a\right)$
+e la soluzione è unica modulo $\text{mcm}\left(m,n\right)$
+
+\subparagraph*{Lemma}
+
+$s\equiv t\mod m,s\equiv t\mod n\;\Longleftrightarrow\;s\equiv t\mod\text{mcm}\left(m,n\right)$,
+in quanto $\left(s-t\right)\in m\mathbb{Z}\;\wedge\;\left(s-t\right)\in n\mathbb{Z}\;\Longleftrightarrow\;\left(s-t\right)\in\text{mcm}\left(m,n\right)\mathbb{Z}$
+
+\subparagraph*{Dimostrazione}
+
+$x$ soluzione se e solo se $\exists\,y,z\colon x=a+my=b-nz\;\Longrightarrow\;a-b=my+nz\;\Longrightarrow\;\text{mcd}\left(m,n\right)\mid\left(b-a\right)$,
+unicità dal lemma precedente in quanto presa una soluzione particolare
+$x_{0}$ il sistema equivale a $x\equiv x_{0}\mod m,x\equiv x_{0}\mod n$.
+
+\subsubsection*{Corollario (Teorema Cinese del Resto)}
+
+Se $\text{mcd}\left(m,n\right)=1$, il sistema ha soluzione per ogni
+$a,b\in\mathbb{Z}$, e la soluzione è unica modulo $mn$. Equivalentemente
+$\left[x\right]_{mn}\mapsto\left(\left[x\right]_{m},\left[x\right]_{n}\right)$
+è biunivoca se $\text{mcd}\left(m,n\right)=1$.
+
+\vspace{1.5cm}
+
+\begin{center}
+\rule{0.8\textwidth}{1pt}
+\par\end{center}
+
+\vspace{1cm}
+
+
+\part{Gruppi, Sottogruppi, Omomorfismi}
+
+\section*{Definizioni}
+
+\paragraph*{Gruppo $\left(G,\circ,e\right)$, con composizione $\circ\colon G\times G\protect\longrightarrow G$
+ed elemento neutro $e\in G$}
+
+\[
+\begin{array}{rllcrll}
+\text{(G1)} & \text{(\emph{Associatività})} & x\circ\left(y\circ z\right)=\left(x\circ y\right)\circ z &  & \text{(G3)} & \text{(\emph{Inverso})} & x\circ x^{*}=x^{*}\circ x=e\\
+\text{(G2)} & \text{(\emph{Elemento Neutro})} & x\circ e=e\circ x=x &  & \text{*(G4)} & \text{(\emph{Commutatività})} & x\circ y=y\circ x
+\end{array}
+\]
+
+
+\paragraph*{Gruppo abeliano o commutativo (con G4)}
+
+\paragraph*{Gruppi additivi $\mathbb{Z},\mathbb{Q},\mathbb{R},\mathbb{C}$, Gruppi
+moltiplicativi $\mathbb{Q^{*}},\mathbb{R^{*}},\mathbb{C^{*}}$}
+
+\paragraph*{Quaternioni di Hamilton $\left(\mathbb{H},+\right),\left(\mathbb{H^{*}},\cdot\right)$
+e sottogruppo $Q_{8}=\left\{ \pm1,\pm i,\pm j,\pm k\right\} $}
+
+\paragraph*{Vierergruppe $V_{4}=\left\{ e,a,b,c\right\} $ di Klein}
+
+\begin{tabular}{|c|cccc|}
+\cline{2-5} \cline{3-5} \cline{4-5} \cline{5-5} 
+\multicolumn{1}{c|}{} & $e$ & $a$ & $b$ & $c$\tabularnewline
+\hline 
+$e$ & \textbf{$e$} & \textbf{$a$} & \textbf{$b$} & \textbf{$c$}\tabularnewline
+$a$ & \textbf{$a$} & \textbf{$e$} & \textbf{$c$} & \textbf{$b$}\tabularnewline
+$b$ & \textbf{$b$} & \textbf{$c$} & \textbf{$e$} & \textbf{$a$}\tabularnewline
+$c$ & \textbf{$c$} & \textbf{$b$} & \textbf{$a$} & \textbf{$e$}\tabularnewline
+\hline 
+\end{tabular}
+
+\paragraph*{Gruppi delle classi di resto}
+
+$\left(\mathbb{Z}/n\mathbb{Z},+\right)$, $\left(\left(\mathbb{Z}/n\mathbb{Z}\right)^{*}=\left\{ a\in\mathbb{Z}/n\mathbb{Z}:\text{mcd}\left(a,n\right)=1\right\} ,\cdot\right)$
+($\varphi\left(n\right)=\#\left(\mathbb{Z}/n\mathbb{Z}\right)^{*}$)
+
+\paragraph*{Gruppo delle biiezioni $\left(S\left(X\right),\circ\right)$, Gruppo
+Simmetrico $S_{n}$}
+
+per $X=\left\{ 1,2,\dots,n\right\} $
+
+\paragraph*{Gruppo ortogonale $\left(O_{2}\left(\mathbb{R}\right)\right)$}
+
+Isometrie di $\mathbb{R}^{2}$ che fissano $\boldsymbol{0}$, tra
+cui rotazioni $R_{\alpha}$ e riflessioni $S_{l}$
+
+\paragraph*{Gruppo diedrale}
+
+$D_{n}=\left\{ A\in O_{2}\left(\mathbb{R}\right)\colon\text{\ensuremath{A} manda l'\ensuremath{n}-agono \ensuremath{\Delta_{n}} in sé}\right\} =\left\{ \begin{array}{ll}
+R^{k} & {\scriptstyle \text{rotazioni di \ensuremath{\alpha=\frac{2\pi k}{n}}}}\\
+S_{k} & {\scriptstyle \text{riflessioni}}
+\end{array}\right.$, $\#D_{n}=2n$
+
+\paragraph*{Sottogruppo $H<G$}
+
+\paragraph*{Omomorfismo, Isomorfismo, Endomorfismo, Automorfismo}
+
+$f\left(ab\right)=f\left(a\right)f\left(b\right)$
+
+\paragraph*{Kernel $\ker\left(f\right)\protect\coloneqq\left\{ a\in G\colon f\left(a\right)=e'\right\} $
+e Immagine $f\left(G\right)\protect\coloneqq\left\{ f\left(a\right)\colon a\in G\right\} $}
+
+\paragraph*{Prodotto interno di gruppi $G_{1}\times G_{2}$}
+
+con composizione $\left(g_{1},g_{2}\right)\left(g_{1}',g_{2}'\right)=\left(g_{1}g_{1}',g_{2}g_{2}'\right)$
+
+\section*{Teoremi}
+
+\subsection*{Unicità dell'elemento neutro}
+
+\subsection*{Unicità dell'inverso}
+
+\subparagraph*{Dimostrazione}
+
+Siano $x^{*},x^{**}$ inversi di $x$, ho che 
+\[
+x^{*}=e\circ x^{*}=\left(x^{**}\circ x\right)\circ x^{*}=x^{**}\circ\left(x\circ x^{*}\right)=x^{**}\circ e=x^{**}
+\]
+
+
+\subsection*{Inverso dell'inverso}
+
+\subsection*{Inverso del prodotto}
+
+\subsection*{Struttura del gruppo diedrale}
+
+Sia $R$ la rotazione di centro $\boldsymbol{0}$ e angolo $\alpha=2\pi/n$
+e sia $S$ la riflessione rispetto alla retta $y=0$. Allora 
+\begin{align*}
+\text{(i)}\quad & \#D_{n}=2n & \text{(iii)}\quad & SR=R^{-1}S\;\rightarrow\;\begin{array}{l}
+\left(R^{i}S\right)R^{j}=R^{i-j}S\\
+\left(R^{i}S\right)\left(R^{j}S\right)=R^{i-j}
+\end{array}\\
+\text{(ii)}\quad & A\in D_{n}\;\Rightarrow\;\exists!\,i<n\colon A=R^{i}\vee A=R^{i}S & \text{(iv)}\quad & R^{i}S=S_{i}\text{ riflessione rispetto a retta di angolo \ensuremath{\pi i/n}}
+\end{align*}
+
+
+\subparagraph*{Dimostrazione}
+\begin{enumerate}
+\item[(i), (ii)]  {[}...{]}
+\end{enumerate}
+
+\subsection*{Caratterizzazione del sottogruppo}
+
+$G$ gruppo, $H\subseteq G$, sono equivalenti
+\begin{align*}
+\text{(i)}\quad & H\text{ sottogruppo} & \text{(ii)}\quad & H\neq\emptyset\;\text{e}\;\left\{ \begin{array}{ll}
+\forall\,a,b\in H & ab\in H\\
+\forall\,a\in H & a^{-1}\in H
+\end{array}\right. & \text{(iii)}\quad & H\neq\emptyset\;\text{e}\;\forall\,a,b\in H\quad ab^{-1}\in H
+\end{align*}
+
+
+\subparagraph*{Dimostrazione}
+\begin{enumerate}
+\item[(iii) $\Rightarrow$ (i)]  {[}...{]}
+\end{enumerate}
+Altre (i) $\Longrightarrow$ (ii) $\Longrightarrow$ (iii)
+
+\subsection*{\hl{Sottogruppi di $\mathbb{Z}$ e $\mathbb{Z}/n\mathbb{Z}$}}
+
+(1) I sottogruppi di $\mathbb{Z}$ sono $d\mathbb{Z}$ e sono diversi tra loro. \\
+(2) I sottogruppi
+di $\mathbb{Z}/n\mathbb{Z}$ sono $H_{d}=\left\{ \overline{d},\overline{2d},\dots,\overline{n-d},\overline{0}\right\} $
+con $d$ divisore positivo di $n$.
+
+\subparagraph*{Dimostrazione} .
+\begin{enumerate}
+    \item Sia $H<G \implies 0\in H$. Se non ci sono altri elementi $H=\{0\}$ ok, altrimenti esiste $a\in H \implies -a\in H$ (essendo $H$ chiuso per l'operazione) quindi ci sono per forza elementi positivi. Sia \underline{$d\coloneqq\min\{h\in H: h>0\}$}.
+    \begin{itemize}
+        \item[$d\mathbb{Z}\subseteq H$:] poiché $H$ sottogruppo $\implies$ ogni multiplo di $d$ è in $H$ (chiusura per addizione) 
+        \item[$d\mathbb{Z}\supseteq H$:] ovvero ogni elemento $a\in H$ è divisibile (multiplo) di $d$. Facciamo \textbf{divisione con resto} e vediamo che $r=0$: $a=qd+r \in H \quad \text{con }0\le r < d\implies r=a-qd\in H$ ma $d$ è definito come il minimo positivo in $H$ e $r$ è definito come $0\le r < d\implies r=0$
+    \end{itemize}
+    I sottogruppi $d\mathbb{Z}$ sono diversi perché caratterizzati da $d$, che è il loro minimo intero positivo (ciò li distingue).
+    \item Sia $H<\mathbb{Z}/n\mathbb{Z}$. Definiamo $H'=\{a\in\mathbb{Z}:\overline{a}\in H\}$
+    \begin{align*}
+        \underbrace{\overline{0}\in H}_{\text{H sottogr.}} &\implies 0\in H' \\
+        \overline{a}, \overline{b} \in H &\impliedby a,b \in H' \\
+        \underbrace{\overline{a-b}\in H}_{\text{H sottogr.}} &\implies a-b\in H' \quad \quad \implies H'<\mathbb{Z} \\
+        \overline{0}=\overline{n}\in H &\implies n\in H' \quad \quad \implies H'\ne\{0\}
+    \end{align*}
+    Quindi per (1) $H'=d\mathbb{Z}$. Inoltre $n\in H' \implies d|n$. Verificare che i gruppi $H_d$ sono distinti.
+\end{enumerate}
+
+
+
+\subsection*{Immagine dell'elemento neutro e dell'inverso attraverso un omomorfismo}
+
+$\begin{array}{rlrl}
+\text{(i)}\quad & f\left(e\right)=e'\hspace{4em} & \text{(ii)}\quad & f\left(a^{-1}\right)=f\left(a\right)^{-1}\end{array}$
+
+\subparagraph*{Dimostrazione}
+\begin{enumerate}
+\item[(i)]  Abbiamo che $f\left(e\right)=f\left(e\cdot e\right)=f\left(e\right)\cdot f\left(e\right)$
+\[
+e'=f\left(e\right)^{-1}f\left(e\right)=f\left(e\right)^{-1}\left(f\left(e\right)f\left(e\right)\right)=\left(f\left(e\right)^{-1}f\left(e\right)\right)f\left(e\right)=e'f\left(e\right)=f\left(e\right)
+\]
+\item[(ii)]  Dalla parte (i) e dall'unicità dell'inverso
+\[
+f\left(a^{-1}\right)f\left(a\right)=f\left(a^{-1}a\right)=f\left(e\right)=e'
+\]
+\end{enumerate}
+
+\subsection*{Sottogruppi Kernel e Immagine}
+
+\begin{align*}
+\text{(i)}\quad & \ker\left(f\right)\text{ sottogruppo di }G & \text{(ii)}\quad & f\left(G\right)\text{ sottogruppo di }G & \text{(iii)}\quad & f\text{ iniettiva}\;\Longleftrightarrow\;\ker\left(G\right)=\left\{ e\right\} 
+\end{align*}
+
+
+\subparagraph*{Dimostrazione}
+
+{[}...{]}
+
+\subsection*{Composizione e Inverso di Isomorfismi}
+
+\begin{align*}
+\text{(i)}\quad & f,g\text{ isomorfismi}\;\Longrightarrow\;f\circ g\text{ isomorfismo} & \text{(ii)}\quad & f\text{ isomorfismo}\;\Longrightarrow\;f^{-1}\text{ isomorfismo}
+\end{align*}
+
+
+\subparagraph*{Dimostrazione}
+\begin{enumerate}
+\item[(ii)]  Devo dimostrare che è omomorfismo
+\[
+f\left(f^{-1}\left(ab\right)\right)=ab=f\left(f^{-1}\left(a\right)\right)f\left(f^{-1}\left(b\right)\right)=f\left(f^{-1}\left(a\right)f^{-1}\left(b\right)\right)\quad\overset{\text{per iniettività di \ensuremath{f}}}{\longrightarrow}\quad f^{-1}\left(ab\right)=f^{-1}\left(a\right)f^{-1}\left(b\right)
+\]
+\end{enumerate}
+
+\subsection*{\hl{Teorema Cinese del Resto}}
+
+$f\left(a\mod nm\right)=\left(a\mod n,a\mod m\right)$ con $\text{mcd}\left(n,m\right)=1$
+è un isomorfismo, ovvero
+$$\boxed{\mathbb{Z}/nm\mathbb{Z}\cong\mathbb{Z}/n\mathbb{Z}\oplus\mathbb{Z}/m\mathbb{Z}} \quad \text{se $n,m$ coprimi}$$
+dove $\oplus$ è il prodotto cartesiano tra gruppi in cui l'operazione è il + (indica che è abeliano))
+
+\subparagraph*{Dimostrazione}
+
+$f$ è ben definita in quanto lo sono le due proiezioni (siccome $n\mid nm$
+e $m\mid nm$), ed è un omomorfismo. 
+\begin{itemize}
+    \item \textbf{Iniettività}: Prendo $a\in\ker\left(f\right)$,
+ho che $a\equiv0\mod n$ e quindi $a=un$ (analogamente $a=vm$).
+In quanto $m$ e $n$ coprimi posso scrivere $1=nx+my$ e quindi
+\[
+a=a\left(nx+my\right)=anx+amy=\left(vm\right)nx+\left(un\right)my=\left(vx+uy\right)mn
+\]
+Da cui $mn\mid a\;\Longrightarrow\;a\equiv0\mod mn$, e dunque $f$
+iniettivo.
+\item \textbf{Suriettività}: da $\#\mathbb{Z}/nm\mathbb{Z}=\#\left(\mathbb{Z}/n\mathbb{Z}\times\mathbb{Z}/m\mathbb{Z}\right)$
+
+\end{itemize}
+\vspace{1.5cm}
+
+\begin{center}
+\rule{0.8\textwidth}{1pt}
+\par\end{center}
+
+\vspace{1cm}
+
+
+\part{Permutazioni}
+
+\section*{Definizioni}
+
+\paragraph*{Cicli $\sigma=\left(a_{1}\,a_{2}\,\dots\,a_{k}\right)$}
+
+$\sigma\left(a_{i}\right)=a_{i+1},\;\sigma\left(a_{k}\right)=a_{1},\;\sigma\left(x\right)=x\text{ altrimenti}$
+
+\paragraph*{Cicli disgiunti }
+
+$\left(a_{1}\,a_{2}\,\dots\,a_{s}\right)$, $\left(b_{1}\,b_{2}\,\dots\,b_{t}\right)$
+con $a_{i}\neq b_{j}$
+
+\paragraph*{Segno $\varepsilon\left(\sigma\right)$}
+Sia: 
+$$\Omega\coloneqq\{h: \mathbb{Z}^n\to \mathbb{Z}\}=\{\text{funzioni $h(X_1,\dots,X_n)$ di $n$ variabili intere}\}$$
+Per $h\in \Omega$ e $\sigma \in S_n$ definiamo $\sigma(h)\in\Omega$:
+$$(\sigma(h))(X_1,\dots,X_n)\coloneqq h(X_{\sigma(1)},\dots,X_{\sigma(n)})$$ \\
+Usiamo la funzione $D\in \Omega$: 
+\begin{align*}
+    D\left(X_{1},\dots,X_{n}\right)\coloneqq\prod_{1\leq i<j\leq n}\left(X_{i}-X_{j}\right) \\
+\sigma\left(D\right)=\pm D \coloneqq\varepsilon\left(\sigma\right)D\implies \varepsilon(\sigma)=\pm 1
+\end{align*}
+In sostanza definiamo il segno di una permutazione (ovvero se il numero di trasposizioni, congiunte e disgiunte ma diverse, di cui è composta è in numero pari o dispari) attraverso sta funzione $D: \mathbb{Z}^n\to \mathbb{Z}$ che piglia gli $n$ elementi $X_1,\dots, X_n$ e ci fa il prodotto delle differenze di tutte le coppie possibili a meno del segno come definito sopra. Quindi $\sigma$ che agisce su tale $D$ effettivamente per ogni trasposizione che fa ne cambia il segno, quindi per un numero pari avremo segno positivo perché si annullano, per un numero dispari rimarrà il meno.
+
+
+\paragraph*{Gruppo alterno $A_{n}\protect\coloneqq\left\{ \sigma\in S_{n}\colon\varepsilon\left(\sigma\right)=1\right\} $}
+
+\section*{Teoremi}
+
+\subsection*{Scomponibilità di una permutazione in cicli disgiunti}
+
+\subparagraph*{Dimostrazione}
+
+Per induzione, se $\sigma=\left(1\right)$ la tesi è dimostrata. Altrimenti,
+preso $x\in\left\{ 1,\dots,n\right\} $ consideriamo $Y\coloneqq\left\{ x,\sigma\left(x\right),\sigma^{2}\left(x\right),\dots\right\} $
+(che sarà finito), con $k$ intero minimo per cui $x=\sigma^{k}\left(x\right)$,
+da cui $Y=\left\{ x,\sigma\left(x\right),\dots,\sigma^{k-1}\left(x\right)\right\} $.
+Osserviamo che $\sigma\left(Y^{C}\right)=Y^{C}$, e dunque presa la
+restrizione $\sigma\vert_{Y^{C}}$ questa è prodotto di cicli disgiunti
+per ipotesi induttiva.
+
+\subsection*{Segno del prodotto di permutazioni}
+
+$\varepsilon\left(\sigma\tau\right)=\varepsilon\left(\sigma\right)\varepsilon\left(\tau\right)$,
+ovvero la funzione $\varepsilon$ è un omomorfismo
+
+\subparagraph*{Dimostrazione}
+
+\[
+\varepsilon\left(\sigma\tau\right)D=\left(\sigma\tau\right)\left(D\right)=\sigma\left(\tau\left(D\right)\right)=\sigma\left(\varepsilon\left(\tau\right)D\right)=\varepsilon\left(\tau\right)\sigma\left(D\right)=\varepsilon\left(\tau\right)\varepsilon\left(\sigma\right)D
+\]
+
+
+\subsection*{Segno di trasposizioni, $k$-cicli e permutazioni}
+\begin{enumerate}
+\item[(i)] Dato un $k$-ciclo ho che $\left(a_{1}\,a_{2}\,\dots\,a_{k}\right)=\left(a_{1}\,a_{2}\right)\left(a_{2}\,a_{3}\right)\dots\left(a_{k-1}\,a_{k}\right)$
+\item[(ii)] $\forall\,\tau\text{ trasposizione}\;\rightarrow\;\varepsilon\left(\tau\right)=-1$,
+e dunque dato un $k$-ciclo $\tau$ ho che $\varepsilon\left(\tau\right)=\left(-1\right)^{k-1}$
+\item[(iii)] Per una permutazione $\sigma$ prodotto di $k$ trasposizioni ho
+che $\varepsilon\left(\sigma\right)=\left(-1\right)^{k}$
+\end{enumerate}
+
+\subparagraph*{Dimostrazione}
+\begin{enumerate}
+\item[(i)] Verifica di $\sigma\left(a_{i}\right)=a_{i+1}$, $\sigma\left(a_{k}\right)=a_{1}$
+e $\sigma\left(x\right)=x$ per $x\notin\left\{ a_{1},a_{2},\dots,a_{k}\right\} $
+\item[(ii)] Per le trasposizioni $\tau=\left(a\,a+1\right)$ ovviamente $\varepsilon\left(\tau\right)=-1$,
+le per quelle generiche posso scrivere $\left(a\,b\right)=\left(b\,a+1\right)\left(a\,a+1\right)\left(b\,a+1\right)$,
+e avrà dunque segno $\varepsilon\left(\left(a\,b\right)\right)=\varepsilon\left(\left(b\,a+1\right)\right)^{2}\varepsilon\left(\left(a\,a+1\right)\right)=-1$.
+\end{enumerate}
+
+\subsection*{Scomponibilità di una permutazione pari in $3$-cicli}
+
+\subparagraph*{Dimostrazione}
+
+Ogni permutazione pari è prodotto di un numero pari di trasposizioni.
+Basta dimostrare che il prodotto di due trasposizioni diverse è scomponibile
+in $3$-cicli
+\begin{align*}
+\left(a\,b\right)\left(b\,c\right) & =\left(a\,b\,c\right)\quad\text{(trasposizioni non disgiunte)} & \left(a\,b\right)\left(c\,d\right) & =\left(c\,a\,d\right)\left(a\,b\,c\right)\quad\text{(trasposizioni disgiunte)}
+\end{align*}
+
+
+\subsection*{\hl{Teorema di Cayley}}
+
+Ogni gruppo finito $G$ è isomorfo a un sottogruppo di $S_{n}$ per
+un certo intero positivo $n$.
+
+\subparagraph*{Dimostrazione}
+Devo costruire un isomorfismo tra $G$ e un sotto gruppo di $S_n$
+\begin{itemize}
+    \item Definisco 
+    $$T_g: G\to G\quad h\mapsto gh$$
+    Verifico che essa è una \textbf{biezione}, ovvero una permutazione degli elementi di $G$, ovvero $T_g\in S(G)$. \\
+    \textbf{Iniettiva}:
+    $$h,h'\in G.\quad T_g(h)=T_g(h')\implies gh=gh'\implies h=h'$$
+    in quanto in un gruppo vale la legge di cancellazione.\\
+    \textbf{Suriettiva}:
+    $$\forall y\in G: \quad y=y(g^{-1}g)=(yg^{-1})g=T_g(yg^{-1})$$
+    Quidni $T_g$ copre tutto $G$.
+    \item Definisco 
+    $$I: G\to S(G)\cong S_n \quad \quad I(g)=T_g \quad \quad n=\# G$$
+    (ovvero assegno ad ogni elemento la permutazione che esso fa su tutto $G$ se moltiplicato per i suoi elementi). Verifico che è un \textbf{omomorfismo iniettivo}.  \\
+    \textbf{Omomorfismo}:
+    \[
+I\left(gg'\right)\left(h\right)=T_{gg'}\left(h\right)=gg'h=T_{g}\left(g'h\right)=T_{g}\left(T_{g'}\left(h\right)\right)=I\left(g\right)\left(I\left(g'\right)\left(h\right)\right)=\left(I\left(g\right)\circ I\left(g'\right)\right)\left(h\right)
+\]
+
+\textbf{Iniettivo}: $g\in\ker\left(I\right)\;\Rightarrow\;I\left(g\right)=\text{Id}_{G}\;\Rightarrow\;g=e$. \\
+Quindi (essendo omomorfismo) l'immagine $I(G)<S(G)\cong S_n$ e, essendo $I$ iniettiva, la restrizione $I':G\to I(G)$ è isomorfismo tra $G$ e un sottogruppo di $S_n$.
+\end{itemize}
+\textcolor{red}{Sostanzialmente vedo gli elementi di un gruppo come le permutazioni che ognuno fa sugli elementi del gruppo stesso tramite $g\mapsto xg$. Quindi effettivamente un gruppo finito è l'insieme di \textbf{alcune} permutazioni sui suoi oggetti definite proprio dai suoi stessi elementi. Peccato che è altamente inefficiente vedere un gruppo in tal modo poiché $\#G=n$ è molto minore di $\# S_n=n!$, ovvero le permutazioni degli $n$ elementi rappresentate dagli elementi di $G$ sono \textbf{molto meno} rispetto a tutte le possibili.} \\
+\textbf{Teorema di Cayley generalizzato} a p. 77 dell'Hernstein
+
+\vspace{1.5cm}
+
+\begin{center}
+\rule{0.8\textwidth}{1pt}
+\par\end{center}
+
+\vspace{1cm}
+
+
+\part{Generatori, Ordine, Indice, Coniugato e Centralizzante}
+
+\section*{Definizioni}
+
+\paragraph*{Sottogruppo $\left\langle X\right\rangle $ generato da $X\subseteq G$,
+e Generatore $X$ di un gruppo $G=\left\langle X\right\rangle $}
+
+\paragraph*{Gruppo ciclico}
+
+$G=\left\langle x\right\rangle $
+
+\paragraph*{Ordine di un gruppo $\#G$, ordine di un elemento}
+
+$\text{ord}\left(x\right)\coloneqq\min\left\{ m>0\colon x^{m}=e\right\} $
+
+\paragraph*{Classi lateriali sinistre $gH$ e destre $Hg$ e Insieme delle classi
+laterali sinistre $G/H$ e destre $H/G$}
+
+Dato $H\subseteq G$ sottogruppo, $gH\coloneqq\left\{ gh\colon h\in H\right\} $
+e $Hg\coloneqq\left\{ hg\colon h\in H\right\} $
+
+\paragraph*{Indice $\left[G:H\right]$, Sistema di rappresentanti $S$}
+
+$G=\bigcup_{s\in S}sH,\quad\left[G:H\right]=\#S$
+
+\paragraph*{Coniugato $b=c^{-1}ac$, Coniugio $a\sim b$, Classe di coniugio }
+
+$\text{Cl}\left(a\right)\coloneqq\left\{ b\in G\colon b\sim a\right\} $
+
+\paragraph*{Sottogruppo del Centro $Z\left(G\right)=\left\{ g\in G\colon gh=hg\quad\forall\,h\in G\right\} $} \textcolor{red}{sottoinsieme di $G$ che commuta con tutto $G$}
+
+\paragraph*{Sottogruppo del Centralizzante $C\left(a\right)=\left\{ g\in G\colon ga=ag\right\} $} \textcolor{red}{sottoinsieme di $G$ che commuta con $a\in G$}
+
+Vale che $Z\left(G\right)=\bigcap_{g\in G}C\left(g\right)$
+
+\section*{Teoremi}
+
+\subsection*{\hl{Isomorfismo dei gruppi ciclici}}
+
+Se $\text{ord}\left(x\right)=\left\{ \begin{array}{llr}
+\infty & \text{allora }\left\langle x\right\rangle \cong\mathbb{Z} & \text{(i)}\\
+m & \text{allora }\left\langle x\right\rangle \cong\mathbb{Z}/m\mathbb{Z} & \text{(ii)}
+\end{array}\right.$. Quindi se $G$ ciclico allora $G\cong\mathbb{Z}\text{ oppure }G\cong\mathbb{Z}/m\mathbb{Z}$
+
+\subparagraph*{Dimostrazione}
+\begin{enumerate}
+\item[(i)] Considero $f\colon\mathbb{Z}\longrightarrow G$ tale che $f\left(n\right)=x^{n}$,
+è ovviamente un omomorfismo ed è iniettiva in quanto $x^{m}=1$ vale
+solo per $m=0$, quindi è un isomorfismo
+\item[(ii)] Considero $f\colon\mathbb{Z}/m\mathbb{Z}\rightarrow G$ tale che
+$f\left(\overline{a}\right)=x^{a}$, è ben definita, è un omomorfismo
+suriettivo, ed è iniettiva in quanto $x^{m}=1$ vale solo per $\overline{m}=\overline{0}$,
+quindi è un isomorfismo
+\end{enumerate}
+
+\subsubsection*{Corollario}
+
+$\text{ord}\left(x\right)=\#\left\langle x\right\rangle $
+
+\subsection*{\hl{Proprietà delle classi laterali sinistre}}
+
+Dati $a,b$ valgono
+\begin{align*}
+\text{(i)}\quad & aH=bH\;\Leftrightarrow\;a^{-1}b\in H & \text{(ii)}\quad & aH=bH\;\vee\;aH\cap bH=\emptyset & \text{(iii)}\quad & \forall\,x\in G\;\exists\,a\in G\colon x\in aH
+\end{align*}
+
+
+\subparagraph*{Dimostrazione}
+\begin{enumerate}
+\item[(i)] $\Rightarrow$: ho che $ah=be$ per un certo $h\in H$, da cui $a^{-1}b=h\in H$.\\
+$\Leftarrow$: ho che $a^{-1}b=h\in H$, ovvero $b=ah,a=bh^{-1}$,
+quindi $x\in aH\;\Rightarrow\;x=ah_{1}=bh^{-1}h_{1}\in bH$ e viceversa
+\item[(ii)] Se $z\in aH\cap bH\neq\emptyset$ ho che $z=ah_{1}=bh_{2}$ da cui
+$a^{-1}b=h_{1}h_{2}^{-1}\in H$ in quanto $H$ gruppo, la tesi segue
+da (i)
+\item[(iii)] $x=xe\in xH$
+\end{enumerate}
+
+\subsection*{Cardinalità delle classi laterali sinistre}
+
+Dato $H\subseteq G$ sottogruppo, $f\colon H\rightarrow aH$ tale
+che $f\left(h\right)=ah$ è una biiezione (ma non un omomorfismo),
+e quindi $\#H=\#aH$
+
+\subsection*{\hl{Teorema di Lagrange}}
+
+Dato $G$ gruppo e $H\subseteq G$ sottogruppo, $\#G=\#H\cdot\left[G:H\right]$
+
+\subparagraph*{Dimostrazione}
+
+Data $S$ sistema di rappresentanti, siccome $\#H=\#sH$ ho che $\#G=\sum_{s\in S}\#\left(sH\right)=\#S\cdot\#H=\#H\cdot\left[G:H\right]$
+
+\subsubsection*{Corollario}
+
+Dato $G$ gruppo finito
+\begin{enumerate}
+\item[(i)] Se $H$ sottogruppo di $G$, allora $\#H\mid\#G$
+\item[(ii)] Se $x\in G$, allora $\text{ord}\left(x\right)\mid\#G$
+\item[(iii)] Sia $G'$ gruppo e sia $f\colon G\longrightarrow G'$ omomorfismo,
+allora $\#\ker\left(f\right)\mid\#G$ e, se il gruppo $G'$ è finito,
+$\#f\left(G\right)\mid\#G'$. 
+\end{enumerate}
+
+\subsubsection*{Corollario}
+
+Dato $p$ primo e $G$ gruppo di ordine $p$ ho che $G\cong\mathbb{Z}/p\mathbb{Z}$
+
+\subparagraph*{Dimostrazione}
+
+Prendo $x\neq e$ in $G$, ho che $\text{ord}\left(x\right)\mid\#G$
+e dunque $\text{ord}\left(x\right)=p$, ma quindi $G$ gruppo ciclico
+di ordine $p$, quindi la tesi
+
+\subsection*{Teorema di Fermat}
+
+$p$ primo e $x\in\mathbb{Z}$ tale che $p\nmid x$, allora $x^{p-1}\equiv1\mod p$
+
+\subparagraph*{Dimostrazione}
+
+Siccome $p\nmid x$, la classe $\overline{x}$ è in $\left(\mathbb{Z}/p\mathbb{Z}\right)^{*}$,
+ma dunque $\text{ord}\left(x\right)\mid\#\left(\mathbb{Z}/p\mathbb{Z}\right)^{*}=p-1$ 
+
+\subsection*{Teorema di Eulero}
+
+$n$ intero positivo e $x\in\mathbb{Z}$ tale che $\text{mcd}\left(x,n\right)=1$,
+allora $x^{\varphi\left(n\right)}\equiv1\mod n$
+
+\subparagraph*{Dimostrazione}
+
+Analogamente a prima, ma con $\#\left(\mathbb{Z}/n\mathbb{Z}\right)^{*}=\varphi\left(n\right)$ 
+
+\subsection*{Numero di elementi coniugati ad $a$}
+
+$c_{a}=\#\text{Cl}\left(a\right)=\#G/\#C\left(a\right)=\left[G:C\left(a\right)\right]$
+
+\subparagraph*{Dimostrazione}
+
+Ho una corrispondenza biunivoca tra gli elementi di $\text{Cl}\left(a\right)$
+e le classi laterali destre di $C\left(a\right)$ siccome $x,y$ nella
+stessa classe implica $y=cx$ con $c\in C\left(a\right)$ , da cui
+\[
+y^{-1}ay=\left(x^{-1}c^{-1}\right)a\left(cx\right)=x^{-1}\left(c^{-1}ac\right)x=x^{-1}\left(c^{-1}ca\right)x=x^{-1}ax
+\]
+
+L'implicazione inversa procedendo in senso opposto
+
+\subsubsection*{Corollario (Equazione delle classi)}
+
+$\#G=\sum\frac{\#G}{\#C\left(a\right)}$, sommatoria su un $a$ per
+ogni classe di coniugio
+
+\subsection*{Centro di un gruppo di ordine $p^{n}$}
+
+Se $\#G=p^{n}$ con $p$ primo, allora $Z\left(G\right)\neq\left\{ e\right\} $
+
+\subparagraph*{Dimostrazione}
+
+{[}...{]}
+
+\subsubsection*{Corollario}
+
+Se $\#G=p^{2}$ con $p$ primo, allora $G$ è abeliano 
+
+\vspace{1.5cm}
+
+\begin{center}
+\rule{0.8\textwidth}{1pt}
+\par\end{center}
+
+\vspace{1cm}
+
+
+\part{Sottogruppi normali e Gruppi quoziente }
+
+\section*{Definizioni}
+
+\paragraph*{Elemento coniugato} Il coniugato di $h\in G$ da $g\in G$ è $^gh\coloneqq ghg^{-1}$
+
+\paragraph*{Sottogruppo coniugato} Il coniugato di $H<G$ è l'inisieme degli elementi coniugati degli elementi di $H$, ovvero $^gH=\{ghg^{-1}:\; h\in H\} =gHg^{-1}$. È sempre un sottogruppo.
+
+\paragraph*{Sottogruppo normale}
+
+$H\vartriangleleft G$ sottogruppo tale che $ghg^{-1}\in H\quad\forall\,h\in H,g\in G$. Tre definizioni equivalenti (dim. sotto):
+\begin{itemize}
+    \item $gH=Hg \; \forall g\in G$ (classi destre sono uguali alle sinistre)
+    \item $gHg^{-1}=H \; \forall g\in G$ (\hl{$H$ coincide cin il suo coniugato})
+    \item $ghg^{-1}\in H \; \forall h\in H,g\in G$ ($H$ chiuso rispetto alla coniugazione)
+\end{itemize}
+
+
+
+\paragraph*{Gruppo quoziente $G/N\protect\coloneqq\left\{ gN\colon g\in G\right\} $}
+
+Elementi $\overline{g}=gN=Ng$, $\overline{a}=\overline{b}\;\Leftrightarrow\;a^{-1}b\in N$,
+composizione $\overline{a}\cdot\overline{b}=\overline{ab}$
+
+\paragraph*{Applicazione canonica $\pi\colon G\protect\longrightarrow G/N,\quad\pi\left(g\right)=\overline{g}$}
+
+\paragraph*{Commutatori} The commutator gives an indication of the extent to which a certain binary operation fails to be commutative. \\
+In gruppi: $[a,b]\coloneqq aba^{-1}b^{-1}$, ovvero $ab=[a,b]ba$. Quindi $[a,b]=1 \iff ab=ba$, ovvero se commutano.\\
+In anelli: $[a,b]=ab-ba$, discorso analogo a sopra.
+
+\paragraph*{Sottogruppo generato dai commutatori}
+
+$\left[G,G\right] \coloneqq <C>$ con $C=\{\left[g,h\right]:g,h\in G\}=\{ghg^{-1}h^{-1}: \; g,h\in G\}$. È sottogruppo
+normale
+
+\section*{Teoremi}
+
+\subsection*{Caratterizzazione dei sottogruppi normali}
+
+Dato $H\subseteq G$ sottogruppo, sono equivalenti
+\begin{align*}
+\text{(i)}\quad & H\text{ sottogruppo normale di }G & \text{(ii)}\quad & gH=Hg\quad\forall\,g\in G & \text{(iii)}\quad & gHg^{-1}=H\quad\forall\,g\in G
+\end{align*}
+
+
+\subparagraph*{Dimostrazione}
+\begin{enumerate}
+\item[(i) $\Rightarrow$ (ii)] Prendo $x=gh\in gH$, quindi $x=gh=\left(ghg^{-1}\right)g=h'g\in Hg$,
+da cui $gH\subseteq Hg$, analogo l'inverso
+\item[(ii) $\Rightarrow$ (i)] Presi $h\in H$ e $g\in G$ ho che $gh\in gH=Hg$, quindi $gh=h'g\;\Rightarrow\;h'=ghg^{-1}\in H$
+\item[(ii) $\Leftrightarrow$ (iii)] Preso $g\in G$ vale che
+\[
+\overset{gH}{\overbrace{\left\{ gh\colon h\in H\right\} }}=\overset{Hg}{\overbrace{\left\{ hg\colon h\in H\right\} }}\quad\Longleftrightarrow\quad\overset{gHg^{-1}}{\overbrace{\left\{ ghg^{-1}\colon h\in H\right\} }}=\overset{H}{\overbrace{\left\{ h\colon h\in H\right\} }}
+\]
+\end{enumerate}
+
+\subsection*{\hl{Insieme delle classi è gruppo solo se $H$ è normale}}
+$H\vartriangleleft G \implies G/H=\{$insieme delle classi laterali sinistre di $H\}$ è un gruppo con l'operazione definita da 
+$$\overline{a}\cdot \overline{b}=\overline{ab} \quad \quad \text{ovvero} \quad \quad aH\cdot bH=abH$$
+\subparagraph*{Dimostrazione}
+Due passi:
+\begin{itemize}
+    \item L'operazione è ben definita: se $a_1H=a_2H$ e $b_1H=b_2H$ allora 
+    $$a_1H\cdot b_1H=a_1b_1H=a_1(b_2H)\overset{\star}{=}(a_1H)b_2=(a_2H)b_2\overset{\star}{=}a_2b_2H=a_1H\cdot a_2 H$$
+    in $\star$ abbiamo usato l'ipotesi che $H$ è normale, ovvero le classi laterali commutano.
+    \item $G/H$ verifica le proprietà di gruppo (identità con $e=eH=H$, chiusura e inverso)
+\end{itemize}
+
+\subsection*{\hl{Normalità dei sottogruppi di indice $2$}}
+
+$H\subseteq G$ sottogruppo di indice $\left[G:H\right]=2$ $\Longrightarrow$
+$H$ sottogruppo normale
+
+\subparagraph*{Dimostrazione}
+
+Una delle due classi laterali sinistre sarà $H$, e l'altra di conseguenza
+$G-H$. Analogamente per le classi destre, da cui le uguaglianze
+\begin{align*}
+gH=Hg=H & \quad\text{per }g\in H & gH=Hg=G-H & \quad\text{per }g\notin H
+\end{align*}
+
+
+\subsection*{Normalità del $\ker$ di una funzione}
+
+$f\colon G\longrightarrow G'$ omomorfismo, allora $\ker\left(f\right)$
+sottogruppo normale di $G$
+
+\subparagraph*{Dimostrazione}
+
+Dato $h\in\ker\left(f\right)$ ho che $f\left(ghg^{-1}\right)=f\left(g\right)f\left(h\right)f\left(g^{-1}\right)=f\left(g\right)f\left(g^{-1}\right)=e'$,
+da cui $ghg^{-1}\in\ker\left(f\right)$
+
+\subsection*{Buona definizione della composizione nel gruppo quoziente}
+
+\subparagraph*{Dimostrazione}
+
+Dati $\overline{a}=\overline{a'}$ e $\overline{b}=\overline{b'}$
+ho che $a'=an_{1}$ e $b'=bn_{2}$, da cui $a'b'=an_{1}bn_{2}=ab\left(b^{-1}n_{1}b\right)n_{2}$
+e quindi $\overline{a'b'}=\overline{ab}$
+
+\subsection*{\hl{Commutatività del gruppo quoziente}}
+
+$N$ sottogruppo normale di $G$. Allora $G/N$ commutativo $\Longleftrightarrow$
+$\left[G,G\right]\subseteq N$ 
+
+\subparagraph*{Dimostrazione}
+
+\[
+G/N\text{ commutativo}\;\Leftrightarrow\;\forall\,\overline{g},\overline{h}\in G/N\quad\overline{g}\cdot\overline{h}=\overline{h}\cdot\overline{g}\;\Leftrightarrow\;\overline{ghg^{-1}h^{-1}}=\overline{e}\;\Leftrightarrow\;ghg^{-1}h^{-1}\in N\;\Leftrightarrow\;\left[G,G\right]\subseteq N
+\]
+
+\vspace{1.5cm}
+
+\begin{center}
+\rule{0.8\textwidth}{1pt}
+\par\end{center}
+
+\vspace{1cm}
+
+
+\part{Teoremi di Isomorfismo}
+
+\section*{Teoremi}
+
+\subsection*{\hl{Teorema di omomorfismo}}
+
+$f\colon G\longrightarrow G'$ omomorfismo, $N\subseteq G$ sottogruppo
+normale con $N\subseteq\ker\left(f\right)$, allora, $\exists!\,h\colon G/N\longrightarrow G'$
+tale che $h\circ\pi=f$, ovvero $h(\underbrace{xN}_{\text{classe di }x})=f\left(x\right)$. Alternativamente, il
+diagramma è commutativo ($\pi$ applicazione canonica).
+\[
+\begin{array}{ccc}
+G\quad & \overset{f}{\longrightarrow} & \quad G'\\
+\pi\;\searrow &  & \nearrow\;h\\
+ & G/N
+\end{array}
+\]
+
+
+\subparagraph*{Dimostrazione}
+
+Definisco $h\left(\overline{x}\right)=f\left(x\right)$, ben definita
+in quanto 
+\[
+\overline{x}=\overline{y}\;\longrightarrow\;x^{-1}y\in N,\quad\text{dunque }f\left(x^{-1}y\right)=e'=f(x)^{-1}f(y)\iff f(x)=f(y)\;\longrightarrow h\left(\overline{x}\right)=f\left(x\right)=f\left(y\right)=h\left(\overline{y}\right)
+\]
+
+Ed omomorfismo in quanto $h\left(\overline{xy}\right)=f\left(xy\right)=f\left(x\right)f\left(y\right)=h\left(\overline{x}\right)h\left(\overline{y}\right)$
+
+\subsection*{\hl{Primo teorema di isomorfismo}}
+
+$f\colon G\longrightarrow G'$ omomorfismo, allora $G/\ker\left(f\right)\cong \text{Im}f $
+
+\subparagraph*{Dimostrazione}
+Devo trovare un \textbf{omomorfismo iniettivo}
+$$G/\ker f\to G$$
+in modo che poi la restrizione all'immagine sia anche suriettiva e quindi isomorfismo. Vediamo che 
+$$\begin{cases}
+    h: G/N\to G,\quad h(\overline{x})= f(x) \quad \text{ dal teo omo.}\\
+    N=\ker f
+\end{cases}$$
+soddisfa la richiesta.
+\begin{itemize}
+    \item \textbf{$f$ e $h$ hanno stessa immagine}: Vediamo dalla def. di $h$ che $h(x\ker(f))=f(x)$, quindi l'immagine di $h$ è uguale all'immagine di $f$ (poiché anche $f(x\cdot k)=f(x)f(k)=f(x)$ con $k\in\ker f$) 
+    \item \textbf{$h$ iniettiva}: $$\overline{x}\in\ker\left(h\right) \implies  h\left(\overline{x}\right)=f\left(x\right)=e'\implies x\in\ker\left(f\right)\implies \overline{x}=\overline{1}$$
+    dove $\overline{1}$ è l'elemento neutro di $G/\ker(f)$. Allora è iniettiva
+\end{itemize}
+
+Quindi $h$ isomorfismo sull'immagine.
+
+\subsubsection*{Corollario}
+
+Se $f$ omomorfismo suriettivo, allora $G/\ker\left(f\right)\cong G'$
+
+\subsubsection*{Corollario}
+
+Se $G'=A$ abeliano, allora, $\exists!\,f\colon G/\left[G,G\right]\longrightarrow A$
+tale che $h\left(x\left[G,G\right]\right)=f\left(x\right)$.
+
+\subparagraph*{Dimostrazione}
+
+Siccome $G/\ker\left(f\right)\cong f\left(G\right)$ è un sottogruppo
+di $A$, è abeliano, e quindi $\left[G,G\right]\subseteq\ker\left(f\right)$
+
+\subsection*{Secondo teorema di isomorfismo}
+
+$H\subseteq G$ sottogruppo, $N\subseteq G$ sottogruppo normale,
+$HN\coloneqq\left\{ hn\colon h\in H,n\in N\right\} $, allora:
+\begin{align*}
+\text{(i)}\quad & H\cap N\text{ sottogruppo normale di }H & \text{(ii)}\quad & \begin{array}{rcl}
+HN & \text{sottogruppo di} & G\\
+N & \text{sottogr. normale di} & HN
+\end{array} & \text{(iii)}\quad & H/\left(H\cap N\right)\cong HN/N
+\end{align*}
+
+
+\subparagraph*{Dimostrazione}
+\begin{enumerate}
+\item[(i)] $n\in H\cap N,g\in H$, ho che $gng^{-1}\in H$ in quanto $H$ gruppo,
+e $gng^{-1}\in N$ in quanto $N$ normale.
+\item[(ii)] Di certo $e=e\cdot e\in HN$. Prendo $a=h_{1}n_{1}$ e $b=h_{2}n_{2}$,
+ho che 
+\[
+ab^{-1}=h_{1}n_{1}n_{2}^{-1}h_{2}^{-1}=\overset{h'}{\overbrace{h_{1}h_{2}^{-1}}}\overset{n',\;N\,\text{normale}}{\overbrace{h_{2}n_{1}n_{2}^{-1}h_{2}^{-1}}}=h'n'\in HN
+\]
+quindi $HN$ sottogruppo di $G$. $N$ sottogruppo normale di $HN$
+in quanto $N$ sottogruppo normale di $G\supseteq HN$
+\item[(iii)] Prendo $f\colon H\longrightarrow HN/N$ tale che $f\left(h\right)=hN$,
+omomorf. suriett. di $\ker\left(f\right)=\left\{ h\in H\colon hN=N\right\} =H\cap N$
+\end{enumerate}
+
+\subsection*{\hl{Terzo teorema di isomorfismo}}
+
+$N,N'$ sottogruppi normali di $G$ tali che $N\subseteq N'\subseteq G$,
+allora $N'/N$ sottogruppo normale di $G/N$, ogni sottogruppo normale
+di $G/N$ ha la forma $M/N$ con $N\subseteq M\subseteq G$, e inoltre
+$\left(G/N\right)/\left(N'/N\right)\cong G/N'$
+
+\subparagraph*{Dimostrazione}
+
+{[}...{]}
+
+Data l'applicazione canonica $\pi\colon G\longrightarrow G/N'$, trovo
+per il teorema di omomorfismo $h\colon G/N\longrightarrow G/N'$ tale
+che $h\left(gN\right)=\pi\left(g\right)=gN'$, suriettiva dato che
+lo è $\pi$. Adesso, so che $gN\in\ker\left(h\right)\;\Leftrightarrow\;gN'=N'$,
+ovvero $g\in N'$, da cui
+\[
+\ker\left(h\right)=\left\{ gN\colon g\in N'\right\} =N'/N\qquad\longrightarrow\qquad G/N'\cong\left(G/N\right)/\ker\left(h\right)=\left(G/N\right)/\left(N'/N\right)
+\]
+
+\vspace{1.5cm}
+
+\begin{center}
+\rule{0.8\textwidth}{1pt}
+\par\end{center}
+
+\vspace{1cm}
+
+
+\part{Anelli}
+
+\section*{Definizioni}
+
+\paragraph*{Anello $\left(R,+,\cdot,0,1\right)$, con addizione $+$, moltiplicazione
+$\cdot$, ed elementi $0,1$}
+
+\[
+\begin{array}{rllcrll}
+\text{(R1)} & \text{(\emph{Gruppo additivo})} & \left(R,+,0\right)\text{ gruppo abeliano} &  & \text{(R4)} & \text{(\emph{Distributività})} & \begin{array}{l}
+x\cdot\left(y+z\right)=x\cdot y+x\cdot z\\
+\left(y+z\right)\cdot x=y\cdot x+z\cdot x
+\end{array}\\
+\text{(R2)} & \text{(\emph{Associatività})} & x\cdot\left(y\cdot z\right)=\left(x\cdot y\right)\cdot z &  & \text{*(R5)} & \text{(\emph{Commutatività})} & x\cdot y=y\cdot x\\
+\text{(R3)} & \text{(\emph{Identità})} & 1\cdot x=x\cdot1=x &  & \text{*(R6)} & \text{(\emph{Inverso moltipl.})} & x\cdot x^{*}=x^{*}\cdot x=1\quad{\scriptstyle \left(x\neq0\right)}
+\end{array}
+\]
+
+
+\paragraph*{Anello commutativo (R5), Anello con divisione (R6), Campo o Corpo
+(R5 e R6)}
+
+\paragraph*{Anelli $\mathbb{Z},\mathbb{Q},\mathbb{R},\mathbb{C},\mathbb{H}$}
+
+commutativi $\mathbb{Z},\mathbb{Q},\mathbb{R},\mathbb{C}$, con divisione
+$\mathbb{Q},\mathbb{R},\mathbb{C},\mathbb{H}$, campi $\mathbb{Q},\mathbb{R},\mathbb{C}$
+
+\paragraph*{Anello banale} È l'insieme $\{0\}$ in cui 0=1: i due elementi neutri coincidono. Si può anche dare come caratteristica unica il fatto che gli elementi neutri coincidono e ricavare che è solo l'insieme  $\{0\}$, infatti: 
+$$0=1\implies x=1\cdot x=0\cdot x = 0 \quad \forall x $$
+la prima uguaglianza per def. di elem. neutro prodotto, nella seconda perché 1=0, nella terza perché in un anello valgono
+$$\begin{cases}
+    x+0=x\quad \text{(def. elem. neutro somma)} \\
+    x(y+z)=xy+zy \quad \text{(proprietà distributiva)}
+\end{cases}$$
+(usiamo la proprietà distributiva proprio come ponte tra le due operazioni, infatti vogliamo capire cosa fa il \textbf{prodotto} per l'elemento neutro della \textbf{somma}) quindi
+\begin{align*}
+    x+0&=x \\
+     (x+0)y&=xy \\
+     xy+0y&=xy  \iff 0y=0
+\end{align*}
+
+\hl{NB: $\{0\}$ NON È UN CAMPO }
+
+\paragraph*{Anello delle classi di resto $\mathbb{Z}/n\mathbb{Z}$}
+
+commutativo
+
+\paragraph*{Anello degli interi di Gauss $\mathbb{Z}\left[i\right]$}
+
+$\mathbb{C}\supset\mathbb{Z}\left[i\right]\coloneqq\left\{ a+bi\in\mathbb{C}\colon a,b\in\mathbb{Z}\right\} $,
+commutativo
+
+\paragraph*{Unità di $R$ e insieme delle unità $R^{*}$}
+
+$x\mid\exists\,x^{-1}\colon x\cdot x^{-1}=x^{-1}\cdot x=1$
+
+\paragraph*{Divisori di zero}
+
+$a\neq0\mid\exists\,b\neq0$ tale che $ab=0$ (divisore sinistro)
+/ $ba=0$ (divisore destro)
+
+\paragraph*{Dominio di integrità}
+
+Anello \emph{non banale}, \emph{commutativo} e \emph{senza divisori
+di zero}
+
+\paragraph*{Sottoanelli}
+
+$S\subseteq R$ tale che $\left(S,+,\cdot,0,1\right)$ anello {[}$\left(S,+,0\right)$
+sottogruppo di $\left(R,+,0\right)$, e $a,b\in S\Longrightarrow ab\in S${]}
+
+\paragraph*{Prodotto di anelli $R_{1}\times R_{2}$}
+
+con addizione $\left(r,s\right)+\left(r',s'\right)=\left(r+r',s+s'\right)$
+e moltiplicazione $\left(r,s\right)\cdot\left(r',s'\right)=\left(r\cdot r',s\cdot s'\right)$
+
+Se $R_{1},R_{2}\neq\left\{ 0\right\} $, ha divisori di zero in quanto
+$\left(r,0\right)\cdot\left(0,r\right)=\left(0,0\right)$
+
+\paragraph*{Anello dei polinomi $R\left[X\right]$}
+
+$R\left[X\right]=\left\{ \sum_{i=0}^{\infty}a_{i}X^{i}:a_{i}\in R\right\} $,
+con
+\begin{align*}
+\boxed{+}\quad & (\sum_{i=0}^{\infty}a_{i}X^{i})+(\sum_{i=0}^{\infty}b_{i}X^{i})=\sum_{i=0}^{\infty}\left(a_{i}+b_{i}\right)X^{i} & \boxed{\cdot}\quad & (\sum_{i=0}^{\infty}a_{i}X^{i})\cdot(\sum_{i=0}^{\infty}b_{i}X^{i})=\sum_{k=0}^{\infty}\left(\sum_{i=0}^{k}a_{i}b_{k-i}\right)X^{i}
+\end{align*}
+
+$R\left[X\right]$ commutativo $\Leftrightarrow$ $R$ commutativo,
+$R$ dominio $\Rightarrow$ $R\left[X\right]$ dominio e $\deg\left(fg\right)=\deg\left(f\right)+\deg\left(g\right)$
+
+\paragraph*{Anello dei polinomi in $n$ variabili}
+
+$R\left[X_{1},X_{2},\dots,X_{n}\right]=\left(R\left[X_{1},X_{2},\dots,X_{n-1}\right]\right)\left[X_{n}\right]$
+
+\paragraph*{Campo quoziente $Q\left(R\right)$}
+
+$R$ \emph{dominio}, $\Omega\coloneqq\left\{ \left(a,r\right)\in R\times\left(R-\left\{ 0\right\} \right)\right\} $,
+$\left(a,r\right)\sim\left(b,s\right)\Leftrightarrow as=br$ relazione
+d'equivalenza, $Q\left(R\right)=\nicefrac{\Omega}{\sim}=\left\{ \frac{a}{r}\text{ classe di }\left(a,r\right)\right\} $,
+addizione $\frac{a}{r}+\frac{b}{s}=\frac{as+br}{rs}$ e moltiplicazione
+$\frac{a}{r}\cdot\frac{b}{s}=\frac{ab}{rs}$
+
+\paragraph*{Campo delle funzioni razionali $K\left(X\right)=Q\left(K\left[X\right]\right)$}
+
+\paragraph*{Anello degli endomorfismi $\text{End}\left(A\right)$}
+
+$A$ gruppo \emph{additivo}, addizione $\left(f+g\right)\left(a\right)=f\left(a\right)+g\left(a\right)$,
+prodotto $\left(fg\right)\left(a\right)=f\left(g\left(a\right)\right)$
+
+\paragraph*{Anello delle funzioni $R^{X}\protect\coloneqq\left\{ f\colon X\protect\longrightarrow R\right\} $}
+
+$X$ insieme, $R$ anello, addizione $\left(f+g\right)\left(x\right)=f\left(x\right)+g\left(x\right)$,
+prodotto $\left(f\cdot g\right)\left(x\right)=f\left(x\right)\cdot g\left(x\right)$
+
+Anelli $C^{0}\left(\left[0,1\right]\right)$, $C^{1}\left(\left[0,1\right]\right)$,
+$C^{\infty}\left(\left[0,1\right]\right)$
+
+\section*{Teoremi}
+
+\subsection*{Gruppo moltiplicativo dell'insieme delle unità}
+
+\subparagraph*{Dimostrazione}
+
+Vale associatività, $1$ è elemento neutro, inverso $a\in R^{*}\Rightarrow a^{-1}\in R^{*}$,
+e chiusura $a,b\in R^{*}\Rightarrow ab\in R^{*}$ siccome 
+\[
+\left(ab\right)\left(b^{-1}a^{-1}\right)=\left(b^{-1}a^{-1}\right)\left(ab\right)=1
+\]
+
+
+\subsection*{Campo $\mathbb{Z}/p\mathbb{Z}$}
+
+$\mathbb{Z}/n\mathbb{Z}$ campo $\Longleftrightarrow$ $n$ primo
+
+\subparagraph*{Dimostrazione}
+
+$\forall\,a\in\left(\mathbb{Z}/n\mathbb{Z}-\left\{ 0\right\} \right)$
+ha inverso moltipl. $\Leftrightarrow$ $\forall\,a\in\mathbb{Z}\colon0<a<n$
+si ha $\text{mcd}\left(a,n\right)=1$ $\Leftrightarrow$ $n$ primo
+
+\subsection*{Indivisibilità dello zero per le unità}
+
+Un'unità di $R$ non può essere divisore di zero
+
+\subparagraph*{Dimostrazione}
+
+Per assurdo, $a,b,c$ tali che $ab=1$, $ca=0$, $c\neq0$, allora
+\[
+0=0\cdot b=\left(ca\right)\cdot b=c\cdot\left(ab\right)=c\cdot1=c\quad\text{\lightning}
+\]
+
+\subsection*{\hl{Campo quoziente è campo}}
+Il campo quoziente come definito sopra è un campo.
+\subparagraph*{Dimostrazione} Prima buone def. delle operazioni:
+\begin{itemize}
+    \item Buona def. del $+$: abbiamo 
+    $$\frac{a}{r}=\frac{a'}{r'}\iff ar'=a'r, \quad \quad \frac{b}{s}=\frac{b'}{s'}\iff bs'=b's$$
+    allora
+    $$(a's'+b'r')rs=a's'rs+b'r'rs=(a'r)s's+(b's)r'r=ar's's+bs'r'r=(as+br)r's'$$
+    che per  def. 
+    $$\frac{a's'+b'r'}{r's'}=\frac{as+br}{rs} \longrightarrow \frac{a'}{r'}+\frac{b'}{s'}=\frac{a}{r}+\frac{b}{s}$$
+\end{itemize}
+
+\vspace{1.5cm}
+
+\begin{center}
+\rule{0.8\textwidth}{1pt}
+\par\end{center}
+
+\vspace{1cm}
+
+
+\part{Omomorfismi di anelli e Ideali}
+
+\section*{Definizioni}
+
+\paragraph*{Omomorfismo di anelli} $\quad f\left(a+b\right)=f\left(a\right)+f\left(b\right)\qquad f\left(a\cdot b\right)=f\left(a\right)\cdot f\left(b\right)\qquad f\left(1\right)=1$ \\
+
+
+\paragraph*{Ideale sinistro, destro, bilaterale}
+
+$I\subseteq R$ sottogruppo additivo, $ra\in I\quad\forall\,r\in R,\;\forall\,a\in I$
+(destro se $ar\in I$)
+$\longrightarrow$ sottogruppo additivo (normale) $+$ \textbf{assorbe} $R$ in $I$
+
+\paragraph*{Ideale principale}
+
+sinistro $Rx\coloneqq\left\{ rx\colon r\in R\right\} $ e destro $xR\coloneqq\left\{ xr\colon r\in R\right\} $,
+ideali $\left(x\right)$ generati da $x$
+
+\paragraph*{Ideale generato da $a_{1},a_{2},\dots,a_{n}$}
+
+$\left(a_{1},\dots,a_{n}\right)=a_{1}R+\dots+a_{n}R\coloneqq\left\{ a_{1}x_{1}+\dots+a_{n}x_{n}\colon x_{1},\dots,x_{n}\in R\right\} $
+
+\paragraph*{Intersezioni, Prodotti, Somme di ideali}
+
+Dati $I,J$ ideali bilaterali, sono ideali $I\cap J$, $I+J\coloneqq\left\{ x+y\colon x\in I,y\in J\right\} $
+e $IJ\coloneqq\left\{ \sum_{k=1}^{m}x_{k}y_{k}\colon x_{k}\in I,y_{k}\in J\right\} $
+
+\[
+\begin{array}{ccccccccc}
+ &  &  & \subset & I & \subset\\
+IJ & \subset & I\cap J &  &  &  & I+J & \subset & R\\
+ &  &  & \subset & J & \subset
+\end{array}
+\]
+
+
+\paragraph*{Ideali coprimi}
+
+$I+J=R$
+
+\paragraph*{Anelli quoziente} \hl{$R/I\protect\coloneqq\left\{ x+I\colon x\in R\right\} $ NB è con il +}
+
+Elementi $\overline{x}=x+I=I+x$, $\overline{x}=\overline{y}\;\Leftrightarrow\;x-y\in I$,
+addizione $\overline{x}+\overline{y}=\overline{x+y}$, moltiplicazione
+$\overline{x}\cdot\overline{y}=\overline{x\cdot y}$
+
+\paragraph*{Omomorfismo canonico $\pi\colon R\protect\longrightarrow R/I,\quad\pi\left(x\right)=\overline{x}$}
+
+suriettivo, di nucleo $\ker\left(\pi\right)=I$
+
+\section*{Teoremi}
+
+\subsection*{\hl{Ideale del Nucleo di omomorfismi}}
+
+$f$ omomorfismo, allora $\ker\left(f\right)$ ideale
+
+\subparagraph*{Dimostrazione}
+
+Presi $r\in R$ e $x\in\ker\left(f\right)$ ho che $f\left(rx\right)=f\left(r\right)f\left(x\right)=f\left(r\right)\cdot0=0$,
+e quindi $rx\in\ker\left(f\right)$. Analogamente $xr\in\ker\left(f\right)$
+
+\subsection*{Ideali contenenti un'unità}
+
+$I\subseteq R$ ideale che contiene un'unità $a\in R^{*}$, allora
+$I=R$ 
+
+\subparagraph*{Dimostrazione}
+
+Vale che $a\in I\;\Rightarrow\;a\cdot a^{-1}\in I\;\Rightarrow\;\forall\,x\in R\quad x=x\cdot1\in I$
+
+\subsubsection*{Corollario}
+
+Dato $R$ anello con divisione
+\begin{enumerate}
+\item[(i)] $R$ ha solo ideali banali
+\item[(ii)] Dato $R'$ anello non banale, $f\colon R\rightarrow R'$ omomorfismo
+è sempre iniettivo
+\end{enumerate}
+
+\subparagraph*{Dimostrazione}
+\begin{enumerate}
+\item[(ii)] Vale che $f\left(1\right)=1$, quindi $1\notin\ker\left(f\right)$,
+ma quindi $\ker\left(f\right)\neq R\;\Rightarrow\;\ker\left(f\right)=\left\{ 0\right\} $
+\end{enumerate}
+
+\subsection*{\hl{Teorema di omomorfismo}}
+
+$f\colon R\longrightarrow R'$ omomorfismo di anelli, $I\subseteq R$
+ideale con $I\subseteq\ker\left(f\right)$, allora, $\exists!\,h\colon R/I\longrightarrow R'$
+tale che $h\circ\pi=f$, ovvero $h\left(x+N\right)=f\left(x\right)$.
+Alternativamente, il diagramma è commutativo.
+\[
+\begin{array}{ccc}
+R\quad & \overset{f}{\longrightarrow} & \quad R'\\
+\pi\;\searrow &  & \nearrow\;h\\
+ & R/I
+\end{array}
+\]
+
+
+\subparagraph*{Dimostrazione}
+
+Definisco $h\left(\overline{x}\right)=f\left(x\right)$, ben definita
+in quanto 
+\[
+\overline{x}=\overline{y}\;\longrightarrow\;x-y=a\quad\text{con }a\in I\subseteq\ker\left(f\right),\quad\text{dunque }f\left(x\right)=f\left(y+a\right)=f\left(y\right)+f\left(a\right)=f\left(y\right)
+\]
+
+Per costruzione vale $h\left(\pi\left(x\right)\right)=f\left(x\right)$,
+ed omomorfismo in quanto $h\left(\overline{1_{R}}\right)=f\left(1_{R}\right)=1_{R'}$
+\begin{align*}
+h\left(\overline{x+y}\right) & =f\left(x+y\right)=f\left(x\right)+f\left(y\right)=h\left(\overline{x}\right)+h\left(\overline{y}\right) & h\left(\overline{xy}\right) & =f\left(xy\right)=f\left(x\right)f\left(y\right)=h\left(\overline{x}\right)h\left(\overline{y}\right)
+\end{align*}
+
+
+\subsection*{Primo teorema di isomorfismo}
+
+$f\colon R\longrightarrow R'$ omomorfismo di anelli, allora $R/\ker\left(f\right)\cong f\left(R\right)$
+
+\subparagraph*{Dimostrazione}
+
+Dal Teorema di omomorfismo, con $I=\ker\left(f\right)$, ottengo $h\left(\overline{x}\right)=f\left(x\right)$.
+Preso ora $\overline{x}\in\ker\left(h\right)$, ho che $h\left(\overline{x}\right)=f\left(x\right)=e'$,
+dunque $x\in\ker\left(f\right)$, ovvero $\overline{x}=\overline{0}$
+e perciò $h$ è inettiva, quindi isomorfismo.
+
+\subsection*{Secondo teorema di isomorfismo}
+
+$R'\subseteq R$ sottoanello, $I\subseteq R$ ideale, allora:
+\begin{align*}
+\text{(i)}\quad & R'\cap I\text{ ideale di }R' & \text{(ii)}\quad & R'+I\text{ sottoanello di }R & \text{(iii)}\quad & R'/\left(R'\cap I\right)\cong\left(R'+I\right)/I
+\end{align*}
+
+
+\subsection*{Terzo teorema di isomorfismo}
+
+$I$ ideale di $R$, ogni ideale di $R/I$ ha la forma $J/I$ con
+$J$ ideale di $R$ tale che $I\subseteq J\subseteq R$, e inoltre
+$\left(R/I\right)/\left(J/I\right)\cong R/J$
+
+\subsection*{\hl{Teorema Cinese del Resto}}
+
+$I,J$ ideali coprimi di $R$ anello commutativo ($I+J=R$). Allora
+vale che
+\begin{align*}
+\text{(i)}\quad & IJ=I\cap J & \text{(ii)}\quad & R/\left(IJ\right)\cong\left(R/I\right)\times\left(R/J\right)
+\end{align*}
+
+
+\subparagraph*{Dimostrazione}
+\begin{enumerate}
+\item[(i)] $\subseteq$) Vale sempre che $IJ\subseteq I\cap J$ (in quanto sia $I$ che $J$ sono chiusi rispetto al prodotto esterno). \\
+$\supseteq$) Siccome $I+J=R$, ho che
+$\exists\,x\in I,y\in J$ tali che $x+y=1$, prendo allora $z\in I\cap J$
+e osservo $z=z\cdot1=zx+zy$, dove
+$$
+\begin{cases}
+    zx\in(I\cap J)I \subseteq JI \\
+    zy\in(I\cap J)J \subseteq \text{\hl{$IJ=JI$ essendo commutativo}} \\
+\end{cases}
+\implies z=zx+zy\in IJ+IJ=IJ
+$$
+che dimostra $z\in IJ$, ovvero $IJ\supseteq I\cap J$
+\item[(ii)] Prendo $\Psi\colon R\rightarrow\left(R/I\right)\times\left(R/J\right)$
+tale che $\Psi\left(x\right)=\left(x\mod I,x\mod J\right)$, ovvero la proiezione standard ai due quozienti, che è
+dunque \textbf{omomorfismo} con $\ker\left(\Psi\right)=I\cap J=IJ$ (per punto (i)). $\Psi$
+è \textbf{suriettivo} in quanto ogni $(a,b)$ nel codominio ha preimmagine definita da $z=ay+bx$ con $x\in I,y\in J$ tali
+che $x+y=1$. Infatti:
+$$
+\begin{cases}
+z =ay+bx\equiv ay=a\left(1-x\right)=a-ax\equiv a\mod I\\
+z =ay+bx\equiv bx=b\left(1-y\right)=b-by\equiv b\mod J
+\end{cases}
+\implies \Psi(z)=(a,b)
+$$
+Quindi, per il primo teo. di isomorfismo  $R/\ker\Psi\cong\Psi(R) \implies$ tesi
+\end{enumerate}
+
+\subsubsection*{Corollario}
+
+Dati $m,n$ interi coprimi vale
+\begin{enumerate}
+\item[(i)] Isomorfismo tra anelli $\mathbb{Z}/nm\mathbb{Z}\cong\mathbb{Z}/n\mathbb{Z}\times\mathbb{Z}/m\mathbb{Z}$
+\item[(ii)] Isomorfismo tra gruppi $\left(\mathbb{Z}/nm\mathbb{Z}\right)^{*}\cong\left(\mathbb{Z}/n\mathbb{Z}\right)^{*}\times\left(\mathbb{Z}/m\mathbb{Z}\right)^{*}$
+\item[(iii)] Se $m,n$ coprimi e positivi, allora $\varphi\left(nm\right)=\varphi\left(n\right)\varphi\left(m\right)$
+\end{enumerate}
+
+\subsubsection*{Corollario}
+
+$n$ intero positivo, allora $\varphi\left(n\right)=\prod_{p\in P}\left(1-\frac{1}{p}\right)$
+con $P\coloneqq\left\{ p\text{ primo}\colon p\mid n\right\} $
+
+\subparagraph*{Dimostrazione}
+
+{[}...{]}
+
+\vspace{1.5cm}
+
+\begin{center}
+\rule{0.8\textwidth}{1pt}
+\par\end{center}
+
+\vspace{1cm}
+
+
+\part{Zeri di Polinomi}
+
+\section*{Definizioni}
+
+\paragraph*{Zero di un polinomio $f\left(\alpha\right)=0$ e zeri doppi}
+
+$f_{1}\left(\alpha\right)=0$ per $f=f_{1}\cdot\left(X-\alpha\right)$
+
+\paragraph*{Polinomio derivato $f^{\prime}$}
+
+Dato $f\in R\left[X\right]$ con $R$ anello commutativo, $f^{\prime}=na_{n}X^{n-1}+\left(n-1\right)a_{n-1}X^{n-2}+\dots+a_{1}$
+
+\section*{Teoremi}
+
+\subsection*{Divisione con resto}
+
+Sia $R$ anello, dati $f,g\in R\left[X\right]$ con $g=b_{m}X^{m}+\dots+b_{1}X+b_{0}$
+e $b_{m}\in R^{*}$, allora $\exists!\,q,r\in R\left[X\right]$ tali
+che 
+\[
+f=qg+r,\qquad r=0\text{ oppure }\deg\left(r\right)<\deg\left(g\right)
+\]
+
+
+\subparagraph*{Dimostrazione}
+\begin{itemize}
+\item \textbf{Esistenza:} Di $f_{1}\left(\alpha\right)=0$ mostro per $\deg\left(f\right)\geq\deg\left(g\right)$,
+altrimenti banale. Dimostro per induzione sul grado di $f$: sia $f=a_{n}X^{n}+\dots+a_{1}X+a_{0}$
+con $n\geq m$, e considero
+\[
+f_{1}=f-a_{n}b_{m}^{-1}X^{n-m}g=\left(a_{n-1}-a_{n}b_{m}^{-1}b_{m-1}\right)X^{n}+\dots
+\]
+Siccome $\deg\left(f_{1}\right)<\deg\left(f\right)$ per induzione
+ho $f_{1}=q_{1}g+r_{1}$ con $r_{1}=0$ oppure $\deg\left(r_{1}\right)<\deg\left(g\right)$,
+da cui
+\[
+f=f_{1}+a_{n}b_{m}^{-1}X^{n-m}g=\left(q_{1}+a_{n}b_{m}^{-1}X^{n-m}\right)g+r_{1}
+\]
+\item \textbf{Unicità:} Considero $f=qg+r=q'g+r'$, avrei $\left(q-q'\right)g=r'-r$.
+Se per assurdo $q\neq q'$, siccome $b_{m}\in R^{*}$ ho che $\deg\left(q-q'\right)g\geq\deg\left(g\right)$,
+ma vale che $\deg\left(r-r'\right)<\deg\left(g\right)$ oppure $r-r'=0$,
+$\text{\lightning}$.
+\end{itemize}
+
+\subsection*{\hl{Principalità degli ideali dei polinomi a coefficienti in un campo}}
+
+Dato $K$ campo, gli ideali di $K\left[X\right]$ sono principali
+
+\subparagraph*{Dimostrazione}
+
+Sia $I$ un ideale di $K\left[X\right]$. Se $I=\left\{ 0\right\} $,
+è principale, altrimenti prendo $g\in I$ non nullo di grado minimale,
+e dimostro che $I=\left(g\right)$. Prendo $f\in I$, posso scrivere
+$f=qg+r$ e noto che $r=f-qg\in I$, ma non può essere $\deg\left(r\right)<\deg\left(g\right)$
+quindi $r=0$, quindi $f=qg$ da cui la tesi.
+
+\subsection*{Struttura di $R\left[X\right]/\left(X-\alpha\right)$}
+
+Dato $R$ anello \hl{commutativo} e $\alpha\in R$ vale che:
+\begin{enumerate}
+\item[(i)] Per ogni polinomio $f\in R\left[X\right]$ esiste $q\in R\left[X\right]$
+tale che $f=q\cdot\left(X-\alpha\right)+f\left(\alpha\right)$
+\item[(ii)] $\Psi:R\left[X\right]\longrightarrow R,\quad f\mapsto f\left(\alpha\right)$
+è un omomorfismo suriettivo di nucleo $\left(X-\alpha\right)$
+\item[(iii)] C'è un isomorfismo indotto da $\Psi$ tra $R\left[X\right]/\left(X-\alpha\right)\cong R,\quad\overline{f}\mapsto f\left(\alpha\right)$
+\end{enumerate}
+
+\subparagraph*{Dimostrazione}
+\begin{enumerate}
+\item[(i)] Ho che $f=q\cdot\left(X-\alpha\right)+r$, e ottengo $r$ da $f\left(\alpha\right)=q\left(\alpha\right)\left(\alpha-\alpha\right)+r$
+\item[(ii)] $\Psi$ omomorfismo suriettivo  (grazie alla \hl{commutatività}), per (i) $f\in\ker\left(\Psi\right)$
+se e solo se $f$ è divisibile per $X-\alpha$
+\item[(iii)] Primo Teorema di Isomorfismo applicato a $\Psi$
+\end{enumerate}
+
+\subsection*{Isomorfismo tra $\mathbb{R}\left[X\right]/\left(X^{2}+1\right)\protect\cong\mathbb{C}$}
+
+\subparagraph*{Dimostrazione}
+
+Considero $\Phi\left(f\right)=f\left(i\right)$, ovviamente omomorfismo
+suriettivo, per il nucleo osservo che $\left(X^{2}+1\right)\subseteq\ker\left(\Phi\right)$.
+Viceversa, per $f\in\ker\left(\Phi\right)$ ho $f=q\cdot\left(X^{2}+1\right)+r$,
+da cui $r\left(i\right)=0$, ma vale $\deg\left(r\right)\leq1$, quindi
+$r\left(i\right)=ai+b=0$, quindi $r\equiv0$, da cui $X^{2}+1\mid f$,
+$\left(X^{2}+1\right)\supseteq\ker\left(\Phi\right)$. La tesi dal
+Primo Teorema di Isomorfismo.
+
+\subsection*{Struttura di $\mathbb{R}\left[X\right]/\left(g\right)$}
+
+$R$ anello commutativo e $g=b_{n}X^{n}+\dots+b_{1}X+b_{0}\in R\left[X\right]$
+e $b_{n}\in R^{*}$ , allora $\forall\,\overline{f}\in R\left[X\right]/\left(g\right)$
+esiste unico $r\in R\left[X\right]$ con $\deg\left(r\right)<n$ oppure
+$r=0$ tale che $\overline{f}=\overline{r}$, ovvero $R\left[X\right]/\left(g\right)=\left\{ r\colon r=a_{n-1}X^{n-1}+\dots+a_{1}X+a_{0}\in R\left[X\right]\right\} $
+
+\subparagraph*{Dimostrazione}
+
+Preso $\overline{f}\in R\left[X\right]/\left(g\right)$ ho $\overline{f}=\overline{qg+r}=\overline{r}$
+siccome $\left(qg+r\right)-r=qg\in\left(g\right)$. L'unicità dalla
+divisione col resto.
+
+\subsection*{Scomponibilità di un polinomio in un dominio di integrità}
+
+$R$ \hl{dominio di integrità} e $f\in R\left[X\right]$ polinomio di zeri
+distinti $\alpha_{1},\alpha_{2},\dots,\alpha_{n}$, allora $\exists\,q\in R\left[X\right]$
+tale che 
+\[
+f=q\cdot\left(X-\alpha_{1}\right)\left(X-\alpha_{2}\right)\cdot\dots\cdot\left(X-\alpha_{n}\right)
+\]
+
+
+\subparagraph*{Dimostrazione}
+
+Per induzione su $n$, $n=0$ banale, dato $n$ per $n+1$ posso scrivere
+$f=f_{1}\cdot\left(X-\alpha_{n+1}\right)+f\left(\alpha_{n+1}\right)=f_{1}\cdot\left(X-\alpha_{n+1}\right)$,
+ma $\alpha_{1},\alpha_{2},\dots,\alpha_{n}$ sono anche zeri di $f_{1}$in
+quanto $\forall\,1\leq i\leq n$ ho $0=f_{1}\left(\alpha_{i}\right)\left(\alpha_{i}-\alpha_{n+1}\right)$
+con $\alpha_{i}-\alpha_{n+1}\neq0$ per ipotesi e \hl{$R$ dominio di
+integrità}, quindi $f_{1}\left(\alpha_{i}\right)=0$
+
+\subsubsection*{Corollario}
+
+Un polinomio di grado $d$ in un dominio di integrità ha al più $d$
+zeri distinti.
+
+\subsection*{Proprietà del polinomio derivato}
+
+\begin{align*}
+\alpha' & =0\quad\text{per \ensuremath{\alpha} costante} & \left(f+g\right)^{\prime} & =f^{\prime}+g^{\prime} & \left(f\cdot g\right)^{\prime} & =f^{\prime}g+fg^{\prime}
+\end{align*}
+
+
+\subsection*{Caratterizzazione degli zeri doppi}
+
+$\alpha$ zero doppio per $f$ $\Longleftrightarrow$ $f^{\prime}\left(\alpha\right)=0$
+
+\subparagraph*{Dimostrazione}
+
+\[
+f=f_{1}\cdot\left(X-\alpha\right)\quad\longrightarrow\quad f^{\prime}=f_{1}^{\prime}\cdot\left(X-\alpha\right)+f_{1}\quad\longrightarrow\quad f^{\prime}\left(\alpha\right)=\cancel{f_{1}^{\prime}\left(\alpha\right)\cdot\left(\alpha-\alpha\right)}+f_{1}\left(\alpha\right)=0
+\]
+
+
+\subsection*{Prodotto di tutti i polinomi di grado $1$ di $\mathbb{Z}/p\mathbb{Z}\left[X\right]$ }
+
+Dato $p$ primo, in $\mathbb{Z}/p\mathbb{Z}\left[X\right]$ vale 
+\[
+\prod_{\overline{a}\in\mathbb{Z}/p\mathbb{Z}}\left(X-\overline{a}\right)=X^{p}-X
+\]
+
+
+\subparagraph*{Dimostrazione}
+
+Per il Teorema di Fermat vale $\overline{a}^{p-1}=\overline{1}$ per
+$\overline{a}\in\left(\mathbb{Z}/p\mathbb{Z}\right)^{*}$, ovvero
+$\forall\,\overline{a}\in\mathbb{Z}/p\mathbb{Z}-\left\{ \overline{0}\right\} $
+è uno zero di $X^{p-1}-1$, moltiplicando il polinomio per $X=X-\overline{0}$
+ho la tesi.
+
+\subsection*{Teorema di Wilson}
+
+$p$ primo $\Longleftrightarrow$ $\left(p-1\right)!\equiv-1\mod p$
+
+\subparagraph*{Dimostrazione}
+\begin{itemize}
+\item[$\Rightarrow$] Per $p=2$ verifica diretta. Per $p$ dispari, ho che $\prod_{i=1}^{p-1}\left(X-\overline{i}\right)=X^{p-1}-\overline{1}$,
+che valutato in $X=\overline{0}$ dà 
+\[
+\left(\overline{-1}\right)\cdot\left(\overline{-2}\right)\cdot\dots\cdot\left(\overline{-\left(p-1\right)}\right)=-\overline{1}\quad\longrightarrow\quad\overline{\left(p-1\right)!}=-\overline{1}
+\]
+\end{itemize}
+
+\subsection*{Proprietà dei numeri primi}
+
+$p>2$ primo, sono equivalenti
+\begin{align*}
+\text{(i)}\quad & \exists\,x\in\mathbb{Z}\mid x^{2}\equiv-1\mod p & \text{(ii)}\quad & X^{2}-1\text{ ha uno zero in }\mathbb{Z}/p\mathbb{Z} & \text{(iii)}\quad & p\equiv1\mod4
+\end{align*}
+
+
+\subparagraph*{Dimostrazione}
+\begin{enumerate}
+\item[(i) $\Rightarrow$ (iii)] $x^{2}\equiv-1\mod p\;\Rightarrow\;\text{ord}\left(\overline{x}\right)=4$,
+quindi $4\mid\#\left(\mathbb{Z}/p\mathbb{Z}\right)^{*}=p-1\;\Rightarrow\;p\equiv1\mod4$
+\item[(iii) $\Rightarrow$ (i)] Posso prendere $x=\left(\frac{p-1}{2}\right)!$ che soddisfa $x^{2}\equiv-1\mod p$
+\end{enumerate}
+\vspace{1.5cm}
+
+\begin{center}
+\rule{0.8\textwidth}{1pt}
+\par\end{center}
+
+\vspace{1cm}
+
+
+\part{Ideali primi e massimali}
+
+\section*{Definizioni}
+SIAMO IN ANELLI COMMUTATIVI 
+\paragraph*{Ideale primo}
+
+$I\subsetneqq R$ ideale primo di un anello commutativo $R$ se $\forall\,x,y\in R\quad xy\in I\;\Longrightarrow\;x\in I\;\vee\;y\in I$
+
+\paragraph*{Ideale massimale}
+
+$I\subsetneqq R$ ideale massimale di un anello commutativo $R$ se
+$\forall\,J$ ideale tale che $I\subseteq J\subseteq R$ vale $J=I$
+oppure $J=R$\\
+
+\noindent SIAMO IN DOMINI DI INT: 
+
+\paragraph*{Irriducibile }
+
+$\alpha\in R$ irriducibile in $R$ dominio di integrità se $\alpha\neq0$,
+$\alpha\notin R^{*}$ e $\alpha=\beta\gamma\;\Longrightarrow\;\beta\in R^{*}\;\vee\;\gamma\in R^{*}$
+
+\paragraph*{Implicazioni tra ideali primi, ideali massimali e irriducibili }
+
+Dato $R$ dominio di integrità ho che 
+\[
+\begin{array}{ccccc}
+\left(\alpha\right)\text{ massimale} & \Longrightarrow & \left(\alpha\right)\text{ primo} & \Longrightarrow & \alpha\text{ irriducibile}\end{array}
+\]
+
+
+\section*{Teoremi}
+
+\subsection*{\hl{Caratterizzazione degli ideali primi}}
+
+$I\subsetneqq R$ ideale è primo in un anello commutativo $R$ $\Longleftrightarrow$
+$R/I$ è un dominio di integrità
+
+\subparagraph*{Dimostrazione}
+
+Per definizione $R/I\neq\left\{ 0\right\} $. Siano $x,y\in R$ tali
+che $\overline{x}\cdot\overline{y}=\overline{0}$ in $R/I$, significa
+che $xy\in I$, ovvero $x\in I\;\vee y\in I$, cioè $x=\overline{0}\;\vee y=\overline{0}$,
+quindi $R/I$ è un dominio di integrità. L'implicazione inversa è
+la dimostrazione nel senso opposto.
+
+\subsubsection*{Corollario (riformulazione def. dominio}
+
+$\left\{ 0\right\} $ ideale banale è primo $\iff R$ dominio
+di integrità
+
+\subsection*{\hl{Caratterizzazione degli ideali massimali}}
+
+$I\subsetneqq R$ ideale è massimale in un anello commutativo $R$
+$\Longleftrightarrow$ $R/I$ è un campo
+
+\subparagraph*{Dimostrazione}
+\begin{itemize}
+\item[$\Rightarrow$] Per definizione $R/I\neq\left\{ 0\right\} $. Prendo $\overline{x}\in R/I$
+non nullo (ovvero $x\in R$ ma $x\notin I$) e cerco l'inverso. L'ideale
+$I+\left(x\right)$ è tale che $I\subsetneqq I+\left(x\right)\subseteq R$
+e quindi $I+\left(x\right)=R$ (in quanto per ipotesi $I$ è massimale), e in paricolare $1=y+rx$ per certi
+$y\in I$ e $r\in R$. Modulo $I$ ottengo $\overline{1}=\cancel{\overline{y}}+\overline{rx}=\overline{r}\cdot\overline{x}$
+da cui $\overline{x}^{-1}=\overline{r}$, $R/I$ campo.
+\item[$\Leftarrow$] Prendo $J$ ideale di $R$ tale che $I\subseteq J\subseteq R$, ho
+che $J/I$ è ideale di $R/I$, ma siccome $R/I$ campo (e quindi anello
+con divisione) possiede solo ideali banali, da cui
+$$\begin{cases}
+    J/I=\left\{ 0\right\} \iff J=I \\
+    \quad \text{oppure} \\
+    J/I=R/I \iff J=R
+\end{cases}$$
+\end{itemize}
+
+\subsubsection*{Corollario}
+
+Ogni ideale massimale di un anello commutativo $R$ è anche un ideale
+primo
+
+\subparagraph*{Dimostrazione}
+
+Ogni campo è dominio di integrità
+
+\subsection*{Irriducibilità dei generatori di ideali primi principali}
+
+$R$ dominio di integrità, $\alpha\in R$ non zero, allora $\left(\alpha\right)$
+primo $\Longrightarrow$ $\alpha$ irriducibile
+
+\subparagraph*{Dimostrazione}
+
+Siccome $\left(\alpha\right)\neq R$ per definizione, ho $\alpha\notin R^{*}$.
+Prendo $\beta\gamma=\alpha$, ho che $\beta\gamma\in\left(\alpha\right)$,
+da cui $\beta\in\left(\alpha\right)\;\vee\;\gamma\in\left(\alpha\right)$.
+Prendo WLOG $\beta\in\left(\alpha\right)$ ovvero $\beta=r\alpha=r\beta\gamma$,
+da cui $\beta\left(1-r\gamma\right)=0$, e siccome $R$ dominio di
+integrità e $\beta\neq0$ ho che $1=r\gamma$. 
+
+\subsection*{Esistenza di ideali massimali}
+
+$R$ anello commutativo, allora
+\begin{enumerate}
+\item[(i)] Se $R\neq\left\{ 0\right\} $, allora $R$ contiene un ideale massimale
+\item[(ii)] Sia $I\neq R$ un ideale di $R$, allora $\exists\,J$ ideale massimale
+di $R$ tale che $J\supseteq I$
+\end{enumerate}
+
+\subparagraph*{Dimostrazione}
+\begin{enumerate}
+\item[(i)] Dal Lemma di Zorn.
+\item[(ii)] Applicando la parte (i) a $R/I$ ottengo un ideale massimale per
+$R/I$ della forma $J/I$ con $J\supseteq I$ ideale di $R$. Ho quindi
+che $R/J\cong\left(R/I\right)/\left(J/I\right)$ è un campo, dunque
+$J$ massimale.
+\end{enumerate}
+\vspace{1.5cm}
+
+\begin{center}
+\rule{0.8\textwidth}{1pt}
+\par\end{center}
+
+\vspace{1cm}
+
+
+\part{Fattorizzazione}
+
+\section*{Definizioni}
+
+\paragraph*{Anello a ideali principali}
+
+$R$ dominio di integrità, è anello a ideali principali se ogni ideale
+di $R$ è principale
+
+\paragraph*{Anello Euclideo}
+
+$R$ dominio di integrità, è anello euclideo se $\exists\,N\colon R-\left\{ 0\right\} \rightarrow\mathbb{Z}_{\geq0}$
+tale che $\forall\,x,y\in R$ posso scrivere $x=qy+r$ con $r=0$
+oppure $N\left(r\right)<N\left(y\right)$
+
+$K$ campo $\Longrightarrow$ $K$ anello Euclideo rispetto alla funzione
+$N\equiv0$
+
+\paragraph*{Elementi associati}
+
+$\alpha,\beta$ associati $\Longleftrightarrow$ $\exists\,\varepsilon\in R^{*}$
+tale che $\alpha=\varepsilon\beta$. Si ha che $\forall\,\gamma\in R$
+vale che $\alpha\mid\gamma\;\Leftrightarrow\;\beta\mid\gamma$
+
+\paragraph*{Anello a Fattorizzazione unica}
+
+$R$ dominio di integrità, è anello a fattorizzazione unica se $\forall\,x\in R,x\neq0$
+posso scrivere $x=u\cdot\pi_{1}\cdot\dots\cdot\pi_{t}$ con $u\in R^{*}$
+e $\pi_{i}$ irriducibili, unica a meno di ordine e fattori associati
+
+\section*{Teoremi}
+
+\subsection*{Proprietà degli anelli a ideali principali}
+
+Sia $R$ anello a ideali principali e $\alpha\in R$, $\alpha\neq0$,
+allora sono equivalenti
+\begin{align*}
+\text{(i)}\quad & \left(\alpha\right)\text{ massimale} & \text{(ii)}\quad & \left(\alpha\right)\text{ primo} & \text{(iii)}\quad & \alpha\text{ irriducibile}
+\end{align*}
+
+
+\subparagraph*{Dimostrazione}
+
+Basta dimostrare (iii) $\Rightarrow$ (i). Per definizione, ho $\alpha\notin R^{*}$,
+prendo $J$ ideale tale che $\left(\alpha\right)\subseteq J\subseteq R$,
+ma siccome $R$ a ideali principali ho $J=\left(\beta\right)$, e
+vale che $\alpha=r\beta$. Ma siccome $\alpha$ irriducibile $\beta\in R^{*}$
+oppure $r\in R^{*}$, nel primo caso $J=R$ e nel secondo $J=\left(\alpha\right)$
+
+\subsubsection*{Corollario}
+
+In un anello a ideali principali ogni ideale primo è massimale.
+
+\subsection*{\hl{Anello Euclideo $\protect\Longrightarrow$ Anello a ideali principali}}
+
+\subparagraph*{Dimostrazione}
+
+Per definizione $R$ dominio di integrità, preso $I\neq\left\{ 0\right\} $
+ideale di $R$ (per $\left\{ 0\right\} $ banale) osservo che questo
+è principale in quanto se prendo $y\in I$ tale che $N\left(y\right)$
+minimale, ho che $\forall\,x\in I$ posso scrivere $x=qy+r$, ma $r=x-qy\in I$
+quindi $r=0$ (impossibile $N\left(r\right)<N\left(y\right)$), da
+cui $I=\left(y\right)$
+
+\subsection*{Anello Euclideo degli interi di Gauss}
+
+$\mathbb{Z}\left[i\right]$ è un anello Euclideo rispetto alla funzione
+$N\left(a+bi\right)=a^{2}+b^{2}$
+
+\subparagraph*{Dimostrazione}
+
+{[}...{]}
+
+\subsubsection*{Corollario}
+
+Sia $p\neq2$ primo, allora $p=a^{2}+b^{2}$ per certi interi $a,b$
+se e soltanto se $p\equiv1\mod4$. 
+
+\subparagraph*{Dimostrazione}
+
+{[}...{]}
+
+\subsection*{Proprietà degli anelli a fattorizzazione unica}
+
+Sia $R$ anello a fattorizzazione unica, allora $\pi$ irriducibile
+$\Longleftrightarrow$ $\left(\pi\right)$ primo
+
+\subparagraph*{Dimostrazione}
+
+Basta dimostrare $\Rightarrow$. Prendo $\beta,\gamma\in R$ con $\beta\gamma\in\left(\pi\right)$,
+fattorizzo $\beta$ e $\gamma$ come prodotto di irriducibili, $\pi$
+dovrà comparire nella fattorizzazione di $\beta$ o in quella di $\gamma$,
+ovvero $\beta\in\left(\pi\right)$ o $\gamma\in\left(\pi\right)$.
+
+\subsection*{Anello a ideali principali $\protect\Longrightarrow$ Anello a fattorizzazione
+unica}
+
+\subparagraph*{Dimostrazione}
+
+{[}...{]}
+
+\vspace{1.5cm}
+
+\begin{center}
+\rule{0.8\textwidth}{1pt}
+\par\end{center}
+
+\vspace{1cm}
+
+
+\part{Fattorizzazione di Polinomi}
+
+\section*{Definizioni}
+
+\paragraph*{Numero di fattori $\pi$ }
+
+$\text{ord}_{\pi}\left(x\right)$ per $x\neq0$ e $\pi$ irriducibile
+
+\paragraph*{Massimo comun divisore}
+
+\[
+\text{mcd}\left(x,y\right)\coloneqq\prod_{\pi\text{ irriducibile}}\pi^{\min\left(\text{ord}_{\pi}\left(x\right),\text{ord}_{\pi}\left(y\right)\right)},\quad x,y\neq\left(0,0\right),\;\text{altrimenti }\text{mcd}\left(x,0\right)=\text{mcd}\left(0,x\right)\coloneqq x
+\]
+
+
+\paragraph*{Contenuto e Polinomio primitivo}
+
+$R$ dominio a fattorizzazione unica, $f=a_{n}X^{n}+\dots+a_{0}\in R\left[X\right]$
+non nullo, allora contenuto $\text{cont}\left(f\right)=\text{mcd}\left(a_{n},\dots,a_{0}\right)$,
+e $f$ primitivo $\Leftrightarrow$ $\text{cont}\left(f\right)=1$
+
+\section*{Teoremi}
+
+\subsection*{Proprietà del massimo comun divisore}
+
+Sia $R$ dominio a fattorizzazione unica e $x,y\in R$ non nulli,
+allora:
+\begin{enumerate}
+\item[(i)] $x\mid y\;\Longleftrightarrow\;\text{ord}_{\pi}\left(x\right)<\text{ord}_{\pi}\left(y\right)\quad\forall\,\pi\text{ irriducibile}$
+\item[(ii)] $\forall\,z\in R,z\neq0$ vale che $\text{mcd}\left(zx,zy\right)=z\cdot\text{mcd}\left(x,y\right)$
+\item[(iii)] $\text{mcd}\left(x,y\right)$ divide $x$ e $y$, e ogni divisore
+comune di $x$ e $y$ divide $\text{mcd}\left(x,y\right)$
+\end{enumerate}
+
+\subparagraph*{Dimostrazione}
+
+{[}...{]}
+
+\subsection*{Unicità di fattorizzazione dei polinomi a coefficienti in un anello
+a fattorizzazione unica}
+
+$R$ dominio a fattorizzazione unica $\Longrightarrow$ $R\left[X\right]$
+a fattorizzazione unica
+
+\subparagraph*{Lemma}
+
+Sia $K$ il campo quoziente di $R$, allora ogni $g\in K\left[X\right],g\neq0$
+si può scrivere $g=c\cdot g_{0}$ con $c\in K^{*}$ e $g_{0}\in R\left[X\right]$
+primitivo, unici a meno di moltiplicazione per unità di $R$.\\
+Posso trovare infatti $\gamma\in R,\gamma\neq0$ per cui $h=\gamma\cdot g\in R\left[X\right]$
+e preso $\delta=\text{cont}\left(h\right)$ ho che $h=\delta\cdot g_{0}$
+con $g_{0}$ primitivo
+
+\subparagraph*{Lemma}
+
+Dati due polinomi $f,g\in R\left[X\right]$ primitivi, $f\cdot g$
+è primitivo.\\
+Se $f\cdot g$ non fosse primitivo, $\exists\,\pi$ che divide tutti
+i sui coiefficienti, ovvero $f\cdot g\equiv0$ in $R/\left(\pi\right)\left[X\right]$,
+ma siccome l'ideale $\left(\pi\right)$ è primo, ho che l'anello $R/\left(\pi\right)\left[X\right]$
+è un dominio di integrità, da cui $f\equiv0\;\vee\;g\equiv0$, ovvero
+$\pi\mid\text{cont}\left(f\right)$ oppure $\pi\mid\text{cont}\left(g\right)$,
+$\text{\lightning}$
+
+\subparagraph*{Dimostrazione}
+
+Considero $f\in R\left[X\right]$ , dimostro dapprima che si può scrivere
+come $f=u\cdot\pi_{1}\cdot\ldots\cdot\pi_{s}\cdot g_{1}\cdot\ldots\cdot g_{t}$
+con $u\in R^{*}$, $\pi_{i}$ irriducibili di $R$ e $g_{i}$ polinomi
+primitivi in $R\left[X\right]$ irriducibili in $K\left[X\right]$.
+{[}...{]}
+
+Concludo dimostrando che gli irriducibili di $R\left[X\right]$ sono
+gli irriducibili di $R$ e i polinomi primitivi di $R\left[X\right]$
+che sono irriducibili in $K\left[X\right]$. 
+
+\subsubsection*{Corollario}
+\begin{enumerate}
+\item[(i)] L\textquoteright anello $\mathbb{Z}\left[X_{1},X_{2},\dots,X_{n}\right]$
+è un anello a fattorizzazione unica
+\item[(ii)] $K$ campo $\Rightarrow$ $K\left[X_{1},X_{2},\dots,X_{n}\right]$
+anello a fattorizzazione unica. 
+\end{enumerate}
+
+\subsection*{Proprietà degli zeri di un polinomio}
+
+$R$ dominio a fattorizzazione unica, $K$ campo quoziente associato,
+e $f=a_{n}X^{n}+\dots+a_{0}\in R\left[X\right]$ con $a_{n},a_{0}\neq0$,
+allora ogni $\alpha\in K$ zero di $f$ ha la forma $\alpha=u/v$
+con $u\mid a_{0}$ e $v\mid a_{n}$. Se $f$ monico, ogni zero sta
+in $R$ e divide $a_{0}$
+
+\subparagraph*{Dimostrazione}
+
+{[}...{]}
+
+\subsection*{Irriducibilità di un polinomio di grado $2$ o $3$ in un campo}
+
+$K$ campo, $f\in K\left[X\right]$ di grado $2$ o $3$ è irriducibile
+$\Longleftrightarrow$ non ha zeri in $K$
+
+\subparagraph*{Dimostrazione}
+
+Per assurdo $f=g\cdot h$ con $g,h\in K\left[X\right]$ non costanti,
+allora almeno uno fra $g$ e $h$ avrebbe grado $1$, $\text{\lightning}$. 
+
+\subsection*{Lemma di Gauss}
+
+$R$ dominio a fattorizzazione unica, $K$ campo quoziente associato,
+$f\in R\left[X\right]$ primitivo è irriducibile in $R\left[X\right]$
+$\Longleftrightarrow$ è irriducibile in $K\left[X\right]$
+
+\subparagraph*{Dimostrazione}
+
+Posso scomporre $f=u\cdot g_{1}\cdot\dots\cdot g_{t}$ con $u\in R^{*}$,
+$g_{i}\in R\left[X\right]$ primitivi e irriducibili in $K\left[X\right]$
+con $t\geq1$ ($f$ primitivo $\Rightarrow$ $\deg\left(f\right)>0$),
+allora $f$ è irriducibile in $R\left[X\right]$ $\Longleftrightarrow$
+$t=1$ $\Longleftrightarrow$ è irriducibile in $K\left[X\right]$
+
+\subsubsection*{Corollario}
+
+$f\in\mathbb{Z}\left[X\right]$ monico, se $\exists\,p$ primo tale
+che $f\mod p\in\mathbb{Z}/p\mathbb{Z}\left[X\right]$ è irriducibile
+allora $f$ è irriducibile in $\mathbb{Z}\left[X\right]$ e in $\mathbb{Q}\left[X\right]$ 
+
+\subsection*{Criterio di Eisenstein}
+
+$R$ dominio a fattorizzazione unica, $f=a_{n}X^{n}+\dots+a_{0}\in R\left[X\right]$
+primitivo, $\pi$ elemento irriducibile di $R$ , allora $f$ è irriducibile
+in $R\left[X\right]$ se
+\begin{align*}
+\pi & \text{ non divide }a_{n} & \pi & \text{ divide }a_{k}\text{ con }k=0,\dots,n-1 & \pi^{2} & \text{ non divide }a_{0}
+\end{align*}
+ 
+
+\subparagraph*{Dimostrazione}
+
+Per assurdo $f=g\cdot h$ fattorizzazione non banale in $R\left[X\right]$,
+allora $\deg\left(g\right),\deg\left(h\right)>0$ e vale che 
+\[
+\overline{a_{n}}X^{n}=\overline{g}\cdot\overline{h}\quad\text{in }R/\left(\pi\right)\left[X\right]\quad\longrightarrow\quad g\equiv bX^{k},\quad h\equiv aX^{n-k}\mod\pi
+\]
+
+Ma ciò vuol dire che i termini noti di $g$ e $h$ sono divisibili
+per $\pi$, da cui $\pi^{2}\mid a_{0}$, $\text{\lightning}$.\pagebreak{}
+
+\begin{table}[H]
+\centering{}
+\begin{tabular}{|l|lll|lll|}
+\cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multicolumn{1}{l|}{} & \multicolumn{3}{c|}{\textbf{Commutativi}} & \multicolumn{3}{c|}{\textbf{Non commutativi}}\tabularnewline
+\hline 
+\textbf{1} & $\left\{ e\right\} {\scriptstyle \;=C_{1}=S_{1}=A_{1}}$ &  &  &  &  & \tabularnewline
+\textbf{2} & $C_{2}{\scriptstyle \;=S_{2}}$ &  &  &  &  & \tabularnewline
+\textbf{3} & $C_{3}{\scriptstyle \;=A_{3}}$ &  &  &  &  & \tabularnewline
+\textbf{4} & $C_{4}$ & $C_{2}\times C_{2}{\scriptstyle \;=D_{2}=V_{4}}$ &  &  &  & \tabularnewline
+\textbf{5} & $C_{5}$ &  &  &  &  & \tabularnewline
+\textbf{6} & $C_{6}$ &  &  & $D_{3}{\scriptstyle \;=S_{3}}$ &  & \tabularnewline
+\textbf{7} & $C_{7}$ &  &  &  &  & \tabularnewline
+\textbf{8} & $C_{8}$ & $C_{4}\times C_{2}$ & $C_{2}\times C_{2}\times C_{2}$ & $D_{4}$ & $Q_{8}$ & \tabularnewline
+\textbf{9} & $C_{9}$ & $C_{3}\times C_{3}$ &  &  &  & \tabularnewline
+\textbf{10} & $C_{10}$ &  &  & $D_{5}$ &  & \tabularnewline
+\textbf{11} & $C_{11}$ &  &  &  &  & \tabularnewline
+\textbf{12} & $C_{12}$ & $C_{6}\times C_{2}$ &  & $D_{6}$ & $A_{4}$ & $B$\tabularnewline
+\textbf{13} & $C_{13}$ &  &  &  &  & \tabularnewline
+\textbf{14} & $C_{14}$ &  &  & $D_{7}$ &  & \tabularnewline
+\textbf{15} & $C_{15}$ &  &  &  &  & \tabularnewline
+\hline 
+\end{tabular}
+\end{table}
+
+\vspace{1cm}
+
+\begin{table}[H]
+\centering{}%
+\begin{tabular}{|>{\centering}p{0.8cm}c>{\centering}p{0.8cm}c>{\centering}p{0.8cm}c>{\centering}p{0.8cm}|>{\centering}p{0.8cm}>{\centering}p{0.8cm}>{\centering}p{0.8cm}|>{\centering}p{0.8cm}|>{\centering}p{0.8cm}>{\centering}p{0.8cm}|}
+\cline{1-10} \cline{2-10} \cline{3-10} \cline{4-10} \cline{5-10} \cline{6-10} \cline{7-10} \cline{8-10} \cline{9-10} \cline{10-10} \cline{12-13} \cline{13-13} 
+\multicolumn{2}{|c}{\includegraphics[height=1.5cm]{Groups_Graphs/Alg1-Cn}} & \multicolumn{2}{c}{\includegraphics[height=1.5cm]{Groups_Graphs/Alg1-C2^n}} & \multicolumn{2}{c}{\includegraphics[height=1.5cm]{Groups_Graphs/Alg1-C2xC4}} & \multicolumn{2}{c}{\includegraphics[height=1.5cm]{Groups_Graphs/Alg1-C3xC3}} & \multicolumn{2}{c|}{\includegraphics[height=1.5cm]{Groups_Graphs/Alg1-C2xC6}} &  & \multicolumn{2}{c|}{\includegraphics[height=1.5cm]{Groups_Graphs/Alg1-A4}}\tabularnewline
+\multicolumn{2}{|c}{$C_{n}$} & \multicolumn{2}{c}{$\left(C_{2}\right)^{n}$} & \multicolumn{2}{c}{$C_{4}\times C_{2}$} & \multicolumn{2}{c}{$C_{3}\times C_{3}$} & \multicolumn{2}{c|}{$C_{6}\times C_{2}$} &  & \multicolumn{2}{c|}{$A_{4}$}\tabularnewline
+\cline{1-10} \cline{2-10} \cline{3-10} \cline{4-10} \cline{5-10} \cline{6-10} \cline{7-10} \cline{8-10} \cline{9-10} \cline{10-10} \cline{12-13} \cline{13-13} 
+\multicolumn{1}{>{\centering}p{0.8cm}}{} &  &  &  &  &  & \multicolumn{1}{>{\centering}p{0.8cm}}{} &  &  & \multicolumn{1}{>{\centering}p{0.8cm}}{} & \multicolumn{1}{>{\centering}p{0.8cm}}{} &  & \multicolumn{1}{>{\centering}p{0.8cm}}{}\tabularnewline
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} \cline{8-13} \cline{9-13} \cline{10-13} \cline{11-13} \cline{12-13} \cline{13-13} 
+\multicolumn{2}{|c}{\includegraphics[height=1.5cm]{Groups_Graphs/Alg1-D3}} & \multicolumn{2}{c}{\includegraphics[height=1.5cm]{Groups_Graphs/Alg1-D4}} & \multicolumn{2}{c|}{\includegraphics[height=1.5cm]{Groups_Graphs/Alg1-D5}} &  & \multicolumn{3}{c|}{\includegraphics[height=1.5cm]{Groups_Graphs/Alg1-Q8}} & \multicolumn{3}{c|}{\includegraphics[height=1.5cm]{Groups_Graphs/Alg1-B}}\tabularnewline
+\multicolumn{2}{|c}{$D_{3}$} & \multicolumn{2}{c}{$D_{4}$} & \multicolumn{2}{c|}{$D_{5}$} &  & \multicolumn{3}{c|}{$Q_{8}$} & \multicolumn{3}{c|}{$B$}\tabularnewline
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} \cline{8-13} \cline{9-13} \cline{10-13} \cline{11-13} \cline{12-13} \cline{13-13} 
+\end{tabular}
+\end{table}
+
+\vspace{2cm}
+
+\begin{table}[H]
+\begin{centering}
+\begin{tabular}{cccccc}
+\cline{1-2} \cline{2-2} \cline{4-4} \cline{6-6} 
+\multicolumn{2}{|c|}{$\left(\alpha\right)$ massimale} & \multicolumn{1}{c|}{$\begin{array}{c}
+\Longrightarrow\\
+\left(\Longleftarrow\right)
+\end{array}$} & \multicolumn{1}{c|}{$\left(\alpha\right)$ primo} & \multicolumn{1}{c|}{$\begin{array}{c}
+\Longrightarrow\\
+\left(\Longleftarrow\right)
+\end{array}$} & \multicolumn{1}{c|}{$\alpha$ irriducibile}\tabularnewline
+\cline{1-2} \cline{2-2} \cline{4-4} \cline{6-6} 
+ &  & \multirow{2}{*}{$\uparrow$} &  & \multirow{2}{*}{$\uparrow$} & \tabularnewline
+ &  &  &  &  & \tabularnewline
+\cline{1-1} \cline{3-3} \cline{5-5} 
+\multicolumn{1}{|c|}{Euclideo} & \multicolumn{1}{c|}{$\Longrightarrow$} & \multicolumn{1}{c|}{$\begin{array}{c}
+\text{Ideali}\\
+\text{principali}
+\end{array}$} & \multicolumn{1}{c|}{$\Longrightarrow$} & \multicolumn{1}{c|}{$\begin{array}{c}
+\text{Fattorizzazione}\\
+\text{unica}
+\end{array}$} & \tabularnewline
+\cline{1-1} \cline{3-3} \cline{5-5} 
+\multirow{2}{*}{$\Uparrow$} &  &  &  & \multirow{2}{*}{$\Downarrow$} & \tabularnewline
+ &  &  &  &  & \tabularnewline
+\cline{1-1} \cline{3-3} \cline{5-5} 
+\multicolumn{1}{|c|}{Campo} & \multicolumn{1}{c|}{$\Longrightarrow$} & \multicolumn{1}{c|}{$\square\left[X\right]\begin{array}{c}
+\text{a ideali}\\
+\text{principali}
+\end{array}$ } & \multicolumn{1}{c|}{$\Longrightarrow$} & \multicolumn{1}{c|}{$\square\left[X\right]\begin{array}{c}
+\text{fattorizzazione}\\
+\text{unica}
+\end{array}$} & \tabularnewline
+\cline{1-1} \cline{3-3} \cline{5-5} 
+\end{tabular}
+\par\end{centering}
+\end{table}
+
+\newpage
+\part{Riassunto gruppi}
+\section{Commutatività e normalità}
+\begin{itemize}
+    \item $G$ non ha sottogruppi (non banali) $\iff G\cong C_p$ con $p$ primo, ovvero $G$ è ciclico di ordine un numero primo. \\
+    \textbf{Dim}: $\implies$) $<g>$ è sottogruppo, ed è il più piccolo sottogruppo che contiene $g$ (quindi non è neanche banale), ma $G$ non ha sottogruppi propri non banali quindi $<g>=G$. $\impliedby$) ovvio, in quanto i sottogruppi di un  gruppo ciclico sono solo ciclici, quindi generati da un solo elemento e dato che $p$ non ha divisori, ogni elemento genera tutto il gruppo.
+    \item Ogni gruppo $G$ ha almeno due sottogruppi normali: $G$ e $\{0\}$. 
+    \item  \textbf{Gruppo semplice}: se ha solo $G$ e $\{0\}$ come sottogruppi normali. \\
+    Esempi: \textbf{gruppi semplici abeliani} sono \textbf{solo} i $C_p$ con $p$ primo; \textbf{gruppi semplici non abeliani}: il più piccolo è $A_5$ che ha 60 elementi.
+   
+    \item Qualunque sottogruppo che contiene $[G,G]$ è normale in $G$
+\end{itemize}
+
+\section{Gruppo simmetrico $S_n$}
+\subsection{Generalità}
+\begin{itemize}
+    \item Sottogruppi \textbf{normali} di $S_n$: per $n=3$ o $n\ge5$ $S_n$ ha solo $A_n$ come sottogruppo normale, il quale per tali $n$ è semplice, ovvero a sua volta non ha sottogruppi normali. 
+\end{itemize}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|} \hline 
+ \textbf{Gruppo}& \textbf{Cosa rappresenta}& \textbf{Sottogr}.& \textbf{Sottogr. normali}&\textbf{Cosa rappresentano}\\ \hline 
+         $S_1$&  Identità&  &  /& \\ \hline 
+         $S_2$&  $\cong C_2$&  &  /& \\ \hline 
+         $S_3$&  $\cong D_3$ (rotaz.+rifl. triangolo)&  Sono 6&  $A_3\cong <r>$& Rotaz. triangolo\\ \hline 
+         $S_4$&  Rotaz. cubo/ottaedro&  Sono 30&  $A_4,V_4$& Rotaz tetraedro, rotaz.+rifl. rettangolo\\ \hline 
+         $S_5$&  &  &  $A_5$& Rotaz icosaedro/dodecaedro\\ \hline
+    \end{tabular}
+    
+\end{table}
+Diagramma sottogruppi di $S_4$: \url{https://people.maths.bris.ac.uk/~matyd/GroupNames/1/S4.html} \\
+Diagramma ciclico di $S_4$: \url{https://en.wikiversity.org/wiki/Symmetric_group_S4#/media/File:Symmetric_group_4;_cycle_graph.svg} 
+
+
+
+\newpage
+\part{Riassunto anelli}
+
+\section{Implicazioni tra strutture}
+Anelli $\supset$ Anelli commutativi $\supset$ Domini di integrità $\supset$ A fattorizzazione unica $\supset$ A ideali principali $\supset$ Euclideo $\supset$  Campi 
+
+\subsection*{Campo $\implies$ euclideo}
+\subsection*{Euclideo $\implies$ a ideali principali}
+(p. 106) Per definizione $R$ dominio di integrità, preso $I\neq\left\{ 0\right\} $
+ideale di $R$ (per $\left\{ 0\right\} $ banale) osservo che questo
+è principale in quanto se prendo $y\in I$ tale che $N\left(y\right)$
+minimale, ho che $\forall\,x\in I$ posso scrivere $x=qy+r$, ma $r=x-qy\in I$
+quindi $r=0$ (impossibile $N\left(r\right)<N\left(y\right)$), da
+cui $I=\left(y\right)$
+\subsection*{A ideali principali $\implies$ a fattorizzazione unica}
+p. 109
+\subsection*{A fattorizzazione unica $\implies$ Dominio di int.}
+\subsection*{Dominio di int. $\implies$ anello commutativo}
+\subsection*{Anello commutativo $\implies$ anello}
+
+\section{Esempi}
+\textbf{Anelli}: $\mathbb{H}$ (ma non contiene divisori di zero)\\
+\textbf{Anelli commutativi}: $R_1\times R_2$ (se entrambi anelli commutativi) contiene divisori di zero\\
+\textbf{Domini di integrità}: $\mathbb{Z}[\sqrt{-5}]$\\
+\textbf{A fattorizzazione unica}: $K[X_1,X_2]$ con $K$ campo\\
+\textbf{A ideali principali}: roba strana, tipo $R[X,Y]/(X^2+Y^2+1)$\\
+\textbf{Euclideo}: $\mathbb{Z}$, $K[X]$ con $K$ campo (rispetto alla funzione grado), $\mathbb{Z}\left[i\right]$ rispetto alla funzione
+$N\left(a+bi\right)=a^{2}+b^{2}$\\
+\textbf{Campi}: $\mathbb{Z}/p\mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C}, Q(R)$ (campo dei quozienti se $R$ dominio )\\
+
+
+\section{Omomorfismi}
+\textcolor{red}{Proprietà omomorfismi:}
+\begin{itemize}
+    \item $f(0_A)=0_B$
+    \item $f(-a)=-f(a)$ ($f$ è omom. di gruppi additivi)
+    \item $a$ unità, allora $f(a^{-1})=f(a)^{-1}$ ($f$ induce un omom. di gruppi moltiplicativi se ristretto alle unità)
+    \item $im(f)$ sottoanello di $B$
+    \item $\ker(f)$ ideale di $A$
+    \item $f$ iniettivo $\iff \ker(f)=\{0\}$
+    \item $A$ campo, $B$ non banale $\implies$ $f$ iniettivo
+    \item $\# A=\#(\text{ker}(f))\#(\text{im}(f))$
+    \item \hl{$I$ ideale di $B \implies f^{-1}(I)$ ideale di $A$}
+    \item \hl{per ogni anello $R$, esiste un \textbf{unico} omomorfismo $\mathbb{Z}\to R$} (per dim. basta vedere che $f(1)=1_R$, quindi $f(n)=f(\underbrace{1+1+\dots+1}_{n \text{ volte}})=f(1)+\dots +f(1)= 1_R+\dots +1_R=n\cdot 1_R= n$, per numeri negativi fare ragionamento analogo ricordando $f(-1)=-f(1)=-1_R$. Quindi $f(n)=n \;\forall n\in \mathbb{Z}$ per forza.)
+\end{itemize}
+
+
+\newpage
+\section{Ideali ed elementi}
+Esempi: \\
+Ideali primi: $\mathbb{Z}/p\mathbb{Z}\subset \mathbb{Z}/n\mathbb{Z}$ con $p$ primo \\
+Ideali massimali: $\mathbb{Z}/p\mathbb{Z}\subset \mathbb{Z}/n\mathbb{Z}$ con $p$ primo
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|>{\bfseries}l|l|c|}\hline
+ Struttura& Elem.&Teo/prop.\\\hline \hline 
+         Anelli && \shortstack{Unità $\implies$ non divisore di zero \\
+         Le unità formano un gruppo moltiplicativo \\
+         $f: R_1\to R_2 \text{ omom.} \implies ker(f)$ è ideale di $R_1$ \\
+         $I$ ideale continiene un'unità $\implies I = R$ \\
+         $I,J$ ideali $\implies I\cap J, I + J$ ideali di $R$
+         } \\ \hline   
+         
+         Anelli commutativi &Associati&  \shortstack{Teo. cinese resto: $I+J=R$ (ideali coprimi) $\implies IJ=I\cap J$ \\ $\implies R/IJ \cong (R/I)\times(R/J)$ \\
+         \hl{$I\subset R$ ideale primo $\iff R/I$ dominio di integrità} \\
+          \hl{$I\subset R$ ideale massimale $\iff R/I$ campo} \\
+          ...quindi massimale $\implies$ primo \\
+          Ogni anello $\ne\{0\}$ contiene un ideale massimale \\Ogni ideale $\ne R$ è contenuto in un ideale massimale}\\ \hline 
+        
+         (Anelli con divisione) && \shortstack{Ideali sono solo quelli banali \\
+         $R'$ non banale $\implies f:R\to R'$ omom. è iniettivo} \\ \hline
+        
+         Domini di integrità &Irriducibili& \shortstack{
+         $\alpha \ne 0$ allora $(\alpha)$ primo $\implies \alpha$ irriducibile \\ $(f)=(g)\iff f$ e $g$  sono  associati} \\ \hline 
+         
+         Anelli a fattorizzazione unica && \shortstack{\hl{$\alpha$ irriducibile $\iff (\alpha)$ primo}}\\ \hline 
+         
+         Anelli a ideali principali && \shortstack{\hl{$(\alpha)$ massimale $\iff (\alpha)$ primo $\iff \alpha$ irriducibile}} \\ \hline 
+         
+         Anelli euclidei && \\ \hline 
+        
+         Campi && \shortstack{
+         $\{0\}$ ideale massimale $\iff R$ campo}\\ \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Attenzione alle definizioni}:
+\begin{itemize}
+    \item Campo: si richiede che \hl{$\forall x\ne 0$} esiste $x^*$, e 0 non deve avere inversi, ovvero divisori di zero. Quindi un campo è un dominio di integrità.
+    \item se \hl{$g,f\ne 0$}, allora $\text{deg}(fg)=\text{deg}(f)+\text{deg}(g)$
+    \item $\alpha$ in un dominio di integrità si dice \textbf{irriducibile} se \hl{$\alpha \ne 0, \alpha\not\in R^*$} ...
+\end{itemize}
+\newpage
+\section{Polinomi}
+Polinomi a coefficienti in:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|>{\bfseries}p{3cm}|c|} \hline 
+         Anelli& \shortstack{}\\ \hline 
+
+         Anelli commutativi&  \shortstack{
+         $f\in R[X]$ ha zeri $\implies f$ riducibile (p. 89) \\
+         Le calssi di $R[X]/(g)$ hanno grado minore di $g$ (p. 90) \\
+         $J/I$ primo in $A/I\iff J$ primo in $A$ (per terzo teo.iso.)} \\ \hline
+        
+         (Anelli con divisione)& \shortstack{} \\ \hline 
+        
+         Domini di integrità& \shortstack{$R$ dominio $\implies R[X]$ dominio (non ha divisori di zero) \\ \hl{$(f)=(g)\iff f$ e $g$  sono  associati}\\ se $g,f\ne 0$, allora $\text{deg}(fg)=\text{deg}(f)+\text{deg}(g)$ \\
+         $f\in R[X]$ con $R$ dominio $\implies f=q\cdot \prod (X-\alpha_i)$ con $\alpha_i$ gli zeri del pol. \\
+         $R$ dominio $\implies f\in R[X]$ di grado $d$ ha al più $d$ zeri distinti in $R$ \\
+         $R$ dominio, allora $\alpha \in R$ è zero doppio di $f\in R[X] \iff f'(\alpha)=0$} \\ \hline 
+         
+         Anelli a fattorizzazione unica& \shortstack{Lemmi p. 117 \\
+         $R$ a fattorizzazione unica $\implies R[X]$ a fattorizzazione unica \\
+         $\mathbb{Z}[X_1,\dots,X_n]$ è a fattorizzazione unica.\\
+         $f\in  R[X] \implies$ zeri: $\alpha=u/v$ con $u,v\in R$ e $u|a_0, v|a_n$ \\
+         \hl{(Lemma Gauss) $f\in R[X]$ primitivo. Allora:} \\
+         \hl{$f$ irriducibile in $R[X]\iff f$ irriducibile in $K[X]$ campo quoziente} \\
+         $f\in\mathbb{Z}[X]$ monico. $f \mod p \in \mathbb{Z}/p\mathbb{Z}$ irriducibile $\implies f$ irriduc. in $\mathbb{Z}[X]$ e $\mathbb{Q}[X]$ \\
+         Criterio Eisenstein $\implies f$ irriducibile in $R[X]$} \\\hline 
+         
+         Anelli a ideali principali& \shortstack{$(f)+(g)=(f,g)=(mcd(f,g))$. Quindi: \\
+         \hl{$(f)+(g)=\mathbb{Q}[X]\iff mcd(f,g)=1$ (non hanno divisori comuni)}} \\ \hline 
+         
+         Anelli euclidei& \\ \hline 
+        
+         Campi& \shortstack{$K$ campo $\implies K[X]$ euclideo \\
+         $K$ campo $\implies K[X_1,\dots,X_n]$ anello a fattorizzazione unica \\
+         $f\in K[X]$ di grado 2 o 3. $f$ irriducibile in $K[X]\iff f$ non ha zeri in $K$}\\ \hline
+    \end{tabular}
+\end{table}
+
+
+\section{Concetti e generalizzazioni}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|} \hline 
+         \textbf{Concetto}& \textbf{Generalizzazione}\\ \hline 
+         $\mathbb{Z}$ & Anello euclideo \\ \hline
+         Fattorizzazione di interi & Fattorizzazione di polinomi \\ \hline
+         Numero primo & Ideale primo \\ \hline
+         Interi coprimi: $a\mathbb{Z}+b\mathbb{Z}=\mathbb{Z}$ & Ideali coprimi: $I+J=R$
+    \end{tabular}
+\end{table}
+
+\newpage
+\part{Esame}
+\section{Scritto}
+\subsection{Gruppi}
+
+\textbf{Miscellaneo}
+\begin{itemize}
+ \item Classe del prodotto è prodotto delle classi
+  \item Per dimostrare uguaglianze tra insiemi/sottoinsiemi (come  ideali, intersezioni, ecc) si può dim. $\subseteq$ e poi $\supseteq$
+   \item Per dimostrare che una cosa divide un'altra posso far divisione con resto e dimostrare che $r=0$
+   \item Dimostrare che \textbf{due gruppi non sono isomorfi}: per esempio vedere che hanno cardinalità diversa, o (forse più utile) vedere che in un gruppo c'è un elemento con ordine "grande" t.c. non ci possono essere elementi con tale ordine nel secondo gruppo
+\end{itemize}
+
+\noindent\textbf{Permutazioni}:
+\begin{itemize}
+    \item Ordine di un $k$-ciclo è $k$
+    \item Prodotto di 3-cicli (non disgiunti) può avere ordine 2. Prodotto di due trasposizioni (non disgiunte) può generare 3-ciclo. 
+    \item Il numero di $k$-cicli in $S_n$ è $$\frac{n!}{(n-k)!}\cdot\frac{1}{k}$$
+    (il primo fattore sono le permutazione di $k$ oggetti in $n$, mentre il secondo fattore c'è perché  un ciclo non dipende dall'elemento da cui parto, quindi devo dividere per il numero di elementi del ciclo)
+     \item Gruppo alternante: ogni elemento si può scrivere come prodotto di 3-cicli o come prodotto di un numero pari di trasposizioni (a due a due se sono congiunte danno luogo a un 3-ciclo, se sono disgiunte danno luogo a un 2-ciclo)
+\end{itemize}
+
+\noindent\textbf{Sottogruppi, sottogruppi normali}
+\begin{itemize}
+ \item Verifica di sottogruppo: $e\in G$, $ab\in G\implies ab^{-1}\in  G$. Delle volte è più comodo verificare $ab\in G, \; a^{-1}\in G$
+  \item In $S_3\cong D_3$ l'unico sottogruppo normale è $A_3\cong <r>$ sottogruppo delle rotazioni. In generale in $D_n$ i sottogruppi normali sono $<r^d> \; \forall d|n$ (per tutti), $<r^2,rf>$ (se $n$ pari) 
+    \item Il massimo ordine di un elemento in $A_4$ è 3 (poiché $A_4$ è fatto solo dai cyle-type $[3^1]$ e $[2^2]$)
+    \item $gH\in H \iff g\in H$, ovvero le classi ripartiscono il gruppo, quindi per forza $g$ deve stare in $H$
+    \item Se nelle ip. c'è che un sottogruppo è normale probabilmente nella dimo si deve usare un quoziente
+       \item $A$ sempre sottogruppo normale di $A\times B$ e $(A\times B)/A=B$
+    \item Per dimostrare che un sottogruppo è normale si può trovare un omom. t.c. il sottogruppo $=\ker$
+     \item Sottogruppi e quozienti di un gruppo ciclico sono ciclici
+\end{itemize}
+
+\noindent\textbf{Ordine}
+\begin{itemize}
+ \item Per dim. che un elemento ha ordine infinito devo dim che $a^k=e \iff k=0$. Se devo dim. che l'ordine è $k$, devo verificare sia che $a^k=0$, ma anche che $k$ sia il minimo intero t.c. avvenga ciò.
+ \item $\text{ord}(\overline{a})\mid \text{ord}(a)$ (ordine della classe divide l'ordine del rappresentante)
+ \item Formula che si usa:
+ $$\text{ord}(a^k)=\frac{\text{ord}(a)}{\text{mcd}(\text{ord}(a),k)}$$
+ \textbf{Dimo}: sia $n=\text{ord}(a)$. Voglio trovare il minimo $c$ t.c. $(a^k)^c=a^{kc}=1\iff kc$ multiplo di n. Voglio che $kc$ sia il più piccolo multiplo sia di $k$ (così lo posso scrivere come $kc$ per un qualche $c$) che di $n$ (così fa l'elemento neutro). Allora:
+ \begin{align*}
+     kc=\text{mcm}(k,n)\implies c&=\frac{\text{mcm}(k,n)}{k} \\
+     &=\frac{\text{mcm}(k,n)\cdot n}{k \cdot n} \\
+     &=\frac{\text{mcm}(k,n)\cdot n}{\text{mcm}(k,n)\text{mcd}(k,n)} \quad \text{NB: $ab=\text{mcm}(a,b)\text{mcd}(a,b)$}\\
+     &=\frac{n}{\text{mcd}(k,n)}
+ \end{align*}
+ \end{itemize}
+
+\noindent\textbf{Omomorfismi}
+\begin{itemize}
+    \item $f$ omomorfismo di gruppi $\implies f(<A>)=<f(A)>$ con $A$ sottogruppo
+    \item Per dim. che omomorf. è iniettivo: $\ker(f)=\{0\}$
+    \item \hl{Isomorfismo di gruppi comodo: automorfismo interno $\gamma_a(g)=gag^{-1}$}
+    \item Omomorfismo iniettivo: \textbf{inclusione}
+    \item Omomorfismo suriettivo: \textbf{proiezione al quoziente}
+     \item $\# A=\#(\text{ker}(f))\#(\text{im}(f))$
+\end{itemize}
+
+\subsection{Anelli}
+\begin{itemize}
+    \item Verifica di sottonaello: deve essere sottogruppo additivo, avere l'1 ed essere chiuso nel prodotto
+    \item \textbf{Verifica di ideale}: o si usano le proprietà (sottogruppo additivo+assorbe nel prodotto esterno) o si trova \hl{omomorf. di anelli di cui è il ker}
+    \item Ricorda: un ideale non banale non è un sottoanello (infatti non contiene l'1, se lo congenesse sarebbe tutto l'anello)
+    \item Schemone anelli e anelli di polinomi
+    \item per studiare l'irriducibilità di un polinomio monico con il lemma usare numeri primi $p$ piccoli (tipo 2), che è più facile
+    \item se devo dim. $A\cong B\times C$ con tutti anelli probabilmente c'è di mezzo teo. cinese resto
+    \item Polinomi irriducibili si comportano come numeri primi: c'è nozione di mcm, essere coprimi (il loro prodotto genera tutto l'anello)
+    \item $G$ dominio $\iff \{0\}$ primo
+    \item \hl{Anello commutativo $\ne\{0\}$ è \textbf{semplice} (solo ideali banali) $\iff$ campo}
+
+    \item $A\ne \{0\}\implies \exists$ un ideale massimale. \\
+    Infatti se $A=\{0\}$ l'unico suo ideale è $\{0\}$, che non è massimale in quanto uguale ad $A$. Se $A\ne\{0\}$ allora, se ha ideali $\ne\{0\}$ basta pigliare un massimale, se non ne ha allora $\{0\}$, che è sempre ideale, è un suo ideale massimale.
+    \item \hl{Omomorfismo (suriettivo) di anelli comodo: valutazione dei polinomi in un $\alpha$ fissato}. Per esempio $\psi_\alpha: \mathbb{Q}[X]\to \mathbb{Q}: \quad \psi_\alpha(f)=f(\alpha)$. È suriettivo poiché basta prendere come input i polinomi costanti e si ha l'identità.
+    \item Omomorfismo iniettivo: \textbf{inclusione}. Ad esempio la mappa inclusione nel proprio campo quoziente $a\mapsto(a,1)=\frac{a}{1}$
+    \item Omomorfismo suriettivo: \textbf{proiezione al quoziente}
+    \item verificare che un \textbf{polinomio di grado alto} non è riducibile: per esempio verifichiamo che $X^4+X^3+X^2+X+1$ non è riducibile in $\mathbb{Z}/2\mathbb{Z}[X]$
+    \begin{itemize}
+        \item \textbf{Radici}: vediamo che non ha radici in $\mathbb{Z}/2\mathbb{Z}$ (\underline{neanche a meno del segno}, infatti le radici vanno cercate tra $\pm0,\pm 1$, anche se $-1\not\in\mathbb{Z}/2\mathbb{Z}$, poiché se ci fosse $-1$ potrei dividere per $(X-(-1))=(X+1)\in\mathbb{Z}/2\mathbb{Z}[X]$)  $\implies$ non lo posso dividere in un polinomio di primo grado $\implies$ quindi neanche di terzo grado (altrimenti  avrei $f=$(terzo grado)$\cdot$(primo grado) per averlo di quarto)
+        \item allora ciò che rimane è provare a dividerlo per un polinomio di secondo grado, che sono: $X^2$, $X^2+1$, $X^2+X$, $X^2+X+1$. Sicuramente non è divisibile per i primi tre perché essi sono riducibili, quindi divisibili per un polin. di primo grado e se $f$ fosse divisibile per uno di quei tre sarebbe anche divisibile per un polin. di primo grado, cosa che abbiamo appena detto essere impossibile. 
+        \\L'unico che rimane è $X^2+X+1$: facciamo divisione con resto e vediamo che non è  divisibile $\implies$ irriducibile
+    \end{itemize}
+    \item Ricorda che \hl{in un dominio di integrità gli ideali $(f)=(g)\iff f$ e $g$  sono  associati}
+    \item Se vogliamo \hl{dimostrare $(f)+(g)=\mathbb{Z}[X]$}, dato che quest'ultimo non è a id. princ. non possiamo usare  $(f)+(g)=K[X]\iff mcd(f,g)=1$. Allora un modo è \underline{dimostrare che $1\in (f)+(g)$}: infatti somma di id. è id. e se un $1\in I\implies I=A$. \\
+    Un modo è fare divisione con resto di $g$ per $f$: così $g=qf+r\implies r=g-qf \implies r\in(g)+(f)$. Se siamo fortunati e $r=1$ siamo apposto.
+    \item È utile la seguente applicazione del \textbf{terzo teo. di isomorfismo}: \\
+    in generale
+    $$R/(a,b)\cong [R/(a)]/[(a,b)/(a)]=[R/(a)]/(\overline{b})$$
+    In particolare (molto utile):
+    $$\mathbb{Z}[X]/(n,f)\cong(\mathbb{Z}[X]/(n))/(\overline{f})\cong\mathbb{Z}/n\mathbb{Z}[X]/(\overline{f})$$
+    dove $\overline{f}\in\mathbb{Z}/n\mathbb{Z}[X]$
+    
+  \end{itemize}
+
+\section{Orale}
+\subsection{Esempi e controesempi}
+\begin{itemize}
+    \item Classi laterali diverse tra loro: in $D_3$ $r<f>\ne<f>r$
+    
+    \item Automorfismo $G\to G$ con $G$ abeliano: lo è sempre la negazione $A(g)=-g$ (se + è l'operazione). Non lo è per anelli o campi.\\
+    In particolare $\mathbb{Z}$ ha solo questo come \textbf{unico automorfismo non banale} (deve mantenere la struttura additiva e ricoprire tutto $\mathbb{Z}$). Invece, considerando l'automorfismo di anelli, $\mathbb{Q}$ ed $\mathbb{R}$ hanno solo l'identità (banale) in quanto si deve mantenere sia la struttura additiva che moltiplicatima. $\mathbb{C}$ invece ha un solo automorfismo non banale, che è la coniugazione complessa (infatti lascia i numeri reali fermi).
+    \item Omomorfismo $G\to \text{Aut}(G)$ con nucleo il centro $Z(G)$. Come prima cosa devo trovare un automorfismo $G\to G$ (ovvero un \textbf{isomorfismo} che ha  $G$ stesso come immagine, in quanto omom. mantiene la sua struttura) che dipenda da un elemento, così assegno ad ogni elemento tale automorfismo e sono a posto. Ad esempio
+    $$\gamma_g:G\to G \quad \quad \gamma_g(x)\coloneqq\,^gx=g^{-1}xg$$
+    è un automorfismo (in quanto ha come nucleo $\ker\gamma_g=\{0\}$, infatti $g^{-1}hg=1\iff hg=1\iff h=1$) chiamato \textbf{automorfismo interno}; assegna ad ogni elemento il proprio coniugato per $g$.
+    Allora
+    $$f:G\to\text{Aut}(G) \quad \quad f(g)\coloneqq\gamma_g$$
+    è omomorfismo (verificare) con nucleo $\ker f= Z(G)$ il centro di $G$. Infatti il nucleo è l'insieme degli elementi di $G$ che vengono mappati nell'elemento neutro di $\text{Aut}(G)$, ovvero l'\textbf{identità}: per ogni $\gamma_g$ si ha l'identità per gli elementi che commutano con $g$, in modo che scambio $h,g$ nella def. e ottengo l'identità, ovvero gli elementi del centralizzante $C(g)$ di $g$. Quindi l'insieme dei  centralizzanti di tutti i $g\in  G$ è il centro $C(Z)$ di $G$.
+    \item \hl{Gruppo di Klein $V_4$}: 4 elementi (neutro + 3), ogni elemento è l'inverso di se stesso e il prodotto di due elementi dà il terzo (non neutro). Può essere visto come gruppo delle simmetrie di un rettangolo non quadrato (le due riflessioni e rotazione di $180^o$) oppure come $\mathbb{Z}_2\times \mathbb{Z}_2$. É sottogruppo normale di $S_4$
+
+    \item Anello in cui ci sono ideali tali che il prodotto non è un ideale:
+    \item Omomorfismo di anelli $R\to \text{End}(R)$: 
+    \item Sottoanello di $\mathbb{Q}\ne\mathbb{Z}$: $R=\{\frac{m}{2^n}: m\in\mathbb{Z},n\in\mathbb{N}_0\}$. Si dimostra che ogni sottoanello di $\mathbb{Q}$ contiene $\mathbb{Z}$
+    \item Ideali primi di $\mathbb{Z}/n\mathbb{Z}$: ogni ideale ha la forma $m\mathbb{Z}/n\mathbb{Z}$ con $m|n$ (per il terzo teo. iso). Per essere ideale primo $m$ deve essere un numero primo, quindi sono  $p\mathbb{Z}/n\mathbb{Z}$ con $p|n$, $p$ primo.
+    \item Ideale primo ma non massimale di $\mathbb{Z}[X]$: (in realtà vale per qualsiasi $R[X]$, $R$ dominio di integrità) (X), in quanto $R[X]/(X)\cong R$ non è un campo (non essendolo $R) \iff (X)$  non è massimale. È primo in quanto $R$ è un dominio di integrità, quindi non ha divisori di 0, quindi se il prodotto di due elementi sta in $(X)$ (ovvero $a_0b_0=0$) allora almeno uno dei due deve stare in  $(X)$ ($a_0=0$ oppure $b_0=0$)
+\end{itemize}
+
+\subsection{Dimostrazioni}
+\begin{itemize}
+    \item Ideale massimale $\implies$ non principale in $\mathbb{Z}[X]$: dimostriamo il contrario, ovvero principale $\implies$ non massimale. \\
+    Se $f\in\mathbb{Z}[X]=n\ne \pm 1$ (ovvero $f\in\mathbb{Z}\setminus\mathbb{Z}^*$) allora $(X, n)$ contiene $(f)$, in quanto contiene tutti i polinomi con coefficienti multipli di $n$, ma diverso da $(f)$ poiché abbiamo anche tutti i polinomi di primo grado, con qualsiasi coeff., ed è diverso da tutto l'anello, in quanto per esempio non ha l'1. \\
+    Se $f\in\mathbb{Z}[X]$ ha grado $>0$, allora se $p$ è un primo che non divide il coefficiente di grado massimo, $(f, p)$ contiene $(f)$ ed è diverso da tutto l'anello, dal momento che (terzo teo. iso.)
+    $$\mathbb{Z}[X]/(f,p)\cong(\mathbb{Z}[X]/(p))/(\overline{f})\cong\mathbb{Z}/p\mathbb{Z}[X]/(\overline{f})$$
+    non può essere banale ($=\{0\}$, ovvero $(f,p)$ deve essere diverso da tutto $\mathbb{Z}[X]$) poiché altrimenti $$(\overline{f})=\mathbb{Z}/p\mathbb{Z}[X],\text{ ovvero } \overline{f}\in\mathbb{Z}/p\mathbb{Z}[X]^*=\mathbb{Z}/p\mathbb{Z}^*$$
+    il che è impossibile dato che $f$ ha grado $>0$ e $p$ non divide il coeff. di grado max.
+\end{itemize}
+
+
+\end{document}
+
